@@ -14,22 +14,30 @@ type FreeBusyCalendarComponent interface {
 }
 
 type freeBusyCalendarComponent struct {
-	Begin properties.BlockDelimiterProperty
-	End   properties.BlockDelimiterProperty
-
-	Properties properties.Properties
+	Begin         properties.BlockDelimiterProperty
+	UID           properties.UidProperty
+	DateTimeStamp properties.DateTimeStampProperty
+	Properties    properties.Properties
+	End           properties.BlockDelimiterProperty
 }
 
-func NewFreeBusyCalendarComponent(propertyList ...properties.Property) FreeBusyCalendarComponent {
+func NewFreeBusyCalendarComponent(
+	uid properties.UidProperty,
+	dateTimeStamp properties.DateTimeStampProperty,
+	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VFREEBUSY),
-		End:        properties.NewBlockDelimiterProperty(registries.END, properties.VFREEBUSY),
-		Properties: propertyList,
+		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VFREEBUSY),
+		UID:           uid,
+		DateTimeStamp: dateTimeStamp,
+		Properties:    propertyList,
+		End:           properties.NewBlockDelimiterProperty(registries.END, properties.VFREEBUSY),
 	}
 }
 
 func (fC *freeBusyCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	fC.Begin.ToICalendarPropFormat(output)
+	fC.UID.ToICalendarPropFormat(output)
+	fC.DateTimeStamp.ToICalendarPropFormat(output)
 	for i := 0; i < len(fC.Properties); i++ {
 		fC.Properties[i].ToICalendarPropFormat(output)
 	}

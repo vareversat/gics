@@ -14,22 +14,30 @@ type EventCalendarComponent interface {
 }
 
 type eventCalendarComponent struct {
-	Begin properties.BlockDelimiterProperty
-	End   properties.BlockDelimiterProperty
-
-	Properties properties.Properties
+	Begin         properties.BlockDelimiterProperty
+	UID           properties.UidProperty
+	DateTimeStamp properties.DateTimeStampProperty
+	Properties    properties.Properties
+	End           properties.BlockDelimiterProperty
 }
 
-func NewEventCalendarComponent(propertyList ...properties.Property) EventCalendarComponent {
+func NewEventCalendarComponent(
+	uid properties.UidProperty,
+	dateTimeStamp properties.DateTimeStampProperty,
+	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VEVENT),
-		End:        properties.NewBlockDelimiterProperty(registries.END, properties.VEVENT),
-		Properties: propertyList,
+		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VEVENT),
+		UID:           uid,
+		DateTimeStamp: dateTimeStamp,
+		Properties:    propertyList,
+		End:           properties.NewBlockDelimiterProperty(registries.END, properties.VEVENT),
 	}
 }
 
 func (eC *eventCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
+	eC.UID.ToICalendarPropFormat(output)
+	eC.DateTimeStamp.ToICalendarPropFormat(output)
 	for i := 0; i < len(eC.Properties); i++ {
 		eC.Properties[i].ToICalendarPropFormat(output)
 	}

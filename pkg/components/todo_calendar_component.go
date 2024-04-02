@@ -14,22 +14,30 @@ type ToDoCalendarComponent interface {
 }
 
 type toDoCalendarComponent struct {
-	Begin properties.BlockDelimiterProperty
-	End   properties.BlockDelimiterProperty
-
-	Properties properties.Properties
+	Begin         properties.BlockDelimiterProperty
+	UID           properties.UidProperty
+	DateTimeStamp properties.DateTimeStampProperty
+	Properties    properties.Properties
+	End           properties.BlockDelimiterProperty
 }
 
-func NewToDoCalendarComponent(propertyList ...properties.Property) ToDoCalendarComponent {
+func NewToDoCalendarComponent(
+	uid properties.UidProperty,
+	dateTimeStamp properties.DateTimeStampProperty,
+	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VTODO),
-		End:        properties.NewBlockDelimiterProperty(registries.END, properties.VTODO),
-		Properties: propertyList,
+		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VTODO),
+		UID:           uid,
+		DateTimeStamp: dateTimeStamp,
+		Properties:    propertyList,
+		End:           properties.NewBlockDelimiterProperty(registries.END, properties.VTODO),
 	}
 }
 
 func (tC *toDoCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
+	tC.UID.ToICalendarPropFormat(output)
+	tC.DateTimeStamp.ToICalendarPropFormat(output)
 	for i := 0; i < len(tC.Properties); i++ {
 		tC.Properties[i].ToICalendarPropFormat(output)
 	}

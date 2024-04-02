@@ -14,22 +14,30 @@ type JournalCalendarComponent interface {
 }
 
 type journalCalendarComponent struct {
-	Begin properties.BlockDelimiterProperty
-	End   properties.BlockDelimiterProperty
-
-	Properties properties.Properties
+	Begin         properties.BlockDelimiterProperty
+	UID           properties.UidProperty
+	DateTimeStamp properties.DateTimeStampProperty
+	Properties    properties.Properties
+	End           properties.BlockDelimiterProperty
 }
 
-func NewJournalCalendarComponent(propertyList ...properties.Property) JournalCalendarComponent {
+func NewJournalCalendarComponent(
+	uid properties.UidProperty,
+	dateTimeStamp properties.DateTimeStampProperty,
+	propertyList ...properties.Property) JournalCalendarComponent {
 	return &journalCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VJOURNAL),
-		End:        properties.NewBlockDelimiterProperty(registries.END, properties.VJOURNAL),
-		Properties: propertyList,
+		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VJOURNAL),
+		UID:           uid,
+		DateTimeStamp: dateTimeStamp,
+		Properties:    propertyList,
+		End:           properties.NewBlockDelimiterProperty(registries.END, properties.VJOURNAL),
 	}
 }
 
 func (jC *journalCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	jC.Begin.ToICalendarPropFormat(output)
+	jC.UID.ToICalendarPropFormat(output)
+	jC.DateTimeStamp.ToICalendarPropFormat(output)
 	for i := 0; i < len(jC.Properties); i++ {
 		jC.Properties[i].ToICalendarPropFormat(output)
 	}
