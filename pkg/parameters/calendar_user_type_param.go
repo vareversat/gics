@@ -2,21 +2,31 @@ package parameters
 
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.3
 
+// Parameter used in these properties :
+// - ATTENDEE
+
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type CalendarUserTypeParam interface{}
-
-type calendarUserTypeParam struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+type CalendarUserTypeParam interface {
+	TextParameter
 }
 
-func NewCalendarUserTypeParam(value registries.CalendarUserType) CalendarUserTypeParam {
-	return &calendarUserTypeParam{
-		IANAToken: registries.CUTYPE,
-		Value:     values.NewTextValue(string(value)),
+func NewCalendarUserTypeParam(value CalendarUserType) CalendarUserTypeParam {
+	return &textParameter{
+		ParamName: registries.CUTYPE,
+		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+type CalendarUserType string
+
+const (
+	GROUP      CalendarUserType = "GROUP"
+	INDIVIDUAL CalendarUserType = "INDIVIDUAL"
+	RESOURCE   CalendarUserType = "RESOURCE"
+	ROOM       CalendarUserType = "ROOM"
+	UNKNOWN    CalendarUserType = "UNKNOWN"
+)

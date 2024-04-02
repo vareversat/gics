@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type VersionProperty interface {
-}
-
-type versionProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+	TextPropertyType
 }
 
 func NewVersionProperty(value string) VersionProperty {
-	return &versionProperty{
-		IANAToken: registries.VERSION,
-		Value:     values.NewTextValue(value),
+	return &textPropertyType{
+		PropName: registries.VERSION,
+		Value:    types.NewTextValue(value),
 	}
 }

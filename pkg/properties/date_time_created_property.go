@@ -6,20 +6,19 @@ import (
 	"time"
 
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type DateTimeCreatedProperty interface {
+	DateTimePropertyType
 }
 
-type dateTimeCreatedProperty struct {
-	IANAToken registries.Properties
-	Value     values.DateTimeValue
-}
-
-func NewDateTimeCreatedProperty(value *time.Time) DateTimeCreatedProperty {
-	return &dateTimeCreatedProperty{
-		IANAToken: registries.CREATED,
-		Value:     values.NewDateTimeValue(value),
+func NewDateTimeCreatedProperty(
+	timeValue time.Time,
+	format types.DTFormat,
+) DateTimeCreatedProperty {
+	return &dateTimePropertyType{
+		PropName: registries.CREATED,
+		Value:    types.NewDateTimeValue(timeValue, format),
 	}
 }

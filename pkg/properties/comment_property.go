@@ -3,20 +3,19 @@ package properties
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.4
 
 import (
+	"github.com/vareversat/gics/pkg/parameters"
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type CommentProperty interface{}
-
-type commentProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+type CommentProperty interface {
+	TextPropertyType
 }
 
-func NewCommentProperty(value string) CommentProperty {
-	return &commentProperty{
-		IANAToken: registries.COMMENT,
-		Value:     values.NewTextValue(value),
+func NewCommentProperty(value string, params ...parameters.Parameter) CommentProperty {
+	return &textPropertyType{
+		PropName:   registries.COMMENT,
+		Value:      types.NewTextValue(value),
+		Parameters: params,
 	}
 }

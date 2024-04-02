@@ -4,19 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type ActionProperty interface{}
-
-type actionProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+type ActionProperty interface {
+	ActionPropertyType
 }
 
-func NewActionProperty(action registries.Action) ActionProperty {
-	return &actionProperty{
-		IANAToken: registries.ACTION,
-		Value:     values.NewTextValue(string(action)),
+func NewActionProperty(action types.ActionType) TextPropertyType {
+	return &actionPropertyType{
+		PropName: registries.ACTION,
+		Value:    types.NewActionValue(action),
 	}
 }

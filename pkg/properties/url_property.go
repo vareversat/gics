@@ -6,20 +6,16 @@ import (
 	"net/url"
 
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type UrlProperty interface {
+	UriPropertyType
 }
 
-type urlProperty struct {
-	IANAToken registries.Properties
-	Value     values.CalendarUserAddressValue
-}
-
-func NewUrlProperty(uri url.URL) UrlProperty {
-	return &urlProperty{
-		IANAToken: registries.URL,
-		Value:     values.NewUriValue(uri),
+func NewUrlProperty(uri *url.URL) UrlProperty {
+	return &uriPropertyType{
+		PropName: registries.URL,
+		Value:    types.NewUriValue(uri),
 	}
 }

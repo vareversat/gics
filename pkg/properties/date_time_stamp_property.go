@@ -5,21 +5,24 @@ package properties
 import (
 	"time"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type DateTimeStampProperty interface {
+	DateTimePropertyType
 }
 
-type dateTimeStampProperty struct {
-	IANAToken registries.Properties
-	Value     values.DateTimeValue
-}
-
-func NewDateTimeStampProperty(value *time.Time) DateTimeStampProperty {
-	return &dateTimeStampProperty{
-		IANAToken: registries.DTSTAMP,
-		Value:     values.NewDateTimeValue(value),
+func NewDateTimeStampProperty(
+	timeValue time.Time,
+	format types.DTFormat,
+	params ...parameters.Parameter,
+) DateTimeStampProperty {
+	return &dateTimePropertyType{
+		PropName:   registries.DTSTAMP,
+		Value:      types.NewDateTimeValue(timeValue, format),
+		Parameters: params,
 	}
 }

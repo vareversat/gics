@@ -5,23 +5,42 @@ package properties
 import (
 	"time"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type DateTimeStartProperty interface {
+	DateTimePropertyType
+	DatePropertyType
 }
 
-type dateTimeStartProperty struct {
-	IANAToken     registries.Properties
-	DateTimeValue values.DateTimeValue // Either Datetime or Date
-	DateValue     values.DateValue
-}
-
-func NewDateTimeStartProperty(value *time.Time) DateTimeStartProperty {
-	return &dateTimeStartProperty{
-		IANAToken:     registries.DTSTART,
-		DateTimeValue: values.NewDateTimeValue(value),
-		DateValue:     values.NewDateValue(value),
+func NewDateTimeStartProperty(
+	value time.Time,
+	format types.DTFormat,
+	params ...parameters.Parameter) DateTimeStartProperty {
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
+	switch valueType {
+	case string(registries.DATETIME):
+		return &dateTimePropertyType{
+			PropName:   registries.DTSTART,
+			Value:      types.NewDateTimeValue(value, format),
+			Parameters: params,
+		}
+	case string(registries.DATE):
+		return &datePropertyType{
+			PropName:   registries.DTSTART,
+			Value:      types.NewDateValue(value),
+			Parameters: params,
+		}
+	default:
+		return nil
 	}
 }

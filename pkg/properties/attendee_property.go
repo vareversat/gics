@@ -5,20 +5,20 @@ package properties
 import (
 	"net/url"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type AttendeeProperty interface{}
-
-type attendeeProperty struct {
-	IANAToken registries.Properties
-	Value     values.CalendarUserAddressValue
+type AttendeeProperty interface {
+	CalendarUserAddressPropertyType
 }
 
-func NewAttendeeProperty(uri url.URL) AttendeeProperty {
-	return &attendeeProperty{
-		IANAToken: registries.ATTENDEE,
-		Value:     values.NewCalendarUserAddressValue(uri),
+func NewAttendeeProperty(uri *url.URL, params ...parameters.Parameter) AttendeeProperty {
+	return &calendarUserAddressPropertyType{
+		PropName:   registries.ATTENDEE,
+		Value:      types.NewCalendarUserAddressValue(uri),
+		Parameters: params,
 	}
 }

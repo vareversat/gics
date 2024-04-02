@@ -1,25 +1,19 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
+// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.5
 
 import (
-	"time"
-
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type DurationProperty interface {
+	DurationPropertyType
 }
 
-type durationProperty struct {
-	IANAToken registries.Properties
-	Value     values.PeriodValue
-}
-
-func NewPeriodProperty(startValue *time.Time, endValue *time.Time) DurationProperty {
-	return &durationProperty{
-		IANAToken: registries.DURATION_PROP,
-		Value:     values.NewPeriodValue(startValue, endValue),
+func NewDurationProperty(duration string) DurationProperty {
+	return &durationPropertyType{
+		PropName: registries.DURATION_PROP,
+		Value:    types.NewDurationValue(duration),
 	}
 }

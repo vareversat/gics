@@ -1,27 +1,44 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.2
+// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.3
 
 import (
 	"time"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type DateTimeDueProperty interface {
+	DateTimePropertyType
+	DatePropertyType
 }
 
-type dateTimeDueProperty struct {
-	IANAToken     registries.Properties
-	DateTimeValue values.DateTimeValue // Either Datetime or Date
-	DateValue     values.DateValue
-}
-
-func NewDateTimeDueProperty(value *time.Time) DateTimeDueProperty {
-	return &dateTimeDueProperty{
-		IANAToken:     registries.DUE,
-		DateTimeValue: values.NewDateTimeValue(value),
-		DateValue:     values.NewDateValue(value),
+func NewDateTimeDueProperty(
+	value time.Time,
+	format types.DTFormat,
+	tzIdentifier string,
+	valueType registries.Type,
+) DateTimeDueProperty {
+	paramSlice := make(parameters.Parameters, 0)
+	paramSlice = append(paramSlice, parameters.NewTimeZoneIdentifierParam(tzIdentifier))
+	paramSlice = append(paramSlice, parameters.NewValueParam(valueType))
+	switch valueType {
+	case registries.DATETIME:
+		return &dateTimePropertyType{
+			PropName:   registries.RDATE,
+			Value:      types.NewDateTimeValue(value, format),
+			Parameters: paramSlice,
+		}
+	case registries.DATE:
+		return &datePropertyType{
+			PropName:   registries.RDATE,
+			Value:      types.NewDateValue(value),
+			Parameters: paramSlice,
+		}
+	default:
+		return nil
 	}
 }

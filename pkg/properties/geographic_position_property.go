@@ -4,21 +4,17 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type GeographicPositionProperty interface{}
-
-type geographicPositionProperty struct {
-	IANAToken registries.Properties
-	Longitude values.FloatValue
-	Latitude  values.FloatValue
+type GeographicPositionProperty interface {
+	GeoPropertyType
 }
 
 func NewGeographicPositionProperty(long float32, lat float32) GeographicPositionProperty {
-	return &geographicPositionProperty{
-		IANAToken: registries.GEO,
-		Longitude: values.NewFloatValue(long),
-		Latitude:  values.NewFloatValue(lat),
+	return &geoPropertyType{
+		PropName:  registries.GEO,
+		Longitude: types.NewFloatValue(long),
+		Latitude:  types.NewFloatValue(lat),
 	}
 }

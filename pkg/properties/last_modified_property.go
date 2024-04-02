@@ -6,20 +6,16 @@ import (
 	"time"
 
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type LastModifiedProperty interface {
+	DateTimePropertyType
 }
 
-type lastModifiedProperty struct {
-	IANAToken registries.Properties
-	Value     values.DateTimeValue
-}
-
-func NewLastModifiedProperty(value *time.Time) LastModifiedProperty {
-	return &lastModifiedProperty{
-		IANAToken: registries.LASTMODIFIED,
-		Value:     values.NewDateTimeValue(value),
+func NewLastModifiedProperty(value time.Time) LastModifiedProperty {
+	return &dateTimePropertyType{
+		PropName: registries.LASTMODIFIED,
+		Value:    types.NewDateTimeValue(value, types.WithUtcTime),
 	}
 }

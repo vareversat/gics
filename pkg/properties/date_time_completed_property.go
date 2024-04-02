@@ -6,20 +6,19 @@ import (
 	"time"
 
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type DateTimeCompletedProperty interface {
+	DateTimePropertyType
 }
 
-type dateTimeCompletedProperty struct {
-	IANAToken registries.Properties
-	Value     values.DateTimeValue
-}
-
-func NewDateTimeCompletedProperty(value *time.Time) DateTimeCompletedProperty {
-	return &dateTimeCompletedProperty{
-		IANAToken: registries.COMPLETED_PROP,
-		Value:     values.NewDateTimeValue(value),
+func NewDateTimeCompletedProperty(
+	value time.Time,
+	format types.DTFormat,
+) DateTimeCompletedProperty {
+	return &dateTimePropertyType{
+		PropName: registries.COMPLETED_PROP,
+		Value:    types.NewDateTimeValue(value, format),
 	}
 }

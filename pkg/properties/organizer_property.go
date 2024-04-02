@@ -5,21 +5,20 @@ package properties
 import (
 	"net/url"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type OrganizerProperty interface {
+	CalendarUserAddressPropertyType
 }
 
-type organizerProperty struct {
-	IANAToken registries.Properties
-	Value     values.CalendarUserAddressValue
-}
-
-func NewOrganizerProperty(uri url.URL) OrganizerProperty {
-	return &organizerProperty{
-		IANAToken: registries.ORGANIZER,
-		Value:     values.NewCalendarUserAddressValue(uri),
+func NewOrganizerProperty(uri *url.URL, params ...parameters.Parameter) OrganizerProperty {
+	return &calendarUserAddressPropertyType{
+		PropName:   registries.ORGANIZER,
+		Value:      types.NewCalendarUserAddressValue(uri),
+		Parameters: params,
 	}
 }

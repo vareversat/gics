@@ -2,21 +2,28 @@ package parameters
 
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.1
 
+// Parameter used in these properties :
+// - COMMENT
+// - DESCRIPTION
+// - LOCATION
+// - RESOURCES
+// - SUMMARY
+// - CONTACT
+
 import (
+	"net/url"
+
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type AlternateTextRepresentationParam interface{}
-
-type alternateTextRepresentationParam struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+type AlternateTextRepresentationParam interface {
+	UriParameter
 }
 
-func NewAlternateTextRepresentationParam(value string) AlternateTextRepresentationParam {
-	return &alternateTextRepresentationParam{
-		IANAToken: registries.ALTREP,
-		Value:     value,
+func NewAlternateTextRepresentationParam(value *url.URL) AlternateTextRepresentationParam {
+	return &uriParameter{
+		ParamName: registries.ALTREP,
+		Value:     types.NewUriValue(value),
 	}
 }

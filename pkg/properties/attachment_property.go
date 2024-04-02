@@ -3,24 +3,23 @@ package properties
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.1
 
 import (
-	"net/url"
+	"github.com/vareversat/gics/pkg/parameters"
 
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type AttachmentProperty interface{}
-
-type attachmentProperty struct {
-	IANAToken   registries.Properties
-	Value       values.UriValue // Either Binary OR URI
-	BinaryValue values.BinaryValue
+type AttachmentProperty interface {
+	TextPropertyType
 }
 
-func NewAttachmentProperty(value url.URL, binaryValue string) AttachmentProperty {
-	return &attachmentProperty{
-		IANAToken:   registries.ATTACH,
-		Value:       values.NewUriValue(value),
-		BinaryValue: values.NewBinaryValue(binaryValue),
+func NewAttachmentProperty(
+	value string,
+	params ...parameters.Parameter,
+) AttachmentProperty {
+	return &textPropertyType{
+		PropName:   registries.ATTACH,
+		Value:      types.NewTextValue(value),
+		Parameters: params,
 	}
 }

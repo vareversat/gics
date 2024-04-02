@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type PriorityProperty interface {
-}
-
-type priorityProperty struct {
-	IANAToken registries.Properties
-	Value     values.IntegerValue
+	IntegerPropertyType
 }
 
 func NewPriorityProperty(value int32) PriorityProperty {
-	return &priorityProperty{
-		IANAToken: registries.PRIORITY,
-		Value:     values.NewIntegerValue(value),
+	return &integerPropertyType{
+		PropName: registries.PRIORITY,
+		Value:    types.NewIntegerValue(value),
 	}
 }

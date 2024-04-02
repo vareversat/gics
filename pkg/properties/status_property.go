@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type StatusProperty interface {
+	StatusPropertyType
 }
 
-type statusProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
-}
-
-func NewStatusProperty(status registries.Status) StatusProperty {
-	return &statusProperty{
-		IANAToken: registries.STATUS,
-		Value:     values.NewTextValue(string(status)),
+func NewStatusProperty(status types.StatusType) StatusProperty {
+	return &statusPropertyType{
+		PropName: registries.STATUS,
+		Value:    types.NewStatusValue(status),
 	}
 }

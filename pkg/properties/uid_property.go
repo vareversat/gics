@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type UidProperty interface {
-}
-
-type uidProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+	TextPropertyType
 }
 
 func NewUidProperty(value string) UidProperty {
-	return &uidProperty{
-		IANAToken: registries.VERSION,
-		Value:     values.NewTextValue(value),
+	return &textPropertyType{
+		PropName: registries.UID,
+		Value:    types.NewTextValue(value),
 	}
 }

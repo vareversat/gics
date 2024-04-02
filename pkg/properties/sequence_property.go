@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type SequenceProperty interface {
-}
-
-type sequenceProperty struct {
-	IANAToken registries.Properties
-	Value     values.IntegerValue
+	IntegerPropertyType
 }
 
 func NewSequenceProperty(value int32) SequenceProperty {
-	return &sequenceProperty{
-		IANAToken: registries.SEQUENCE,
-		Value:     values.NewIntegerValue(value),
+	return &integerPropertyType{
+		PropName: registries.SEQUENCE,
+		Value:    types.NewIntegerValue(value),
 	}
 }

@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type TimeZoneOffsetFrom interface {
+type TimeZoneOffsetFromProperty interface {
+	UtcOffsetPropertyType
 }
 
-type timeZoneOffsetFrom struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
-}
-
-func NewTimeZoneOffsetFrom(value string) TimeZoneOffsetFrom {
-	return &timeZoneOffsetTo{
-		IANAToken: registries.TZOFFSETFROM,
-		Value:     values.NewUtcOffsetValue(value),
+func NewTimeZoneOffsetFromProperty(value string) TimeZoneOffsetFromProperty {
+	return &utcOffsetPropertyType{
+		PropName: registries.TZOFFSETFROM,
+		Value:    types.NewUtcOffsetValue(value),
 	}
 }

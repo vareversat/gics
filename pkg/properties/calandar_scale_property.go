@@ -4,19 +4,18 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
-type CalScaleProperty interface{}
-
-type calScaleProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+type CalendarScaleProperty interface {
+	TextPropertyType
 }
 
-func NewCalScaleProperty() CalScaleProperty {
-	return &calScaleProperty{
-		IANAToken: registries.CALSCALE,
-		Value:     "GREGORIAN", // This is the default value of the CALSCALE property
+func NewCalScaleProperty() CalendarScaleProperty {
+	return &textPropertyType{
+		PropName: registries.CALSCALE,
+		Value: types.NewTextValue(
+			"GREGORIAN",
+		), // This is the default value of the CALSCALE property
 	}
 }

@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type MethodProperty interface {
-}
-
-type methodProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
+	TextPropertyType
 }
 
 func NewMethodProperty(value string) MethodProperty {
-	return &methodProperty{
-		IANAToken: registries.METHOD,
-		Value:     values.NewTextValue(value),
+	return &textPropertyType{
+		PropName: registries.METHOD,
+		Value:    types.NewTextValue(value),
 	}
 }

@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type ClassificationProperty interface {
+	TextPropertyType
 }
 
-type classificationProperty struct {
-	IANAToken registries.Properties
-	Value     values.TextValue
-}
-
-func NewClassificationProperty(classification registries.Classification) ClassificationProperty {
-	return &classificationProperty{
-		IANAToken: registries.CLASS,
-		Value:     values.NewTextValue(string(classification)),
+func NewClassificationProperty(classValue types.ClassificationType) ClassificationProperty {
+	return &classificationPropertyType{
+		PropName: registries.CLASS,
+		Value:    types.NewClassificationValue(classValue),
 	}
 }

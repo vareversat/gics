@@ -7,7 +7,7 @@ type Properties string
 const (
 	CALSCALE        Properties = "CALSCALE"
 	METHOD          Properties = "METHOD"
-	PROID           Properties = "PROID"
+	PRODID          Properties = "PRODID"
 	VERSION         Properties = "VERSION"
 	ATTACH          Properties = "ATTACH"
 	CATEGORIES      Properties = "CATEGORIES"

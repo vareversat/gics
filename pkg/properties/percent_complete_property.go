@@ -4,20 +4,16 @@ package properties
 
 import (
 	"github.com/vareversat/gics/pkg/registries"
-	"github.com/vareversat/gics/pkg/values"
+	"github.com/vareversat/gics/pkg/types"
 )
 
 type PercentCompleteProperty interface {
+	IntegerPropertyType
 }
 
-type percentCompleteProperty struct {
-	IANAToken registries.Properties
-	Value     values.IntegerValue
-}
-
-func NewPercentCompleteProperty(value int32) PercentCompleteProperty {
-	return &percentCompleteProperty{
-		IANAToken: registries.PERCENTCOMPLETE,
-		Value:     values.NewIntegerValue(value),
+func NewPercentCompleteProperty(value int32) IntegerPropertyType {
+	return &integerPropertyType{
+		PropName: registries.PERCENTCOMPLETE,
+		Value:    types.NewIntegerValue(value),
 	}
 }
