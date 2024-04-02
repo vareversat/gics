@@ -1,7 +1,6 @@
 package types
 
 import (
-	"fmt"
 	"net/url"
 
 	"github.com/vareversat/gics/pkg/registries"
@@ -20,5 +19,5 @@ func NewUriValue(value *url.URL) UriValue {
 }
 
 func (uV *UriValue) GetValue() string {
-	return fmt.Sprintf("\"%s\"", uV.Value.String())
+	return uV.Value.String()
 }

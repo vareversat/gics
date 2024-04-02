@@ -53,7 +53,7 @@ type calendarUserAddressParameter struct {
 }
 
 func (tP *textParameter) ToICalendarParamFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", tP.ParamName, tP.Value.S)))
+	output.Write([]byte(fmt.Sprintf("%s=%s", tP.ParamName, tP.GetParamValue())))
 }
 
 func (tP *textParameter) GetParamName() registries.Parameters {
@@ -65,19 +65,19 @@ func (tP *textParameter) GetParamValue() string {
 }
 
 func (uP *uriParameter) ToICalendarParamFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", uP.ParamName, uP.Value.GetValue())))
+	output.Write([]byte(fmt.Sprintf("%s=%s", uP.ParamName, uP.GetParamValue())))
 }
 
-func (tP *uriParameter) GetParamName() registries.Parameters {
-	return tP.ParamName
+func (uP *uriParameter) GetParamName() registries.Parameters {
+	return uP.ParamName
 }
 
-func (tP *uriParameter) GetParamValue() string {
-	return tP.Value.GetValue()
+func (uP *uriParameter) GetParamValue() string {
+	return fmt.Sprintf("\"%s\"", uP.Value.GetValue())
 }
 
 func (bP *booleanParameter) ToICalendarParamFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", bP.ParamName, bP.Value.GetValue())))
+	output.Write([]byte(fmt.Sprintf("%s=%s", bP.ParamName, bP.GetParamValue())))
 }
 
 func (bP *booleanParameter) GetParamName() registries.Parameters {
@@ -89,7 +89,7 @@ func (bP *booleanParameter) GetParamValue() string {
 }
 
 func (cP *calendarUserAddressParameter) ToICalendarParamFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", cP.ParamName, cP.Value.GetValue())))
+	output.Write([]byte(fmt.Sprintf("%s=%s", cP.ParamName, cP.GetParamValue())))
 }
 
 func (cP *calendarUserAddressParameter) GetParamName() registries.Parameters {
@@ -97,5 +97,5 @@ func (cP *calendarUserAddressParameter) GetParamName() registries.Parameters {
 }
 
 func (cP *calendarUserAddressParameter) GetParamValue() string {
-	return cP.Value.GetValue()
+	return fmt.Sprintf("\"%s\"", cP.Value.GetValue())
 }

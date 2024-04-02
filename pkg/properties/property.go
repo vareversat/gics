@@ -226,23 +226,27 @@ func (tP *textPropertyType) ToICalendarPropFormat(output io.Writer) {
 }
 
 func (iP *integerPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	if iP.Parameters != nil {
 		computeParameters(&paramsOutput, iP.Parameters)
 	}
-	output.Write(
+	unfoldedOutput.Write(
 		[]byte(
 			fmt.Sprintf(
-				"%s%s:%s\r\n",
+				"%s%s:%s",
 				iP.PropName,
 				paramsOutput.String(),
 				iP.Value.GetStringValue(),
 			),
 		),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (dP *dateTimePropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var valuesOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	if dP.Values != nil {
@@ -258,14 +262,17 @@ func (dP *dateTimePropertyType) ToICalendarPropFormat(output io.Writer) {
 	if dP.Parameters != nil {
 		computeParameters(&paramsOutput, dP.Parameters)
 	}
-	output.Write(
+	unfoldedOutput.Write(
 		[]byte(
-			fmt.Sprintf("%s%s:%s\r\n", dP.PropName, paramsOutput.String(), valuesOutput.String()),
+			fmt.Sprintf("%s%s:%s", dP.PropName, paramsOutput.String(), valuesOutput.String()),
 		),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (dP *datePropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var valuesOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	if dP.Values != nil {
@@ -281,49 +288,60 @@ func (dP *datePropertyType) ToICalendarPropFormat(output io.Writer) {
 	if dP.Parameters != nil {
 		computeParameters(&paramsOutput, dP.Parameters)
 	}
-	output.Write(
+	unfoldedOutput.Write(
 		[]byte(
-			(fmt.Sprintf("%s%s:%s\r\n", dP.PropName, paramsOutput.String(), valuesOutput.String())),
+			(fmt.Sprintf("%s%s:%s", dP.PropName, paramsOutput.String(), valuesOutput.String())),
 		),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (pP *periodPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
+	var valuesOutput bytes.Buffer
 	if pP.Values != nil {
-		var valuesOutput bytes.Buffer
 		for i := 0; i < len(pP.Values); i++ {
 			valuesOutput.WriteString(pP.Values[i].GetValue())
 			if len(pP.Values)-1 > i {
 				valuesOutput.WriteString(fmt.Sprint(","))
 			}
 		}
-		output.Write([]byte(fmt.Sprintf("%s:%s\r\n", pP.PropName, valuesOutput.String())))
 	} else {
-		output.Write([]byte(fmt.Sprintf("%s:%s\r\n", pP.PropName, pP.Value.GetValue())))
+		valuesOutput.WriteString(pP.Value.GetValue())
 	}
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", pP.PropName, valuesOutput.String())))
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (dP *durationPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	if dP.Parameters != nil {
 		computeParameters(&paramsOutput, dP.Parameters)
 	}
-	output.Write(
-		[]byte(fmt.Sprintf("%s%s:%s\r\n", dP.PropName, paramsOutput.String(), dP.Value.GetValue())),
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", dP.PropName, paramsOutput.String(), dP.Value.GetValue())),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (gP *geoPropertyType) ToICalendarPropFormat(output io.Writer) {
-	output.Write(
+	var unfoldedOutput bytes.Buffer
+	unfoldedOutput.Write(
 		[]byte(
 			fmt.Sprintf(
-				"%s:%f;%f\r\n",
+				"%s:%f;%f",
 				gP.PropName,
 				gP.Longitude.GetValue(),
 				gP.Latitude.GetValue(),
 			),
 		),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (gP *calendarUserAddressPropertyType) ToICalendarPropFormat(output io.Writer) {
@@ -340,26 +358,33 @@ func (gP *calendarUserAddressPropertyType) ToICalendarPropFormat(output io.Write
 }
 
 func (uP *utcOffsetPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	if uP.Parameters != nil {
 		computeParameters(&paramsOutput, uP.Parameters)
 	}
-	output.Write(
-		[]byte(fmt.Sprintf("%s%s:%s\r\n", uP.PropName, paramsOutput.String(), uP.Value.GetValue())),
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", uP.PropName, paramsOutput.String(), uP.Value.GetValue())),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (uP *uriPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	if uP.Parameters != nil {
 		computeParameters(&paramsOutput, uP.Parameters)
 	}
-	output.Write(
-		[]byte(fmt.Sprintf("%s%s:%s\r\n", uP.PropName, paramsOutput.String(), uP.Value.GetValue())),
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", uP.PropName, paramsOutput.String(), uP.Value.GetValue())),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (dP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	var extraValueOutput bytes.Buffer
 	if dP.Parameters != nil {
@@ -368,10 +393,10 @@ func (dP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 	if dP.ExtraData.S != "" {
 		extraValueOutput.Write([]byte(fmt.Sprintf(";%s", dP.ExtraData.S)))
 	}
-	output.Write(
+	unfoldedOutput.Write(
 		[]byte(
 			fmt.Sprintf(
-				"%s%s:%s;%s\r\n",
+				"%s%s:%s;%s",
 				dP.PropName,
 				paramsOutput.String(),
 				dP.StatusCode.S,
@@ -379,28 +404,45 @@ func (dP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 			),
 		),
 	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (rrP *recurrenceRulePropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
 	var partsOutput bytes.Buffer
 	if rrP.Value.Parts != nil {
 		partsOutput.Write([]byte(fmt.Sprint(rrP.Value.GetValue())))
 	}
-	output.Write([]byte(fmt.Sprintf("%s:%s\r\n", rrP.PropName, partsOutput.String())))
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", rrP.PropName, rrP.Value.GetValue())))
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (aP *actionPropertyType) ToICalendarPropFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s:%s\r\n", aP.PropName, aP.Value.Value)))
+	var unfoldedOutput bytes.Buffer
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", aP.PropName, aP.Value.Value)))
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (cP *classificationPropertyType) ToICalendarPropFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s:%s\r\n", cP.PropName, cP.Value.Value)))
+	var unfoldedOutput bytes.Buffer
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", cP.PropName, cP.Value.Value)))
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (sP *statusPropertyType) ToICalendarPropFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s:%s\r\n", sP.PropName, sP.Value.Value)))
+	var unfoldedOutput bytes.Buffer
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", sP.PropName, sP.Value.Value)))
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }
 
 func (tP *timeTransparencyPropertyType) ToICalendarPropFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s:%s\r\n", tP.PropName, tP.Value.Value)))
+	var unfoldedOutput bytes.Buffer
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", tP.PropName, tP.Value.Value)))
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
 }

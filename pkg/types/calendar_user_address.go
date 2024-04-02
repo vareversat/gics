@@ -5,7 +5,6 @@ package types
 // Example :mailto:jane_doe@example.com
 
 import (
-	"fmt"
 	"net/url"
 
 	"github.com/vareversat/gics/pkg/registries"
@@ -24,5 +23,5 @@ func NewCalendarUserAddressValue(value *url.URL) CalendarUserAddressValue {
 }
 
 func (cUAV *CalendarUserAddressValue) GetValue() string {
-	return fmt.Sprintf("\"%s\"", cUAV.Value.String())
+	return cUAV.Value.String()
 }
