@@ -3,6 +3,7 @@ package components
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
 
 import (
+	"github.com/vareversat/gics/pkg/types"
 	"io"
 
 	"github.com/vareversat/gics/pkg/properties"
@@ -36,6 +37,26 @@ func NewAlarmCalendarComponent(
 		Action:     action,
 		End:        properties.NewBlockDelimiterProperty(registries.END, properties.VALARM),
 	}
+}
+func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	switch aC.Action.GetValue() {
+	case types.AUDIO:
+		return []registries.PropertyNames{registries.BEGIN, registries.END, registries.ACTION, registries.TRIGGER}
+	case types.DISPLAY:
+		return []registries.PropertyNames{registries.BEGIN, registries.END, registries.ACTION, registries.TRIGGER, registries.DESCRIPTION}
+	case types.EMAIL:
+		return []registries.PropertyNames{registries.BEGIN, registries.END, registries.ACTION, registries.TRIGGER, registries.DESCRIPTION, registries.SUMMARY}
+	default:
+		return []registries.PropertyNames{registries.BEGIN, registries.END}
+	}
+}
+
+func (aC *alarmCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
+func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.DURATION_PROP, registries.REPEAT}
 }
 
 func (aC *alarmCalendarComponent) ToICalendarComponentFormat(output io.Writer) {

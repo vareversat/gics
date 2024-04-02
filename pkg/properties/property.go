@@ -68,6 +68,7 @@ type RecurrenceRulePropertyType interface {
 
 type ActionPropertyType interface {
 	Property
+	GetValue() types.ActionType
 }
 
 type ClassificationPropertyType interface {
@@ -83,71 +84,71 @@ type TimeTransparencyPropertyType interface {
 }
 
 type textPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.TextValue
 	Values     []types.TextValue
 	Parameters parameters.Parameters
 }
 
 type integerPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.IntegerValue
 	Parameters parameters.Parameters
 }
 
 type dateTimePropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.DateTimeValue
 	Values     []types.DateTimeValue
 	Parameters parameters.Parameters
 }
 
 type datePropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.DateValue
 	Values     []types.DateValue
 	Parameters parameters.Parameters
 }
 
 type periodPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.PeriodValue
 	Values     []types.PeriodValue
 	Parameters parameters.Parameters
 }
 
 type durationPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.DurationValue
 	Parameters parameters.Parameters
 }
 
 type geoPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Longitude  types.FloatValue
 	Latitude   types.FloatValue
 	Parameters parameters.Parameters
 }
 
 type calendarUserAddressPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.CalendarUserAddressValue
 	Parameters parameters.Parameters
 }
 
 type utcOffsetPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.UtcOffsetValue
 	Parameters parameters.Parameters
 }
 
 type uriPropertyType struct {
-	PropName   registries.Properties
+	PropName   registries.PropertyNames
 	Value      types.UriValue
 	Parameters parameters.Parameters
 }
 type requestStatusPropertyType struct {
-	PropName          registries.Properties
+	PropName          registries.PropertyNames
 	StatusCode        types.TextValue
 	StatusDescription types.TextValue
 	ExtraData         types.TextValue
@@ -155,27 +156,27 @@ type requestStatusPropertyType struct {
 }
 
 type recurrenceRulePropertyType struct {
-	PropName registries.Properties
+	PropName registries.PropertyNames
 	Value    recurrence_rule.RecurrenceRuleValue
 }
 
 type actionPropertyType struct {
-	PropName registries.Properties
+	PropName registries.PropertyNames
 	Value    types.ActionValue
 }
 
 type classificationPropertyType struct {
-	PropName registries.Properties
+	PropName registries.PropertyNames
 	Value    types.ClassificationValue
 }
 
 type statusPropertyType struct {
-	PropName registries.Properties
+	PropName registries.PropertyNames
 	Value    types.StatusValue
 }
 
 type timeTransparencyPropertyType struct {
-	PropName registries.Properties
+	PropName registries.PropertyNames
 	Value    types.TimeTransparencyValue
 }
 
@@ -424,6 +425,10 @@ func (aP *actionPropertyType) ToICalendarPropFormat(output io.Writer) {
 	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", aP.PropName, aP.Value.Value)))
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
+}
+
+func (aP *actionPropertyType) GetValue() types.ActionType {
+	return aP.Value.Value
 }
 
 func (cP *classificationPropertyType) ToICalendarPropFormat(output io.Writer) {

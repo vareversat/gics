@@ -34,6 +34,18 @@ func NewToDoCalendarComponent(
 	}
 }
 
+func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.UID, registries.DTSTAMP}
+}
+
+func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.DUE, registries.DURATION_PROP}
+}
+
+func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
 func (tC *toDoCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.UID.ToICalendarPropFormat(output)

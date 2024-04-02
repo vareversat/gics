@@ -12,7 +12,7 @@ type BlockDelimiterProperty interface {
 }
 
 func NewBlockDelimiterProperty(
-	block registries.Properties,
+	block registries.PropertyNames,
 	component Component,
 ) BlockDelimiterProperty {
 	return &textPropertyType{

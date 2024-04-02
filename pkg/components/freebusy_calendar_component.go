@@ -34,6 +34,18 @@ func NewFreeBusyCalendarComponent(
 	}
 }
 
+func (fC *freeBusyCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.UID, registries.DTSTAMP}
+}
+
+func (fC *freeBusyCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
+func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
 func (fC *freeBusyCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	fC.Begin.ToICalendarPropFormat(output)
 	fC.UID.ToICalendarPropFormat(output)

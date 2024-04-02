@@ -82,7 +82,7 @@ func NewTimeZoneCalendarStandardComponent(
 	dateTimeStart properties.DateTimeStartProperty,
 	timeZoneOffsetTo properties.TimeZoneOffsetToProperty,
 	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
-	propertyList ...properties.Property) TimeZoneCalendarComponent {
+	propertyList ...properties.Property) TimeZoneCalendarSubComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registries.BEGIN,
@@ -111,6 +111,18 @@ func (tC *timeZoneCalendarComponent) ToICalendarComponentFormat(output io.Writer
 	tC.End.ToICalendarPropFormat(output)
 }
 
+func (tC *timeZoneCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.PROP_TZID}
+}
+
+func (tC *timeZoneCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
+func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
 func (tC *timeZoneCalendarSubComponent) ToICalendarComponentFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.DateTimeStart.ToICalendarPropFormat(output)
@@ -120,4 +132,16 @@ func (tC *timeZoneCalendarSubComponent) ToICalendarComponentFormat(output io.Wri
 		tC.Properties[i].ToICalendarPropFormat(output)
 	}
 	tC.End.ToICalendarPropFormat(output)
+}
+
+func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.DTSTART, registries.TZOFFSETTO, registries.TZOFFSETFROM}
+}
+
+func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
+func (tC *timeZoneCalendarSubComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
 }

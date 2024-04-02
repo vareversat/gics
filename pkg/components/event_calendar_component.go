@@ -34,6 +34,18 @@ func NewEventCalendarComponent(
 	}
 }
 
+func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.UID, registries.DTSTAMP}
+}
+
+func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.DTEND, registries.DURATION_PROP}
+}
+
+func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
 func (eC *eventCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
 	eC.UID.ToICalendarPropFormat(output)

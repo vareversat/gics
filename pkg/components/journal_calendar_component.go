@@ -34,6 +34,18 @@ func NewJournalCalendarComponent(
 	}
 }
 
+func (jC *journalCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.UID, registries.DTSTAMP}
+}
+
+func (jC *journalCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
+func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
+}
+
 func (jC *journalCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
 	jC.Begin.ToICalendarPropFormat(output)
 	jC.UID.ToICalendarPropFormat(output)

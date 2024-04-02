@@ -17,7 +17,7 @@ type TriggerProperty interface {
 
 type triggerProperty struct {
 	TriggerParameters
-	PropName      registries.Properties
+	PropName      registries.PropertyNames
 	DateTimeValue types.DateTimeValue
 	DurationValue types.DurationValue
 }
