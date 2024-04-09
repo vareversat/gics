@@ -19,3 +19,10 @@ func NewLastModifiedProperty(value time.Time) LastModifiedProperty {
 		Value:    types.NewDateTimeValue(value, types.WithUtcTime),
 	}
 }
+
+func NewLastModifiedPropertyFromString(value string) LastModifiedProperty {
+	return &dateTimePropertyType{
+		PropName: registries.LASTMODIFIED,
+		Value:    types.NewDateTimeValueFromString(value, types.WithUtcTime),
+	}
+}

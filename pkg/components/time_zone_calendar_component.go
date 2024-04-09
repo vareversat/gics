@@ -5,6 +5,8 @@ package components
 import (
 	"io"
 
+	"github.com/vareversat/gics/pkg/types"
+
 	"github.com/vareversat/gics/pkg/properties"
 	"github.com/vareversat/gics/pkg/registries"
 )
@@ -49,11 +51,11 @@ func NewTimeZoneCalendarComponent(
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, properties.STANDARD),
+		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, types.STANDARD),
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End:        properties.NewBlockDelimiterProperty(registries.END, properties.STANDARD),
+		End:        properties.NewBlockDelimiterProperty(registries.END, types.STANDARD),
 	}
 }
 
@@ -65,7 +67,7 @@ func NewTimeZoneDayLightComponent(
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registries.BEGIN,
-			properties.DAYLIGHT,
+			types.DAYLIGHT,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
@@ -73,7 +75,7 @@ func NewTimeZoneDayLightComponent(
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
 			registries.END,
-			properties.DAYLIGHT,
+			types.DAYLIGHT,
 		),
 	}
 }
@@ -86,7 +88,7 @@ func NewTimeZoneCalendarStandardComponent(
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registries.BEGIN,
-			properties.VTIMEZONE,
+			types.VTIMEZONE,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
@@ -94,7 +96,7 @@ func NewTimeZoneCalendarStandardComponent(
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
 			registries.END,
-			properties.VTIMEZONE,
+			types.VTIMEZONE,
 		),
 	}
 }
@@ -135,7 +137,13 @@ func (tC *timeZoneCalendarSubComponent) ToICalendarComponentFormat(output io.Wri
 }
 
 func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.DTSTART, registries.TZOFFSETTO, registries.TZOFFSETFROM}
+	return []registries.PropertyNames{
+		registries.BEGIN,
+		registries.END,
+		registries.DTSTART,
+		registries.TZOFFSETTO,
+		registries.TZOFFSETFROM,
+	}
 }
 
 func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registries.PropertyNames {

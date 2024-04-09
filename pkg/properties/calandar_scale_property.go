@@ -3,19 +3,23 @@ package properties
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.7.1
 
 import (
+	"github.com/vareversat/gics/pkg/parameters"
 	"github.com/vareversat/gics/pkg/registries"
 	"github.com/vareversat/gics/pkg/types"
 )
+
+// CalendarScaleValue This is the default value of the CALSCALE property
+const CalendarScaleValue = "GREGORIAN"
 
 type CalendarScaleProperty interface {
 	TextPropertyType
 }
 
-func NewCalScaleProperty() CalendarScaleProperty {
+func NewCalScaleProperty(params ...parameters.Parameter) CalendarScaleProperty {
 	return &textPropertyType{
-		PropName: registries.CALSCALE,
+		Parameters: params,
+		PropName:   registries.CALSCALE,
 		Value: types.NewTextValue(
-			"GREGORIAN",
-		), // This is the default value of the CALSCALE property
+			CalendarScaleValue),
 	}
 }

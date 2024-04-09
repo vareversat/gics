@@ -5,6 +5,8 @@ package components
 import (
 	"io"
 
+	"github.com/vareversat/gics/pkg/types"
+
 	"github.com/vareversat/gics/pkg/properties"
 	"github.com/vareversat/gics/pkg/registries"
 )
@@ -26,16 +28,21 @@ func NewEventCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VEVENT),
+		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, types.VEVENT),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, properties.VEVENT),
+		End:           properties.NewBlockDelimiterProperty(registries.END, types.VEVENT),
 	}
 }
 
 func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.UID, registries.DTSTAMP}
+	return []registries.PropertyNames{
+		registries.BEGIN,
+		registries.END,
+		registries.UID,
+		registries.DTSTAMP,
+	}
 }
 
 func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {

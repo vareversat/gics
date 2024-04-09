@@ -6,6 +6,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/vareversat/gics/pkg"
+	"github.com/vareversat/gics/pkg/parser"
+
 	"github.com/vareversat/gics/pkg/registries"
 	"github.com/vareversat/gics/pkg/types/recurrence_rule"
 
@@ -13,7 +16,6 @@ import (
 	"github.com/vareversat/gics/pkg/properties"
 	"github.com/vareversat/gics/pkg/types"
 
-	"github.com/vareversat/gics/pkg"
 	"github.com/vareversat/gics/pkg/components"
 )
 
@@ -26,14 +28,6 @@ func main() {
 	url4, _ := url.Parse("mailto:someone@company.com")
 
 	vevent := components.NewEventCalendarComponent(
-		properties.NewUidProperty("9FIDJ7FKSDNNSK"),
-		properties.NewDateTimeStampProperty(time.Now(), types.WithLocalTime,
-			parameters.NewTimeZoneIdentifierParam("Europe/Paris")),
-		properties.NewDateTimeStartProperty(time.Now(), types.WithLocalTime,
-			parameters.NewTimeZoneIdentifierParam("Europe/Paris"),
-			parameters.NewValueParam(registries.DATE)),
-		properties.NewClassificationProperty(types.PUBLIC),
-		properties.NewDateTimeCreatedProperty(time.Now(), types.WithUtcTime),
 		properties.NewDescriptionProperty(
 			"This is a description sdklhjfkdjshfjkqsdhfkjqshddkfjhkuliueuifhj<ehfkj<dshfjkshfuhzuhfkkjshkjdhfjksqhfdk",
 			parameters.NewLanguageParam("EN"),
@@ -115,11 +109,13 @@ func main() {
 
 	component = append(component, vevent)
 	calendar, err := pkg.NewCalendar(component, "this_project", "xyz", "2.0")
+	event, err := os.OpenFile("event.ics", os.O_CREATE, os.ModeAppend)
 	if err != nil {
-		output := os.Stderr
-		output.Write(
-			[]byte(fmt.Sprintf("Error: %s", err.Error())))
-		os.Exit(1)
+		fmt.Println("Erreur lors de la création du fichier de sortie:", err)
+		return
 	}
-	calendar.ToICalendarFormat(os.Stdout)
+	calendar.ToICalendarFormat(event)
+	event.Close()
+	parser.Parser()
+
 }

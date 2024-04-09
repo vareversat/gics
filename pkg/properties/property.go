@@ -12,6 +12,12 @@ import (
 	"github.com/vareversat/gics/pkg/types"
 )
 
+const (
+	escapeCharacter  = "\r\n"
+	foldingIndex     = 75
+	foldingCharacter = escapeCharacter + " "
+)
+
 type Property interface {
 	ToICalendarPropFormat(output io.Writer)
 }
@@ -80,6 +86,10 @@ type StatusPropertyType interface {
 }
 
 type TimeTransparencyPropertyType interface {
+	Property
+}
+
+type BlockDelimiterPropertyType interface {
 	Property
 }
 
@@ -161,23 +171,33 @@ type recurrenceRulePropertyType struct {
 }
 
 type actionPropertyType struct {
-	PropName registries.PropertyNames
-	Value    types.ActionValue
+	PropName   registries.PropertyNames
+	Value      types.ActionValue
+	Parameters parameters.Parameters
 }
 
 type classificationPropertyType struct {
-	PropName registries.PropertyNames
-	Value    types.ClassificationValue
+	PropName   registries.PropertyNames
+	Value      types.ClassificationValue
+	Parameters parameters.Parameters
 }
 
 type statusPropertyType struct {
-	PropName registries.PropertyNames
-	Value    types.StatusValue
+	PropName   registries.PropertyNames
+	Value      types.StatusValue
+	Parameters parameters.Parameters
 }
 
 type timeTransparencyPropertyType struct {
-	PropName registries.PropertyNames
-	Value    types.TimeTransparencyValue
+	PropName   registries.PropertyNames
+	Value      types.TimeTransparencyValue
+	Parameters parameters.Parameters
+}
+
+type blockDelimiterPropertyType struct {
+	PropName   registries.PropertyNames
+	Value      types.BlockDelimiterValue
+	Parameters parameters.Parameters
 }
 
 func computeParameters(paramsOutput io.Writer, params parameters.Parameters) {
@@ -188,9 +208,6 @@ func computeParameters(paramsOutput io.Writer, params parameters.Parameters) {
 }
 
 func foldOutput(unfoldedOutput *bytes.Buffer) {
-	escapeCharacter := "\r\n"
-	foldingIndex := 75
-	foldingCharacter := escapeCharacter + " "
 	for i := foldingIndex; i < unfoldedOutput.Len(); i += foldingIndex + 1 {
 		var afterFoldingBlock = bytes.Clone(unfoldedOutput.Bytes()[i:])
 		var beforeFoldingBlock = bytes.Clone(unfoldedOutput.Bytes()[:i])
@@ -331,11 +348,16 @@ func (dP *durationPropertyType) ToICalendarPropFormat(output io.Writer) {
 
 func (gP *geoPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
+	var paramsOutput bytes.Buffer
+	if gP.Parameters != nil {
+		computeParameters(&paramsOutput, gP.Parameters)
+	}
 	unfoldedOutput.Write(
 		[]byte(
 			fmt.Sprintf(
-				"%s:%f;%f",
+				"%s%s:%f;%f",
 				gP.PropName,
+				paramsOutput.String(),
 				gP.Longitude.GetValue(),
 				gP.Latitude.GetValue(),
 			),
@@ -422,7 +444,13 @@ func (rrP *recurrenceRulePropertyType) ToICalendarPropFormat(output io.Writer) {
 
 func (aP *actionPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
-	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", aP.PropName, aP.Value.Value)))
+	var paramsOutput bytes.Buffer
+	if aP.Parameters != nil {
+		computeParameters(&paramsOutput, aP.Parameters)
+	}
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", aP.PropName, paramsOutput.String(), aP.Value.Value)),
+	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
 }
@@ -433,21 +461,52 @@ func (aP *actionPropertyType) GetValue() types.ActionType {
 
 func (cP *classificationPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
-	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", cP.PropName, cP.Value.Value)))
+	var paramsOutput bytes.Buffer
+	if cP.Parameters != nil {
+		computeParameters(&paramsOutput, cP.Parameters)
+	}
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", cP.PropName, paramsOutput.String(), cP.Value.Value)),
+	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
 }
 
 func (sP *statusPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
-	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", sP.PropName, sP.Value.Value)))
+	var paramsOutput bytes.Buffer
+	if sP.Parameters != nil {
+		computeParameters(&paramsOutput, sP.Parameters)
+	}
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", sP.PropName, paramsOutput.String(), sP.Value.Value)),
+	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
 }
 
 func (tP *timeTransparencyPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
-	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", tP.PropName, tP.Value.Value)))
+	var paramsOutput bytes.Buffer
+	if tP.Parameters != nil {
+		computeParameters(&paramsOutput, tP.Parameters)
+	}
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", tP.PropName, paramsOutput.String(), tP.Value.Value)),
+	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
+}
+
+func (bT *blockDelimiterPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
+	var paramsOutput bytes.Buffer
+	if bT.Parameters != nil {
+		computeParameters(&paramsOutput, bT.Parameters)
+	}
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", bT.PropName, paramsOutput.String(), bT.Value.Value)),
+	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
 }

@@ -5,6 +5,8 @@ package components
 import (
 	"io"
 
+	"github.com/vareversat/gics/pkg/types"
+
 	"github.com/vareversat/gics/pkg/properties"
 	"github.com/vareversat/gics/pkg/registries"
 )
@@ -26,16 +28,21 @@ func NewToDoCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VTODO),
+		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, types.VTODO),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, properties.VTODO),
+		End:           properties.NewBlockDelimiterProperty(registries.END, types.VTODO),
 	}
 }
 
 func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.UID, registries.DTSTAMP}
+	return []registries.PropertyNames{
+		registries.BEGIN,
+		registries.END,
+		registries.UID,
+		registries.DTSTAMP,
+	}
 }
 
 func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {

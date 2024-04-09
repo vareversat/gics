@@ -12,12 +12,10 @@ type TimeZoneNameProperty interface {
 	TextPropertyType
 }
 
-func NewTimeZoneNameProperty(value string, languageParam string) TimeZoneNameProperty {
-	paramSlice := make(parameters.Parameters, 0)
-	paramSlice = append(paramSlice, parameters.NewLanguageParam(languageParam))
+func NewTimeZoneNameProperty(value string, params ...parameters.Parameter) TimeZoneNameProperty {
 	return &textPropertyType{
 		PropName:   registries.TZNAME,
 		Value:      types.NewTextValue(value),
-		Parameters: paramSlice,
+		Parameters: params,
 	}
 }

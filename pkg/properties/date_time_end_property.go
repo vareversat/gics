@@ -44,3 +44,32 @@ func NewDateTimeEndProperty(
 		return nil
 	}
 }
+
+func NewDateTimeEndPropertyFromString(
+	value string,
+	format types.DTFormat,
+	params ...parameters.Parameter) DateTimeEndProperty {
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
+	switch valueType {
+	case string(registries.DATETIME):
+		return &dateTimePropertyType{
+			PropName:   registries.DTEND,
+			Value:      types.NewDateTimeValueFromString(value, format),
+			Parameters: params,
+		}
+	case string(registries.DATE):
+		return &datePropertyType{
+			PropName:   registries.DTEND,
+			Value:      types.NewDateValueFromString(value),
+			Parameters: params,
+		}
+	default:
+		return nil
+	}
+}

@@ -1,8 +1,9 @@
 package components
 
 import (
-	"github.com/vareversat/gics/pkg/registries"
 	"io"
+
+	"github.com/vareversat/gics/pkg/registries"
 )
 
 type CalendarComponent interface {

@@ -5,6 +5,8 @@ package properties
 import (
 	"time"
 
+	"github.com/vareversat/gics/pkg/utils"
+
 	"github.com/vareversat/gics/pkg/parameters"
 
 	"github.com/vareversat/gics/pkg/registries"
@@ -38,6 +40,38 @@ func NewExceptionDateTimeProperty(
 		return &datePropertyType{
 			PropName:   registries.EXDATE,
 			Values:     types.NewDateValues(values),
+			Parameters: params,
+		}
+	default:
+		return nil
+	}
+}
+
+func NewExceptionDateTimePropertyFromString(
+	values string,
+	format types.DTFormat,
+	params ...parameters.Parameter) ExceptionDateTimeProperty {
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
+	switch valueType {
+	case string(registries.DATETIME):
+		return &dateTimePropertyType{
+			PropName: registries.EXDATE,
+			Values: types.NewDateTimeValuesFromString(
+				utils.StringToStringArray(values),
+				format,
+			),
+			Parameters: params,
+		}
+	case string(registries.DATE):
+		return &datePropertyType{
+			PropName:   registries.EXDATE,
+			Values:     types.NewDateValuesFromString(utils.StringToStringArray(values)),
 			Parameters: params,
 		}
 	default:

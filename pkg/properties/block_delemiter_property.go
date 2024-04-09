@@ -13,24 +13,20 @@ type BlockDelimiterProperty interface {
 
 func NewBlockDelimiterProperty(
 	block registries.PropertyNames,
-	component Component,
+	component types.BlockDelimiterType,
 ) BlockDelimiterProperty {
-	return &textPropertyType{
+	return &blockDelimiterPropertyType{
 		PropName: block,
-		Value:    types.NewTextValue(string(component)),
+		Value:    types.NewBlockDelimiterValue(component),
 	}
 }
 
-type Component string
-
-const (
-	VCALENDAR Component = "VCALENDAR"
-	VEVENT    Component = "VEVENT"
-	VTODO     Component = "VTODO"
-	VJOURNAL  Component = "VJOURNAL"
-	VFREEBUSY Component = "VFREEBUSY"
-	VTIMEZONE Component = "VTIMEZONE"
-	VALARM    Component = "VALARM"
-	STANDARD  Component = "STANDARD"
-	DAYLIGHT  Component = "DAYLIGHT"
-)
+func NewBlockDelimiterPropertyFromString(
+	block registries.PropertyNames,
+	stringComponent string,
+) BlockDelimiterProperty {
+	return &blockDelimiterPropertyType{
+		PropName: block,
+		Value:    types.NewBlockDelimiterValue(types.BlockDelimiterType(stringComponent)),
+	}
+}

@@ -5,6 +5,7 @@ package types
 // Example : 19970714
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/vareversat/gics/pkg/registries"
@@ -23,6 +24,13 @@ func NewDateValue(value time.Time) DateValue {
 	}
 }
 
+func NewDateValueFromString(value string) DateValue {
+	return DateValue{
+		V:     NewValue(registries.DATE),
+		Value: parseStringToDateTime(value),
+	}
+}
+
 func NewDateValues(values []time.Time) []DateValue {
 	dateTimeValues := make([]DateValue, 0)
 
@@ -33,6 +41,26 @@ func NewDateValues(values []time.Time) []DateValue {
 		})
 	}
 	return dateTimeValues
+}
+
+func NewDateValuesFromString(values []string) []DateValue {
+	dateTimeValues := make([]DateValue, 0)
+
+	for i := 0; i < len(values); i++ {
+		dateTimeValues = append(dateTimeValues, DateValue{
+			V:     NewValue(registries.DATE),
+			Value: parseStringToDate(values[i]),
+		})
+	}
+	return dateTimeValues
+}
+
+func parseStringToDate(value string) time.Time {
+	date, err := time.Parse("20060102", value)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return date
 }
 
 func (bV *DateValue) GetValue() string {

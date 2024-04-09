@@ -3,8 +3,9 @@ package components
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
 
 import (
-	"github.com/vareversat/gics/pkg/types"
 	"io"
+
+	"github.com/vareversat/gics/pkg/types"
 
 	"github.com/vareversat/gics/pkg/properties"
 	"github.com/vareversat/gics/pkg/registries"
@@ -31,21 +32,39 @@ func NewAlarmCalendarComponent(
 	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, properties.VALARM),
+		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, types.VALARM),
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registries.END, properties.VALARM),
+		End:        properties.NewBlockDelimiterProperty(registries.END, types.VALARM),
 	}
 }
 func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyNames {
 	switch aC.Action.GetValue() {
 	case types.AUDIO:
-		return []registries.PropertyNames{registries.BEGIN, registries.END, registries.ACTION, registries.TRIGGER}
+		return []registries.PropertyNames{
+			registries.BEGIN,
+			registries.END,
+			registries.ACTION,
+			registries.TRIGGER,
+		}
 	case types.DISPLAY:
-		return []registries.PropertyNames{registries.BEGIN, registries.END, registries.ACTION, registries.TRIGGER, registries.DESCRIPTION}
+		return []registries.PropertyNames{
+			registries.BEGIN,
+			registries.END,
+			registries.ACTION,
+			registries.TRIGGER,
+			registries.DESCRIPTION,
+		}
 	case types.EMAIL:
-		return []registries.PropertyNames{registries.BEGIN, registries.END, registries.ACTION, registries.TRIGGER, registries.DESCRIPTION, registries.SUMMARY}
+		return []registries.PropertyNames{
+			registries.BEGIN,
+			registries.END,
+			registries.ACTION,
+			registries.TRIGGER,
+			registries.DESCRIPTION,
+			registries.SUMMARY,
+		}
 	default:
 		return []registries.PropertyNames{registries.BEGIN, registries.END}
 	}
