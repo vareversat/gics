@@ -3,11 +3,12 @@ package components
 import (
 	"bytes"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/pkg/properties"
 	"github.com/vareversat/gics/pkg/types"
-	"testing"
-	"time"
 )
 
 func TestNewAlarmCalendarComponent(t *testing.T) {
@@ -34,6 +35,9 @@ func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	component.SerializeToICSFormat(&buf)
 	serialized := buf.String()
 
-	expected := fmt.Sprintf("BEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm Summary\r\nEND:VALARM\r\n", myTimeToString)
+	expected := fmt.Sprintf(
+		"BEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm Summary\r\nEND:VALARM\r\n",
+		myTimeToString,
+	)
 	assert.Equal(t, expected, serialized)
 }
