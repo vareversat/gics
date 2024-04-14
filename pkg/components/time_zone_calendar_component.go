@@ -1,7 +1,5 @@
 package components
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
-
 import (
 	"io"
 
@@ -11,20 +9,26 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// TimeZoneCalendarComponent is the interface definition of a VTIMEZONE calendar component
+// See also : [CalendarComponent]
 type TimeZoneCalendarComponent interface {
 	CalendarComponent
 }
 
+// TimeZoneCalendarSubComponent may be either a STANDARD or a DAYLIGHT subcomponent of a VTIMEZONE calendar component
 type TimeZoneCalendarSubComponent interface {
 	CalendarComponent
 }
 
+// TimeZoneCalendarSubComponents array of TimeZoneCalendarSubComponent
 type TimeZoneCalendarSubComponents []TimeZoneCalendarSubComponent
 
+// TimeZoneCalendarStandardComponent is a STANDARD subcomponent of a VTIMEZONE calendar component
 type TimeZoneCalendarStandardComponent interface {
 	TimeZoneCalendarSubComponent
 }
 
+// TimeZoneCalendarDaylightComponent is a DAYLIGHT subcomponent of a VTIMEZONE calendar component
 type TimeZoneCalendarDaylightComponent interface {
 	TimeZoneCalendarSubComponent
 }
@@ -46,6 +50,8 @@ type timeZoneCalendarSubComponent struct {
 	End                properties.BlockDelimiterProperty
 }
 
+// NewTimeZoneCalendarComponent create a VTIMEZONE calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
 func NewTimeZoneCalendarComponent(
 	timeZoneId properties.TimeZoneIdProperty,
 	components TimeZoneCalendarSubComponents,
@@ -59,7 +65,9 @@ func NewTimeZoneCalendarComponent(
 	}
 }
 
-func NewTimeZoneDayLightComponent(
+// NewTimeZoneDayLightSubcomponent create a STANDARD subcomponent of a VTIMEZONE calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
+func NewTimeZoneDayLightSubcomponent(
 	dateTimeStart properties.DateTimeStartProperty,
 	timeZoneOffsetTo properties.TimeZoneOffsetToProperty,
 	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
@@ -80,7 +88,9 @@ func NewTimeZoneDayLightComponent(
 	}
 }
 
-func NewTimeZoneCalendarStandardComponent(
+// NewTimeZoneCalendarStandardSubcomponent create a DAYLIGHT subcomponent of a VTIMEZONE calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
+func NewTimeZoneCalendarStandardSubcomponent(
 	dateTimeStart properties.DateTimeStartProperty,
 	timeZoneOffsetTo properties.TimeZoneOffsetToProperty,
 	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
@@ -101,14 +111,14 @@ func NewTimeZoneCalendarStandardComponent(
 	}
 }
 
-func (tC *timeZoneCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
+func (tC *timeZoneCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.TimeZoneId.ToICalendarPropFormat(output)
 	for i := 0; i < len(tC.Properties); i++ {
 		tC.Properties[i].ToICalendarPropFormat(output)
 	}
 	for i := 0; i < len(tC.Components); i++ {
-		tC.Components[i].ToICalendarComponentFormat(output)
+		tC.Components[i].SerializeToICSFormat(output)
 	}
 	tC.End.ToICalendarPropFormat(output)
 }
@@ -125,7 +135,7 @@ func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registries.
 	return []registries.PropertyNames{}
 }
 
-func (tC *timeZoneCalendarSubComponent) ToICalendarComponentFormat(output io.Writer) {
+func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.DateTimeStart.ToICalendarPropFormat(output)
 	tC.TimeZoneOffsetTo.ToICalendarPropFormat(output)

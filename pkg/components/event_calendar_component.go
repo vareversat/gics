@@ -1,7 +1,5 @@
 package components
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.1
-
 import (
 	"io"
 
@@ -11,6 +9,8 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// EventCalendarComponent is the interface definition of a VEVENT calendar component
+// See also : [CalendarComponent]
 type EventCalendarComponent interface {
 	CalendarComponent
 }
@@ -23,6 +23,8 @@ type eventCalendarComponent struct {
 	End           properties.BlockDelimiterProperty
 }
 
+// NewEventCalendarComponent create a VEVENT calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.1
 func NewEventCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
@@ -53,7 +55,7 @@ func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 	return []registries.PropertyNames{}
 }
 
-func (eC *eventCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
+func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
 	eC.UID.ToICalendarPropFormat(output)
 	eC.DateTimeStamp.ToICalendarPropFormat(output)

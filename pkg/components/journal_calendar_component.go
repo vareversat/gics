@@ -1,7 +1,5 @@
 package components
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.3
-
 import (
 	"io"
 
@@ -11,6 +9,8 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// JournalCalendarComponent is the interface definition of a VJOURNAL calendar component
+// See also : [CalendarComponent]
 type JournalCalendarComponent interface {
 	CalendarComponent
 }
@@ -23,6 +23,8 @@ type journalCalendarComponent struct {
 	End           properties.BlockDelimiterProperty
 }
 
+// NewJournalCalendarComponent create a VJOURNAL calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.3
 func NewJournalCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
@@ -53,7 +55,7 @@ func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registries.P
 	return []registries.PropertyNames{}
 }
 
-func (jC *journalCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
+func (jC *journalCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	jC.Begin.ToICalendarPropFormat(output)
 	jC.UID.ToICalendarPropFormat(output)
 	jC.DateTimeStamp.ToICalendarPropFormat(output)

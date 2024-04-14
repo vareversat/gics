@@ -1,7 +1,5 @@
 package components
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
-
 import (
 	"io"
 
@@ -11,6 +9,8 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// FreeBusyCalendarComponent is the interface definition of a VFREEBUSY calendar component
+// See also : [CalendarComponent]
 type FreeBusyCalendarComponent interface {
 	CalendarComponent
 }
@@ -23,6 +23,8 @@ type freeBusyCalendarComponent struct {
 	End           properties.BlockDelimiterProperty
 }
 
+// NewFreeBusyCalendarComponent create a VFREEBUSY calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.4
 func NewFreeBusyCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
@@ -53,7 +55,7 @@ func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.
 	return []registries.PropertyNames{}
 }
 
-func (fC *freeBusyCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
+func (fC *freeBusyCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	fC.Begin.ToICalendarPropFormat(output)
 	fC.UID.ToICalendarPropFormat(output)
 	fC.DateTimeStamp.ToICalendarPropFormat(output)

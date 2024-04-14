@@ -1,7 +1,5 @@
 package pkg
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.4
-
 import (
 	"fmt"
 	"io"
@@ -13,8 +11,11 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// Calendar is the interface definition of a iCalendar object
 type Calendar interface {
-	ToICalendarFormat(output io.Writer)
+	// SerializeToICSFormat format the CalendarComponent to his RFC-5545 representation.
+	// It can be print inside a file or the stdout via the "output" param
+	SerializeToICSFormat(output io.Writer)
 }
 
 type calendar struct {
@@ -27,6 +28,8 @@ type calendar struct {
 	End        properties.BlockDelimiterProperty // Mandatory
 }
 
+// NewCalendar create a iCalendar object
+// You can find more information in this section of the RFC-5545 : https://datatracker.ietf.org/doc/html/rfc5545#section-3.4
 func NewCalendar(
 	calendarComponents components.Components,
 	proId string,
@@ -53,7 +56,7 @@ func NewCalendar(
 	}, nil
 }
 
-func (c *calendar) ToICalendarFormat(output io.Writer) {
+func (c *calendar) SerializeToICSFormat(output io.Writer) {
 	c.Begin.ToICalendarPropFormat(output)
 	c.ProdId.ToICalendarPropFormat(output)
 	c.Version.ToICalendarPropFormat(output)
@@ -64,7 +67,7 @@ func (c *calendar) ToICalendarFormat(output io.Writer) {
 		c.CalScale.ToICalendarPropFormat(output)
 	}
 	for i := 0; i < len(c.Components); i++ {
-		c.Components[i].ToICalendarComponentFormat(output)
+		c.Components[i].SerializeToICSFormat(output)
 	}
 	c.End.ToICalendarPropFormat(output)
 }

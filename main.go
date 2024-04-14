@@ -114,7 +114,7 @@ func main() {
 		fmt.Println("Erreur lors de la création du fichier de sortie:", err)
 		return
 	}
-	calendar.ToICalendarFormat(event)
+	calendar.SerializeToICSFormat(event)
 	event.Close()
 	parser.Parser()
 

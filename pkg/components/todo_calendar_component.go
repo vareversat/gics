@@ -1,7 +1,5 @@
 package components
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.2
-
 import (
 	"io"
 
@@ -11,6 +9,8 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// ToDoCalendarComponent is the interface definition of a VTODO calendar component
+// See also : [CalendarComponent]
 type ToDoCalendarComponent interface {
 	CalendarComponent
 }
@@ -23,6 +23,8 @@ type toDoCalendarComponent struct {
 	End           properties.BlockDelimiterProperty
 }
 
+// NewToDoCalendarComponent create a VTODO calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.2
 func NewToDoCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
@@ -53,7 +55,7 @@ func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.Prop
 	return []registries.PropertyNames{}
 }
 
-func (tC *toDoCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
+func (tC *toDoCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.UID.ToICalendarPropFormat(output)
 	tC.DateTimeStamp.ToICalendarPropFormat(output)

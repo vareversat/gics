@@ -1,7 +1,5 @@
 package components
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
-
 import (
 	"io"
 
@@ -11,11 +9,9 @@ import (
 	"github.com/vareversat/gics/pkg/registries"
 )
 
+// AlarmCalendarComponent is the interface definition of a VALARM calendar component
+// See also : [CalendarComponent]
 type AlarmCalendarComponent interface {
-	CalendarComponent
-}
-
-type AlarmCalendarSubComponent interface {
 	CalendarComponent
 }
 
@@ -27,6 +23,8 @@ type alarmCalendarComponent struct {
 	End        properties.BlockDelimiterProperty
 }
 
+// NewAlarmCalendarComponent create a VALARM calendar component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
 func NewAlarmCalendarComponent(
 	action properties.ActionProperty,
 	trigger properties.TriggerProperty,
@@ -78,7 +76,7 @@ func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 	return []registries.PropertyNames{registries.DURATION_PROP, registries.REPEAT}
 }
 
-func (aC *alarmCalendarComponent) ToICalendarComponentFormat(output io.Writer) {
+func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	aC.Begin.ToICalendarPropFormat(output)
 	aC.Action.ToICalendarPropFormat(output)
 	aC.Trigger.ToICalendarPropFormat(output)
