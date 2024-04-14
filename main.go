@@ -105,7 +105,7 @@ func main() {
 			parameters.NewValueParam(registries.PERIOD)),
 	)
 
-	component := make(components.Components, 0)
+	component := make(components.CalendarComponents, 0)
 
 	component = append(component, vevent)
 	calendar, err := pkg.NewCalendar(component, "this_project", "xyz", "2.0")

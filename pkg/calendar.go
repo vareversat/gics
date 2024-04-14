@@ -24,14 +24,14 @@ type calendar struct {
 	Version    properties.VersionProperty        // Mandatory
 	Method     properties.MethodProperty         // Optional
 	CalScale   properties.CalendarScaleProperty  // Optional
-	Components components.Components             // At list one
+	Components components.CalendarComponents     // At list one
 	End        properties.BlockDelimiterProperty // Mandatory
 }
 
 // NewCalendar create a iCalendar object
 // You can find more information in this section of the RFC-5545 : https://datatracker.ietf.org/doc/html/rfc5545#section-3.4
 func NewCalendar(
-	calendarComponents components.Components,
+	calendarComponents components.CalendarComponents,
 	proId string,
 	calendarMethod string,
 	calendarVersion string,

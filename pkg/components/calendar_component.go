@@ -25,4 +25,5 @@ type CalendarComponent interface {
 	MutuallyInclusiveProperties() []registries.PropertyNames
 }
 
-type Components []CalendarComponent
+// CalendarComponents is an array of CalendarComponent
+type CalendarComponents []CalendarComponent
