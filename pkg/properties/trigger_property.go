@@ -15,13 +15,6 @@ type TriggerProperty interface {
 	DatePropertyType
 }
 
-type triggerProperty struct {
-	TriggerParameters
-	PropName      registries.PropertyNames
-	DateTimeValue types.DateTimeValue
-	DurationValue types.DurationValue
-}
-
 type TriggerParameters struct {
 	AlarmTriggerRelationship parameters.AlarmTriggerRelationshipParam
 }
