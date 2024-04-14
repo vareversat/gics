@@ -1,0 +1,25 @@
+name: Action - Go List
+
+on:
+  workflow_call:
+    inputs:
+      go_version:
+        description: 'The Go version used (ex: 1.21.4)'
+        required: true
+        type: string
+
+jobs:
+  list:
+    name: 'List'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v4.1.1
+      - name: 'Setup Go action'
+        uses: actions/setup-go@v5.0.0
+        with:
+          go-version: ${{ inputs.go_version }}
+      - name: 'Go list package'
+        run: go list -m 'github.com/${{ github.repository }}@${{ github.ref_name }}-${{ github.sha }}'
+        with:
+          GOPROXY: proxy.golang.org

@@ -1,0 +1,25 @@
+name: Workflow - Push tag
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  go-lint:
+    uses: ./.github/workflows/action.go.lint.yaml
+    with:
+      go_version: '1.22.x'
+  go-test:
+    uses: ./.github/workflows/action.go.test.yaml
+    secrets: inherit
+    with:
+      go_version: '1.22.x'
+  go-list:
+    uses: ./.github/workflows/action.go.list.yaml
+    secrets: inherit
+    with:
+      go_version: '1.22.x'
+  release:
+    needs: [ go-build ]
+    uses: ./.github/workflows/action.release.yaml
