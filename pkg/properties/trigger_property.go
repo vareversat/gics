@@ -30,28 +30,27 @@ func NewTriggerProperty(
 	dateTimeValue time.Time,
 	durationValue string,
 	format types.DTFormat,
-	valueType registries.Type,
-	alarmTriggerRelationshipParam parameters.AlarmTriggerRelationshipType,
+	params ...parameters.Parameter,
 ) TriggerProperty {
-
-	paramSlice := make(parameters.Parameters, 0)
-	paramSlice = append(paramSlice, parameters.NewValueParam(valueType))
-	paramSlice = append(
-		paramSlice,
-		parameters.NewAlarmTriggerRelationshipParam(alarmTriggerRelationshipParam),
-	)
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
 	switch valueType {
-	case registries.DATETIME:
+	case string(registries.DATETIME):
 		return &dateTimePropertyType{
 			PropName:   registries.TRIGGER,
 			Value:      types.NewDateTimeValue(dateTimeValue, format),
-			Parameters: paramSlice,
+			Parameters: params,
 		}
-	case registries.DURATION:
+	case string(registries.DURATION):
 		return &durationPropertyType{
 			PropName:   registries.TRIGGER,
 			Value:      types.NewDurationValue(durationValue),
-			Parameters: paramSlice,
+			Parameters: params,
 		}
 	default:
 		return nil

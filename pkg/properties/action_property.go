@@ -12,7 +12,7 @@ type ActionProperty interface {
 	ActionPropertyType
 }
 
-func NewActionProperty(action types.ActionType, params ...parameters.Parameter) TextPropertyType {
+func NewActionProperty(action types.ActionType, params ...parameters.Parameter) ActionProperty {
 	return &actionPropertyType{
 		PropName:   registries.ACTION,
 		Value:      types.NewActionValue(action),
