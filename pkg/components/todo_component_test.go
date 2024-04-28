@@ -15,6 +15,7 @@ func TestNewToDoCalendarComponent(t *testing.T) {
 	component := NewToDoCalendarComponent(
 		properties.NewUidProperty("UID"),
 		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		[]AlarmCalendarComponent{},
 	)
 
 	assert.NotNil(t, component)
@@ -27,7 +28,7 @@ func TestToDoCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	uid := properties.NewUidProperty("My ToDo")
 	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
 
-	component := NewToDoCalendarComponent(uid, dateTimestamp)
+	component := NewToDoCalendarComponent(uid, dateTimestamp, []AlarmCalendarComponent{})
 
 	var buf bytes.Buffer
 	component.SerializeToICSFormat(&buf)

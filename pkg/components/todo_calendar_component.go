@@ -16,11 +16,12 @@ type ToDoCalendarComponent interface {
 }
 
 type toDoCalendarComponent struct {
-	Begin         properties.BlockDelimiterProperty
-	UID           properties.UidProperty
-	DateTimeStamp properties.DateTimeStampProperty
-	Properties    properties.Properties
-	End           properties.BlockDelimiterProperty
+	Begin                   properties.BlockDelimiterProperty
+	UID                     properties.UidProperty
+	DateTimeStamp           properties.DateTimeStampProperty
+	AlarmCalendarComponents []AlarmCalendarComponent
+	Properties              properties.Properties
+	End                     properties.BlockDelimiterProperty
 }
 
 // NewToDoCalendarComponent create a VTODO calendar component
@@ -28,13 +29,18 @@ type toDoCalendarComponent struct {
 func NewToDoCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
+	alarmCalendarComponents []AlarmCalendarComponent,
 	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, types.VTODO),
-		UID:           uid,
-		DateTimeStamp: dateTimeStamp,
-		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, types.VTODO),
+		Begin: properties.NewBlockDelimiterProperty(
+			registries.BEGIN,
+			types.VTODO,
+		),
+		UID:                     uid,
+		DateTimeStamp:           dateTimeStamp,
+		AlarmCalendarComponents: alarmCalendarComponents,
+		Properties:              propertyList,
+		End:                     properties.NewBlockDelimiterProperty(registries.END, types.VTODO),
 	}
 }
 
@@ -59,6 +65,9 @@ func (tC *toDoCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.UID.ToICalendarPropFormat(output)
 	tC.DateTimeStamp.ToICalendarPropFormat(output)
+	for i := 0; i < len(tC.AlarmCalendarComponents); i++ {
+		tC.AlarmCalendarComponents[i].SerializeToICSFormat(output)
+	}
 	for i := 0; i < len(tC.Properties); i++ {
 		tC.Properties[i].ToICalendarPropFormat(output)
 	}

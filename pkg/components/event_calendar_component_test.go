@@ -15,6 +15,7 @@ func TestNewEventCalendarComponent(t *testing.T) {
 	component := NewEventCalendarComponent(
 		properties.NewUidProperty("UID"),
 		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		[]AlarmCalendarComponent{},
 	)
 
 	assert.NotNil(t, component)
@@ -29,7 +30,13 @@ func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	description := properties.NewDescriptionProperty("Test Event")
 	summary := properties.NewSummaryProperty("Event Summary")
 
-	component := NewEventCalendarComponent(uid, dateTimestamp, description, summary)
+	component := NewEventCalendarComponent(
+		uid,
+		dateTimestamp,
+		[]AlarmCalendarComponent{},
+		description,
+		summary,
+	)
 
 	var buf bytes.Buffer
 	component.SerializeToICSFormat(&buf)

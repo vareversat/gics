@@ -16,11 +16,12 @@ type EventCalendarComponent interface {
 }
 
 type eventCalendarComponent struct {
-	Begin         properties.BlockDelimiterProperty
-	UID           properties.UidProperty
-	DateTimeStamp properties.DateTimeStampProperty
-	Properties    properties.Properties
-	End           properties.BlockDelimiterProperty
+	Begin                   properties.BlockDelimiterProperty
+	UID                     properties.UidProperty
+	DateTimeStamp           properties.DateTimeStampProperty
+	AlarmCalendarComponents []AlarmCalendarComponent
+	Properties              properties.Properties
+	End                     properties.BlockDelimiterProperty
 }
 
 // NewEventCalendarComponent create a VEVENT calendar component
@@ -28,13 +29,18 @@ type eventCalendarComponent struct {
 func NewEventCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
+	alarmCalendarComponents []AlarmCalendarComponent,
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, types.VEVENT),
-		UID:           uid,
-		DateTimeStamp: dateTimeStamp,
-		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, types.VEVENT),
+		Begin: properties.NewBlockDelimiterProperty(
+			registries.BEGIN,
+			types.VEVENT,
+		),
+		UID:                     uid,
+		DateTimeStamp:           dateTimeStamp,
+		AlarmCalendarComponents: alarmCalendarComponents,
+		Properties:              propertyList,
+		End:                     properties.NewBlockDelimiterProperty(registries.END, types.VEVENT),
 	}
 }
 
@@ -59,6 +65,9 @@ func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
 	eC.UID.ToICalendarPropFormat(output)
 	eC.DateTimeStamp.ToICalendarPropFormat(output)
+	for i := 0; i < len(eC.AlarmCalendarComponents); i++ {
+		eC.AlarmCalendarComponents[i].SerializeToICSFormat(output)
+	}
 	for i := 0; i < len(eC.Properties); i++ {
 		eC.Properties[i].ToICalendarPropFormat(output)
 	}
