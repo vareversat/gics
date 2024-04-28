@@ -11,8 +11,8 @@ import (
 	"github.com/vareversat/gics/pkg/types"
 )
 
-func TestNewEventCalendarComponent(t *testing.T) {
-	component := NewEventCalendarComponent(
+func TestNewToDoCalendarComponent(t *testing.T) {
+	component := NewToDoCalendarComponent(
 		properties.NewUidProperty("UID"),
 		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
 	)
@@ -20,23 +20,21 @@ func TestNewEventCalendarComponent(t *testing.T) {
 	assert.NotNil(t, component)
 }
 
-func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
+func TestToDoCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTime := time.Now()
 	myTimeToString := myTime.Format("20060102T150405Z")
 
-	uid := properties.NewUidProperty("My Event")
+	uid := properties.NewUidProperty("My ToDo")
 	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
-	description := properties.NewDescriptionProperty("Test Event")
-	summary := properties.NewSummaryProperty("Event Summary")
 
-	component := NewEventCalendarComponent(uid, dateTimestamp, description, summary)
+	component := NewToDoCalendarComponent(uid, dateTimestamp)
 
 	var buf bytes.Buffer
 	component.SerializeToICSFormat(&buf)
 	serialized := buf.String()
 
 	expected := fmt.Sprintf(
-		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event Summary\r\nEND:VEVENT\r\n",
+		"BEGIN:VTODO\r\nUID:My ToDo\r\nDTSTAMP:%s\r\nEND:VTODO\r\n",
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)

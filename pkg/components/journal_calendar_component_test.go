@@ -11,8 +11,8 @@ import (
 	"github.com/vareversat/gics/pkg/types"
 )
 
-func TestNewEventCalendarComponent(t *testing.T) {
-	component := NewEventCalendarComponent(
+func TestNewJournalCalendarComponent(t *testing.T) {
+	component := NewJournalCalendarComponent(
 		properties.NewUidProperty("UID"),
 		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
 	)
@@ -20,23 +20,21 @@ func TestNewEventCalendarComponent(t *testing.T) {
 	assert.NotNil(t, component)
 }
 
-func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
+func TestJournalCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTime := time.Now()
 	myTimeToString := myTime.Format("20060102T150405Z")
 
-	uid := properties.NewUidProperty("My Event")
+	uid := properties.NewUidProperty("My Journal")
 	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
-	description := properties.NewDescriptionProperty("Test Event")
-	summary := properties.NewSummaryProperty("Event Summary")
 
-	component := NewEventCalendarComponent(uid, dateTimestamp, description, summary)
+	component := NewJournalCalendarComponent(uid, dateTimestamp)
 
 	var buf bytes.Buffer
 	component.SerializeToICSFormat(&buf)
 	serialized := buf.String()
 
 	expected := fmt.Sprintf(
-		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event Summary\r\nEND:VEVENT\r\n",
+		"BEGIN:VJOURNAL\r\nUID:My Journal\r\nDTSTAMP:%s\r\nEND:VJOURNAL\r\n",
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)

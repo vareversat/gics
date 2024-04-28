@@ -57,11 +57,11 @@ func NewTimeZoneCalendarComponent(
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, types.STANDARD),
+		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, types.VTIMEZONE),
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End:        properties.NewBlockDelimiterProperty(registries.END, types.STANDARD),
+		End:        properties.NewBlockDelimiterProperty(registries.END, types.VTIMEZONE),
 	}
 }
 
@@ -98,7 +98,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registries.BEGIN,
-			types.VTIMEZONE,
+			types.STANDARD,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
@@ -106,7 +106,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
 			registries.END,
-			types.VTIMEZONE,
+			types.STANDARD,
 		),
 	}
 }
@@ -114,11 +114,11 @@ func NewTimeZoneCalendarStandardSubcomponent(
 func (tC *timeZoneCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.TimeZoneId.ToICalendarPropFormat(output)
-	for i := 0; i < len(tC.Properties); i++ {
-		tC.Properties[i].ToICalendarPropFormat(output)
-	}
 	for i := 0; i < len(tC.Components); i++ {
 		tC.Components[i].SerializeToICSFormat(output)
+	}
+	for i := 0; i < len(tC.Properties); i++ {
+		tC.Properties[i].ToICalendarPropFormat(output)
 	}
 	tC.End.ToICalendarPropFormat(output)
 }

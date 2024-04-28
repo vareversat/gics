@@ -11,8 +11,8 @@ import (
 	"github.com/vareversat/gics/pkg/types"
 )
 
-func TestNewEventCalendarComponent(t *testing.T) {
-	component := NewEventCalendarComponent(
+func TestNewFreeBusyCalendarComponent(t *testing.T) {
+	component := NewFreeBusyCalendarComponent(
 		properties.NewUidProperty("UID"),
 		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
 	)
@@ -20,23 +20,21 @@ func TestNewEventCalendarComponent(t *testing.T) {
 	assert.NotNil(t, component)
 }
 
-func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
+func TestFreeBusyCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTime := time.Now()
 	myTimeToString := myTime.Format("20060102T150405Z")
 
-	uid := properties.NewUidProperty("My Event")
+	uid := properties.NewUidProperty("My FreeBusy")
 	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
-	description := properties.NewDescriptionProperty("Test Event")
-	summary := properties.NewSummaryProperty("Event Summary")
 
-	component := NewEventCalendarComponent(uid, dateTimestamp, description, summary)
+	component := NewFreeBusyCalendarComponent(uid, dateTimestamp)
 
 	var buf bytes.Buffer
 	component.SerializeToICSFormat(&buf)
 	serialized := buf.String()
 
 	expected := fmt.Sprintf(
-		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event Summary\r\nEND:VEVENT\r\n",
+		"BEGIN:VFREEBUSY\r\nUID:My FreeBusy\r\nDTSTAMP:%s\r\nEND:VFREEBUSY\r\n",
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)
