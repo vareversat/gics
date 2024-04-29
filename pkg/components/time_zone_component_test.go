@@ -8,12 +8,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/pkg/properties"
-	"github.com/vareversat/gics/pkg/types"
 )
 
 func TestNewTimeZoneCalendarComponent_STANDARD(t *testing.T) {
 	subComponent := NewTimeZoneCalendarStandardSubcomponent(
-		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		properties.NewDateTimeStampProperty(time.Now()),
 		properties.NewTimeZoneOffsetToProperty("-0100"),
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
@@ -27,7 +26,7 @@ func TestNewTimeZoneCalendarComponent_STANDARD(t *testing.T) {
 
 func TestNewTimeZoneCalendarComponent_DAYLIGHT(t *testing.T) {
 	subComponent := NewTimeZoneDayLightSubcomponent(
-		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		properties.NewDateTimeStampProperty(time.Now()),
 		properties.NewTimeZoneOffsetToProperty("-0100"),
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
@@ -44,7 +43,7 @@ func TestTimeZoneCalendarComponent_STANDARD_SerializeToICSFormat(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	subComponent := NewTimeZoneCalendarStandardSubcomponent(
-		properties.NewDateTimeStampProperty(myTime, types.WithUtcTime),
+		properties.NewDateTimeStampProperty(myTime),
 		properties.NewTimeZoneOffsetToProperty("-0100"),
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
@@ -69,7 +68,7 @@ func TestTimeZoneCalendarComponent_DAYLIGHT_SerializeToICSFormat(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	subComponent := NewTimeZoneDayLightSubcomponent(
-		properties.NewDateTimeStampProperty(myTime, types.WithUtcTime),
+		properties.NewDateTimeStampProperty(myTime),
 		properties.NewTimeZoneOffsetToProperty("-0100"),
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 

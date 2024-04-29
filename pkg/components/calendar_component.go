@@ -17,7 +17,7 @@ type CalendarComponent interface {
 	MandatoryProperties() []registries.PropertyNames
 
 	// MutuallyExclusiveProperties return the list of the mutually exclusives properties of a CalendarComponent
-	// Example : In a VEVENT component, you can have a DTEND and a DURATION property at the same time
+	// Example : In a VEVENT component, you can't have a DTEND and a DURATION property at the same time
 	MutuallyExclusiveProperties() []registries.PropertyNames
 
 	// MutuallyInclusiveProperties return the list of the mutually inclusive properties of a CalendarComponent

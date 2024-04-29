@@ -8,13 +8,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/pkg/properties"
-	"github.com/vareversat/gics/pkg/types"
 )
 
 func TestNewFreeBusyCalendarComponent(t *testing.T) {
 	component := NewFreeBusyCalendarComponent(
 		properties.NewUidProperty("UID"),
-		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		properties.NewDateTimeStampProperty(time.Now()),
 	)
 
 	assert.NotNil(t, component)
@@ -25,7 +24,7 @@ func TestFreeBusyCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	uid := properties.NewUidProperty("My FreeBusy")
-	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
+	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
 
 	component := NewFreeBusyCalendarComponent(uid, dateTimestamp)
 

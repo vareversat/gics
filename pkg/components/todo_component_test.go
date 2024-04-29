@@ -8,13 +8,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/pkg/properties"
-	"github.com/vareversat/gics/pkg/types"
 )
 
 func TestNewToDoCalendarComponent(t *testing.T) {
 	component := NewToDoCalendarComponent(
 		properties.NewUidProperty("UID"),
-		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		properties.NewDateTimeStampProperty(time.Now()),
 		[]AlarmCalendarComponent{},
 	)
 
@@ -26,7 +25,7 @@ func TestToDoCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	uid := properties.NewUidProperty("My ToDo")
-	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
+	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
 
 	component := NewToDoCalendarComponent(uid, dateTimestamp, []AlarmCalendarComponent{})
 

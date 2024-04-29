@@ -19,24 +19,55 @@ type DateTimeDueProperty interface {
 func NewDateTimeDueProperty(
 	value time.Time,
 	format types.DTFormat,
-	tzIdentifier string,
-	valueType registries.Type,
-) DateTimeDueProperty {
-	paramSlice := make(parameters.Parameters, 0)
-	paramSlice = append(paramSlice, parameters.NewTimeZoneIdentifierParam(tzIdentifier))
-	paramSlice = append(paramSlice, parameters.NewValueParam(valueType))
+	params ...parameters.Parameter) DateTimeDueProperty {
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
 	switch valueType {
-	case registries.DATETIME:
+	case string(registries.DATETIME):
 		return &dateTimePropertyType{
 			PropName:   registries.DUE,
 			Value:      types.NewDateTimeValue(value, format),
-			Parameters: paramSlice,
+			Parameters: params,
 		}
-	case registries.DATE:
+	case string(registries.DATE):
 		return &datePropertyType{
 			PropName:   registries.DUE,
 			Value:      types.NewDateValue(value),
-			Parameters: paramSlice,
+			Parameters: params,
+		}
+	default:
+		return nil
+	}
+}
+
+func NewDateTimeDuePropertyFromString(
+	value string,
+	format types.DTFormat,
+	params ...parameters.Parameter) DateTimeDueProperty {
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
+	switch valueType {
+	case string(registries.DATETIME):
+		return &dateTimePropertyType{
+			PropName:   registries.DUE,
+			Value:      types.NewDateTimeValueFromString(value, format),
+			Parameters: params,
+		}
+	case string(registries.DATE):
+		return &datePropertyType{
+			PropName:   registries.DUE,
+			Value:      types.NewDateValueFromString(value),
+			Parameters: params,
 		}
 	default:
 		return nil

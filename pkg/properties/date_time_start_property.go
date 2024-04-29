@@ -44,3 +44,32 @@ func NewDateTimeStartProperty(
 		return nil
 	}
 }
+
+func NewDateTimeStartPropertyFromString(
+	value string,
+	format types.DTFormat,
+	params ...parameters.Parameter) DateTimeStartProperty {
+	// Get the VALUE param
+	valueType := string(registries.DATETIME)
+	for i := 0; i < len(params); i++ {
+		if params[i].GetParamName() == registries.VALUE {
+			valueType = params[i].GetParamValue()
+		}
+	}
+	switch valueType {
+	case string(registries.DATETIME):
+		return &dateTimePropertyType{
+			PropName:   registries.DTSTART,
+			Value:      types.NewDateTimeValueFromString(value, format),
+			Parameters: params,
+		}
+	case string(registries.DATE):
+		return &datePropertyType{
+			PropName:   registries.DTSTART,
+			Value:      types.NewDateValueFromString(value),
+			Parameters: params,
+		}
+	default:
+		return nil
+	}
+}

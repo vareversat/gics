@@ -17,12 +17,21 @@ type DateTimeStampProperty interface {
 
 func NewDateTimeStampProperty(
 	timeValue time.Time,
-	format types.DTFormat,
 	params ...parameters.Parameter,
 ) DateTimeStampProperty {
 	return &dateTimePropertyType{
 		PropName:   registries.DTSTAMP,
-		Value:      types.NewDateTimeValue(timeValue, format),
+		Value:      types.NewDateTimeValue(timeValue, types.WithUtcTime),
+		Parameters: params,
+	}
+}
+
+func NewDateTimeStampPropertyFromString(
+	value string,
+	params ...parameters.Parameter) DateTimeStampProperty {
+	return &dateTimePropertyType{
+		PropName:   registries.DTSTAMP,
+		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
 		Parameters: params,
 	}
 }

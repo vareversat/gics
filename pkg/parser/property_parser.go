@@ -35,23 +35,23 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 	case "COMMENT":
 		return properties.NewCommentProperty(propertyValue), nil
 	case "COMPLETED_PROP":
-		panic("Traitement pour COMPLETED_PROP")
+		return properties.NewDateTimeCompletedPropertyFromString(propertyValue), nil
 	case "CONTACT":
 		return properties.NewContactProperty(propertyValue), nil
 	case "CREATED":
-		panic("Traitement pour CREATED")
+		return properties.NewDateTimeCreatedPropertyFromString(propertyValue), nil
 	case "DESCRIPTION":
 		return properties.NewDescriptionProperty(propertyValue), nil
 	case "DTEND":
 		return properties.NewDateTimeEndPropertyFromString(propertyValue, types.WithUtcTime), nil
 	case "DTSTART":
-		panic("Traitement pour DTSTART")
+		return properties.NewDateTimeStartPropertyFromString(propertyValue, types.WithUtcTime), nil
 	case "DTSTAMP":
-		panic("Traitement pour DTSTAMP")
+		return properties.NewDateTimeStampPropertyFromString(propertyValue), nil
 	case "DURATION":
 		return properties.NewDurationProperty(propertyValue), nil
 	case "DUE":
-		panic("Traitement pour DUE")
+		return properties.NewDateTimeDuePropertyFromString(propertyValue, types.WithUtcTime), nil
 	case "END":
 		return properties.NewBlockDelimiterPropertyFromString(registries.END, propertyValue), nil
 	case "EXDATE":

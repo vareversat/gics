@@ -8,13 +8,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/pkg/properties"
-	"github.com/vareversat/gics/pkg/types"
 )
 
 func TestNewJournalCalendarComponent(t *testing.T) {
 	component := NewJournalCalendarComponent(
 		properties.NewUidProperty("UID"),
-		properties.NewDateTimeStampProperty(time.Now(), types.WithUtcTime),
+		properties.NewDateTimeStampProperty(time.Now()),
 	)
 
 	assert.NotNil(t, component)
@@ -25,7 +24,7 @@ func TestJournalCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	uid := properties.NewUidProperty("My Journal")
-	dateTimestamp := properties.NewDateTimeStampProperty(myTime, types.WithUtcTime)
+	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
 
 	component := NewJournalCalendarComponent(uid, dateTimestamp)
 

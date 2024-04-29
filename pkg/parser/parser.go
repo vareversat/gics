@@ -47,7 +47,6 @@ func readerUnfoldedBuffer(unfoldedData bytes.Buffer) {
 		line := scanner.Text()
 		lexer := NewLexer(line)
 		for tok := lexer.NextToken(); tok.Type != EOF; tok = lexer.NextToken() {
-
 		}
 		test, _ := ParseProperty(lexer.property.PropertyName, lexer.property.PropertyValue)
 		if test != nil {

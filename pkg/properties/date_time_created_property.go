@@ -5,6 +5,8 @@ package properties
 import (
 	"time"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
 	"github.com/vareversat/gics/pkg/types"
 )
@@ -15,10 +17,21 @@ type DateTimeCreatedProperty interface {
 
 func NewDateTimeCreatedProperty(
 	timeValue time.Time,
-	format types.DTFormat,
+	params ...parameters.Parameter,
 ) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
-		PropName: registries.CREATED,
-		Value:    types.NewDateTimeValue(timeValue, format),
+		PropName:   registries.CREATED,
+		Value:      types.NewDateTimeValue(timeValue, types.WithUtcTime),
+		Parameters: params,
+	}
+}
+
+func NewDateTimeCreatedPropertyFromString(
+	value string,
+	params ...parameters.Parameter) DateTimeCreatedProperty {
+	return &dateTimePropertyType{
+		PropName:   registries.CREATED,
+		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
+		Parameters: params,
 	}
 }

@@ -5,6 +5,8 @@ package properties
 import (
 	"time"
 
+	"github.com/vareversat/gics/pkg/parameters"
+
 	"github.com/vareversat/gics/pkg/registries"
 	"github.com/vareversat/gics/pkg/types"
 )
@@ -15,10 +17,19 @@ type DateTimeCompletedProperty interface {
 
 func NewDateTimeCompletedProperty(
 	value time.Time,
-	format types.DTFormat,
 ) DateTimeCompletedProperty {
 	return &dateTimePropertyType{
 		PropName: registries.COMPLETED_PROP,
-		Value:    types.NewDateTimeValue(value, format),
+		Value:    types.NewDateTimeValue(value, types.WithUtcTime),
+	}
+}
+
+func NewDateTimeCompletedPropertyFromString(
+	value string,
+	params ...parameters.Parameter) DateTimeCompletedProperty {
+	return &dateTimePropertyType{
+		PropName:   registries.COMPLETED_PROP,
+		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
+		Parameters: params,
 	}
 }
