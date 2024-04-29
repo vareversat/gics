@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
-
 import (
 	"github.com/vareversat/gics/pkg/parameters"
 	"github.com/vareversat/gics/pkg/registries"
@@ -12,6 +10,9 @@ type ActionProperty interface {
 	ActionPropertyType
 }
 
+// NewActionProperty create a new ACTION property
+// This property MUST be seen in VALARM component
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
 func NewActionProperty(action types.ActionType, params ...parameters.Parameter) ActionProperty {
 	return &actionPropertyType{
 		PropName:   registries.ACTION,
