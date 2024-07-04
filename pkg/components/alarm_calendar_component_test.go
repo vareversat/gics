@@ -17,7 +17,7 @@ func TestNewAlarmCalendarComponent(t *testing.T) {
 	component := NewAlarmCalendarComponent(action, trigger)
 
 	assert.NotNil(t, component)
-	assert.Equal(t, action.GetValue(), types.AUDIO)
+	assert.Equal(t, action.GetActionValue(), types.AUDIO)
 }
 
 func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
