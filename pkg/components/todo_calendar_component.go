@@ -44,6 +44,15 @@ func NewToDoCalendarComponent(
 	}
 }
 
+func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+	for i := 0; i < len(tC.Properties); i++ {
+		if tC.Properties[i].GetName() == name {
+			return tC.Properties[i]
+		}
+	}
+	return nil
+}
+
 func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyNames {
 	return []registries.PropertyNames{
 		registries.BEGIN,

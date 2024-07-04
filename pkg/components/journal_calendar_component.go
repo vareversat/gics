@@ -38,6 +38,15 @@ func NewJournalCalendarComponent(
 	}
 }
 
+func (jC *journalCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+	for i := 0; i < len(jC.Properties); i++ {
+		if jC.Properties[i].GetName() == name {
+			return jC.Properties[i]
+		}
+	}
+	return nil
+}
+
 func (jC *journalCalendarComponent) MandatoryProperties() []registries.PropertyNames {
 	return []registries.PropertyNames{
 		registries.BEGIN,

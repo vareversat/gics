@@ -8,6 +8,8 @@ import (
 
 type ActionProperty interface {
 	ActionPropertyType
+	// GetActionValue return the types.ActionValue associated to this ActionProperty
+	GetActionValue() types.ActionType
 }
 
 // NewActionProperty create a new ACTION property
@@ -30,4 +32,8 @@ func NewActionPropertyFromString(
 		Value:      types.NewActionValue(types.ActionType(actionString)),
 		Parameters: params,
 	}
+}
+
+func (aP *actionPropertyType) GetActionValue() types.ActionType {
+	return aP.Value.Value
 }

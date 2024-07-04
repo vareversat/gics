@@ -3,6 +3,7 @@ package components
 import (
 	"bytes"
 	"fmt"
+	"github.com/vareversat/gics/pkg/registries"
 	"testing"
 	"time"
 
@@ -46,4 +47,24 @@ func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)
+}
+
+func TestEventCalendarComponent_GetProperty(t *testing.T) {
+	myTime := time.Now()
+
+	uid := properties.NewUidProperty("My Event")
+	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
+	description := properties.NewDescriptionProperty("Test Event")
+	summary := properties.NewSummaryProperty("Event Summary")
+
+	component := NewEventCalendarComponent(
+		uid,
+		dateTimestamp,
+		[]AlarmCalendarComponent{},
+		description,
+		summary,
+	)
+
+	prop := component.GetProperty(registries.SUMMARY)
+	assert.Equal(t, "Event Summary", prop.GetValue())
 }

@@ -65,6 +65,24 @@ func NewTimeZoneCalendarComponent(
 	}
 }
 
+func (tC *timeZoneCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+	for i := 0; i < len(tC.Properties); i++ {
+		if tC.Properties[i].GetName() == name {
+			return tC.Properties[i]
+		}
+	}
+	return nil
+}
+
+func (tC *timeZoneCalendarSubComponent) GetProperty(name registries.PropertyNames) properties.Property {
+	for i := 0; i < len(tC.Properties); i++ {
+		if tC.Properties[i].GetName() == name {
+			return tC.Properties[i]
+		}
+	}
+	return nil
+}
+
 // NewTimeZoneDayLightSubcomponent create a STANDARD subcomponent of a VTIMEZONE calendar component
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
 func NewTimeZoneDayLightSubcomponent(

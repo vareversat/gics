@@ -44,6 +44,14 @@ func NewEventCalendarComponent(
 	}
 }
 
+func (eC *eventCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+	for i := 0; i < len(eC.Properties); i++ {
+		if eC.Properties[i].GetName() == name {
+			return eC.Properties[i]
+		}
+	}
+	return nil
+}
 func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyNames {
 	return []registries.PropertyNames{
 		registries.BEGIN,

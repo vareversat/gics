@@ -1,6 +1,7 @@
 package components
 
 import (
+	"github.com/vareversat/gics/pkg/properties"
 	"io"
 
 	"github.com/vareversat/gics/pkg/registries"
@@ -15,6 +16,9 @@ type CalendarComponent interface {
 
 	// MandatoryProperties return the list of the mandatory properties of a CalendarComponent
 	MandatoryProperties() []registries.PropertyNames
+
+	// GetProperty get a property by his registries.PropertyNames
+	GetProperty(name registries.PropertyNames) properties.Property
 
 	// MutuallyExclusiveProperties return the list of the mutually exclusives properties of a CalendarComponent
 	// Example : In a VEVENT component, you can't have a DTEND and a DURATION property at the same time

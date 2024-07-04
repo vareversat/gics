@@ -37,8 +37,18 @@ func NewAlarmCalendarComponent(
 		End:        properties.NewBlockDelimiterProperty(registries.END, types.VALARM),
 	}
 }
+
+func (aC *alarmCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+	for i := 0; i < len(aC.Properties); i++ {
+		if aC.Properties[i].GetName() == name {
+			return aC.Properties[i]
+		}
+	}
+	return nil
+}
+
 func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	switch aC.Action.GetValue() {
+	switch aC.Action.GetActionValue() {
 	case types.AUDIO:
 		return []registries.PropertyNames{
 			registries.BEGIN,
