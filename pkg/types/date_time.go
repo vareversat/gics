@@ -7,7 +7,6 @@ package types
 // - 19980119T070000Z
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/vareversat/gics/pkg/registries"
@@ -27,7 +26,7 @@ type DateTimeValue struct {
 }
 
 func NewDateTimeValues(values []time.Time, format DTFormat) []DateTimeValue {
-	dateTimeValues := make([]DateTimeValue, 0)
+	var dateTimeValues []DateTimeValue
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateTimeValue{
@@ -40,7 +39,7 @@ func NewDateTimeValues(values []time.Time, format DTFormat) []DateTimeValue {
 }
 
 func NewDateTimeValuesFromString(values []string, format DTFormat) []DateTimeValue {
-	dateTimeValues := make([]DateTimeValue, 0)
+	var dateTimeValues []DateTimeValue
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateTimeValue{
@@ -71,11 +70,7 @@ func NewDateTimeValueFromString(value string, format DTFormat) DateTimeValue {
 func parseStringToDateTime(value string) time.Time {
 	date, err := time.Parse("20060102T150405Z", value)
 	if err != nil {
-		fmt.Println(err)
 		date, err = time.Parse("20060102T150405", value)
-		if err != nil {
-			fmt.Println(err)
-		}
 	}
 	return date
 }
