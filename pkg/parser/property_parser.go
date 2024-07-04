@@ -148,7 +148,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 		}
 		return url, nil
 	case "UID":
-		properties.NewUidProperty(propertyValue)
+		return properties.NewUidProperty(propertyValue), nil
 	case "URL":
 		url, err := properties.NewUrlPropertyFromString(propertyValue)
 		if err != nil {
