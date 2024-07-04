@@ -65,7 +65,9 @@ func NewTimeZoneCalendarComponent(
 	}
 }
 
-func (tC *timeZoneCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (tC *timeZoneCalendarComponent) GetProperty(
+	name registries.PropertyNames,
+) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
 			return tC.Properties[i]
@@ -74,7 +76,9 @@ func (tC *timeZoneCalendarComponent) GetProperty(name registries.PropertyNames) 
 	return nil
 }
 
-func (tC *timeZoneCalendarSubComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (tC *timeZoneCalendarSubComponent) GetProperty(
+	name registries.PropertyNames,
+) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
 			return tC.Properties[i]

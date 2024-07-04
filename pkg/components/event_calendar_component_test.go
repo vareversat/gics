@@ -3,9 +3,10 @@ package components
 import (
 	"bytes"
 	"fmt"
-	"github.com/vareversat/gics/pkg/registries"
 	"testing"
 	"time"
+
+	"github.com/vareversat/gics/pkg/registries"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/pkg/properties"

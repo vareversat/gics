@@ -1,8 +1,9 @@
 package components
 
 import (
-	"github.com/vareversat/gics/pkg/properties"
 	"io"
+
+	"github.com/vareversat/gics/pkg/properties"
 
 	"github.com/vareversat/gics/pkg/registries"
 )

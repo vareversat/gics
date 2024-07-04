@@ -38,7 +38,9 @@ func NewFreeBusyCalendarComponent(
 	}
 }
 
-func (fC *freeBusyCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (fC *freeBusyCalendarComponent) GetProperty(
+	name registries.PropertyNames,
+) properties.Property {
 	for i := 0; i < len(fC.Properties); i++ {
 		if fC.Properties[i].GetName() == name {
 			return fC.Properties[i]
