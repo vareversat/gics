@@ -156,6 +156,7 @@ func (l *Lexer) readIdentifier() string {
 	}
 	return l.input[position:l.position]
 }
+
 func isLetterRelaxed(ch byte) bool {
 	return ch != '"' && ch != 0
 }
