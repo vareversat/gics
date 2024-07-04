@@ -549,24 +549,24 @@ func (uP *uriPropertyType) ToICalendarPropFormat(output io.Writer) {
 	unfoldedOutput.WriteTo(output)
 }
 
-func (dP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
+func (rsP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
 	var extraValueOutput bytes.Buffer
-	if dP.Parameters != nil {
-		computeParameters(&paramsOutput, dP.Parameters)
+	if rsP.Parameters != nil {
+		computeParameters(&paramsOutput, rsP.Parameters)
 	}
-	if dP.ExtraData.S != "" {
-		extraValueOutput.Write([]byte(fmt.Sprintf(";%s", dP.ExtraData.S)))
+	if rsP.ExtraData.S != "" {
+		extraValueOutput.Write([]byte(fmt.Sprintf(";%s", rsP.ExtraData.S)))
 	}
 	unfoldedOutput.Write(
 		[]byte(
 			fmt.Sprintf(
 				"%s%s:%s;%s",
-				dP.PropName,
+				rsP.PropName,
 				paramsOutput.String(),
-				dP.StatusCode.S,
-				dP.StatusDescription.S,
+				rsP.StatusCode.S,
+				rsP.StatusDescription.S,
 			),
 		),
 	)
@@ -624,14 +624,14 @@ func (sP *statusPropertyType) ToICalendarPropFormat(output io.Writer) {
 	unfoldedOutput.WriteTo(output)
 }
 
-func (tP *timeTransparencyPropertyType) ToICalendarPropFormat(output io.Writer) {
+func (ttP *timeTransparencyPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
 	var paramsOutput bytes.Buffer
-	if tP.Parameters != nil {
-		computeParameters(&paramsOutput, tP.Parameters)
+	if ttP.Parameters != nil {
+		computeParameters(&paramsOutput, ttP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", tP.PropName, paramsOutput.String(), tP.Value.Value)),
+		[]byte(fmt.Sprintf("%s%s:%s", ttP.PropName, paramsOutput.String(), ttP.Value.Value)),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
