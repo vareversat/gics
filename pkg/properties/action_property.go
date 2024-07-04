@@ -8,8 +8,6 @@ import (
 
 type ActionProperty interface {
 	ActionPropertyType
-	// GetActionValue return the types.ActionValue associated to this ActionProperty
-	GetActionValue() types.ActionType
 }
 
 // NewActionProperty create a new ACTION property

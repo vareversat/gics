@@ -79,7 +79,8 @@ type RecurrenceRulePropertyType interface {
 
 type ActionPropertyType interface {
 	Property
-	GetValue() types.ActionType
+	// GetActionValue return the types.ActionValue associated to this ActionProperty
+	GetActionValue() types.ActionType
 }
 
 type ClassificationPropertyType interface {
