@@ -60,9 +60,9 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 			types.WithUtcTime,
 		), nil
 	case "EXRULE":
-		panic("Traitement pour EXRULE")
+		fmt.Printf("### omitting %s\n", propertyName)
 	case "FREEBUSY":
-		panic("Traitement pour FREEBUSY")
+		fmt.Printf("### omitting %s\n", propertyName)
 	case "GEO":
 		geo, err := properties.NewGeographicPositionPropertyFromString(propertyValue)
 		if err != nil {
@@ -134,7 +134,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 	case "TRANSP":
 		return properties.NewTimeTransparencyPropertyFromString(propertyValue), nil
 	case "TRIGGER":
-		panic("Traitement pour TRIGGER")
+		fmt.Printf("### omitting %s\n", propertyName)
 	case "TZNAME":
 		return properties.NewTimeZoneNameProperty(propertyValue), nil
 	case "TZOFFSETFROM":
@@ -158,7 +158,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 	case "VERSION":
 		return properties.NewVersionProperty(propertyValue), nil
 	default:
-		panic(propertyName)
+		fmt.Printf("### omitting %s\n", propertyName)
 	}
 	return nil, nil
 }
