@@ -48,7 +48,10 @@ func parse(unfoldedData bytes.Buffer) {
 		lexer := NewLexer(line)
 		for tok := lexer.NextToken(); tok.Type != EOF; tok = lexer.NextToken() {
 		}
-		parsedProperty, _ := ParseProperty(lexer.property.PropertyName, lexer.property.PropertyValue)
+		parsedProperty, _ := ParseProperty(
+			lexer.property.PropertyName,
+			lexer.property.PropertyValue,
+		)
 		if parsedProperty != nil {
 			parsedProperty.ToICalendarPropFormat(os.Stdout)
 		}
