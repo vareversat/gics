@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+PRODID:vsa-calendar
+METHOD:PUBLISH
+X-PUBLISHED-TTL:PT1H
+BEGIN:VEVENT
+UID:T2P79220240508T074100
+SUMMARY:Marseille Saint-Charles - Gap
+DTSTAMP:20240508T074100
+DTSTART:20240508T074100
+DTEND:20240508T105600
+DESCRIPTION:Votre voyage\n1 Voyageur\n\n    Marseille Saint-Charles -> Gap\n    Départ le mercredi 8 mai, 07:41\n    Arrivée à 10:56\n    Durée : 3h15\n    TER 17402\n    \n\n\nRéférences : T2P700 - DUPONT\nAccéder à mon voyage :\nhttps://sncf-connect.com/
+LOCATION:Marseille Saint-Charles
+URL:https://sncf-connect.com
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+REPEAT:1
+DESCRIPTION:Marseille Saint-Charles - Gap
+DURATION:PT3H
+TRIGGER:-PT4H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Marseille Saint-Charles - Gap
+TRIGGER:-PT1H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
