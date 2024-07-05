@@ -38,7 +38,7 @@ func unfold(foldedFile *os.File, unfoldedData *bytes.Buffer) {
 	}
 }
 
-func readerUnfoldedBuffer(unfoldedData bytes.Buffer) {
+func parse(unfoldedData bytes.Buffer) {
 	unfoldedDataReader := bytes.NewReader(unfoldedData.Bytes())
 	scanner := bufio.NewScanner(unfoldedDataReader)
 	// Iterate through all the unfolded file
@@ -48,24 +48,10 @@ func readerUnfoldedBuffer(unfoldedData bytes.Buffer) {
 		lexer := NewLexer(line)
 		for tok := lexer.NextToken(); tok.Type != EOF; tok = lexer.NextToken() {
 		}
-		test, _ := ParseProperty(lexer.property.PropertyName, lexer.property.PropertyValue)
-		if test != nil {
-			test.ToICalendarPropFormat(os.Stdout)
+		parsedProperty, _ := ParseProperty(lexer.property.PropertyName, lexer.property.PropertyValue)
+		if parsedProperty != nil {
+			parsedProperty.ToICalendarPropFormat(os.Stdout)
 		}
 		lineNumber++
 	}
-}
-
-func Parser() {
-	input, err := os.OpenFile("event.ics", os.O_CREATE, os.ModeAppend)
-	output, err := os.OpenFile("output.ics", os.O_CREATE, os.ModeAppend)
-	if err != nil {
-		fmt.Println("Erreur lors de l'ouverture du fichier:", err)
-		return
-	}
-	defer output.Close()
-	unfoldedData := bytes.Buffer{}
-
-	unfold(input, &unfoldedData)
-	readerUnfoldedBuffer(unfoldedData)
 }
