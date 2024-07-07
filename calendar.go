@@ -32,7 +32,7 @@ type calendar struct {
 // You can find more information in this section of the RFC-5545 : https://datatracker.ietf.org/doc/html/rfc5545#section-3.4
 func NewCalendar(
 	calendarComponents components.CalendarComponents,
-	proId string,
+	prodId string,
 	calendarMethod string,
 	calendarVersion string,
 ) (Calendar, error) {
@@ -42,12 +42,12 @@ func NewCalendar(
 	if calendarVersion == "" {
 		return nil, fmt.Errorf("you must specify a VERSION number")
 	}
-	if proId == "" {
+	if prodId == "" {
 		return nil, fmt.Errorf("you must specify a PRODID number")
 	}
 	return &calendar{
 		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, types.VCALENDAR),
-		ProdId:     properties.NewProductIdProperty(proId),
+		ProdId:     properties.NewProductIdProperty(prodId),
 		Version:    properties.NewVersionProperty(calendarVersion),
 		Method:     properties.NewMethodProperty(calendarMethod),
 		CalScale:   properties.NewCalScaleProperty(),
