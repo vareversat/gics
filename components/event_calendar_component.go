@@ -25,7 +25,8 @@ type eventCalendarComponent struct {
 }
 
 // NewEventCalendarComponent create a VEVENT calendar component
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.1
+// See the [RFC-5545] ref for more info
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.1
 func NewEventCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,

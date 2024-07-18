@@ -24,7 +24,8 @@ type freeBusyCalendarComponent struct {
 }
 
 // NewFreeBusyCalendarComponent create a VFREEBUSY calendar component
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.4
+// See the [RFC-5545] ref for more info
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.4
 func NewFreeBusyCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,

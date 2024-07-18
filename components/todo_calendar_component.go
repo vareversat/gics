@@ -25,7 +25,8 @@ type toDoCalendarComponent struct {
 }
 
 // NewToDoCalendarComponent create a VTODO calendar component
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.2
+// See the [RFC-5545] ref for more info
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.2
 func NewToDoCalendarComponent(
 	uid properties.UidProperty,
 	dateTimeStamp properties.DateTimeStampProperty,
