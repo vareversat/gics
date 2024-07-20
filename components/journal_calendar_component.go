@@ -3,8 +3,6 @@ package components
 import (
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
 )
@@ -31,11 +29,11 @@ func NewJournalCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) JournalCalendarComponent {
 	return &journalCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registry.BEGIN, types.VJOURNAL),
+		Begin:         properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Vjournal),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registry.END, types.VJOURNAL),
+		End:           properties.NewBlockDelimiterProperty(registry.END, registry.Vjournal),
 	}
 }
 

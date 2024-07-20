@@ -1,6 +1,6 @@
 package registry
 
-// ParameterRegistry contains all parameters name of the [RFC-5545]
+// ParameterRegistry contains all parameter names of the [RFC-5545]
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-8.3.3
 type ParameterRegistry string
 

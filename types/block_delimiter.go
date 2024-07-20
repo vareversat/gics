@@ -2,26 +2,12 @@ package types
 
 import "github.com/vareversat/gics/registry"
 
-type BlockDelimiterType string
-
-const (
-	VCALENDAR BlockDelimiterType = "VCALENDAR"
-	VEVENT    BlockDelimiterType = "VEVENT"
-	VTODO     BlockDelimiterType = "VTODO"
-	VJOURNAL  BlockDelimiterType = "VJOURNAL"
-	VFREEBUSY BlockDelimiterType = "VFREEBUSY"
-	VTIMEZONE BlockDelimiterType = "VTIMEZONE"
-	VALARM    BlockDelimiterType = "VALARM"
-	STANDARD  BlockDelimiterType = "STANDARD"
-	DAYLIGHT  BlockDelimiterType = "DAYLIGHT"
-)
-
 type BlockDelimiterValue struct {
 	V
-	Value BlockDelimiterType
+	Value registry.ComponentRegistry
 }
 
-func NewBlockDelimiterValue(value BlockDelimiterType) BlockDelimiterValue {
+func NewBlockDelimiterValue(value registry.ComponentRegistry) BlockDelimiterValue {
 	return BlockDelimiterValue{
 		V:     NewValue(registry.Text),
 		Value: value,

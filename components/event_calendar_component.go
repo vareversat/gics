@@ -3,8 +3,6 @@ package components
 import (
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
 )
@@ -35,13 +33,16 @@ func NewEventCalendarComponent(
 	return &eventCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registry.BEGIN,
-			types.VEVENT,
+			registry.Vevent,
 		),
 		UID:                     uid,
 		DateTimeStamp:           dateTimeStamp,
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
-		End:                     properties.NewBlockDelimiterProperty(registry.END, types.VEVENT),
+		End: properties.NewBlockDelimiterProperty(
+			registry.END,
+			registry.Vevent,
+		),
 	}
 }
 

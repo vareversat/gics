@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/components"
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
@@ -46,13 +44,13 @@ func NewCalendar(
 		return nil, fmt.Errorf("you must specify a PRODID number")
 	}
 	return &calendar{
-		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, types.VCALENDAR),
+		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Vcalendar),
 		ProdId:     properties.NewProductIdProperty(prodId),
 		Version:    properties.NewVersionProperty(calendarVersion),
 		Method:     properties.NewMethodProperty(calendarMethod),
 		CalScale:   properties.NewCalScaleProperty(),
 		Components: calendarComponents,
-		End:        properties.NewBlockDelimiterProperty(registry.END, types.VCALENDAR),
+		End:        properties.NewBlockDelimiterProperty(registry.END, registry.Vcalendar),
 	}, nil
 }
 

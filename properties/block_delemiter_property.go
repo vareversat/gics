@@ -13,7 +13,7 @@ type BlockDelimiterProperty interface {
 
 func NewBlockDelimiterProperty(
 	block registry.PropertyNames,
-	component types.BlockDelimiterType,
+	component registry.ComponentRegistry,
 ) BlockDelimiterProperty {
 	return &blockDelimiterPropertyType{
 		PropName: block,
@@ -27,6 +27,6 @@ func NewBlockDelimiterPropertyFromString(
 ) BlockDelimiterProperty {
 	return &blockDelimiterPropertyType{
 		PropName: block,
-		Value:    types.NewBlockDelimiterValue(types.BlockDelimiterType(stringComponent)),
+		Value:    types.NewBlockDelimiterValue(registry.ComponentRegistry(stringComponent)),
 	}
 }

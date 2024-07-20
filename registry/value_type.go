@@ -1,6 +1,6 @@
 package registry
 
-// ValueTypeRegistry contains all parameters name of the [RFC-5545]
+// ValueTypeRegistry contains all value type names of the [RFC-5545]
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-8.3.4
 type ValueTypeRegistry string
 

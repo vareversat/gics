@@ -31,11 +31,11 @@ func NewAlarmCalendarComponent(
 	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, types.VALARM),
+		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Valarm),
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registry.END, types.VALARM),
+		End:        properties.NewBlockDelimiterProperty(registry.END, registry.Valarm),
 	}
 }
 

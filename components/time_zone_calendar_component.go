@@ -3,8 +3,6 @@ package components
 import (
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
 )
@@ -58,11 +56,11 @@ func NewTimeZoneCalendarComponent(
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, types.VTIMEZONE),
+		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Vtimezone),
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End:        properties.NewBlockDelimiterProperty(registry.END, types.VTIMEZONE),
+		End:        properties.NewBlockDelimiterProperty(registry.END, registry.Vtimezone),
 	}
 }
 
@@ -99,7 +97,7 @@ func NewTimeZoneDayLightSubcomponent(
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registry.BEGIN,
-			types.DAYLIGHT,
+			registry.Daylight,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
@@ -107,7 +105,7 @@ func NewTimeZoneDayLightSubcomponent(
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
 			registry.END,
-			types.DAYLIGHT,
+			registry.Daylight,
 		),
 	}
 }
@@ -123,7 +121,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registry.BEGIN,
-			types.STANDARD,
+			registry.Standard,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
@@ -131,7 +129,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
 			registry.END,
-			types.STANDARD,
+			registry.Standard,
 		),
 	}
 }

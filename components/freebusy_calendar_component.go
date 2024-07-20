@@ -3,8 +3,6 @@ package components
 import (
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
 )
@@ -31,11 +29,11 @@ func NewFreeBusyCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registry.BEGIN, types.VFREEBUSY),
+		Begin:         properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Vfreebusy),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registry.END, types.VFREEBUSY),
+		End:           properties.NewBlockDelimiterProperty(registry.END, registry.Vfreebusy),
 	}
 }
 

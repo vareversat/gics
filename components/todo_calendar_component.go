@@ -3,8 +3,6 @@ package components
 import (
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
 )
@@ -35,13 +33,13 @@ func NewToDoCalendarComponent(
 	return &toDoCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
 			registry.BEGIN,
-			types.VTODO,
+			registry.Vtodo,
 		),
 		UID:                     uid,
 		DateTimeStamp:           dateTimeStamp,
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
-		End:                     properties.NewBlockDelimiterProperty(registry.END, types.VTODO),
+		End:                     properties.NewBlockDelimiterProperty(registry.END, registry.Vtodo),
 	}
 }
 
