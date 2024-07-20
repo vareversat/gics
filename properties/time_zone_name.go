@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -14,7 +14,7 @@ type TimeZoneNameProperty interface {
 
 func NewTimeZoneNameProperty(value string, params ...parameters.Parameter) TimeZoneNameProperty {
 	return &textPropertyType{
-		PropName:   registry.TZNAME,
+		PropName:   registries.TZNAME,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

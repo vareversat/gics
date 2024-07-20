@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -13,11 +13,11 @@ type ClassificationProperty interface {
 }
 
 func NewClassificationProperty(
-	classValue registry.ClassificationRegistry,
+	classValue registries.ClassificationRegistry,
 	params ...parameters.Parameter,
 ) ClassificationProperty {
 	return &classificationPropertyType{
-		PropName:   registry.CLASS,
+		PropName:   registries.CLASS,
 		Value:      types.NewClassificationValue(classValue),
 		Parameters: params,
 	}
@@ -28,8 +28,8 @@ func NewClassificationPropertyFromString(
 	params ...parameters.Parameter,
 ) ClassificationProperty {
 	return &classificationPropertyType{
-		PropName:   registry.CLASS,
-		Value:      types.NewClassificationValue(registry.ClassificationRegistry(classValue)),
+		PropName:   registries.CLASS,
+		Value:      types.NewClassificationValue(registries.ClassificationRegistry(classValue)),
 		Parameters: params,
 	}
 }

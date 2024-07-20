@@ -16,7 +16,7 @@ package parameters
 // - REQUEST-STATUS
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -26,7 +26,7 @@ type LanguageParam interface {
 
 func NewLanguageParam(value string) LanguageParam {
 	return &textParameter{
-		ParamName: registry.Language,
+		ParamName: registries.Language,
 		Value:     types.NewTextValue(value),
 	}
 }

@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -17,7 +17,7 @@ type SequenceProperty interface {
 
 func NewSequenceProperty(value int32, params ...parameters.Parameter) SequenceProperty {
 	return &integerPropertyType{
-		PropName:   registry.SEQUENCE,
+		PropName:   registries.SEQUENCE,
 		Value:      types.NewIntegerValue(value),
 		Parameters: params,
 	}
@@ -32,7 +32,7 @@ func NewSequencePropertyFromString(
 		return nil, fmt.Errorf("%s cannot be parsed as int32", value)
 	}
 	return &integerPropertyType{
-		PropName:   registry.SEQUENCE,
+		PropName:   registries.SEQUENCE,
 		Value:      types.NewIntegerValue(int32(sequence)),
 		Parameters: params,
 	}, nil

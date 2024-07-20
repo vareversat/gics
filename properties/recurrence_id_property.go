@@ -7,7 +7,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -21,22 +21,22 @@ func NewRecurrenceIdProperty(
 	format types.DTFormat,
 	params ...parameters.Parameter) RecurrenceIdProperty {
 	// Get the VALUE param
-	valueType := string(registry.DateTime)
+	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registry.Value {
+		if params[i].GetParamName() == registries.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DateTime):
+	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registry.RECURRENCEID,
+			PropName:   registries.RECURRENCEID,
 			Value:      types.NewDateTimeValue(value, format),
 			Parameters: params,
 		}
-	case string(registry.Date):
+	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registry.RECURRENCEID,
+			PropName:   registries.RECURRENCEID,
 			Value:      types.NewDateValue(value),
 			Parameters: params,
 		}
@@ -50,22 +50,22 @@ func NewRecurrenceIdPropertyFromString(
 	format types.DTFormat,
 	params ...parameters.Parameter) RecurrenceIdProperty {
 	// Get the VALUE param
-	valueType := string(registry.DateTime)
+	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registry.Value {
+		if params[i].GetParamName() == registries.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DateTime):
+	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registry.RECURRENCEID,
+			PropName:   registries.RECURRENCEID,
 			Value:      types.NewDateTimeValueFromString(value, format),
 			Parameters: params,
 		}
-	case string(registry.Date):
+	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registry.RECURRENCEID,
+			PropName:   registries.RECURRENCEID,
 			Value:      types.NewDateValueFromString(value),
 			Parameters: params,
 		}

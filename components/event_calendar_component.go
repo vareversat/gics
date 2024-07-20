@@ -4,7 +4,7 @@ import (
 	"io"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 // EventCalendarComponent is the interface definition of a VEVENT calendar component
@@ -32,21 +32,21 @@ func NewEventCalendarComponent(
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registry.BEGIN,
-			registry.Vevent,
+			registries.BEGIN,
+			registries.Vevent,
 		),
 		UID:                     uid,
 		DateTimeStamp:           dateTimeStamp,
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registry.END,
-			registry.Vevent,
+			registries.END,
+			registries.Vevent,
 		),
 	}
 }
 
-func (eC *eventCalendarComponent) GetProperty(name registry.PropertyNames) properties.Property {
+func (eC *eventCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
 	for i := 0; i < len(eC.Properties); i++ {
 		if eC.Properties[i].GetName() == name {
 			return eC.Properties[i]
@@ -54,21 +54,21 @@ func (eC *eventCalendarComponent) GetProperty(name registry.PropertyNames) prope
 	}
 	return nil
 }
-func (eC *eventCalendarComponent) MandatoryProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{
-		registry.BEGIN,
-		registry.END,
-		registry.UID,
-		registry.DTSTAMP,
+func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{
+		registries.BEGIN,
+		registries.END,
+		registries.UID,
+		registries.DTSTAMP,
 	}
 }
 
-func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{registry.DTEND, registry.DURATION_PROP}
+func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.DTEND, registries.DURATION_PROP}
 }
 
-func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{}
+func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
 }
 
 func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {

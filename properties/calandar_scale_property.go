@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ type CalendarScaleProperty interface {
 func NewCalScaleProperty(params ...parameters.Parameter) CalendarScaleProperty {
 	return &textPropertyType{
 		Parameters: params,
-		PropName:   registry.CALSCALE,
+		PropName:   registries.CALSCALE,
 		Value: types.NewTextValue(
 			CalendarScaleValue),
 	}

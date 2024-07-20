@@ -13,7 +13,7 @@ package parameters
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -23,7 +23,7 @@ type AlternateTextRepresentationParam interface {
 
 func NewAlternateTextRepresentationParam(value *url.URL) AlternateTextRepresentationParam {
 	return &uriParameter{
-		ParamName: registry.AlternateTextRepresentation,
+		ParamName: registries.AlternateTextRepresentation,
 		Value:     types.NewUriValue(value),
 	}
 }

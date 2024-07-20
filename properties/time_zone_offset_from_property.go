@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -17,7 +17,7 @@ func NewTimeZoneOffsetFromProperty(
 	params ...parameters.Parameter,
 ) TimeZoneOffsetFromProperty {
 	return &utcOffsetPropertyType{
-		PropName:   registry.TZOFFSETFROM,
+		PropName:   registries.TZOFFSETFROM,
 		Value:      types.NewUtcOffsetValue(value),
 		Parameters: params,
 	}

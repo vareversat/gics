@@ -6,7 +6,7 @@ package parameters
 // - ATTACH
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type FormatTypeParam interface {
 
 func NewFormatTypeParam(value string) FormatTypeParam {
 	return &textParameter{
-		ParamName: registry.FormatType,
+		ParamName: registries.FormatType,
 		Value:     types.NewTextValue(value),
 	}
 }

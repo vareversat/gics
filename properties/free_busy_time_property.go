@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -22,7 +22,7 @@ func NewFreeBusyTimeProperty(
 	paramSlice := make(parameters.Parameters, 0)
 	paramSlice = append(paramSlice, freeBusyTimeParam)
 	return &periodPropertyType{
-		PropName:   registry.FREEBUSY,
+		PropName:   registries.FREEBUSY,
 		Value:      types.NewPeriodValue(startTime, endTime),
 		Parameters: paramSlice,
 	}

@@ -7,7 +7,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -23,28 +23,28 @@ func NewRecurrenceDateTimesProperty(
 	format types.DTFormat,
 	params ...parameters.Parameter,
 ) RecurrenceDateTimesProperty {
-	valueType := string(registry.DateTime)
+	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registry.Value {
+		if params[i].GetParamName() == registries.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.Period):
+	case string(registries.Period):
 		return &periodPropertyType{
-			PropName:   registry.RDATE,
+			PropName:   registries.RDATE,
 			Values:     types.NewPeriodValues(startValues, endValues),
 			Parameters: params,
 		}
-	case string(registry.DateTime):
+	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registry.RDATE,
+			PropName:   registries.RDATE,
 			Values:     types.NewDateTimeValues(startValues, format),
 			Parameters: params,
 		}
-	case string(registry.Date):
+	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registry.RDATE,
+			PropName:   registries.RDATE,
 			Values:     types.NewDateValues(startValues),
 			Parameters: params,
 		}

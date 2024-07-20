@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -50,7 +50,7 @@ type RecurrenceRuleValue struct {
 
 func NewRecurrenceRuleValue(parts []RRPart) RecurrenceRuleValue {
 	return RecurrenceRuleValue{
-		V:     types.NewValue(registry.Recur),
+		V:     types.NewValue(registries.Recur),
 		Parts: parts,
 	}
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/types/recurrence_rule"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -22,7 +22,7 @@ type Property interface {
 	// ToICalendarPropFormat format output to the icalendar specs
 	ToICalendarPropFormat(output io.Writer)
 	// GetName return the property name
-	GetName() registry.PropertyNames
+	GetName() registries.PropertyNames
 	// GetValue return the string of a property
 	GetValue() string
 }
@@ -80,7 +80,7 @@ type RecurrenceRulePropertyType interface {
 type ActionPropertyType interface {
 	Property
 	// GetActionValue return the types.ActionValue associated to this ActionProperty
-	GetActionValue() registry.ActionRegistry
+	GetActionValue() registries.ActionRegistry
 }
 
 type ClassificationPropertyType interface {
@@ -100,13 +100,13 @@ type BlockDelimiterPropertyType interface {
 }
 
 type textPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.TextValue
 	Values     []types.TextValue
 	Parameters parameters.Parameters
 }
 
-func (tP *textPropertyType) GetName() registry.PropertyNames {
+func (tP *textPropertyType) GetName() registries.PropertyNames {
 	return tP.PropName
 }
 
@@ -115,12 +115,12 @@ func (tP *textPropertyType) GetValue() string {
 }
 
 type integerPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.IntegerValue
 	Parameters parameters.Parameters
 }
 
-func (iP *integerPropertyType) GetName() registry.PropertyNames {
+func (iP *integerPropertyType) GetName() registries.PropertyNames {
 	return iP.PropName
 }
 
@@ -129,13 +129,13 @@ func (iP *integerPropertyType) GetValue() string {
 }
 
 type dateTimePropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.DateTimeValue
 	Values     []types.DateTimeValue
 	Parameters parameters.Parameters
 }
 
-func (dtP *dateTimePropertyType) GetName() registry.PropertyNames {
+func (dtP *dateTimePropertyType) GetName() registries.PropertyNames {
 	return dtP.PropName
 }
 
@@ -144,13 +144,13 @@ func (dtP *dateTimePropertyType) GetValue() string {
 }
 
 type datePropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.DateValue
 	Values     []types.DateValue
 	Parameters parameters.Parameters
 }
 
-func (dP *datePropertyType) GetName() registry.PropertyNames {
+func (dP *datePropertyType) GetName() registries.PropertyNames {
 	return dP.PropName
 }
 
@@ -159,13 +159,13 @@ func (dP *datePropertyType) GetValue() string {
 }
 
 type periodPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.PeriodValue
 	Values     []types.PeriodValue
 	Parameters parameters.Parameters
 }
 
-func (pP *periodPropertyType) GetName() registry.PropertyNames {
+func (pP *periodPropertyType) GetName() registries.PropertyNames {
 	return pP.PropName
 }
 
@@ -174,12 +174,12 @@ func (pP *periodPropertyType) GetValue() string {
 }
 
 type durationPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.DurationValue
 	Parameters parameters.Parameters
 }
 
-func (dP *durationPropertyType) GetName() registry.PropertyNames {
+func (dP *durationPropertyType) GetName() registries.PropertyNames {
 	return dP.PropName
 }
 
@@ -188,13 +188,13 @@ func (dP *durationPropertyType) GetValue() string {
 }
 
 type geoPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Longitude  types.FloatValue
 	Latitude   types.FloatValue
 	Parameters parameters.Parameters
 }
 
-func (gP *geoPropertyType) GetName() registry.PropertyNames {
+func (gP *geoPropertyType) GetName() registries.PropertyNames {
 	return gP.PropName
 }
 
@@ -203,12 +203,12 @@ func (gP *geoPropertyType) GetValue() string {
 }
 
 type calendarUserAddressPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.CalendarUserAddressValue
 	Parameters parameters.Parameters
 }
 
-func (caP *calendarUserAddressPropertyType) GetName() registry.PropertyNames {
+func (caP *calendarUserAddressPropertyType) GetName() registries.PropertyNames {
 	return caP.PropName
 }
 
@@ -217,12 +217,12 @@ func (caP *calendarUserAddressPropertyType) GetValue() string {
 }
 
 type utcOffsetPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.UtcOffsetValue
 	Parameters parameters.Parameters
 }
 
-func (uoP *utcOffsetPropertyType) GetName() registry.PropertyNames {
+func (uoP *utcOffsetPropertyType) GetName() registries.PropertyNames {
 	return uoP.PropName
 }
 
@@ -231,12 +231,12 @@ func (uoP *utcOffsetPropertyType) GetValue() string {
 }
 
 type uriPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.UriValue
 	Parameters parameters.Parameters
 }
 
-func (uP *uriPropertyType) GetName() registry.PropertyNames {
+func (uP *uriPropertyType) GetName() registries.PropertyNames {
 	return uP.PropName
 }
 
@@ -245,14 +245,14 @@ func (uP *uriPropertyType) GetValue() string {
 }
 
 type requestStatusPropertyType struct {
-	PropName          registry.PropertyNames
+	PropName          registries.PropertyNames
 	StatusCode        types.TextValue
 	StatusDescription types.TextValue
 	ExtraData         types.TextValue
 	Parameters        parameters.Parameters
 }
 
-func (rsP *requestStatusPropertyType) GetName() registry.PropertyNames {
+func (rsP *requestStatusPropertyType) GetName() registries.PropertyNames {
 	return rsP.PropName
 }
 
@@ -261,11 +261,11 @@ func (rsP *requestStatusPropertyType) GetValue() string {
 }
 
 type recurrenceRulePropertyType struct {
-	PropName registry.PropertyNames
+	PropName registries.PropertyNames
 	Value    recurrence_rule.RecurrenceRuleValue
 }
 
-func (rrP *recurrenceRulePropertyType) GetName() registry.PropertyNames {
+func (rrP *recurrenceRulePropertyType) GetName() registries.PropertyNames {
 	return rrP.PropName
 }
 
@@ -274,12 +274,12 @@ func (rrP *recurrenceRulePropertyType) GetValue() string {
 }
 
 type actionPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.ActionValue
 	Parameters parameters.Parameters
 }
 
-func (aP *actionPropertyType) GetName() registry.PropertyNames {
+func (aP *actionPropertyType) GetName() registries.PropertyNames {
 	return aP.PropName
 }
 
@@ -288,12 +288,12 @@ func (aP *actionPropertyType) GetValue() string {
 }
 
 type classificationPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.ClassificationValue
 	Parameters parameters.Parameters
 }
 
-func (cP *classificationPropertyType) GetName() registry.PropertyNames {
+func (cP *classificationPropertyType) GetName() registries.PropertyNames {
 	return cP.PropName
 }
 
@@ -302,12 +302,12 @@ func (cP *classificationPropertyType) GetValue() string {
 }
 
 type statusPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.StatusValue
 	Parameters parameters.Parameters
 }
 
-func (sP *statusPropertyType) GetName() registry.PropertyNames {
+func (sP *statusPropertyType) GetName() registries.PropertyNames {
 	return sP.PropName
 }
 
@@ -316,12 +316,12 @@ func (sP *statusPropertyType) GetValue() string {
 }
 
 type timeTransparencyPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.TimeTransparencyValue
 	Parameters parameters.Parameters
 }
 
-func (ttP *timeTransparencyPropertyType) GetName() registry.PropertyNames {
+func (ttP *timeTransparencyPropertyType) GetName() registries.PropertyNames {
 	return ttP.PropName
 }
 
@@ -330,12 +330,12 @@ func (ttP *timeTransparencyPropertyType) GetValue() string {
 }
 
 type blockDelimiterPropertyType struct {
-	PropName   registry.PropertyNames
+	PropName   registries.PropertyNames
 	Value      types.BlockDelimiterValue
 	Parameters parameters.Parameters
 }
 
-func (bdP *blockDelimiterPropertyType) GetName() registry.PropertyNames {
+func (bdP *blockDelimiterPropertyType) GetName() registries.PropertyNames {
 	return bdP.PropName
 }
 

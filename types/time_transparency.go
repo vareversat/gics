@@ -1,6 +1,6 @@
 package types
 
-import "github.com/vareversat/gics/registry"
+import "github.com/vareversat/gics/registries"
 
 type TimeTransparencyType string
 
@@ -16,7 +16,7 @@ type TimeTransparencyValue struct {
 
 func NewTimeTransparencyValue(value TimeTransparencyType) TimeTransparencyValue {
 	return TimeTransparencyValue{
-		V:     NewValue(registry.Text),
+		V:     NewValue(registries.Text),
 		Value: value,
 	}
 }

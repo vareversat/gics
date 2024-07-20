@@ -1,6 +1,6 @@
 package types
 
-import "github.com/vareversat/gics/registry"
+import "github.com/vareversat/gics/registries"
 
 type StatusType string
 
@@ -29,7 +29,7 @@ type StatusValue struct {
 
 func NewStatusValue(value StatusType) StatusValue {
 	return StatusValue{
-		V:     NewValue(registry.Text),
+		V:     NewValue(registries.Text),
 		Value: value,
 	}
 }

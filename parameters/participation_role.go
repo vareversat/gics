@@ -6,7 +6,7 @@ package parameters
 // - ATTENDEE
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -14,9 +14,9 @@ type ParticipationRoleParam interface {
 	TextTypeParameter
 }
 
-func NewParticipationRoleParam(value registry.ParticipantRoleRegistry) ParticipationRoleParam {
+func NewParticipationRoleParam(value registries.ParticipantRoleRegistry) ParticipationRoleParam {
 	return &textParameter{
-		ParamName: registry.Role,
+		ParamName: registries.Role,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

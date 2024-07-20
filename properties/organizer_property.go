@@ -8,7 +8,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ type OrganizerProperty interface {
 
 func NewOrganizerProperty(uri *url.URL, params ...parameters.Parameter) OrganizerProperty {
 	return &calendarUserAddressPropertyType{
-		PropName:   registry.ORGANIZER,
+		PropName:   registries.ORGANIZER,
 		Value:      types.NewCalendarUserAddressValue(uri),
 		Parameters: params,
 	}
@@ -34,7 +34,7 @@ func NewOrganizerPropertyFromString(
 	}
 
 	return &calendarUserAddressPropertyType{
-		PropName:   registry.ORGANIZER,
+		PropName:   registries.ORGANIZER,
 		Value:      types.NewCalendarUserAddressValue(urlValue),
 		Parameters: params,
 	}, nil

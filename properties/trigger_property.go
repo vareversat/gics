@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -26,22 +26,22 @@ func NewTriggerProperty(
 	params ...parameters.Parameter,
 ) TriggerProperty {
 	// Get the VALUE param
-	valueType := string(registry.DateTime)
+	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registry.Value {
+		if params[i].GetParamName() == registries.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DateTime):
+	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registry.TRIGGER,
+			PropName:   registries.TRIGGER,
 			Value:      types.NewDateTimeValue(dateTimeValue, format),
 			Parameters: params,
 		}
-	case string(registry.Duration):
+	case string(registries.Duration):
 		return &durationPropertyType{
-			PropName:   registry.TRIGGER,
+			PropName:   registries.TRIGGER,
 			Value:      types.NewDurationValue(durationValue),
 			Parameters: params,
 		}

@@ -5,7 +5,7 @@ import (
 
 	"github.com/vareversat/gics/properties"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 // CalendarComponent is the common interface definition share among VEVENT, VALARM, VJOURNAL, VTODO, VFREEBUSY & VTIMEZONE
@@ -16,18 +16,18 @@ type CalendarComponent interface {
 	SerializeToICSFormat(output io.Writer)
 
 	// MandatoryProperties return the list of the mandatory properties of a CalendarComponent
-	MandatoryProperties() []registry.PropertyNames
+	MandatoryProperties() []registries.PropertyNames
 
-	// GetProperty get a property by his registry.PropertyNames
-	GetProperty(name registry.PropertyNames) properties.Property
+	// GetProperty get a property by his registries.PropertyNames
+	GetProperty(name registries.PropertyNames) properties.Property
 
 	// MutuallyExclusiveProperties return the list of the mutually exclusives properties of a CalendarComponent
 	// Example : In a VEVENT component, you can't have a DTEND and a DURATION property at the same time
-	MutuallyExclusiveProperties() []registry.PropertyNames
+	MutuallyExclusiveProperties() []registries.PropertyNames
 
 	// MutuallyInclusiveProperties return the list of the mutually inclusive properties of a CalendarComponent
 	// Example : In a VALARM component, if you set a value for the DURATION property, you have to also set one for the REPEAT property
-	MutuallyInclusiveProperties() []registry.PropertyNames
+	MutuallyInclusiveProperties() []registries.PropertyNames
 }
 
 // CalendarComponents is an array of CalendarComponent

@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 	"github.com/vareversat/gics/utils"
 )
@@ -15,7 +15,7 @@ type CategoriesProperty interface {
 
 func NewCategoryProperty(values []string, params ...parameters.Parameter) CategoriesProperty {
 	return &textPropertyType{
-		PropName:   registry.CATEGORIES,
+		PropName:   registries.CATEGORIES,
 		Values:     types.NewTextValues(values),
 		Parameters: params,
 	}
@@ -26,7 +26,7 @@ func NewCategoryPropertyFromString(
 	params ...parameters.Parameter,
 ) CategoriesProperty {
 	return &textPropertyType{
-		PropName:   registry.CATEGORIES,
+		PropName:   registries.CATEGORIES,
 		Values:     types.NewTextValues(utils.StringToStringArray(values)),
 		Parameters: params,
 	}

@@ -11,7 +11,7 @@ package parameters
 // - RDATE
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -21,7 +21,7 @@ type TimeZoneIdentifierParam interface {
 
 func NewTimeZoneIdentifierParam(value string) TimeZoneIdentifierParam {
 	return &textParameter{
-		ParamName: registry.TZIDParameter,
+		ParamName: registries.TZIDParameter,
 		Value:     types.NewTextValue(value),
 	}
 }

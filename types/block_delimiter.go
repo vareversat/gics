@@ -1,15 +1,15 @@
 package types
 
-import "github.com/vareversat/gics/registry"
+import "github.com/vareversat/gics/registries"
 
 type BlockDelimiterValue struct {
 	V
-	Value registry.ComponentRegistry
+	Value registries.ComponentRegistry
 }
 
-func NewBlockDelimiterValue(value registry.ComponentRegistry) BlockDelimiterValue {
+func NewBlockDelimiterValue(value registries.ComponentRegistry) BlockDelimiterValue {
 	return BlockDelimiterValue{
-		V:     NewValue(registry.Text),
+		V:     NewValue(registries.Text),
 		Value: value,
 	}
 }

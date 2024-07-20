@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -17,7 +17,7 @@ func NewTimeTransparencyProperty(
 	params ...parameters.Parameter,
 ) TimeTransparencyProperty {
 	return &timeTransparencyPropertyType{
-		PropName:   registry.TRANSP,
+		PropName:   registries.TRANSP,
 		Value:      types.NewTimeTransparencyValue(value),
 		Parameters: params,
 	}
@@ -28,7 +28,7 @@ func NewTimeTransparencyPropertyFromString(
 	params ...parameters.Parameter,
 ) TimeTransparencyProperty {
 	return &timeTransparencyPropertyType{
-		PropName:   registry.TRANSP,
+		PropName:   registries.TRANSP,
 		Value:      types.NewTimeTransparencyValue(types.TimeTransparencyType(value)),
 		Parameters: params,
 	}

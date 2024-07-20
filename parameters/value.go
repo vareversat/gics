@@ -1,7 +1,7 @@
 package parameters
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,9 +18,9 @@ type ValueParam interface {
 	TextTypeParameter
 }
 
-func NewValueParam(value registry.ValueTypeRegistry) ValueParam {
+func NewValueParam(value registries.ValueTypeRegistry) ValueParam {
 	return &textParameter{
-		ParamName: registry.Value,
+		ParamName: registries.Value,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

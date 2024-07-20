@@ -4,7 +4,7 @@ import (
 	"io"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 // TimeZoneCalendarComponent is the interface definition of a VTIMEZONE calendar component
@@ -56,16 +56,16 @@ func NewTimeZoneCalendarComponent(
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Vtimezone),
+		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Vtimezone),
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End:        properties.NewBlockDelimiterProperty(registry.END, registry.Vtimezone),
+		End:        properties.NewBlockDelimiterProperty(registries.END, registries.Vtimezone),
 	}
 }
 
 func (tC *timeZoneCalendarComponent) GetProperty(
-	name registry.PropertyNames,
+	name registries.PropertyNames,
 ) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
@@ -76,7 +76,7 @@ func (tC *timeZoneCalendarComponent) GetProperty(
 }
 
 func (tC *timeZoneCalendarSubComponent) GetProperty(
-	name registry.PropertyNames,
+	name registries.PropertyNames,
 ) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
@@ -96,16 +96,16 @@ func NewTimeZoneDayLightSubcomponent(
 	propertyList ...properties.Property) TimeZoneCalendarDaylightComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registry.BEGIN,
-			registry.Daylight,
+			registries.BEGIN,
+			registries.Daylight,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registry.END,
-			registry.Daylight,
+			registries.END,
+			registries.Daylight,
 		),
 	}
 }
@@ -120,16 +120,16 @@ func NewTimeZoneCalendarStandardSubcomponent(
 	propertyList ...properties.Property) TimeZoneCalendarSubComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registry.BEGIN,
-			registry.Standard,
+			registries.BEGIN,
+			registries.Standard,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registry.END,
-			registry.Standard,
+			registries.END,
+			registries.Standard,
 		),
 	}
 }
@@ -146,16 +146,16 @@ func (tC *timeZoneCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.End.ToICalendarPropFormat(output)
 }
 
-func (tC *timeZoneCalendarComponent) MandatoryProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{registry.BEGIN, registry.END, registry.PROP_TZID}
+func (tC *timeZoneCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.PROP_TZID}
 }
 
-func (tC *timeZoneCalendarComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{}
+func (tC *timeZoneCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
 }
 
-func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{}
+func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
 }
 
 func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
@@ -169,20 +169,20 @@ func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
 	tC.End.ToICalendarPropFormat(output)
 }
 
-func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{
-		registry.BEGIN,
-		registry.END,
-		registry.DTSTART,
-		registry.TZOFFSETTO,
-		registry.TZOFFSETFROM,
+func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{
+		registries.BEGIN,
+		registries.END,
+		registries.DTSTART,
+		registries.TZOFFSETTO,
+		registries.TZOFFSETFROM,
 	}
 }
 
-func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{}
+func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
 }
 
-func (tC *timeZoneCalendarSubComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
-	return []registry.PropertyNames{}
+func (tC *timeZoneCalendarSubComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
+	return []registries.PropertyNames{}
 }

@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -22,7 +22,7 @@ func NewRequestStatusProperty(
 	params ...parameters.Parameter,
 ) RequestStatusProperty {
 	return &requestStatusPropertyType{
-		PropName:          registry.REQUESTSTATUS,
+		PropName:          registries.REQUESTSTATUS,
 		StatusCode:        types.NewTextValue(code),
 		StatusDescription: types.NewTextValue(description),
 		ExtraData:         types.NewTextValue(extraData),
@@ -48,7 +48,7 @@ func NewRequestStatusPropertyFromString(
 		extraData = status[1]
 	}
 	return &requestStatusPropertyType{
-		PropName:          registry.REQUESTSTATUS,
+		PropName:          registries.REQUESTSTATUS,
 		StatusCode:        types.NewTextValue(code),
 		StatusDescription: types.NewTextValue(description),
 		ExtraData:         types.NewTextValue(extraData),

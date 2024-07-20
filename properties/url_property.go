@@ -8,7 +8,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ type UrlProperty interface {
 
 func NewUrlProperty(uri *url.URL, params ...parameters.Parameter) UrlProperty {
 	return &uriPropertyType{
-		PropName:   registry.URL,
+		PropName:   registries.URL,
 		Value:      types.NewUriValue(uri),
 		Parameters: params,
 	}
@@ -31,7 +31,7 @@ func NewUrlPropertyFromString(uri string, params ...parameters.Parameter) (UrlPr
 	}
 
 	return &uriPropertyType{
-		PropName:   registry.URL,
+		PropName:   registries.URL,
 		Value:      types.NewUriValue(urlValue),
 		Parameters: params,
 	}, nil

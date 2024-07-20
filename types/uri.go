@@ -3,7 +3,7 @@ package types
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 type UriValue struct {
@@ -13,7 +13,7 @@ type UriValue struct {
 
 func NewUriValue(value *url.URL) UriValue {
 	return UriValue{
-		V:     NewValue(registry.Uri),
+		V:     NewValue(registries.Uri),
 		Value: value,
 	}
 }

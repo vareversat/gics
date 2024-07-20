@@ -1,4 +1,4 @@
-package registry
+package registries
 
 // RFC5545 section  https://datatracker.ietf.org/doc/html/rfc5545#section-8.3.2
 

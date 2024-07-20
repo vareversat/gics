@@ -5,7 +5,7 @@ package types
 // Example : P15DT5H0M20S (A duration of 15 days, 5 hours, and 20 seconds)
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 type DurationValue struct {
@@ -15,7 +15,7 @@ type DurationValue struct {
 
 func NewDurationValue(value string) DurationValue {
 	return DurationValue{
-		V:     NewValue(registry.Duration),
+		V:     NewValue(registries.Duration),
 		Value: value,
 	}
 }

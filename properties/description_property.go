@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -15,7 +15,7 @@ type DescriptionProperty interface {
 func NewDescriptionProperty(descriptionValue string,
 	params ...parameters.Parameter) DescriptionProperty {
 	return &textPropertyType{
-		PropName:   registry.DESCRIPTION,
+		PropName:   registries.DESCRIPTION,
 		Value:      types.NewTextValue(descriptionValue),
 		Parameters: params,
 	}

@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -14,7 +14,7 @@ type RelatedToProperty interface {
 
 func NewRelatedToProperty(value string, params ...parameters.Parameter) RelatedToProperty {
 	return &textPropertyType{
-		PropName:   registry.RELATEDTO,
+		PropName:   registries.RELATEDTO,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

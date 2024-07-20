@@ -6,7 +6,7 @@ import (
 
 	"github.com/vareversat/gics/components"
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 // Calendar is the interface definition of a iCalendar object
@@ -44,13 +44,13 @@ func NewCalendar(
 		return nil, fmt.Errorf("you must specify a PRODID number")
 	}
 	return &calendar{
-		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, registry.Vcalendar),
+		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Vcalendar),
 		ProdId:     properties.NewProductIdProperty(prodId),
 		Version:    properties.NewVersionProperty(calendarVersion),
 		Method:     properties.NewMethodProperty(calendarMethod),
 		CalScale:   properties.NewCalScaleProperty(),
 		Components: calendarComponents,
-		End:        properties.NewBlockDelimiterProperty(registry.END, registry.Vcalendar),
+		End:        properties.NewBlockDelimiterProperty(registries.END, registries.Vcalendar),
 	}, nil
 }
 

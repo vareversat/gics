@@ -8,7 +8,7 @@ package parameters
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ type MemberParam interface {
 
 func NewMemberParam(value *url.URL) MemberParam {
 	return &calendarUserAddressParameter{
-		ParamName: registry.Member,
+		ParamName: registries.Member,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
 }

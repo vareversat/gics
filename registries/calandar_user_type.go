@@ -1,4 +1,4 @@
-package registry
+package registries
 
 // CalendarUserTypeRegistry contains all calendar user type registry names of the [RFC-5545]
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-8.3.5

@@ -1,15 +1,15 @@
 package types
 
-import "github.com/vareversat/gics/registry"
+import "github.com/vareversat/gics/registries"
 
 type ActionValue struct {
 	V
-	Value registry.ActionRegistry
+	Value registries.ActionRegistry
 }
 
-func NewActionValue(value registry.ActionRegistry) ActionValue {
+func NewActionValue(value registries.ActionRegistry) ActionValue {
 	return ActionValue{
-		V:     NewValue(registry.Text),
+		V:     NewValue(registries.Text),
 		Value: value,
 	}
 }

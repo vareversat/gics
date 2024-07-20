@@ -6,7 +6,7 @@ package parameters
 // - ATTENDEE
 
 import (
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -14,9 +14,9 @@ type CalendarUserTypeParam interface {
 	TextTypeParameter
 }
 
-func NewCalendarUserTypeParam(value registry.CalendarUserTypeRegistry) CalendarUserTypeParam {
+func NewCalendarUserTypeParam(value registries.CalendarUserTypeRegistry) CalendarUserTypeParam {
 	return &textParameter{
-		ParamName: registry.CalendarUserType,
+		ParamName: registries.CalendarUserType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

@@ -1,15 +1,15 @@
 package types
 
-import "github.com/vareversat/gics/registry"
+import "github.com/vareversat/gics/registries"
 
 type ClassificationValue struct {
 	V
-	Value registry.ClassificationRegistry
+	Value registries.ClassificationRegistry
 }
 
-func NewClassificationValue(value registry.ClassificationRegistry) ClassificationValue {
+func NewClassificationValue(value registries.ClassificationRegistry) ClassificationValue {
 	return ClassificationValue{
-		V:     NewValue(registry.Text),
+		V:     NewValue(registries.Text),
 		Value: value,
 	}
 }

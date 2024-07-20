@@ -5,7 +5,7 @@ package types
 import (
 	"strconv"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 )
 
 type IntegerValue struct {
@@ -15,7 +15,7 @@ type IntegerValue struct {
 
 func NewIntegerValue(value int32) IntegerValue {
 	return IntegerValue{
-		V:     NewValue(registry.Integer),
+		V:     NewValue(registries.Integer),
 		Value: value,
 	}
 }

@@ -5,7 +5,7 @@ package properties
 import (
 	"time"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -15,14 +15,14 @@ type LastModifiedProperty interface {
 
 func NewLastModifiedProperty(value time.Time) LastModifiedProperty {
 	return &dateTimePropertyType{
-		PropName: registry.LASTMODIFIED,
+		PropName: registries.LASTMODIFIED,
 		Value:    types.NewDateTimeValue(value, types.WithUtcTime),
 	}
 }
 
 func NewLastModifiedPropertyFromString(value string) LastModifiedProperty {
 	return &dateTimePropertyType{
-		PropName: registry.LASTMODIFIED,
+		PropName: registries.LASTMODIFIED,
 		Value:    types.NewDateTimeValueFromString(value, types.WithUtcTime),
 	}
 }

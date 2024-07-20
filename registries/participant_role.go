@@ -1,4 +1,4 @@
-package registry
+package registries
 
 // ParticipantRoleRegistry contains all participant role names of the [RFC-5545]
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-8.3.9

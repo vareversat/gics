@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -14,7 +14,7 @@ type UidProperty interface {
 
 func NewUidProperty(value string, params ...parameters.Parameter) UidProperty {
 	return &textPropertyType{
-		PropName:   registry.UID,
+		PropName:   registries.UID,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

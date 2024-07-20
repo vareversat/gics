@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ func NewSummaryProperty(
 	summaryValue string, params ...parameters.Parameter,
 ) SummaryProperty {
 	return &textPropertyType{
-		PropName:   registry.SUMMARY,
+		PropName:   registries.SUMMARY,
 		Value:      types.NewTextValue(summaryValue),
 		Parameters: params,
 	}

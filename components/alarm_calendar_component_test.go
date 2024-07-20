@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vareversat/gics/registry"
+	"github.com/vareversat/gics/registries"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/properties"
@@ -14,19 +14,19 @@ import (
 )
 
 func TestNewAlarmCalendarComponent(t *testing.T) {
-	action := properties.NewActionProperty(registry.Audio)
+	action := properties.NewActionProperty(registries.Audio)
 	trigger := properties.NewTriggerProperty(time.Now(), "PT5M", types.WithUtcTime)
 	component := NewAlarmCalendarComponent(action, trigger)
 
 	assert.NotNil(t, component)
-	assert.Equal(t, action.GetActionValue(), registry.Audio)
+	assert.Equal(t, action.GetActionValue(), registries.Audio)
 }
 
 func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTime := time.Now()
 	myTimeToString := myTime.Format("20060102T150405Z")
 
-	action := properties.NewActionProperty(registry.Audio)
+	action := properties.NewActionProperty(registries.Audio)
 	trigger := properties.NewTriggerProperty(myTime, "PT5M", types.WithUtcTime)
 	description := properties.NewDescriptionProperty("Test Alarm")
 	summary := properties.NewSummaryProperty("Alarm Summary")
