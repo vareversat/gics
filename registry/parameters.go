@@ -5,57 +5,57 @@ package registry
 type ParameterRegistry string
 
 const (
-	// Altrep [See RFC-5545 spec]
+	// AlternateTextRepresentation [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.1
-	Altrep ParameterRegistry = "ALTREP"
-	// Cn [See RFC-5545 spec]
+	AlternateTextRepresentation ParameterRegistry = "ALTREP"
+	// CommonName [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.2
-	Cn ParameterRegistry = "CN"
-	// CuType [See RFC-5545 spec]
+	CommonName ParameterRegistry = "CN"
+	// CalendarUserType [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.3
-	CuType ParameterRegistry = "CUTYPE"
+	CalendarUserType ParameterRegistry = "CUTYPE"
 	// DelegatedFrom [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.4
 	DelegatedFrom ParameterRegistry = "DELEGATED-FROM"
 	// DelegatedTo [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.5
 	DelegatedTo ParameterRegistry = "DELEGATED-TO"
-	// Dir [See RFC-5545 spec]
+	// DirectoryEntryReference [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.6
-	Dir ParameterRegistry = "DIR"
+	DirectoryEntryReference ParameterRegistry = "DIR"
 	// Encoding [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.7
 	Encoding ParameterRegistry = "ENCODING"
-	// FmtType [See RFC-5545 spec]
+	// FormatType [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.8
-	FmtType ParameterRegistry = "FMTTYPE"
-	// FbType [See RFC-5545 spec]
+	FormatType ParameterRegistry = "FMTTYPE"
+	// FreeBusyTimeType [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.9
-	FbType ParameterRegistry = "FBTYPE"
+	FreeBusyTimeType ParameterRegistry = "FBTYPE"
 	// Language [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.10
 	Language ParameterRegistry = "LANGUAGE"
 	// Member [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.11
 	Member ParameterRegistry = "MEMBER"
-	// PartStat [See RFC-5545 spec]
+	// ParticipationStatus [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.12
-	PartStat ParameterRegistry = "PARTSTAT"
+	ParticipationStatus ParameterRegistry = "PARTSTAT"
 	// Range [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.13
 	Range ParameterRegistry = "RANGE"
 	// Related [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.14
 	Related ParameterRegistry = "RELATED"
-	// RelType [See RFC-5545 spec]
+	// RelationshipType [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.15
-	RelType ParameterRegistry = "RELTYPE"
+	RelationshipType ParameterRegistry = "RELTYPE"
 	// Role [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.16
 	Role ParameterRegistry = "ROLE"
-	// Rsvp [See RFC-5545 spec]
+	// RsvpExpectation [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.17
-	Rsvp ParameterRegistry = "RSVP"
+	RsvpExpectation ParameterRegistry = "RSVP"
 	// SentBy [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.18
 	SentBy ParameterRegistry = "SENT-BY"
