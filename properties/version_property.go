@@ -4,7 +4,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -14,7 +14,7 @@ type VersionProperty interface {
 
 func NewVersionProperty(value string, params ...parameters.Parameter) VersionProperty {
 	return &textPropertyType{
-		PropName:   registries.VERSION,
+		PropName:   registry.VERSION,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

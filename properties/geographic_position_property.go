@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -22,7 +22,7 @@ func NewGeographicPositionProperty(
 	params ...parameters.Parameter,
 ) GeographicPositionProperty {
 	return &geoPropertyType{
-		PropName:   registries.GEO,
+		PropName:   registry.GEO,
 		Longitude:  types.NewFloatValue(long),
 		Latitude:   types.NewFloatValue(lat),
 		Parameters: params,
@@ -48,7 +48,7 @@ func NewGeographicPositionPropertyFromString(
 		)
 	}
 	return &geoPropertyType{
-		PropName:   registries.GEO,
+		PropName:   registry.GEO,
 		Longitude:  types.NewFloatValue(float32(long)),
 		Latitude:   types.NewFloatValue(float32(lat)),
 		Parameters: params,

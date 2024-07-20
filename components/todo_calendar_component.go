@@ -6,7 +6,7 @@ import (
 	"github.com/vareversat/gics/types"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 // ToDoCalendarComponent is the interface definition of a VTODO calendar component
@@ -34,18 +34,18 @@ func NewToDoCalendarComponent(
 	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.BEGIN,
+			registry.BEGIN,
 			types.VTODO,
 		),
 		UID:                     uid,
 		DateTimeStamp:           dateTimeStamp,
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
-		End:                     properties.NewBlockDelimiterProperty(registries.END, types.VTODO),
+		End:                     properties.NewBlockDelimiterProperty(registry.END, types.VTODO),
 	}
 }
 
-func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (tC *toDoCalendarComponent) GetProperty(name registry.PropertyNames) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
 			return tC.Properties[i]
@@ -54,21 +54,21 @@ func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyNames) prop
 	return nil
 }
 
-func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (tC *toDoCalendarComponent) MandatoryProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{
+		registry.BEGIN,
+		registry.END,
+		registry.UID,
+		registry.DTSTAMP,
 	}
 }
 
-func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.DUE, registries.DURATION_PROP}
+func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{registry.DUE, registry.DURATION_PROP}
 }
 
-func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{}
 }
 
 func (tC *toDoCalendarComponent) SerializeToICSFormat(output io.Writer) {

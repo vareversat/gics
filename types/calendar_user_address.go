@@ -7,7 +7,7 @@ package types
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type CalendarUserAddressValue struct {
@@ -17,7 +17,7 @@ type CalendarUserAddressValue struct {
 
 func NewCalendarUserAddressValue(value *url.URL) CalendarUserAddressValue {
 	return CalendarUserAddressValue{
-		V:     NewValue(registries.CALADDRESS),
+		V:     NewValue(registry.CALADDRESS),
 		Value: value,
 	}
 }

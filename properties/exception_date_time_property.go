@@ -9,7 +9,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -23,22 +23,22 @@ func NewExceptionDateTimeProperty(
 	values []time.Time,
 	format types.DTFormat,
 	params ...parameters.Parameter) ExceptionDateTimeProperty {
-	valueType := string(registries.DATETIME)
+	valueType := string(registry.DATETIME)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registries.VALUE {
+		if params[i].GetParamName() == registry.VALUE {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registries.DATETIME):
+	case string(registry.DATETIME):
 		return &dateTimePropertyType{
-			PropName:   registries.EXDATE,
+			PropName:   registry.EXDATE,
 			Values:     types.NewDateTimeValues(values, format),
 			Parameters: params,
 		}
-	case string(registries.DATE):
+	case string(registry.DATE):
 		return &datePropertyType{
-			PropName:   registries.EXDATE,
+			PropName:   registry.EXDATE,
 			Values:     types.NewDateValues(values),
 			Parameters: params,
 		}
@@ -52,25 +52,25 @@ func NewExceptionDateTimePropertyFromString(
 	format types.DTFormat,
 	params ...parameters.Parameter) ExceptionDateTimeProperty {
 	// Get the VALUE param
-	valueType := string(registries.DATETIME)
+	valueType := string(registry.DATETIME)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registries.VALUE {
+		if params[i].GetParamName() == registry.VALUE {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registries.DATETIME):
+	case string(registry.DATETIME):
 		return &dateTimePropertyType{
-			PropName: registries.EXDATE,
+			PropName: registry.EXDATE,
 			Values: types.NewDateTimeValuesFromString(
 				utils.StringToStringArray(values),
 				format,
 			),
 			Parameters: params,
 		}
-	case string(registries.DATE):
+	case string(registry.DATE):
 		return &datePropertyType{
-			PropName:   registries.EXDATE,
+			PropName:   registry.EXDATE,
 			Values:     types.NewDateValuesFromString(utils.StringToStringArray(values)),
 			Parameters: params,
 		}

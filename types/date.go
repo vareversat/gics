@@ -8,25 +8,25 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type DateValue struct {
 	V
 	Value     time.Time
-	IANAToken registries.Type
+	IANAToken registry.Type
 }
 
 func NewDateValue(value time.Time) DateValue {
 	return DateValue{
-		V:     NewValue(registries.DATE),
+		V:     NewValue(registry.DATE),
 		Value: value,
 	}
 }
 
 func NewDateValueFromString(value string) DateValue {
 	return DateValue{
-		V:     NewValue(registries.DATE),
+		V:     NewValue(registry.DATE),
 		Value: parseStringToDateTime(value),
 	}
 }
@@ -36,7 +36,7 @@ func NewDateValues(values []time.Time) []DateValue {
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateValue{
-			V:     NewValue(registries.DATE),
+			V:     NewValue(registry.DATE),
 			Value: values[i],
 		})
 	}
@@ -48,7 +48,7 @@ func NewDateValuesFromString(values []string) []DateValue {
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateValue{
-			V:     NewValue(registries.DATE),
+			V:     NewValue(registry.DATE),
 			Value: parseStringToDate(values[i]),
 		})
 	}

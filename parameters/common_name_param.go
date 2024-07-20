@@ -7,7 +7,7 @@ package parameters
 // - ORGANIZER
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,13 +16,13 @@ type CommonNameParam interface {
 }
 
 type commonNameParam struct {
-	IANAToken registries.Parameters
+	IANAToken registry.Parameters
 	Value     types.TextValue
 }
 
 func NewCommonNameParam(value string) CommonNameParam {
 	return &textParameter{
-		ParamName: registries.CN,
+		ParamName: registry.CN,
 		Value:     types.NewTextValue(value),
 	}
 }

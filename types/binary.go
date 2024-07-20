@@ -3,7 +3,7 @@ package types
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.1
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type BinaryValue struct {
@@ -13,7 +13,7 @@ type BinaryValue struct {
 
 func NewBinaryValue(value string) BinaryValue {
 	return BinaryValue{
-		V:           NewValue(registries.BINARY),
+		V:           NewValue(registry.BINARY),
 		Base64Value: value,
 	}
 }

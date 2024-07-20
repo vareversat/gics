@@ -3,7 +3,7 @@ package parameters
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -19,7 +19,7 @@ type DirectoryEntryParam interface {
 
 func NewDirectoryEntryParam(value *url.URL) DirectoryEntryParam {
 	return &uriParameter{
-		ParamName: registries.DIR,
+		ParamName: registry.DIR,
 		Value:     types.NewUriValue(value),
 	}
 }

@@ -1,6 +1,6 @@
 package types
 
-import "github.com/vareversat/gics/registries"
+import "github.com/vareversat/gics/registry"
 
 type ActionType string
 
@@ -17,7 +17,7 @@ type ActionValue struct {
 
 func NewActionValue(value ActionType) ActionValue {
 	return ActionValue{
-		V:     NewValue(registries.TEXT),
+		V:     NewValue(registry.TEXT),
 		Value: value,
 	}
 }

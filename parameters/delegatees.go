@@ -8,7 +8,7 @@ package parameters
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ type DelegateesParam interface {
 
 func NewDelegateesParam(value *url.URL) DelegateesParam {
 	return &calendarUserAddressParameter{
-		ParamName: registries.DELEGATEDTO,
+		ParamName: registry.DELEGATEDTO,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
 }

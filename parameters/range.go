@@ -6,7 +6,7 @@ package parameters
 // - RECURRENCE-ID
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type RangeParam interface {
 
 func NewRangeParam() RangeParam {
 	return &textParameter{
-		ParamName: registries.RANGE,
+		ParamName: registry.RANGE,
 		Value:     types.NewTextValue("THISANDFUTURE"),
 	}
 }

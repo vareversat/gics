@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/properties"
@@ -66,6 +66,6 @@ func TestEventCalendarComponent_GetProperty(t *testing.T) {
 		summary,
 	)
 
-	prop := component.GetProperty(registries.SUMMARY)
+	prop := component.GetProperty(registry.SUMMARY)
 	assert.Equal(t, "Event Summary", prop.GetValue())
 }

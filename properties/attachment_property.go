@@ -3,7 +3,7 @@ package properties
 import (
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -20,7 +20,7 @@ func NewAttachmentProperty(
 	params ...parameters.Parameter,
 ) AttachmentProperty {
 	return &textPropertyType{
-		PropName:   registries.ATTACH,
+		PropName:   registry.ATTACH,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

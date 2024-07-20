@@ -6,7 +6,7 @@ import (
 	"github.com/vareversat/gics/types"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 // AlarmCalendarComponent is the interface definition of a VALARM calendar component
@@ -31,15 +31,15 @@ func NewAlarmCalendarComponent(
 	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, types.VALARM),
+		Begin:      properties.NewBlockDelimiterProperty(registry.BEGIN, types.VALARM),
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registries.END, types.VALARM),
+		End:        properties.NewBlockDelimiterProperty(registry.END, types.VALARM),
 	}
 }
 
-func (aC *alarmCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (aC *alarmCalendarComponent) GetProperty(name registry.PropertyNames) properties.Property {
 	for i := 0; i < len(aC.Properties); i++ {
 		if aC.Properties[i].GetName() == name {
 			return aC.Properties[i]
@@ -48,43 +48,43 @@ func (aC *alarmCalendarComponent) GetProperty(name registries.PropertyNames) pro
 	return nil
 }
 
-func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+func (aC *alarmCalendarComponent) MandatoryProperties() []registry.PropertyNames {
 	switch aC.Action.GetActionValue() {
 	case types.AUDIO:
-		return []registries.PropertyNames{
-			registries.BEGIN,
-			registries.END,
-			registries.ACTION,
-			registries.TRIGGER,
+		return []registry.PropertyNames{
+			registry.BEGIN,
+			registry.END,
+			registry.ACTION,
+			registry.TRIGGER,
 		}
 	case types.DISPLAY:
-		return []registries.PropertyNames{
-			registries.BEGIN,
-			registries.END,
-			registries.ACTION,
-			registries.TRIGGER,
-			registries.DESCRIPTION,
+		return []registry.PropertyNames{
+			registry.BEGIN,
+			registry.END,
+			registry.ACTION,
+			registry.TRIGGER,
+			registry.DESCRIPTION,
 		}
 	case types.EMAIL:
-		return []registries.PropertyNames{
-			registries.BEGIN,
-			registries.END,
-			registries.ACTION,
-			registries.TRIGGER,
-			registries.DESCRIPTION,
-			registries.SUMMARY,
+		return []registry.PropertyNames{
+			registry.BEGIN,
+			registry.END,
+			registry.ACTION,
+			registry.TRIGGER,
+			registry.DESCRIPTION,
+			registry.SUMMARY,
 		}
 	default:
-		return []registries.PropertyNames{registries.BEGIN, registries.END}
+		return []registry.PropertyNames{registry.BEGIN, registry.END}
 	}
 }
 
-func (aC *alarmCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (aC *alarmCalendarComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{}
 }
 
-func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.DURATION_PROP, registries.REPEAT}
+func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{registry.DURATION_PROP, registry.REPEAT}
 }
 
 func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {

@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type ResourcesProperty interface {
 
 func NewResourcesProperty(values []string, params ...parameters.Parameter) ResourcesProperty {
 	return &textPropertyType{
-		PropName:   registries.RESOURCES,
+		PropName:   registry.RESOURCES,
 		Values:     types.NewTextValues(values),
 		Parameters: params,
 	}
@@ -28,7 +28,7 @@ func NewResourcesPropertyFromString(
 ) ResourcesProperty {
 	resources := strings.Split(values, ",")
 	return &textPropertyType{
-		PropName:   registries.RESOURCES,
+		PropName:   registry.RESOURCES,
 		Values:     types.NewTextValues(resources),
 		Parameters: params,
 	}

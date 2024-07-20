@@ -6,7 +6,7 @@ package parameters
 // - RELATED-TO
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type RelationshipParam interface {
 
 func NewRelationshipParam(value RelationshipType) RelationshipParam {
 	return &textParameter{
-		ParamName: registries.RELTYPE,
+		ParamName: registry.RELTYPE,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

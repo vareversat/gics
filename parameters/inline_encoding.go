@@ -6,7 +6,7 @@ package parameters
 // - BINARY
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type InlineEncodingParam interface {
 
 func NewInlineEncodingParam(value EncodingType) InlineEncodingParam {
 	return &textParameter{
-		ParamName: registries.ENCODING,
+		ParamName: registry.ENCODING,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

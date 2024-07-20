@@ -6,7 +6,7 @@ package parameters
 // - FREEBUSY
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type FreeBusyTimeParam interface {
 
 func NewFreeBusyTimeParam(value FreeBusyTimeType) FreeBusyTimeParam {
 	return &textParameter{
-		ParamName: registries.FBTYPE,
+		ParamName: registry.FBTYPE,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

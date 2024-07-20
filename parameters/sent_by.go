@@ -9,7 +9,7 @@ package parameters
 import (
 	"net/url"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -19,7 +19,7 @@ type SentByParam interface {
 
 func NewSentByParam(value *url.URL) SentByParam {
 	return &calendarUserAddressParameter{
-		ParamName: registries.SENTBY,
+		ParamName: registry.SENTBY,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
 }

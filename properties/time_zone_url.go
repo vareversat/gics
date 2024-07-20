@@ -8,7 +8,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ type TimeZoneUrlProperty interface {
 
 func NewTimeZoneUrlProperty(value *url.URL, params ...parameters.Parameter) TimeZoneUrlProperty {
 	return &uriPropertyType{
-		PropName:   registries.TZURL,
+		PropName:   registry.TZURL,
 		Value:      types.NewUriValue(value),
 		Parameters: params,
 	}
@@ -34,7 +34,7 @@ func NewTimeZoneUrlPropertyFromString(
 	}
 
 	return &uriPropertyType{
-		PropName:   registries.TZURL,
+		PropName:   registry.TZURL,
 		Value:      types.NewUriValue(urlValue),
 		Parameters: params,
 	}, nil

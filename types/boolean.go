@@ -3,7 +3,7 @@ package types
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.2
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type BooleanValue struct {
@@ -13,7 +13,7 @@ type BooleanValue struct {
 
 func NewBooleanValue(value bool) BooleanValue {
 	return BooleanValue{
-		V:     NewValue(registries.BOOLEAN),
+		V:     NewValue(registry.BOOLEAN),
 		Value: value,
 	}
 }

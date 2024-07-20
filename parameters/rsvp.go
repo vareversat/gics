@@ -6,7 +6,7 @@ package parameters
 // - ATTENDEE
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type RSVPParam interface {
 
 func NewRSVPParam(value bool) RSVPParam {
 	return &booleanParameter{
-		ParamName: registries.RSVP,
+		ParamName: registry.RSVP,
 		Value:     types.NewBooleanValue(value),
 	}
 }

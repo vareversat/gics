@@ -7,7 +7,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -20,7 +20,7 @@ func NewDateTimeCreatedProperty(
 	params ...parameters.Parameter,
 ) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
-		PropName:   registries.CREATED,
+		PropName:   registry.CREATED,
 		Value:      types.NewDateTimeValue(timeValue, types.WithUtcTime),
 		Parameters: params,
 	}
@@ -30,7 +30,7 @@ func NewDateTimeCreatedPropertyFromString(
 	value string,
 	params ...parameters.Parameter) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
-		PropName:   registries.CREATED,
+		PropName:   registry.CREATED,
 		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
 		Parameters: params,
 	}

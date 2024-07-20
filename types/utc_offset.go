@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type UtcOffsetValue struct {
@@ -11,7 +11,7 @@ type UtcOffsetValue struct {
 
 func NewUtcOffsetValue(value string) UtcOffsetValue {
 	return UtcOffsetValue{
-		V:     NewValue(registries.UTCOFFSET),
+		V:     NewValue(registry.UTCOFFSET),
 		Value: value,
 	}
 }

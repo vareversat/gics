@@ -6,7 +6,7 @@ package parameters
 // - ATTENDEE
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -16,7 +16,7 @@ type ParticipationStatusParam interface {
 
 func NewParticipationStatusParam(value ParticipantStatusType) ParticipationStatusParam {
 	return &textParameter{
-		ParamName: registries.PARTSTAT,
+		ParamName: registry.PARTSTAT,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

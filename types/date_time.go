@@ -9,7 +9,7 @@ package types
 import (
 	"time"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type DTFormat string
@@ -30,7 +30,7 @@ func NewDateTimeValues(values []time.Time, format DTFormat) []DateTimeValue {
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateTimeValue{
-			V:      NewValue(registries.DATETIME),
+			V:      NewValue(registry.DATETIME),
 			Value:  values[i],
 			Format: format,
 		})
@@ -43,7 +43,7 @@ func NewDateTimeValuesFromString(values []string, format DTFormat) []DateTimeVal
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateTimeValue{
-			V:      NewValue(registries.DATETIME),
+			V:      NewValue(registry.DATETIME),
 			Value:  parseStringToDateTime(values[i]),
 			Format: format,
 		})
@@ -53,7 +53,7 @@ func NewDateTimeValuesFromString(values []string, format DTFormat) []DateTimeVal
 
 func NewDateTimeValue(value time.Time, format DTFormat) DateTimeValue {
 	return DateTimeValue{
-		V:      NewValue(registries.DATETIME),
+		V:      NewValue(registry.DATETIME),
 		Value:  value,
 		Format: format,
 	}
@@ -61,7 +61,7 @@ func NewDateTimeValue(value time.Time, format DTFormat) DateTimeValue {
 
 func NewDateTimeValueFromString(value string, format DTFormat) DateTimeValue {
 	return DateTimeValue{
-		V:      NewValue(registries.DATETIME),
+		V:      NewValue(registry.DATETIME),
 		Value:  parseStringToDateTime(value),
 		Format: format,
 	}

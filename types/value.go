@@ -1,16 +1,16 @@
 package types
 
-import "github.com/vareversat/gics/registries"
+import "github.com/vareversat/gics/registry"
 
 type V interface {
 	GetIANAToken() string
 }
 
 type value struct {
-	IANAToken registries.Type
+	IANAToken registry.Type
 }
 
-func NewValue(IANAToken registries.Type) V {
+func NewValue(IANAToken registry.Type) V {
 	return &value{IANAToken: IANAToken}
 }
 

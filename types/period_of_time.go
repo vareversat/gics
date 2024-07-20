@@ -8,19 +8,19 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type PeriodValue struct {
 	V
 	StartValue time.Time
 	EndValue   time.Time
-	IANAToken  registries.Type
+	IANAToken  registry.Type
 }
 
 func NewPeriodValue(startValue time.Time, endValue time.Time) PeriodValue {
 	return PeriodValue{
-		IANAToken:  registries.PERIOD,
+		IANAToken:  registry.PERIOD,
 		StartValue: startValue,
 		EndValue:   endValue,
 	}
@@ -31,7 +31,7 @@ func NewPeriodValues(startValues []time.Time, endValues []time.Time) []PeriodVal
 
 	for i := 0; i < len(startValues); i++ {
 		periodValues = append(periodValues, PeriodValue{
-			V:          NewValue(registries.PERIOD),
+			V:          NewValue(registry.PERIOD),
 			StartValue: startValues[i],
 			EndValue:   endValues[i],
 		})

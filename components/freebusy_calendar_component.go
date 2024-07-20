@@ -6,7 +6,7 @@ import (
 	"github.com/vareversat/gics/types"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 // FreeBusyCalendarComponent is the interface definition of a VFREEBUSY calendar component
@@ -31,16 +31,16 @@ func NewFreeBusyCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, types.VFREEBUSY),
+		Begin:         properties.NewBlockDelimiterProperty(registry.BEGIN, types.VFREEBUSY),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, types.VFREEBUSY),
+		End:           properties.NewBlockDelimiterProperty(registry.END, types.VFREEBUSY),
 	}
 }
 
 func (fC *freeBusyCalendarComponent) GetProperty(
-	name registries.PropertyNames,
+	name registry.PropertyNames,
 ) properties.Property {
 	for i := 0; i < len(fC.Properties); i++ {
 		if fC.Properties[i].GetName() == name {
@@ -50,21 +50,21 @@ func (fC *freeBusyCalendarComponent) GetProperty(
 	return nil
 }
 
-func (fC *freeBusyCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (fC *freeBusyCalendarComponent) MandatoryProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{
+		registry.BEGIN,
+		registry.END,
+		registry.UID,
+		registry.DTSTAMP,
 	}
 }
 
-func (fC *freeBusyCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (fC *freeBusyCalendarComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{}
 }
 
-func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{}
 }
 
 func (fC *freeBusyCalendarComponent) SerializeToICSFormat(output io.Writer) {

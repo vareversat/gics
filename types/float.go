@@ -3,7 +3,7 @@ package types
 // https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.7
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type FloatValue struct {
@@ -13,7 +13,7 @@ type FloatValue struct {
 
 func NewFloatValue(value float32) FloatValue {
 	return FloatValue{
-		V:     NewValue(registries.FLOAT),
+		V:     NewValue(registry.FLOAT),
 		Value: value,
 	}
 }

@@ -2,7 +2,7 @@ package properties
 
 import (
 	"github.com/vareversat/gics/parameters"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -15,7 +15,7 @@ type ActionProperty interface {
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
 func NewActionProperty(action types.ActionType, params ...parameters.Parameter) ActionProperty {
 	return &actionPropertyType{
-		PropName:   registries.ACTION,
+		PropName:   registry.ACTION,
 		Value:      types.NewActionValue(action),
 		Parameters: params,
 	}
@@ -26,7 +26,7 @@ func NewActionPropertyFromString(
 	params ...parameters.Parameter,
 ) BlockDelimiterProperty {
 	return &actionPropertyType{
-		PropName:   registries.ACTION,
+		PropName:   registry.ACTION,
 		Value:      types.NewActionValue(types.ActionType(actionString)),
 		Parameters: params,
 	}

@@ -1,6 +1,6 @@
 package types
 
-import "github.com/vareversat/gics/registries"
+import "github.com/vareversat/gics/registry"
 
 type ClassificationType string
 
@@ -17,7 +17,7 @@ type ClassificationValue struct {
 
 func NewClassificationValue(value ClassificationType) ClassificationValue {
 	return ClassificationValue{
-		V:     NewValue(registries.TEXT),
+		V:     NewValue(registry.TEXT),
 		Value: value,
 	}
 }

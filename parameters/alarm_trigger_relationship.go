@@ -6,7 +6,7 @@ package parameters
 // - TRIGGER
 
 import (
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 	"github.com/vareversat/gics/types"
 )
 
@@ -18,7 +18,7 @@ func NewAlarmTriggerRelationshipParam(
 	value AlarmTriggerRelationshipType,
 ) AlarmTriggerRelationshipParam {
 	return &textParameter{
-		ParamName: registries.RELATED,
+		ParamName: registry.RELATED,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/vareversat/gics/types"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 // JournalCalendarComponent is the interface definition of a VJOURNAL calendar component
@@ -31,15 +31,15 @@ func NewJournalCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) JournalCalendarComponent {
 	return &journalCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, types.VJOURNAL),
+		Begin:         properties.NewBlockDelimiterProperty(registry.BEGIN, types.VJOURNAL),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, types.VJOURNAL),
+		End:           properties.NewBlockDelimiterProperty(registry.END, types.VJOURNAL),
 	}
 }
 
-func (jC *journalCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (jC *journalCalendarComponent) GetProperty(name registry.PropertyNames) properties.Property {
 	for i := 0; i < len(jC.Properties); i++ {
 		if jC.Properties[i].GetName() == name {
 			return jC.Properties[i]
@@ -48,21 +48,21 @@ func (jC *journalCalendarComponent) GetProperty(name registries.PropertyNames) p
 	return nil
 }
 
-func (jC *journalCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (jC *journalCalendarComponent) MandatoryProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{
+		registry.BEGIN,
+		registry.END,
+		registry.UID,
+		registry.DTSTAMP,
 	}
 }
 
-func (jC *journalCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (jC *journalCalendarComponent) MutuallyExclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{}
 }
 
-func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registry.PropertyNames {
+	return []registry.PropertyNames{}
 }
 
 func (jC *journalCalendarComponent) SerializeToICSFormat(output io.Writer) {

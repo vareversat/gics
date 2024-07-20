@@ -10,7 +10,7 @@ package types
 import (
 	"time"
 
-	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/registry"
 )
 
 type TimeValue struct {
@@ -20,7 +20,7 @@ type TimeValue struct {
 
 func NewTimeValue(value *time.Time) *TimeValue {
 	return &TimeValue{
-		V:     NewValue(registries.TIME),
+		V:     NewValue(registry.TIME),
 		Value: value,
 	}
 }

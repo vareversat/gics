@@ -1,6 +1,6 @@
 package types
 
-import "github.com/vareversat/gics/registries"
+import "github.com/vareversat/gics/registry"
 
 type BlockDelimiterType string
 
@@ -23,7 +23,7 @@ type BlockDelimiterValue struct {
 
 func NewBlockDelimiterValue(value BlockDelimiterType) BlockDelimiterValue {
 	return BlockDelimiterValue{
-		V:     NewValue(registries.TEXT),
+		V:     NewValue(registry.TEXT),
 		Value: value,
 	}
 }
