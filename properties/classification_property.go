@@ -13,7 +13,7 @@ type ClassificationProperty interface {
 }
 
 func NewClassificationProperty(
-	classValue types.ClassificationType,
+	classValue registry.ClassificationRegistry,
 	params ...parameters.Parameter,
 ) ClassificationProperty {
 	return &classificationPropertyType{
@@ -29,7 +29,7 @@ func NewClassificationPropertyFromString(
 ) ClassificationProperty {
 	return &classificationPropertyType{
 		PropName:   registry.CLASS,
-		Value:      types.NewClassificationValue(types.ClassificationType(classValue)),
+		Value:      types.NewClassificationValue(registry.ClassificationRegistry(classValue)),
 		Parameters: params,
 	}
 }

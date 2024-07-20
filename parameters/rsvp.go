@@ -16,7 +16,7 @@ type RSVPParam interface {
 
 func NewRSVPParam(value bool) RSVPParam {
 	return &booleanParameter{
-		ParamName: registry.Rsvp,
+		ParamName: registry.RsvpExpectation,
 		Value:     types.NewBooleanValue(value),
 	}
 }

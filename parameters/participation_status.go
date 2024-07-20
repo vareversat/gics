@@ -14,21 +14,11 @@ type ParticipationStatusParam interface {
 	TextTypeParameter
 }
 
-func NewParticipationStatusParam(value ParticipantStatusType) ParticipationStatusParam {
+func NewParticipationStatusParam(
+	value registry.ParticipantStatusRegistry,
+) ParticipationStatusParam {
 	return &textParameter{
-		ParamName: registry.PartStat,
+		ParamName: registry.ParticipationStatus,
 		Value:     types.NewTextValue(string(value)),
 	}
 }
-
-type ParticipantStatusType string
-
-const (
-	NEEDACTION ParticipantStatusType = "NEEDS-ACTION"
-	ACCEPTED   ParticipantStatusType = "ACCEPTED"
-	DECLINED   ParticipantStatusType = "DECLINED"
-	TENTATIVE  ParticipantStatusType = "TENTATIVE"
-	DELEGATED  ParticipantStatusType = "DELEGATED"
-	COMPLETED  ParticipantStatusType = "COMPLETED"
-	INPROCESS  ParticipantStatusType = "IN-PROCESS"
-)

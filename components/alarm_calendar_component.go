@@ -3,8 +3,6 @@ package components
 import (
 	"io"
 
-	"github.com/vareversat/gics/types"
-
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registry"
 )
@@ -50,14 +48,14 @@ func (aC *alarmCalendarComponent) GetProperty(name registry.PropertyNames) prope
 
 func (aC *alarmCalendarComponent) MandatoryProperties() []registry.PropertyNames {
 	switch aC.Action.GetActionValue() {
-	case types.AUDIO:
+	case registry.Audio:
 		return []registry.PropertyNames{
 			registry.BEGIN,
 			registry.END,
 			registry.ACTION,
 			registry.TRIGGER,
 		}
-	case types.DISPLAY:
+	case registry.Display:
 		return []registry.PropertyNames{
 			registry.BEGIN,
 			registry.END,
@@ -65,7 +63,7 @@ func (aC *alarmCalendarComponent) MandatoryProperties() []registry.PropertyNames
 			registry.TRIGGER,
 			registry.DESCRIPTION,
 		}
-	case types.EMAIL:
+	case registry.Email:
 		return []registry.PropertyNames{
 			registry.BEGIN,
 			registry.END,

@@ -14,18 +14,9 @@ type ParticipationRoleParam interface {
 	TextTypeParameter
 }
 
-func NewParticipationRoleParam(value ParticipationRoleType) ParticipationRoleParam {
+func NewParticipationRoleParam(value registry.ParticipantRoleRegistry) ParticipationRoleParam {
 	return &textParameter{
 		ParamName: registry.Role,
 		Value:     types.NewTextValue(string(value)),
 	}
 }
-
-type ParticipationRoleType string
-
-const (
-	CHAIR          ParticipationRoleType = "CHAIR"
-	REQPARTICIPANT ParticipationRoleType = "REQ-PARTICIPANT"
-	OPTPARTICIPANT ParticipationRoleType = "OPT-PARTICIPANT"
-	NONPARTICIPANT ParticipationRoleType = "NON-PARTICIPANT"
-)

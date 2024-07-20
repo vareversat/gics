@@ -22,7 +22,7 @@ type commonNameParam struct {
 
 func NewCommonNameParam(value string) CommonNameParam {
 	return &textParameter{
-		ParamName: registry.Cn,
+		ParamName: registry.CommonName,
 		Value:     types.NewTextValue(value),
 	}
 }

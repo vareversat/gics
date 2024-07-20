@@ -14,19 +14,9 @@ type CalendarUserTypeParam interface {
 	TextTypeParameter
 }
 
-func NewCalendarUserTypeParam(value CalendarUserType) CalendarUserTypeParam {
+func NewCalendarUserTypeParam(value registry.CalendarUserTypeRegistry) CalendarUserTypeParam {
 	return &textParameter{
-		ParamName: registry.CuType,
+		ParamName: registry.CalendarUserType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }
-
-type CalendarUserType string
-
-const (
-	GROUP      CalendarUserType = "GROUP"
-	INDIVIDUAL CalendarUserType = "INDIVIDUAL"
-	RESOURCE   CalendarUserType = "RESOURCE"
-	ROOM       CalendarUserType = "ROOM"
-	UNKNOWN    CalendarUserType = "UNKNOWN"
-)

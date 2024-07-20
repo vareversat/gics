@@ -14,18 +14,9 @@ type FreeBusyTimeParam interface {
 	TextTypeParameter
 }
 
-func NewFreeBusyTimeParam(value FreeBusyTimeType) FreeBusyTimeParam {
+func NewFreeBusyTimeParam(value registry.FreeBusyTimeTypeRegistry) FreeBusyTimeParam {
 	return &textParameter{
-		ParamName: registry.FbType,
+		ParamName: registry.FreeBusyTimeType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }
-
-type FreeBusyTimeType string
-
-const (
-	FREE            FreeBusyTimeType = "FREE"
-	BUSSY           FreeBusyTimeType = "BUSSY"
-	BUSYUNAVAILABLE FreeBusyTimeType = "BUSY-UNAVAILABLE"
-	BUSYTENTATIVE   FreeBusyTimeType = "BUSY-TENTATIVE"
-)

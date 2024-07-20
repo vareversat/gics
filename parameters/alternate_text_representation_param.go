@@ -23,7 +23,7 @@ type AlternateTextRepresentationParam interface {
 
 func NewAlternateTextRepresentationParam(value *url.URL) AlternateTextRepresentationParam {
 	return &uriParameter{
-		ParamName: registry.Altrep,
+		ParamName: registry.AlternateTextRepresentation,
 		Value:     types.NewUriValue(value),
 	}
 }

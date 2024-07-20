@@ -13,7 +13,10 @@ type ActionProperty interface {
 // NewActionProperty create a new ACTION property
 // This property MUST be seen in VALARM component
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
-func NewActionProperty(action types.ActionType, params ...parameters.Parameter) ActionProperty {
+func NewActionProperty(
+	action registry.ActionRegistry,
+	params ...parameters.Parameter,
+) ActionProperty {
 	return &actionPropertyType{
 		PropName:   registry.ACTION,
 		Value:      types.NewActionValue(action),
@@ -27,11 +30,11 @@ func NewActionPropertyFromString(
 ) BlockDelimiterProperty {
 	return &actionPropertyType{
 		PropName:   registry.ACTION,
-		Value:      types.NewActionValue(types.ActionType(actionString)),
+		Value:      types.NewActionValue(registry.ActionRegistry(actionString)),
 		Parameters: params,
 	}
 }
 
-func (aP *actionPropertyType) GetActionValue() types.ActionType {
+func (aP *actionPropertyType) GetActionValue() registry.ActionRegistry {
 	return aP.Value.Value
 }

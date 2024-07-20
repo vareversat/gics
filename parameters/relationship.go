@@ -14,17 +14,9 @@ type RelationshipParam interface {
 	TextTypeParameter
 }
 
-func NewRelationshipParam(value RelationshipType) RelationshipParam {
+func NewRelationshipParam(value registry.RelationshipTypeRegistry) RelationshipParam {
 	return &textParameter{
-		ParamName: registry.RelType,
+		ParamName: registry.RelationshipType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }
-
-type RelationshipType string
-
-const (
-	CHILD   RelationshipType = "CHILD"
-	PARENT  RelationshipType = "PARENT"
-	SIBLING RelationshipType = "SIBLING"
-)
