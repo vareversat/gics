@@ -16,7 +16,7 @@ type RelationshipParam interface {
 
 func NewRelationshipParam(value RelationshipType) RelationshipParam {
 	return &textParameter{
-		ParamName: registry.RELTYPE,
+		ParamName: registry.RelType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

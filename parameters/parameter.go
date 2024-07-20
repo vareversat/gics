@@ -14,7 +14,7 @@ type Parameter interface {
 	// ToICalendarParamFormat format output to the icalendar specs
 	ToICalendarParamFormat(output io.Writer)
 	// GetParamName return the parameter name
-	GetParamName() registry.Parameters
+	GetParamName() registry.ParameterRegistry
 	// GetParamValue return the parameter name in (string typed)
 	GetParamValue() string
 }
@@ -29,7 +29,7 @@ type TextTypeParameter interface {
 }
 
 type textParameter struct {
-	ParamName registry.Parameters
+	ParamName registry.ParameterRegistry
 	Value     types.TextValue
 }
 
@@ -37,7 +37,7 @@ func (tP *textParameter) ToICalendarParamFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", tP.ParamName, tP.GetParamValue())))
 }
 
-func (tP *textParameter) GetParamName() registry.Parameters {
+func (tP *textParameter) GetParamName() registry.ParameterRegistry {
 	return tP.ParamName
 }
 
@@ -52,7 +52,7 @@ type UriTypeParameter interface {
 }
 
 type uriParameter struct {
-	ParamName registry.Parameters
+	ParamName registry.ParameterRegistry
 	Value     types.UriValue
 }
 
@@ -60,7 +60,7 @@ func (uP *uriParameter) ToICalendarParamFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", uP.ParamName, uP.GetParamValue())))
 }
 
-func (uP *uriParameter) GetParamName() registry.Parameters {
+func (uP *uriParameter) GetParamName() registry.ParameterRegistry {
 	return uP.ParamName
 }
 
@@ -75,7 +75,7 @@ type BooleanTypeParameter interface {
 }
 
 type booleanParameter struct {
-	ParamName registry.Parameters
+	ParamName registry.ParameterRegistry
 	Value     types.BooleanValue
 }
 
@@ -83,7 +83,7 @@ func (bP *booleanParameter) ToICalendarParamFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", bP.ParamName, bP.GetParamValue())))
 }
 
-func (bP *booleanParameter) GetParamName() registry.Parameters {
+func (bP *booleanParameter) GetParamName() registry.ParameterRegistry {
 	return bP.ParamName
 }
 
@@ -98,7 +98,7 @@ type CalendarUserAddressTypeParameter interface {
 }
 
 type calendarUserAddressParameter struct {
-	ParamName registry.Parameters
+	ParamName registry.ParameterRegistry
 	Value     types.CalendarUserAddressValue
 }
 
@@ -106,7 +106,7 @@ func (cP *calendarUserAddressParameter) ToICalendarParamFormat(output io.Writer)
 	output.Write([]byte(fmt.Sprintf("%s=%s", cP.ParamName, cP.GetParamValue())))
 }
 
-func (cP *calendarUserAddressParameter) GetParamName() registry.Parameters {
+func (cP *calendarUserAddressParameter) GetParamName() registry.ParameterRegistry {
 	return cP.ParamName
 }
 

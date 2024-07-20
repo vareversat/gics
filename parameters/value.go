@@ -20,7 +20,7 @@ type ValueParam interface {
 
 func NewValueParam(value registry.Type) ValueParam {
 	return &textParameter{
-		ParamName: registry.VALUE,
+		ParamName: registry.Value,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

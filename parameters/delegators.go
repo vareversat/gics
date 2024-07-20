@@ -18,7 +18,7 @@ type DelegatorsParam interface {
 
 func NewDelegatorsParam(value *url.URL) DelegatorsParam {
 	return &calendarUserAddressParameter{
-		ParamName: registry.DELEGATEDFROM,
+		ParamName: registry.DelegatedFrom,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
 }

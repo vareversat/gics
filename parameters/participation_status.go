@@ -16,7 +16,7 @@ type ParticipationStatusParam interface {
 
 func NewParticipationStatusParam(value ParticipantStatusType) ParticipationStatusParam {
 	return &textParameter{
-		ParamName: registry.PARTSTAT,
+		ParamName: registry.PartStat,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

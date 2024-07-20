@@ -16,7 +16,7 @@ type FreeBusyTimeParam interface {
 
 func NewFreeBusyTimeParam(value FreeBusyTimeType) FreeBusyTimeParam {
 	return &textParameter{
-		ParamName: registry.FBTYPE,
+		ParamName: registry.FbType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

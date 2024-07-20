@@ -18,7 +18,7 @@ func NewAlarmTriggerRelationshipParam(
 	value AlarmTriggerRelationshipType,
 ) AlarmTriggerRelationshipParam {
 	return &textParameter{
-		ParamName: registry.RELATED,
+		ParamName: registry.Related,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

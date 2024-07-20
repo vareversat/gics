@@ -23,7 +23,7 @@ func NewDateTimeEndProperty(
 	// Get the VALUE param
 	valueType := string(registry.DATETIME)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registry.VALUE {
+		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
@@ -52,7 +52,7 @@ func NewDateTimeEndPropertyFromString(
 	// Get the VALUE param
 	valueType := string(registry.DATETIME)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registry.VALUE {
+		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}

@@ -19,7 +19,7 @@ type SentByParam interface {
 
 func NewSentByParam(value *url.URL) SentByParam {
 	return &calendarUserAddressParameter{
-		ParamName: registry.SENTBY,
+		ParamName: registry.SentBy,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
 }

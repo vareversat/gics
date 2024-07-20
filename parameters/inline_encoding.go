@@ -16,7 +16,7 @@ type InlineEncodingParam interface {
 
 func NewInlineEncodingParam(value EncodingType) InlineEncodingParam {
 	return &textParameter{
-		ParamName: registry.ENCODING,
+		ParamName: registry.Encoding,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

@@ -16,7 +16,7 @@ type CalendarUserTypeParam interface {
 
 func NewCalendarUserTypeParam(value CalendarUserType) CalendarUserTypeParam {
 	return &textParameter{
-		ParamName: registry.CUTYPE,
+		ParamName: registry.CuType,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

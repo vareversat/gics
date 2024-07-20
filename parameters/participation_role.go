@@ -16,7 +16,7 @@ type ParticipationRoleParam interface {
 
 func NewParticipationRoleParam(value ParticipationRoleType) ParticipationRoleParam {
 	return &textParameter{
-		ParamName: registry.ROLE,
+		ParamName: registry.Role,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

@@ -16,13 +16,13 @@ type CommonNameParam interface {
 }
 
 type commonNameParam struct {
-	IANAToken registry.Parameters
+	IANAToken registry.ParameterRegistry
 	Value     types.TextValue
 }
 
 func NewCommonNameParam(value string) CommonNameParam {
 	return &textParameter{
-		ParamName: registry.CN,
+		ParamName: registry.Cn,
 		Value:     types.NewTextValue(value),
 	}
 }

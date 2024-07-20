@@ -16,7 +16,7 @@ type RangeParam interface {
 
 func NewRangeParam() RangeParam {
 	return &textParameter{
-		ParamName: registry.RANGE,
+		ParamName: registry.Range,
 		Value:     types.NewTextValue("THISANDFUTURE"),
 	}
 }

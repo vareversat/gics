@@ -16,7 +16,7 @@ type FormatTypeParam interface {
 
 func NewFormatTypeParam(value string) FormatTypeParam {
 	return &textParameter{
-		ParamName: registry.FMTTYPE,
+		ParamName: registry.FmtType,
 		Value:     types.NewTextValue(value),
 	}
 }

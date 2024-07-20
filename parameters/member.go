@@ -18,7 +18,7 @@ type MemberParam interface {
 
 func NewMemberParam(value *url.URL) MemberParam {
 	return &calendarUserAddressParameter{
-		ParamName: registry.MEMBER,
+		ParamName: registry.Member,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
 }

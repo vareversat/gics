@@ -19,7 +19,7 @@ type DirectoryEntryParam interface {
 
 func NewDirectoryEntryParam(value *url.URL) DirectoryEntryParam {
 	return &uriParameter{
-		ParamName: registry.DIR,
+		ParamName: registry.Dir,
 		Value:     types.NewUriValue(value),
 	}
 }

@@ -26,7 +26,7 @@ type LanguageParam interface {
 
 func NewLanguageParam(value string) LanguageParam {
 	return &textParameter{
-		ParamName: registry.LANGUAGE,
+		ParamName: registry.Language,
 		Value:     types.NewTextValue(value),
 	}
 }
