@@ -13,7 +13,7 @@ type BooleanValue struct {
 
 func NewBooleanValue(value bool) BooleanValue {
 	return BooleanValue{
-		V:     NewValue(registry.BOOLEAN),
+		V:     NewValue(registry.Boolean),
 		Value: value,
 	}
 }

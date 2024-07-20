@@ -50,7 +50,7 @@ type RecurrenceRuleValue struct {
 
 func NewRecurrenceRuleValue(parts []RRPart) RecurrenceRuleValue {
 	return RecurrenceRuleValue{
-		V:     types.NewValue(registry.RECUR),
+		V:     types.NewValue(registry.Recur),
 		Parts: parts,
 	}
 }

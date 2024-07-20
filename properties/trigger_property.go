@@ -26,20 +26,20 @@ func NewTriggerProperty(
 	params ...parameters.Parameter,
 ) TriggerProperty {
 	// Get the VALUE param
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.TRIGGER,
 			Value:      types.NewDateTimeValue(dateTimeValue, format),
 			Parameters: params,
 		}
-	case string(registry.DURATION):
+	case string(registry.Duration):
 		return &durationPropertyType{
 			PropName:   registry.TRIGGER,
 			Value:      types.NewDurationValue(durationValue),

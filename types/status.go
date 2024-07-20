@@ -29,7 +29,7 @@ type StatusValue struct {
 
 func NewStatusValue(value StatusType) StatusValue {
 	return StatusValue{
-		V:     NewValue(registry.TEXT),
+		V:     NewValue(registry.Text),
 		Value: value,
 	}
 }

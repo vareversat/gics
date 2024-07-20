@@ -13,7 +13,7 @@ type UriValue struct {
 
 func NewUriValue(value *url.URL) UriValue {
 	return UriValue{
-		V:     NewValue(registry.URI),
+		V:     NewValue(registry.Uri),
 		Value: value,
 	}
 }

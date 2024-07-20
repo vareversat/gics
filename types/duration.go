@@ -15,7 +15,7 @@ type DurationValue struct {
 
 func NewDurationValue(value string) DurationValue {
 	return DurationValue{
-		V:     NewValue(registry.DURATION),
+		V:     NewValue(registry.Duration),
 		Value: value,
 	}
 }

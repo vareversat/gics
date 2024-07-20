@@ -17,7 +17,7 @@ type CalendarUserAddressValue struct {
 
 func NewCalendarUserAddressValue(value *url.URL) CalendarUserAddressValue {
 	return CalendarUserAddressValue{
-		V:     NewValue(registry.CALADDRESS),
+		V:     NewValue(registry.CalAddress),
 		Value: value,
 	}
 }

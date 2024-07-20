@@ -16,7 +16,7 @@ type TimeTransparencyValue struct {
 
 func NewTimeTransparencyValue(value TimeTransparencyType) TimeTransparencyValue {
 	return TimeTransparencyValue{
-		V:     NewValue(registry.TEXT),
+		V:     NewValue(registry.Text),
 		Value: value,
 	}
 }

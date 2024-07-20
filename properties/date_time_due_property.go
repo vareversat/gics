@@ -21,20 +21,20 @@ func NewDateTimeDueProperty(
 	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeDueProperty {
 	// Get the VALUE param
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.DUE,
 			Value:      types.NewDateTimeValue(value, format),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.DUE,
 			Value:      types.NewDateValue(value),
@@ -50,20 +50,20 @@ func NewDateTimeDuePropertyFromString(
 	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeDueProperty {
 	// Get the VALUE param
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.DUE,
 			Value:      types.NewDateTimeValueFromString(value, format),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.DUE,
 			Value:      types.NewDateValueFromString(value),

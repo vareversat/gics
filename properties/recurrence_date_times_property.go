@@ -23,26 +23,26 @@ func NewRecurrenceDateTimesProperty(
 	format types.DTFormat,
 	params ...parameters.Parameter,
 ) RecurrenceDateTimesProperty {
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.PERIOD):
+	case string(registry.Period):
 		return &periodPropertyType{
 			PropName:   registry.RDATE,
 			Values:     types.NewPeriodValues(startValues, endValues),
 			Parameters: params,
 		}
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.RDATE,
 			Values:     types.NewDateTimeValues(startValues, format),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.RDATE,
 			Values:     types.NewDateValues(startValues),

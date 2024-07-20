@@ -30,7 +30,7 @@ func NewDateTimeValues(values []time.Time, format DTFormat) []DateTimeValue {
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateTimeValue{
-			V:      NewValue(registry.DATETIME),
+			V:      NewValue(registry.DateTime),
 			Value:  values[i],
 			Format: format,
 		})
@@ -43,7 +43,7 @@ func NewDateTimeValuesFromString(values []string, format DTFormat) []DateTimeVal
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateTimeValue{
-			V:      NewValue(registry.DATETIME),
+			V:      NewValue(registry.DateTime),
 			Value:  parseStringToDateTime(values[i]),
 			Format: format,
 		})
@@ -53,7 +53,7 @@ func NewDateTimeValuesFromString(values []string, format DTFormat) []DateTimeVal
 
 func NewDateTimeValue(value time.Time, format DTFormat) DateTimeValue {
 	return DateTimeValue{
-		V:      NewValue(registry.DATETIME),
+		V:      NewValue(registry.DateTime),
 		Value:  value,
 		Format: format,
 	}
@@ -61,7 +61,7 @@ func NewDateTimeValue(value time.Time, format DTFormat) DateTimeValue {
 
 func NewDateTimeValueFromString(value string, format DTFormat) DateTimeValue {
 	return DateTimeValue{
-		V:      NewValue(registry.DATETIME),
+		V:      NewValue(registry.DateTime),
 		Value:  parseStringToDateTime(value),
 		Format: format,
 	}

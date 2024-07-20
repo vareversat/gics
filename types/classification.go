@@ -17,7 +17,7 @@ type ClassificationValue struct {
 
 func NewClassificationValue(value ClassificationType) ClassificationValue {
 	return ClassificationValue{
-		V:     NewValue(registry.TEXT),
+		V:     NewValue(registry.Text),
 		Value: value,
 	}
 }

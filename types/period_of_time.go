@@ -15,12 +15,12 @@ type PeriodValue struct {
 	V
 	StartValue time.Time
 	EndValue   time.Time
-	IANAToken  registry.Type
+	IANAToken  registry.ValueTypeRegistry
 }
 
 func NewPeriodValue(startValue time.Time, endValue time.Time) PeriodValue {
 	return PeriodValue{
-		IANAToken:  registry.PERIOD,
+		IANAToken:  registry.Period,
 		StartValue: startValue,
 		EndValue:   endValue,
 	}
@@ -31,7 +31,7 @@ func NewPeriodValues(startValues []time.Time, endValues []time.Time) []PeriodVal
 
 	for i := 0; i < len(startValues); i++ {
 		periodValues = append(periodValues, PeriodValue{
-			V:          NewValue(registry.PERIOD),
+			V:          NewValue(registry.Period),
 			StartValue: startValues[i],
 			EndValue:   endValues[i],
 		})

@@ -13,7 +13,7 @@ type FloatValue struct {
 
 func NewFloatValue(value float32) FloatValue {
 	return FloatValue{
-		V:     NewValue(registry.FLOAT),
+		V:     NewValue(registry.Float),
 		Value: value,
 	}
 }

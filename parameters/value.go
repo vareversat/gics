@@ -18,7 +18,7 @@ type ValueParam interface {
 	TextTypeParameter
 }
 
-func NewValueParam(value registry.Type) ValueParam {
+func NewValueParam(value registry.ValueTypeRegistry) ValueParam {
 	return &textParameter{
 		ParamName: registry.Value,
 		Value:     types.NewTextValue(string(value)),

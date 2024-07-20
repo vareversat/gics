@@ -23,7 +23,7 @@ type BlockDelimiterValue struct {
 
 func NewBlockDelimiterValue(value BlockDelimiterType) BlockDelimiterValue {
 	return BlockDelimiterValue{
-		V:     NewValue(registry.TEXT),
+		V:     NewValue(registry.Text),
 		Value: value,
 	}
 }

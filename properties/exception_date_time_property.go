@@ -23,20 +23,20 @@ func NewExceptionDateTimeProperty(
 	values []time.Time,
 	format types.DTFormat,
 	params ...parameters.Parameter) ExceptionDateTimeProperty {
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.EXDATE,
 			Values:     types.NewDateTimeValues(values, format),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.EXDATE,
 			Values:     types.NewDateValues(values),
@@ -52,14 +52,14 @@ func NewExceptionDateTimePropertyFromString(
 	format types.DTFormat,
 	params ...parameters.Parameter) ExceptionDateTimeProperty {
 	// Get the VALUE param
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName: registry.EXDATE,
 			Values: types.NewDateTimeValuesFromString(
@@ -68,7 +68,7 @@ func NewExceptionDateTimePropertyFromString(
 			),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.EXDATE,
 			Values:     types.NewDateValuesFromString(utils.StringToStringArray(values)),

@@ -11,7 +11,7 @@ type UtcOffsetValue struct {
 
 func NewUtcOffsetValue(value string) UtcOffsetValue {
 	return UtcOffsetValue{
-		V:     NewValue(registry.UTCOFFSET),
+		V:     NewValue(registry.UTCOffset),
 		Value: value,
 	}
 }

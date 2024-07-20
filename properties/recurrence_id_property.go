@@ -21,20 +21,20 @@ func NewRecurrenceIdProperty(
 	format types.DTFormat,
 	params ...parameters.Parameter) RecurrenceIdProperty {
 	// Get the VALUE param
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.RECURRENCEID,
 			Value:      types.NewDateTimeValue(value, format),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.RECURRENCEID,
 			Value:      types.NewDateValue(value),
@@ -50,20 +50,20 @@ func NewRecurrenceIdPropertyFromString(
 	format types.DTFormat,
 	params ...parameters.Parameter) RecurrenceIdProperty {
 	// Get the VALUE param
-	valueType := string(registry.DATETIME)
+	valueType := string(registry.DateTime)
 	for i := 0; i < len(params); i++ {
 		if params[i].GetParamName() == registry.Value {
 			valueType = params[i].GetParamValue()
 		}
 	}
 	switch valueType {
-	case string(registry.DATETIME):
+	case string(registry.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registry.RECURRENCEID,
 			Value:      types.NewDateTimeValueFromString(value, format),
 			Parameters: params,
 		}
-	case string(registry.DATE):
+	case string(registry.Date):
 		return &datePropertyType{
 			PropName:   registry.RECURRENCEID,
 			Value:      types.NewDateValueFromString(value),

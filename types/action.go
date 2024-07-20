@@ -17,7 +17,7 @@ type ActionValue struct {
 
 func NewActionValue(value ActionType) ActionValue {
 	return ActionValue{
-		V:     NewValue(registry.TEXT),
+		V:     NewValue(registry.Text),
 		Value: value,
 	}
 }

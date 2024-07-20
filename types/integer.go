@@ -15,7 +15,7 @@ type IntegerValue struct {
 
 func NewIntegerValue(value int32) IntegerValue {
 	return IntegerValue{
-		V:     NewValue(registry.INTEGER),
+		V:     NewValue(registry.Integer),
 		Value: value,
 	}
 }

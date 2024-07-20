@@ -13,7 +13,7 @@ type BinaryValue struct {
 
 func NewBinaryValue(value string) BinaryValue {
 	return BinaryValue{
-		V:           NewValue(registry.BINARY),
+		V:           NewValue(registry.Binary),
 		Base64Value: value,
 	}
 }

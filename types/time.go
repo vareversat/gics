@@ -20,7 +20,7 @@ type TimeValue struct {
 
 func NewTimeValue(value *time.Time) *TimeValue {
 	return &TimeValue{
-		V:     NewValue(registry.TIME),
+		V:     NewValue(registry.Time),
 		Value: value,
 	}
 }

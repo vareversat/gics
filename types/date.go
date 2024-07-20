@@ -14,19 +14,19 @@ import (
 type DateValue struct {
 	V
 	Value     time.Time
-	IANAToken registry.Type
+	IANAToken registry.ValueTypeRegistry
 }
 
 func NewDateValue(value time.Time) DateValue {
 	return DateValue{
-		V:     NewValue(registry.DATE),
+		V:     NewValue(registry.Date),
 		Value: value,
 	}
 }
 
 func NewDateValueFromString(value string) DateValue {
 	return DateValue{
-		V:     NewValue(registry.DATE),
+		V:     NewValue(registry.Date),
 		Value: parseStringToDateTime(value),
 	}
 }
@@ -36,7 +36,7 @@ func NewDateValues(values []time.Time) []DateValue {
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateValue{
-			V:     NewValue(registry.DATE),
+			V:     NewValue(registry.Date),
 			Value: values[i],
 		})
 	}
@@ -48,7 +48,7 @@ func NewDateValuesFromString(values []string) []DateValue {
 
 	for i := 0; i < len(values); i++ {
 		dateTimeValues = append(dateTimeValues, DateValue{
-			V:     NewValue(registry.DATE),
+			V:     NewValue(registry.Date),
 			Value: parseStringToDate(values[i]),
 		})
 	}
