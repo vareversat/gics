@@ -8,12 +8,18 @@ import (
 	"github.com/vareversat/gics/types"
 )
 
+// Parameter is the interface definition of a property parameter. See [RFC-5545] for more info
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2
 type Parameter interface {
+	// ToICalendarParamFormat format output to the icalendar specs
 	ToICalendarParamFormat(output io.Writer)
+	// GetParamName return the parameter name
 	GetParamName() registries.Parameters
+	// GetParamValue return the parameter name in (string typed)
 	GetParamValue() string
 }
 
+// Parameters is an array of Parameter
 type Parameters []Parameter
 
 type TextParameter interface {
