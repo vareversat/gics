@@ -11,7 +11,7 @@ import (
 )
 
 type InlineEncodingParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewInlineEncodingParam(value EncodingType) InlineEncodingParam {

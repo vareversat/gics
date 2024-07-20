@@ -11,7 +11,7 @@ import (
 )
 
 type RelationshipParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewRelationshipParam(value RelationshipType) RelationshipParam {

@@ -14,7 +14,7 @@ import (
 // - ORGANIZER
 
 type DirectoryEntryParam interface {
-	UriParameter
+	UriTypeParameter
 }
 
 func NewDirectoryEntryParam(value *url.URL) DirectoryEntryParam {

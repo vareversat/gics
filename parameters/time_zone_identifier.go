@@ -16,7 +16,7 @@ import (
 )
 
 type TimeZoneIdentifierParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewTimeZoneIdentifierParam(value string) TimeZoneIdentifierParam {

@@ -14,7 +14,7 @@ import (
 )
 
 type SentByParam interface {
-	CalendarUserAddressParameter
+	CalendarUserAddressTypeParameter
 }
 
 func NewSentByParam(value *url.URL) SentByParam {

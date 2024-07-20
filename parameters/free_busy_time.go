@@ -11,7 +11,7 @@ import (
 )
 
 type FreeBusyTimeParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewFreeBusyTimeParam(value FreeBusyTimeType) FreeBusyTimeParam {

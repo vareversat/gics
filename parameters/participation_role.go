@@ -11,7 +11,7 @@ import (
 )
 
 type ParticipationRoleParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewParticipationRoleParam(value ParticipationRoleType) ParticipationRoleParam {

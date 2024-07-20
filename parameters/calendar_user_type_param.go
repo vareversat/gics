@@ -11,7 +11,7 @@ import (
 )
 
 type CalendarUserTypeParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewCalendarUserTypeParam(value CalendarUserType) CalendarUserTypeParam {

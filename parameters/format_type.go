@@ -11,7 +11,7 @@ import (
 )
 
 type FormatTypeParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewFormatTypeParam(value string) FormatTypeParam {

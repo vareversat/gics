@@ -15,7 +15,7 @@ import (
 // - TRIGGER
 
 type ValueParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewValueParam(value registries.Type) ValueParam {

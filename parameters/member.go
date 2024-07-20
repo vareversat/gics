@@ -13,7 +13,7 @@ import (
 )
 
 type MemberParam interface {
-	CalendarUserAddressParameter
+	CalendarUserAddressTypeParameter
 }
 
 func NewMemberParam(value *url.URL) MemberParam {

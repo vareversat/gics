@@ -18,7 +18,7 @@ import (
 )
 
 type AlternateTextRepresentationParam interface {
-	UriParameter
+	UriTypeParameter
 }
 
 func NewAlternateTextRepresentationParam(value *url.URL) AlternateTextRepresentationParam {

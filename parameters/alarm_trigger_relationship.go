@@ -11,7 +11,7 @@ import (
 )
 
 type AlarmTriggerRelationshipParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewAlarmTriggerRelationshipParam(

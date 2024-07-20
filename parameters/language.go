@@ -21,7 +21,7 @@ import (
 )
 
 type LanguageParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewLanguageParam(value string) LanguageParam {

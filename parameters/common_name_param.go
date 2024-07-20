@@ -12,7 +12,7 @@ import (
 )
 
 type CommonNameParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 type commonNameParam struct {

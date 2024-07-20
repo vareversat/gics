@@ -11,7 +11,7 @@ import (
 )
 
 type RangeParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewRangeParam() RangeParam {

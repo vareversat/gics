@@ -11,7 +11,7 @@ import (
 )
 
 type ParticipationStatusParam interface {
-	TextParameter
+	TextTypeParameter
 }
 
 func NewParticipationStatusParam(value ParticipantStatusType) ParticipationStatusParam {

@@ -11,7 +11,7 @@ import (
 )
 
 type RSVPParam interface {
-	BooleanParameter
+	BooleanTypeParameter
 }
 
 func NewRSVPParam(value bool) RSVPParam {

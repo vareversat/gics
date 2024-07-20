@@ -13,7 +13,7 @@ import (
 )
 
 type DelegatorsParam interface {
-	CalendarUserAddressParameter
+	CalendarUserAddressTypeParameter
 }
 
 func NewDelegatorsParam(value *url.URL) DelegatorsParam {
