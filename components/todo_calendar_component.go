@@ -32,7 +32,7 @@ func NewToDoCalendarComponent(
 	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.BEGIN,
+			registries.Begin,
 			registries.Vtodo,
 		),
 		UID:                     uid,
@@ -40,13 +40,13 @@ func NewToDoCalendarComponent(
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.END,
+			registries.End,
 			registries.Vtodo,
 		),
 	}
 }
 
-func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyRegistry) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
 			return tC.Properties[i]
@@ -55,21 +55,21 @@ func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyNames) prop
 	return nil
 }
 
-func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{
+		registries.Begin,
+		registries.End,
+		registries.Uid,
+		registries.DateTimeStamp,
 	}
 }
 
-func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.DUE, registries.DURATION_PROP}
+func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{registries.DateTimeDue, registries.DurationProperty}
 }
 
-func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
 func (tC *toDoCalendarComponent) SerializeToICSFormat(output io.Writer) {

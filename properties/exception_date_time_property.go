@@ -32,13 +32,13 @@ func NewExceptionDateTimeProperty(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.EXDATE,
+			PropName:   registries.ExceptionDateTimes,
 			Values:     types.NewDateTimeValues(values, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.EXDATE,
+			PropName:   registries.ExceptionDateTimes,
 			Values:     types.NewDateValues(values),
 			Parameters: params,
 		}
@@ -61,7 +61,7 @@ func NewExceptionDateTimePropertyFromString(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName: registries.EXDATE,
+			PropName: registries.ExceptionDateTimes,
 			Values: types.NewDateTimeValuesFromString(
 				utils.StringToStringArray(values),
 				format,
@@ -70,7 +70,7 @@ func NewExceptionDateTimePropertyFromString(
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.EXDATE,
+			PropName:   registries.ExceptionDateTimes,
 			Values:     types.NewDateValuesFromString(utils.StringToStringArray(values)),
 			Parameters: params,
 		}

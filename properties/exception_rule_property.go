@@ -13,9 +13,10 @@ type ExceptionRuleProperty interface {
 	RequestStatusPropertyType
 }
 
+// NewExceptionRuleProperty Deprecated
 func NewExceptionRuleProperty(parts ...recurrence_rule.RRPart) ExceptionRuleProperty {
 	return &recurrenceRulePropertyType{
-		PropName: registries.EXRULE,
+		PropName: registries.ExceptionRule,
 		Value:    recurrence_rule.NewRecurrenceRuleValue(parts),
 	}
 }

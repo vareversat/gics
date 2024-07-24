@@ -17,7 +17,7 @@ type PercentCompleteProperty interface {
 
 func NewPercentCompleteProperty(value int32, params ...parameters.Parameter) IntegerPropertyType {
 	return &integerPropertyType{
-		PropName:   registries.PERCENTCOMPLETE,
+		PropName:   registries.PercentComplete,
 		Value:      types.NewIntegerValue(value),
 		Parameters: params,
 	}
@@ -32,7 +32,7 @@ func NewPercentCompletePropertyFromString(
 		return nil, fmt.Errorf("%s cannot be parsed as int32", value)
 	}
 	return &integerPropertyType{
-		PropName:   registries.PERCENTCOMPLETE,
+		PropName:   registries.PercentComplete,
 		Value:      types.NewIntegerValue(int32(percentage)),
 		Parameters: params,
 	}, nil

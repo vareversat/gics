@@ -17,7 +17,7 @@ func NewClassificationProperty(
 	params ...parameters.Parameter,
 ) ClassificationProperty {
 	return &classificationPropertyType{
-		PropName:   registries.CLASS,
+		PropName:   registries.Class,
 		Value:      types.NewClassificationValue(classValue),
 		Parameters: params,
 	}
@@ -28,7 +28,7 @@ func NewClassificationPropertyFromString(
 	params ...parameters.Parameter,
 ) ClassificationProperty {
 	return &classificationPropertyType{
-		PropName:   registries.CLASS,
+		PropName:   registries.Class,
 		Value:      types.NewClassificationValue(registries.ClassificationRegistry(classValue)),
 		Parameters: params,
 	}

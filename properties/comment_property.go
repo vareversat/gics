@@ -14,7 +14,7 @@ type CommentProperty interface {
 
 func NewCommentProperty(value string, params ...parameters.Parameter) CommentProperty {
 	return &textPropertyType{
-		PropName:   registries.COMMENT,
+		PropName:   registries.Comment,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

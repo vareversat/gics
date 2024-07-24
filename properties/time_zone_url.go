@@ -18,7 +18,7 @@ type TimeZoneUrlProperty interface {
 
 func NewTimeZoneUrlProperty(value *url.URL, params ...parameters.Parameter) TimeZoneUrlProperty {
 	return &uriPropertyType{
-		PropName:   registries.TZURL,
+		PropName:   registries.TimeZoneUrl,
 		Value:      types.NewUriValue(value),
 		Parameters: params,
 	}
@@ -34,7 +34,7 @@ func NewTimeZoneUrlPropertyFromString(
 	}
 
 	return &uriPropertyType{
-		PropName:   registries.TZURL,
+		PropName:   registries.TimeZoneUrl,
 		Value:      types.NewUriValue(urlValue),
 		Parameters: params,
 	}, nil

@@ -17,7 +17,7 @@ type PriorityProperty interface {
 
 func NewPriorityProperty(value int32, params ...parameters.Parameter) PriorityProperty {
 	return &integerPropertyType{
-		PropName:   registries.PRIORITY,
+		PropName:   registries.Priority,
 		Value:      types.NewIntegerValue(value),
 		Parameters: params,
 	}
@@ -32,7 +32,7 @@ func NewPriorityPropertyFromString(
 		return nil, fmt.Errorf("%s cannot be parsed as int32", value)
 	}
 	return &integerPropertyType{
-		PropName:   registries.PRIORITY,
+		PropName:   registries.Priority,
 		Value:      types.NewIntegerValue(int32(priority)),
 		Parameters: params,
 	}, nil

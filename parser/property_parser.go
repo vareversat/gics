@@ -23,7 +23,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 		return attendee, nil
 	case "BEGIN":
 		return properties.NewBlockDelimiterPropertyFromString(
-			registries.BEGIN,
+			registries.Begin,
 			propertyValue,
 		), nil
 	case "CATEGORIES":
@@ -53,7 +53,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 	case "DUE":
 		return properties.NewDateTimeDuePropertyFromString(propertyValue, types.WithUtcTime), nil
 	case "END":
-		return properties.NewBlockDelimiterPropertyFromString(registries.END, propertyValue), nil
+		return properties.NewBlockDelimiterPropertyFromString(registries.End, propertyValue), nil
 	case "EXDATE":
 		return properties.NewExceptionDateTimePropertyFromString(
 			propertyValue,

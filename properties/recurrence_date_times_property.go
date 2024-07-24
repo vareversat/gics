@@ -32,19 +32,19 @@ func NewRecurrenceDateTimesProperty(
 	switch valueType {
 	case string(registries.Period):
 		return &periodPropertyType{
-			PropName:   registries.RDATE,
+			PropName:   registries.RecurrenceDateTimes,
 			Values:     types.NewPeriodValues(startValues, endValues),
 			Parameters: params,
 		}
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.RDATE,
+			PropName:   registries.RecurrenceDateTimes,
 			Values:     types.NewDateTimeValues(startValues, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.RDATE,
+			PropName:   registries.RecurrenceDateTimes,
 			Values:     types.NewDateValues(startValues),
 			Parameters: params,
 		}

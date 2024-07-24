@@ -32,7 +32,7 @@ func NewEventCalendarComponent(
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.BEGIN,
+			registries.Begin,
 			registries.Vevent,
 		),
 		UID:                     uid,
@@ -40,13 +40,15 @@ func NewEventCalendarComponent(
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.END,
+			registries.End,
 			registries.Vevent,
 		),
 	}
 }
 
-func (eC *eventCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (eC *eventCalendarComponent) GetProperty(
+	name registries.PropertyRegistry,
+) properties.Property {
 	for i := 0; i < len(eC.Properties); i++ {
 		if eC.Properties[i].GetName() == name {
 			return eC.Properties[i]
@@ -54,21 +56,21 @@ func (eC *eventCalendarComponent) GetProperty(name registries.PropertyNames) pro
 	}
 	return nil
 }
-func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{
+		registries.Begin,
+		registries.End,
+		registries.Uid,
+		registries.DateTimeStamp,
 	}
 }
 
-func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.DTEND, registries.DURATION_PROP}
+func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{registries.DateTimeEnd, registries.DurationProperty}
 }
 
-func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
 func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {
