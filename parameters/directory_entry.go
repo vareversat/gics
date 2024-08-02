@@ -7,16 +7,15 @@ import (
 	"github.com/vareversat/gics/types"
 )
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.6
-
-// Parameter used in these properties :
-// - ATTENDEE
-// - ORGANIZER
-
 type DirectoryEntryParam interface {
 	UriTypeParameter
 }
 
+// NewDirectoryEntryParam create a new registries.DirectoryEntryReference property
+// This parameter can be used in these properties :
+// - registries.Attendee
+// - registries.Organizer
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.6
 func NewDirectoryEntryParam(value *url.URL) DirectoryEntryParam {
 	return &uriParameter{
 		ParamName: registries.DirectoryEntryReference,

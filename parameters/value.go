@@ -5,19 +5,20 @@ import (
 	"github.com/vareversat/gics/types"
 )
 
-// Used for the properties to determine their types
-// - DSTART
-// - DTEND
-// - DUE
-// - RECURRENCE-ID
-// - EDATE
-// - RDATE
-// - TRIGGER
-
 type ValueParam interface {
 	TextTypeParameter
 }
 
+// NewValueParam create a new registries.Value property
+// This parameter can be used in these properties :
+// - registries.DateTimeEnd
+// - registries.DateTimeStart
+// - registries.DateTimeDue
+// - registries.RecurrenceId
+// - registries.RecurrenceId
+// - registries.ExceptionDateTimes
+// - registries.Trigger
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
 func NewValueParam(value registries.ValueTypeRegistry) ValueParam {
 	return &textParameter{
 		ParamName: registries.Value,

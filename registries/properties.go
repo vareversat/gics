@@ -151,6 +151,6 @@ const (
 
 	// Begin is used to start a new component definition
 	Begin PropertyRegistry = "BEGIN"
-	// End is used to end a component definition
-	End PropertyRegistry = "END"
+	// EndProperty is used to end a component definition
+	EndProperty PropertyRegistry = "END"
 )

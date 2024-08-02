@@ -40,7 +40,7 @@ func NewToDoCalendarComponent(
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.End,
+			registries.EndProperty,
 			registries.Vtodo,
 		),
 	}
@@ -58,7 +58,7 @@ func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyRegistry) p
 func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
 		registries.Begin,
-		registries.End,
+		registries.EndProperty,
 		registries.Uid,
 		registries.DateTimeStamp,
 	}

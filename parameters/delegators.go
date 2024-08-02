@@ -1,10 +1,5 @@
 package parameters
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.4
-
-// Parameter used in these properties :
-// - ATTENDEE
-
 import (
 	"net/url"
 
@@ -16,6 +11,10 @@ type DelegatorsParam interface {
 	CalendarUserAddressTypeParameter
 }
 
+// NewDelegatorsParam create a new registries.DelegatedFrom property
+// This parameter can be used in this property :
+// - registries.Attendee
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.4
 func NewDelegatorsParam(value *url.URL) DelegatorsParam {
 	return &calendarUserAddressParameter{
 		ParamName: registries.DelegatedFrom,

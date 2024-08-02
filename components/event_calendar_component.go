@@ -40,7 +40,7 @@ func NewEventCalendarComponent(
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.End,
+			registries.EndProperty,
 			registries.Vevent,
 		),
 	}
@@ -59,7 +59,7 @@ func (eC *eventCalendarComponent) GetProperty(
 func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
 		registries.Begin,
-		registries.End,
+		registries.EndProperty,
 		registries.Uid,
 		registries.DateTimeStamp,
 	}

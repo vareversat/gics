@@ -50,7 +50,10 @@ func NewCalendar(
 		Method:     properties.NewMethodProperty(calendarMethod),
 		CalScale:   properties.NewCalScaleProperty(),
 		Components: calendarComponents,
-		End:        properties.NewBlockDelimiterProperty(registries.End, registries.Vcalendar),
+		End: properties.NewBlockDelimiterProperty(
+			registries.EndProperty,
+			registries.Vcalendar,
+		),
 	}, nil
 }
 

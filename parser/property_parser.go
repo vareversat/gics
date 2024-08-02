@@ -53,7 +53,10 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 	case "DUE":
 		return properties.NewDateTimeDuePropertyFromString(propertyValue, types.WithUtcTime), nil
 	case "END":
-		return properties.NewBlockDelimiterPropertyFromString(registries.End, propertyValue), nil
+		return properties.NewBlockDelimiterPropertyFromString(
+			registries.EndProperty,
+			propertyValue,
+		), nil
 	case "EXDATE":
 		return properties.NewExceptionDateTimePropertyFromString(
 			propertyValue,

@@ -33,7 +33,7 @@ func NewAlarmCalendarComponent(
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registries.End, registries.Valarm),
+		End:        properties.NewBlockDelimiterProperty(registries.EndProperty, registries.Valarm),
 	}
 }
 
@@ -53,14 +53,14 @@ func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyReg
 	case registries.Audio:
 		return []registries.PropertyRegistry{
 			registries.Begin,
-			registries.End,
+			registries.EndProperty,
 			registries.Action,
 			registries.Trigger,
 		}
 	case registries.Display:
 		return []registries.PropertyRegistry{
 			registries.Begin,
-			registries.End,
+			registries.EndProperty,
 			registries.Action,
 			registries.Trigger,
 			registries.Description,
@@ -68,14 +68,14 @@ func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyReg
 	case registries.Email:
 		return []registries.PropertyRegistry{
 			registries.Begin,
-			registries.End,
+			registries.EndProperty,
 			registries.Action,
 			registries.Trigger,
 			registries.Description,
 			registries.Summary,
 		}
 	default:
-		return []registries.PropertyRegistry{registries.Begin, registries.End}
+		return []registries.PropertyRegistry{registries.Begin, registries.EndProperty}
 	}
 }
 

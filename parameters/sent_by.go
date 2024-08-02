@@ -1,11 +1,5 @@
 package parameters
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.18
-
-// Parameter used in these properties :
-// - ATTENDEE
-// - ORGANIZER
-
 import (
 	"net/url"
 
@@ -17,6 +11,11 @@ type SentByParam interface {
 	CalendarUserAddressTypeParameter
 }
 
+// NewSentByParam create a new registries.SentBy property
+// This parameter can be used in these properties :
+// - registries.Attendee
+// - registries.Organizer
+// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.18
 func NewSentByParam(value *url.URL) SentByParam {
 	return &calendarUserAddressParameter{
 		ParamName: registries.SentBy,

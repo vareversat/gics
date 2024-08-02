@@ -60,7 +60,10 @@ func NewTimeZoneCalendarComponent(
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End:        properties.NewBlockDelimiterProperty(registries.End, registries.Vtimezone),
+		End: properties.NewBlockDelimiterProperty(
+			registries.EndProperty,
+			registries.Vtimezone,
+		),
 	}
 }
 
@@ -104,7 +107,7 @@ func NewTimeZoneDayLightSubcomponent(
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.End,
+			registries.EndProperty,
 			registries.Daylight,
 		),
 	}
@@ -128,7 +131,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.End,
+			registries.EndProperty,
 			registries.Standard,
 		),
 	}
@@ -149,7 +152,7 @@ func (tC *timeZoneCalendarComponent) SerializeToICSFormat(output io.Writer) {
 func (tC *timeZoneCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
 		registries.Begin,
-		registries.End,
+		registries.EndProperty,
 		registries.TimeZoneIdProperty,
 	}
 }
@@ -176,7 +179,7 @@ func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
 func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
 		registries.Begin,
-		registries.End,
+		registries.EndProperty,
 		registries.DateTimeStart,
 		registries.TimeZoneOffsetTo,
 		registries.TimeZoneOffsetFrom,

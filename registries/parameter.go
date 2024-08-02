@@ -59,7 +59,7 @@ const (
 	// SentBy [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.18
 	SentBy ParameterRegistry = "SENT-BY"
-	// TimeZoneIdProperty [See RFC-5545 spec]
+	// TimeZoneId [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
 	TimeZoneId ParameterRegistry = "TZID"
 	// Value [See RFC-5545 spec]
