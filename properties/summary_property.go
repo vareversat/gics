@@ -16,7 +16,7 @@ func NewSummaryProperty(
 	summaryValue string, params ...parameters.Parameter,
 ) SummaryProperty {
 	return &textPropertyType{
-		PropName:   registries.Summary,
+		PropName:   registries.SummaryProp,
 		Value:      types.NewTextValue(summaryValue),
 		Parameters: params,
 	}

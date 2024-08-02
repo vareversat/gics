@@ -11,7 +11,7 @@ type AlarmTriggerRelationshipParam interface {
 
 // NewAlarmTriggerRelationshipParam create a new registries.RelatedParam property
 // This parameter can be used in this property :
-// - registries.Trigger
+// - registries.TriggerProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.14
 func NewAlarmTriggerRelationshipParam(
 	value registries.AlarmTriggerRelationshipType,

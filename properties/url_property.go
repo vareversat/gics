@@ -18,7 +18,7 @@ type UrlProperty interface {
 
 func NewUrlProperty(uri *url.URL, params ...parameters.Parameter) UrlProperty {
 	return &uriPropertyType{
-		PropName:   registries.Url,
+		PropName:   registries.UrlProp,
 		Value:      types.NewUriValue(uri),
 		Parameters: params,
 	}
@@ -31,7 +31,7 @@ func NewUrlPropertyFromString(uri string, params ...parameters.Parameter) (UrlPr
 	}
 
 	return &uriPropertyType{
-		PropName:   registries.Url,
+		PropName:   registries.UrlProp,
 		Value:      types.NewUriValue(urlValue),
 		Parameters: params,
 	}, nil

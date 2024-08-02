@@ -11,7 +11,7 @@ type FormatTypeParam interface {
 
 // NewFormatTypeParam create a new registries.FormatTypeParam property
 // This parameter can be used in this property :
-// - registries.Attachment
+// - registries.AttachmentProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.8
 func NewFormatTypeParam(value string) FormatTypeParam {
 	return &textParameter{

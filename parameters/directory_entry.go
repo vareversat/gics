@@ -13,8 +13,8 @@ type DirectoryEntryParam interface {
 
 // NewDirectoryEntryParam create a new registries.DirectoryEntryReferenceParam property
 // This parameter can be used in these properties :
-// - registries.Attendee
-// - registries.Organizer
+// - registries.AttendeeProp
+// - registries.OrganizerProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.6
 func NewDirectoryEntryParam(value *url.URL) DirectoryEntryParam {
 	return &uriParameter{

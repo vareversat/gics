@@ -14,7 +14,7 @@ type UidProperty interface {
 
 func NewUidProperty(value string, params ...parameters.Parameter) UidProperty {
 	return &textPropertyType{
-		PropName:   registries.Uid,
+		PropName:   registries.UidProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

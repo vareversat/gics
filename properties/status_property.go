@@ -14,7 +14,7 @@ type StatusProperty interface {
 
 func NewStatusProperty(status types.StatusType, params ...parameters.Parameter) StatusProperty {
 	return &statusPropertyType{
-		PropName:   registries.Status,
+		PropName:   registries.StatusProp,
 		Value:      types.NewStatusValue(status),
 		Parameters: params,
 	}
@@ -22,7 +22,7 @@ func NewStatusProperty(status types.StatusType, params ...parameters.Parameter) 
 
 func NewStatusPropertyFromString(status string, params ...parameters.Parameter) StatusProperty {
 	return &statusPropertyType{
-		PropName:   registries.Status,
+		PropName:   registries.StatusProp,
 		Value:      types.NewStatusValue(types.StatusType(status)),
 		Parameters: params,
 	}

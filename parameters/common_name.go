@@ -11,8 +11,8 @@ type CommonNameParam interface {
 
 // NewCommonNameParam create a new registries.CommonNameParam property
 // This parameter can be used in these properties :
-// - registries.Attendee
-// - registries.Organizer
+// - registries.AttendeeProp
+// - registries.OrganizerProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.2
 func NewCommonNameParam(value string) CommonNameParam {
 	return &textParameter{

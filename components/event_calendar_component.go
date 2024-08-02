@@ -32,7 +32,7 @@ func NewEventCalendarComponent(
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.Begin,
+			registries.BeginProp,
 			registries.Vevent,
 		),
 		UID:                     uid,
@@ -40,7 +40,7 @@ func NewEventCalendarComponent(
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.EndProperty,
+			registries.EndProp,
 			registries.Vevent,
 		),
 	}
@@ -58,15 +58,15 @@ func (eC *eventCalendarComponent) GetProperty(
 }
 func (eC *eventCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
-		registries.Begin,
-		registries.EndProperty,
-		registries.Uid,
-		registries.DateTimeStamp,
+		registries.BeginProp,
+		registries.EndProp,
+		registries.UidProp,
+		registries.DateTimeStampProp,
 	}
 }
 
 func (eC *eventCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
-	return []registries.PropertyRegistry{registries.DateTimeEnd, registries.DurationProperty}
+	return []registries.PropertyRegistry{registries.DateTimeEndProp, registries.DurationProp}
 }
 
 func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {

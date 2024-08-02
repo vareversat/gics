@@ -18,7 +18,7 @@ func NewActionProperty(
 	params ...parameters.Parameter,
 ) ActionProperty {
 	return &actionPropertyType{
-		PropName:   registries.Action,
+		PropName:   registries.ActionProp,
 		Value:      types.NewActionValue(action),
 		Parameters: params,
 	}
@@ -29,7 +29,7 @@ func NewActionPropertyFromString(
 	params ...parameters.Parameter,
 ) BlockDelimiterProperty {
 	return &actionPropertyType{
-		PropName:   registries.Action,
+		PropName:   registries.ActionProp,
 		Value:      types.NewActionValue(registries.ActionRegistry(actionString)),
 		Parameters: params,
 	}

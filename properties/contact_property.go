@@ -14,7 +14,7 @@ type ContactProperty interface {
 
 func NewContactProperty(value string, params ...parameters.Parameter) ContactProperty {
 	return &textPropertyType{
-		PropName:   registries.Contact,
+		PropName:   registries.ContactProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

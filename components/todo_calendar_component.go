@@ -32,7 +32,7 @@ func NewToDoCalendarComponent(
 	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.Begin,
+			registries.BeginProp,
 			registries.Vtodo,
 		),
 		UID:                     uid,
@@ -40,7 +40,7 @@ func NewToDoCalendarComponent(
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.EndProperty,
+			registries.EndProp,
 			registries.Vtodo,
 		),
 	}
@@ -57,15 +57,15 @@ func (tC *toDoCalendarComponent) GetProperty(name registries.PropertyRegistry) p
 
 func (tC *toDoCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
-		registries.Begin,
-		registries.EndProperty,
-		registries.Uid,
-		registries.DateTimeStamp,
+		registries.BeginProp,
+		registries.EndProp,
+		registries.UidProp,
+		registries.DateTimeStampProp,
 	}
 }
 
 func (tC *toDoCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
-	return []registries.PropertyRegistry{registries.DateTimeDue, registries.DurationProperty}
+	return []registries.PropertyRegistry{registries.DateTimeDueProp, registries.DurationProp}
 }
 
 func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {

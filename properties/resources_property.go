@@ -16,7 +16,7 @@ type ResourcesProperty interface {
 
 func NewResourcesProperty(values []string, params ...parameters.Parameter) ResourcesProperty {
 	return &textPropertyType{
-		PropName:   registries.Resources,
+		PropName:   registries.ResourcesProp,
 		Values:     types.NewTextValues(values),
 		Parameters: params,
 	}
@@ -28,7 +28,7 @@ func NewResourcesPropertyFromString(
 ) ResourcesProperty {
 	resources := strings.Split(values, ",")
 	return &textPropertyType{
-		PropName:   registries.Resources,
+		PropName:   registries.ResourcesProp,
 		Values:     types.NewTextValues(resources),
 		Parameters: params,
 	}

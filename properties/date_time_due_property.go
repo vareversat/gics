@@ -30,13 +30,13 @@ func NewDateTimeDueProperty(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.DateTimeDue,
+			PropName:   registries.DateTimeDueProp,
 			Value:      types.NewDateTimeValue(value, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.DateTimeDue,
+			PropName:   registries.DateTimeDueProp,
 			Value:      types.NewDateValue(value),
 			Parameters: params,
 		}
@@ -59,13 +59,13 @@ func NewDateTimeDuePropertyFromString(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.DateTimeDue,
+			PropName:   registries.DateTimeDueProp,
 			Value:      types.NewDateTimeValueFromString(value, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.DateTimeDue,
+			PropName:   registries.DateTimeDueProp,
 			Value:      types.NewDateValueFromString(value),
 			Parameters: params,
 		}

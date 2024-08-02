@@ -14,7 +14,7 @@ type MethodProperty interface {
 
 func NewMethodProperty(value string, params ...parameters.Parameter) MethodProperty {
 	return &textPropertyType{
-		PropName:   registries.Method,
+		PropName:   registries.MethodProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

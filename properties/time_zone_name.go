@@ -14,7 +14,7 @@ type TimeZoneNameProperty interface {
 
 func NewTimeZoneNameProperty(value string, params ...parameters.Parameter) TimeZoneNameProperty {
 	return &textPropertyType{
-		PropName:   registries.TimeZoneName,
+		PropName:   registries.TimeZoneNameProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

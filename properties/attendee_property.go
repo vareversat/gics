@@ -21,7 +21,7 @@ type AttendeeProperty interface {
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.1
 func NewAttendeeProperty(uri *url.URL, params ...parameters.Parameter) AttendeeProperty {
 	return &calendarUserAddressPropertyType{
-		PropName:   registries.Attendee,
+		PropName:   registries.AttendeeProp,
 		Value:      types.NewCalendarUserAddressValue(uri),
 		Parameters: params,
 	}
@@ -37,7 +37,7 @@ func NewAttendeePropertyFromString(
 	}
 
 	return &calendarUserAddressPropertyType{
-		PropName:   registries.Attendee,
+		PropName:   registries.AttendeeProp,
 		Value:      types.NewCalendarUserAddressValue(urlValue),
 		Parameters: params,
 	}, nil

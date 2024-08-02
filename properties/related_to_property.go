@@ -14,7 +14,7 @@ type RelatedToProperty interface {
 
 func NewRelatedToProperty(value string, params ...parameters.Parameter) RelatedToProperty {
 	return &textPropertyType{
-		PropName:   registries.RelatedTo,
+		PropName:   registries.RelatedToProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

@@ -17,7 +17,7 @@ type SequenceProperty interface {
 
 func NewSequenceProperty(value int32, params ...parameters.Parameter) SequenceProperty {
 	return &integerPropertyType{
-		PropName:   registries.Sequence,
+		PropName:   registries.SequenceProp,
 		Value:      types.NewIntegerValue(value),
 		Parameters: params,
 	}
@@ -32,7 +32,7 @@ func NewSequencePropertyFromString(
 		return nil, fmt.Errorf("%s cannot be parsed as int32", value)
 	}
 	return &integerPropertyType{
-		PropName:   registries.Sequence,
+		PropName:   registries.SequenceProp,
 		Value:      types.NewIntegerValue(int32(sequence)),
 		Parameters: params,
 	}, nil

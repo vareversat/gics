@@ -11,7 +11,7 @@ type ParticipationStatusParam interface {
 
 // NewParticipationStatusParam create a new registries.ParticipationStatusParam property
 // This parameter can be used in this property :
-// - registries.Attendee
+// - registries.AttendeeProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.12
 func NewParticipationStatusParam(
 	value registries.ParticipantStatusRegistry,

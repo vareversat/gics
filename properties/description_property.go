@@ -15,7 +15,7 @@ type DescriptionProperty interface {
 func NewDescriptionProperty(descriptionValue string,
 	params ...parameters.Parameter) DescriptionProperty {
 	return &textPropertyType{
-		PropName:   registries.Description,
+		PropName:   registries.DescriptionProp,
 		Value:      types.NewTextValue(descriptionValue),
 		Parameters: params,
 	}

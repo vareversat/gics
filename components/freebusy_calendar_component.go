@@ -29,12 +29,15 @@ func NewFreeBusyCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.Begin, registries.Vfreebusy),
+		Begin: properties.NewBlockDelimiterProperty(
+			registries.BeginProp,
+			registries.Vfreebusy,
+		),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.EndProperty,
+			registries.EndProp,
 			registries.Vfreebusy,
 		),
 	}
@@ -53,10 +56,10 @@ func (fC *freeBusyCalendarComponent) GetProperty(
 
 func (fC *freeBusyCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
-		registries.Begin,
-		registries.EndProperty,
-		registries.Uid,
-		registries.DateTimeStamp,
+		registries.BeginProp,
+		registries.EndProp,
+		registries.UidProp,
+		registries.DateTimeStampProp,
 	}
 }
 

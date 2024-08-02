@@ -19,7 +19,7 @@ func NewDateTimeCompletedProperty(
 	value time.Time,
 ) DateTimeCompletedProperty {
 	return &dateTimePropertyType{
-		PropName: registries.CompletedProperty,
+		PropName: registries.CompletedProp,
 		Value:    types.NewDateTimeValue(value, types.WithUtcTime),
 	}
 }
@@ -28,7 +28,7 @@ func NewDateTimeCompletedPropertyFromString(
 	value string,
 	params ...parameters.Parameter) DateTimeCompletedProperty {
 	return &dateTimePropertyType{
-		PropName:   registries.CompletedProperty,
+		PropName:   registries.CompletedProp,
 		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
 		Parameters: params,
 	}

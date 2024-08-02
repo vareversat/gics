@@ -11,7 +11,7 @@ type RangeParam interface {
 
 // NewRangeParam create a new registries.RangeParam property
 // This parameter can be used in this property :
-// - registries.RecurrenceId
+// - registries.RecurrenceIdProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.13
 func NewRangeParam() RangeParam {
 	return &textParameter{

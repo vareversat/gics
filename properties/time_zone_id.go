@@ -13,7 +13,7 @@ type TimeZoneIdProperty interface {
 
 func NewTimeZoneIdProperty(value string) TimeZoneIdProperty {
 	return &textPropertyType{
-		PropName: registries.TimeZoneIdProperty,
+		PropName: registries.TimeZoneIdProp,
 		Value:    types.NewTextValue(value),
 	}
 }

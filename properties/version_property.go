@@ -14,7 +14,7 @@ type VersionProperty interface {
 
 func NewVersionProperty(value string, params ...parameters.Parameter) VersionProperty {
 	return &textPropertyType{
-		PropName:   registries.Version,
+		PropName:   registries.VersionProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

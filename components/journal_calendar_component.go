@@ -29,12 +29,15 @@ func NewJournalCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) JournalCalendarComponent {
 	return &journalCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.Begin, registries.Vjournal),
+		Begin: properties.NewBlockDelimiterProperty(
+			registries.BeginProp,
+			registries.Vjournal,
+		),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.EndProperty,
+			registries.EndProp,
 			registries.Vjournal,
 		),
 	}
@@ -53,10 +56,10 @@ func (jC *journalCalendarComponent) GetProperty(
 
 func (jC *journalCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{
-		registries.Begin,
-		registries.EndProperty,
-		registries.Uid,
-		registries.DateTimeStamp,
+		registries.BeginProp,
+		registries.EndProp,
+		registries.UidProp,
+		registries.DateTimeStampProp,
 	}
 }
 

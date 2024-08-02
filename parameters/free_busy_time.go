@@ -11,7 +11,7 @@ type FreeBusyTimeParam interface {
 
 // NewFreeBusyTimeParam create a new registries.FreeBusyTimeTypeParam property
 // This parameter can be used in this property :
-// - registries.FreeBusyTime
+// - registries.FreeBusyTimeProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.9
 func NewFreeBusyTimeParam(value registries.FreeBusyTimeTypeRegistry) FreeBusyTimeParam {
 	return &textParameter{

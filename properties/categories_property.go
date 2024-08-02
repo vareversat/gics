@@ -15,7 +15,7 @@ type CategoriesProperty interface {
 
 func NewCategoryProperty(values []string, params ...parameters.Parameter) CategoriesProperty {
 	return &textPropertyType{
-		PropName:   registries.Categories,
+		PropName:   registries.CategoriesProp,
 		Values:     types.NewTextValues(values),
 		Parameters: params,
 	}
@@ -26,7 +26,7 @@ func NewCategoryPropertyFromString(
 	params ...parameters.Parameter,
 ) CategoriesProperty {
 	return &textPropertyType{
-		PropName:   registries.Categories,
+		PropName:   registries.CategoriesProp,
 		Values:     types.NewTextValues(utils.StringToStringArray(values)),
 		Parameters: params,
 	}

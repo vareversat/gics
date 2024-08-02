@@ -29,7 +29,7 @@ func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	uid := properties.NewUidProperty("My Event")
 	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
 	description := properties.NewDescriptionProperty("Test Event")
-	summary := properties.NewSummaryProperty("Event Summary")
+	summary := properties.NewSummaryProperty("Event SummaryProp")
 
 	component := NewEventCalendarComponent(
 		uid,
@@ -44,7 +44,7 @@ func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	serialized := buf.String()
 
 	expected := fmt.Sprintf(
-		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event Summary\r\nEND:VEVENT\r\n",
+		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event SummaryProp\r\nEND:VEVENT\r\n",
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)
@@ -56,7 +56,7 @@ func TestEventCalendarComponent_GetProperty(t *testing.T) {
 	uid := properties.NewUidProperty("My Event")
 	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
 	description := properties.NewDescriptionProperty("Test Event")
-	summary := properties.NewSummaryProperty("Event Summary")
+	summary := properties.NewSummaryProperty("Event SummaryProp")
 
 	component := NewEventCalendarComponent(
 		uid,
@@ -66,6 +66,6 @@ func TestEventCalendarComponent_GetProperty(t *testing.T) {
 		summary,
 	)
 
-	prop := component.GetProperty(registries.Summary)
-	assert.Equal(t, "Event Summary", prop.GetValue())
+	prop := component.GetProperty(registries.SummaryProp)
+	assert.Equal(t, "Event SummaryProp", prop.GetValue())
 }

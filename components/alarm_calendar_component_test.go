@@ -29,7 +29,7 @@ func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	action := properties.NewActionProperty(registries.Audio)
 	trigger := properties.NewTriggerProperty(myTime, "PT5M", types.WithUtcTime)
 	description := properties.NewDescriptionProperty("Test Alarm")
-	summary := properties.NewSummaryProperty("Alarm Summary")
+	summary := properties.NewSummaryProperty("Alarm SummaryProp")
 
 	component := NewAlarmCalendarComponent(action, trigger, description, summary)
 
@@ -38,7 +38,7 @@ func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	serialized := buf.String()
 
 	expected := fmt.Sprintf(
-		"BEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm Summary\r\nEND:VALARM\r\n",
+		"BEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm SummaryProp\r\nEND:VALARM\r\n",
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)

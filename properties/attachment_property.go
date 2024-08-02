@@ -20,7 +20,7 @@ func NewAttachmentProperty(
 	params ...parameters.Parameter,
 ) AttachmentProperty {
 	return &textPropertyType{
-		PropName:   registries.Attachment,
+		PropName:   registries.AttachmentProp,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

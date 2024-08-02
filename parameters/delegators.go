@@ -13,7 +13,7 @@ type DelegatorsParam interface {
 
 // NewDelegatorsParam create a new registries.DelegatedFromParam property
 // This parameter can be used in this property :
-// - registries.Attendee
+// - registries.AttendeeProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.4
 func NewDelegatorsParam(value *url.URL) DelegatorsParam {
 	return &calendarUserAddressParameter{

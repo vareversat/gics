@@ -29,11 +29,11 @@ func NewAlarmCalendarComponent(
 	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.Begin, registries.Valarm),
+		Begin:      properties.NewBlockDelimiterProperty(registries.BeginProp, registries.Valarm),
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registries.EndProperty, registries.Valarm),
+		End:        properties.NewBlockDelimiterProperty(registries.EndProp, registries.Valarm),
 	}
 }
 
@@ -52,30 +52,30 @@ func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyReg
 	switch aC.Action.GetActionValue() {
 	case registries.Audio:
 		return []registries.PropertyRegistry{
-			registries.Begin,
-			registries.EndProperty,
-			registries.Action,
-			registries.Trigger,
+			registries.BeginProp,
+			registries.EndProp,
+			registries.ActionProp,
+			registries.TriggerProp,
 		}
 	case registries.Display:
 		return []registries.PropertyRegistry{
-			registries.Begin,
-			registries.EndProperty,
-			registries.Action,
-			registries.Trigger,
-			registries.Description,
+			registries.BeginProp,
+			registries.EndProp,
+			registries.ActionProp,
+			registries.TriggerProp,
+			registries.DescriptionProp,
 		}
 	case registries.Email:
 		return []registries.PropertyRegistry{
-			registries.Begin,
-			registries.EndProperty,
-			registries.Action,
-			registries.Trigger,
-			registries.Description,
-			registries.Summary,
+			registries.BeginProp,
+			registries.EndProp,
+			registries.ActionProp,
+			registries.TriggerProp,
+			registries.DescriptionProp,
+			registries.SummaryProp,
 		}
 	default:
-		return []registries.PropertyRegistry{registries.Begin, registries.EndProperty}
+		return []registries.PropertyRegistry{registries.BeginProp, registries.EndProp}
 	}
 }
 
@@ -84,7 +84,7 @@ func (aC *alarmCalendarComponent) MutuallyExclusiveProperties() []registries.Pro
 }
 
 func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
-	return []registries.PropertyRegistry{registries.DurationProperty, registries.Repeat}
+	return []registries.PropertyRegistry{registries.DurationProp, registries.RepeatProp}
 }
 
 func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {
