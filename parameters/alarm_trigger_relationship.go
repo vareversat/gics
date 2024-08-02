@@ -14,7 +14,7 @@ type AlarmTriggerRelationshipParam interface {
 // - registries.TriggerProp
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.14
 func NewAlarmTriggerRelationshipParam(
-	value registries.AlarmTriggerRelationshipType,
+	value registries.AlarmTriggerRelationshipTypeRegistry,
 ) AlarmTriggerRelationshipParam {
 	return &textParameter{
 		ParamName: registries.RelatedParam,
