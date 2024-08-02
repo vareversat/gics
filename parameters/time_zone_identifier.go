@@ -21,7 +21,7 @@ type TimeZoneIdentifierParam interface {
 
 func NewTimeZoneIdentifierParam(value string) TimeZoneIdentifierParam {
 	return &textParameter{
-		ParamName: registries.TZIDParameter,
+		ParamName: registries.TimeZoneId,
 		Value:     types.NewTextValue(value),
 	}
 }

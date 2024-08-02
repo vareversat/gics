@@ -22,7 +22,7 @@ func NewFreeBusyTimeProperty(
 	paramSlice := make(parameters.Parameters, 0)
 	paramSlice = append(paramSlice, freeBusyTimeParam)
 	return &periodPropertyType{
-		PropName:   registries.FREEBUSY,
+		PropName:   registries.FreeBusyTime,
 		Value:      types.NewPeriodValue(startTime, endTime),
 		Parameters: paramSlice,
 	}

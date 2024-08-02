@@ -66,6 +66,6 @@ func TestEventCalendarComponent_GetProperty(t *testing.T) {
 		summary,
 	)
 
-	prop := component.GetProperty(registries.SUMMARY)
+	prop := component.GetProperty(registries.Summary)
 	assert.Equal(t, "Event Summary", prop.GetValue())
 }

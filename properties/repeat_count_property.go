@@ -17,7 +17,7 @@ type RepeatCountProperty interface {
 
 func NewRepeatCountProperty(value int32, params ...parameters.Parameter) RepeatCountProperty {
 	return &integerPropertyType{
-		PropName:   registries.REPEAT,
+		PropName:   registries.Repeat,
 		Value:      types.NewIntegerValue(value),
 		Parameters: params,
 	}
@@ -32,7 +32,7 @@ func NewRepeatCountPropertyFromString(
 		return nil, fmt.Errorf("%s cannot be parsed as int32", value)
 	}
 	return &integerPropertyType{
-		PropName:   registries.REPEAT,
+		PropName:   registries.Repeat,
 		Value:      types.NewIntegerValue(int32(repeat)),
 		Parameters: params,
 	}, nil

@@ -14,7 +14,7 @@ type LocationProperty interface {
 
 func NewLocationProperty(value string, params ...parameters.Parameter) LocationProperty {
 	return &textPropertyType{
-		PropName:   registries.LOCATION,
+		PropName:   registries.Location,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

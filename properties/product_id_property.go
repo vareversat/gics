@@ -14,7 +14,7 @@ type ProductIdProperty interface {
 
 func NewProductIdProperty(value string, params ...parameters.Parameter) ProductIdProperty {
 	return &textPropertyType{
-		PropName:   registries.PRODID,
+		PropName:   registries.ProductIdentifier,
 		Value:      types.NewTextValue(value),
 		Parameters: params,
 	}

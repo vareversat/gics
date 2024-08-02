@@ -20,7 +20,7 @@ func NewDateTimeCreatedProperty(
 	params ...parameters.Parameter,
 ) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
-		PropName:   registries.CREATED,
+		PropName:   registries.DateTimeCreated,
 		Value:      types.NewDateTimeValue(timeValue, types.WithUtcTime),
 		Parameters: params,
 	}
@@ -30,7 +30,7 @@ func NewDateTimeCreatedPropertyFromString(
 	value string,
 	params ...parameters.Parameter) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
-		PropName:   registries.CREATED,
+		PropName:   registries.DateTimeCreated,
 		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
 		Parameters: params,
 	}

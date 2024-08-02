@@ -22,7 +22,7 @@ func NewRequestStatusProperty(
 	params ...parameters.Parameter,
 ) RequestStatusProperty {
 	return &requestStatusPropertyType{
-		PropName:          registries.REQUESTSTATUS,
+		PropName:          registries.RequestStatus,
 		StatusCode:        types.NewTextValue(code),
 		StatusDescription: types.NewTextValue(description),
 		ExtraData:         types.NewTextValue(extraData),
@@ -48,7 +48,7 @@ func NewRequestStatusPropertyFromString(
 		extraData = status[1]
 	}
 	return &requestStatusPropertyType{
-		PropName:          registries.REQUESTSTATUS,
+		PropName:          registries.RequestStatus,
 		StatusCode:        types.NewTextValue(code),
 		StatusDescription: types.NewTextValue(description),
 		ExtraData:         types.NewTextValue(extraData),

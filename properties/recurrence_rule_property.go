@@ -13,7 +13,7 @@ type RecurrenceRuleProperty interface {
 
 func NewRecurrenceRuleProperty(parts ...recurrence_rule.RRPart) RecurrenceRuleProperty {
 	return &recurrenceRulePropertyType{
-		PropName: registries.RRULE,
+		PropName: registries.RecurrenceRule,
 		Value:    recurrence_rule.NewRecurrenceRuleValue(parts),
 	}
 }

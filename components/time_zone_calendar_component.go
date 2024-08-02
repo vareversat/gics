@@ -56,16 +56,16 @@ func NewTimeZoneCalendarComponent(
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Vtimezone),
+		Begin:      properties.NewBlockDelimiterProperty(registries.Begin, registries.Vtimezone),
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End:        properties.NewBlockDelimiterProperty(registries.END, registries.Vtimezone),
+		End:        properties.NewBlockDelimiterProperty(registries.End, registries.Vtimezone),
 	}
 }
 
 func (tC *timeZoneCalendarComponent) GetProperty(
-	name registries.PropertyNames,
+	name registries.PropertyRegistry,
 ) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
@@ -76,7 +76,7 @@ func (tC *timeZoneCalendarComponent) GetProperty(
 }
 
 func (tC *timeZoneCalendarSubComponent) GetProperty(
-	name registries.PropertyNames,
+	name registries.PropertyRegistry,
 ) properties.Property {
 	for i := 0; i < len(tC.Properties); i++ {
 		if tC.Properties[i].GetName() == name {
@@ -96,7 +96,7 @@ func NewTimeZoneDayLightSubcomponent(
 	propertyList ...properties.Property) TimeZoneCalendarDaylightComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.BEGIN,
+			registries.Begin,
 			registries.Daylight,
 		),
 		DateTimeStart:      dateTimeStart,
@@ -104,7 +104,7 @@ func NewTimeZoneDayLightSubcomponent(
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.END,
+			registries.End,
 			registries.Daylight,
 		),
 	}
@@ -120,7 +120,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 	propertyList ...properties.Property) TimeZoneCalendarSubComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBlockDelimiterProperty(
-			registries.BEGIN,
+			registries.Begin,
 			registries.Standard,
 		),
 		DateTimeStart:      dateTimeStart,
@@ -128,7 +128,7 @@ func NewTimeZoneCalendarStandardSubcomponent(
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
 		End: properties.NewBlockDelimiterProperty(
-			registries.END,
+			registries.End,
 			registries.Standard,
 		),
 	}
@@ -146,16 +146,20 @@ func (tC *timeZoneCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.End.ToICalendarPropFormat(output)
 }
 
-func (tC *timeZoneCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.BEGIN, registries.END, registries.PROP_TZID}
+func (tC *timeZoneCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{
+		registries.Begin,
+		registries.End,
+		registries.TimeZoneIdProperty,
+	}
 }
 
-func (tC *timeZoneCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (tC *timeZoneCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
-func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
 func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
@@ -169,20 +173,20 @@ func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
 	tC.End.ToICalendarPropFormat(output)
 }
 
-func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.DTSTART,
-		registries.TZOFFSETTO,
-		registries.TZOFFSETFROM,
+func (tC *timeZoneCalendarSubComponent) MandatoryProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{
+		registries.Begin,
+		registries.End,
+		registries.DateTimeStart,
+		registries.TimeZoneOffsetTo,
+		registries.TimeZoneOffsetFrom,
 	}
 }
 
-func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
-func (tC *timeZoneCalendarSubComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (tC *timeZoneCalendarSubComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }

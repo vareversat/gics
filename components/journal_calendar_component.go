@@ -29,15 +29,17 @@ func NewJournalCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) JournalCalendarComponent {
 	return &journalCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Vjournal),
+		Begin:         properties.NewBlockDelimiterProperty(registries.Begin, registries.Vjournal),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, registries.Vjournal),
+		End:           properties.NewBlockDelimiterProperty(registries.End, registries.Vjournal),
 	}
 }
 
-func (jC *journalCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (jC *journalCalendarComponent) GetProperty(
+	name registries.PropertyRegistry,
+) properties.Property {
 	for i := 0; i < len(jC.Properties); i++ {
 		if jC.Properties[i].GetName() == name {
 			return jC.Properties[i]
@@ -46,21 +48,21 @@ func (jC *journalCalendarComponent) GetProperty(name registries.PropertyNames) p
 	return nil
 }
 
-func (jC *journalCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (jC *journalCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{
+		registries.Begin,
+		registries.End,
+		registries.Uid,
+		registries.DateTimeStamp,
 	}
 }
 
-func (jC *journalCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (jC *journalCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
-func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
 func (jC *journalCalendarComponent) SerializeToICSFormat(output io.Writer) {

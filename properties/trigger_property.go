@@ -35,13 +35,13 @@ func NewTriggerProperty(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.TRIGGER,
+			PropName:   registries.Trigger,
 			Value:      types.NewDateTimeValue(dateTimeValue, format),
 			Parameters: params,
 		}
 	case string(registries.Duration):
 		return &durationPropertyType{
-			PropName:   registries.TRIGGER,
+			PropName:   registries.Trigger,
 			Value:      types.NewDurationValue(durationValue),
 			Parameters: params,
 		}

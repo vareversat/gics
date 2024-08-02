@@ -29,15 +29,17 @@ func NewAlarmCalendarComponent(
 	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Valarm),
+		Begin:      properties.NewBlockDelimiterProperty(registries.Begin, registries.Valarm),
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registries.END, registries.Valarm),
+		End:        properties.NewBlockDelimiterProperty(registries.End, registries.Valarm),
 	}
 }
 
-func (aC *alarmCalendarComponent) GetProperty(name registries.PropertyNames) properties.Property {
+func (aC *alarmCalendarComponent) GetProperty(
+	name registries.PropertyRegistry,
+) properties.Property {
 	for i := 0; i < len(aC.Properties); i++ {
 		if aC.Properties[i].GetName() == name {
 			return aC.Properties[i]
@@ -46,43 +48,43 @@ func (aC *alarmCalendarComponent) GetProperty(name registries.PropertyNames) pro
 	return nil
 }
 
-func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyNames {
+func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
 	switch aC.Action.GetActionValue() {
 	case registries.Audio:
-		return []registries.PropertyNames{
-			registries.BEGIN,
-			registries.END,
-			registries.ACTION,
-			registries.TRIGGER,
+		return []registries.PropertyRegistry{
+			registries.Begin,
+			registries.End,
+			registries.Action,
+			registries.Trigger,
 		}
 	case registries.Display:
-		return []registries.PropertyNames{
-			registries.BEGIN,
-			registries.END,
-			registries.ACTION,
-			registries.TRIGGER,
-			registries.DESCRIPTION,
+		return []registries.PropertyRegistry{
+			registries.Begin,
+			registries.End,
+			registries.Action,
+			registries.Trigger,
+			registries.Description,
 		}
 	case registries.Email:
-		return []registries.PropertyNames{
-			registries.BEGIN,
-			registries.END,
-			registries.ACTION,
-			registries.TRIGGER,
-			registries.DESCRIPTION,
-			registries.SUMMARY,
+		return []registries.PropertyRegistry{
+			registries.Begin,
+			registries.End,
+			registries.Action,
+			registries.Trigger,
+			registries.Description,
+			registries.Summary,
 		}
 	default:
-		return []registries.PropertyNames{registries.BEGIN, registries.END}
+		return []registries.PropertyRegistry{registries.Begin, registries.End}
 	}
 }
 
-func (aC *alarmCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (aC *alarmCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
-func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{registries.DURATION_PROP, registries.REPEAT}
+func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{registries.DurationProperty, registries.Repeat}
 }
 
 func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {

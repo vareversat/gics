@@ -17,7 +17,7 @@ func NewTimeTransparencyProperty(
 	params ...parameters.Parameter,
 ) TimeTransparencyProperty {
 	return &timeTransparencyPropertyType{
-		PropName:   registries.TRANSP,
+		PropName:   registries.TimeTransparency,
 		Value:      types.NewTimeTransparencyValue(value),
 		Parameters: params,
 	}
@@ -28,7 +28,7 @@ func NewTimeTransparencyPropertyFromString(
 	params ...parameters.Parameter,
 ) TimeTransparencyProperty {
 	return &timeTransparencyPropertyType{
-		PropName:   registries.TRANSP,
+		PropName:   registries.TimeTransparency,
 		Value:      types.NewTimeTransparencyValue(types.TimeTransparencyType(value)),
 		Parameters: params,
 	}

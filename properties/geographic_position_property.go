@@ -22,7 +22,7 @@ func NewGeographicPositionProperty(
 	params ...parameters.Parameter,
 ) GeographicPositionProperty {
 	return &geoPropertyType{
-		PropName:   registries.GEO,
+		PropName:   registries.Geo,
 		Longitude:  types.NewFloatValue(long),
 		Latitude:   types.NewFloatValue(lat),
 		Parameters: params,
@@ -48,7 +48,7 @@ func NewGeographicPositionPropertyFromString(
 		)
 	}
 	return &geoPropertyType{
-		PropName:   registries.GEO,
+		PropName:   registries.Geo,
 		Longitude:  types.NewFloatValue(float32(long)),
 		Latitude:   types.NewFloatValue(float32(lat)),
 		Parameters: params,

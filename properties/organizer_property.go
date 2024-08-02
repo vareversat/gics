@@ -18,7 +18,7 @@ type OrganizerProperty interface {
 
 func NewOrganizerProperty(uri *url.URL, params ...parameters.Parameter) OrganizerProperty {
 	return &calendarUserAddressPropertyType{
-		PropName:   registries.ORGANIZER,
+		PropName:   registries.Organizer,
 		Value:      types.NewCalendarUserAddressValue(uri),
 		Parameters: params,
 	}
@@ -34,7 +34,7 @@ func NewOrganizerPropertyFromString(
 	}
 
 	return &calendarUserAddressPropertyType{
-		PropName:   registries.ORGANIZER,
+		PropName:   registries.Organizer,
 		Value:      types.NewCalendarUserAddressValue(urlValue),
 		Parameters: params,
 	}, nil

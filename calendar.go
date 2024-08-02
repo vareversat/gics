@@ -44,13 +44,13 @@ func NewCalendar(
 		return nil, fmt.Errorf("you must specify a PRODID number")
 	}
 	return &calendar{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Vcalendar),
+		Begin:      properties.NewBlockDelimiterProperty(registries.Begin, registries.Vcalendar),
 		ProdId:     properties.NewProductIdProperty(prodId),
 		Version:    properties.NewVersionProperty(calendarVersion),
 		Method:     properties.NewMethodProperty(calendarMethod),
 		CalScale:   properties.NewCalScaleProperty(),
 		Components: calendarComponents,
-		End:        properties.NewBlockDelimiterProperty(registries.END, registries.Vcalendar),
+		End:        properties.NewBlockDelimiterProperty(registries.End, registries.Vcalendar),
 	}, nil
 }
 

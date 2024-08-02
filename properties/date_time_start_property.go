@@ -30,13 +30,13 @@ func NewDateTimeStartProperty(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.DTSTART,
+			PropName:   registries.DateTimeStart,
 			Value:      types.NewDateTimeValue(value, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.DTSTART,
+			PropName:   registries.DateTimeStart,
 			Value:      types.NewDateValue(value),
 			Parameters: params,
 		}
@@ -59,13 +59,13 @@ func NewDateTimeStartPropertyFromString(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.DTSTART,
+			PropName:   registries.DateTimeStart,
 			Value:      types.NewDateTimeValueFromString(value, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.DTSTART,
+			PropName:   registries.DateTimeStart,
 			Value:      types.NewDateValueFromString(value),
 			Parameters: params,
 		}

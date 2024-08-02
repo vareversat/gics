@@ -29,16 +29,16 @@ func NewFreeBusyCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
-		Begin:         properties.NewBlockDelimiterProperty(registries.BEGIN, registries.Vfreebusy),
+		Begin:         properties.NewBlockDelimiterProperty(registries.Begin, registries.Vfreebusy),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End:           properties.NewBlockDelimiterProperty(registries.END, registries.Vfreebusy),
+		End:           properties.NewBlockDelimiterProperty(registries.End, registries.Vfreebusy),
 	}
 }
 
 func (fC *freeBusyCalendarComponent) GetProperty(
-	name registries.PropertyNames,
+	name registries.PropertyRegistry,
 ) properties.Property {
 	for i := 0; i < len(fC.Properties); i++ {
 		if fC.Properties[i].GetName() == name {
@@ -48,21 +48,21 @@ func (fC *freeBusyCalendarComponent) GetProperty(
 	return nil
 }
 
-func (fC *freeBusyCalendarComponent) MandatoryProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{
-		registries.BEGIN,
-		registries.END,
-		registries.UID,
-		registries.DTSTAMP,
+func (fC *freeBusyCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{
+		registries.Begin,
+		registries.End,
+		registries.Uid,
+		registries.DateTimeStamp,
 	}
 }
 
-func (fC *freeBusyCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (fC *freeBusyCalendarComponent) MutuallyExclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
-func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyNames {
-	return []registries.PropertyNames{}
+func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
+	return []registries.PropertyRegistry{}
 }
 
 func (fC *freeBusyCalendarComponent) SerializeToICSFormat(output io.Writer) {

@@ -15,14 +15,14 @@ type LastModifiedProperty interface {
 
 func NewLastModifiedProperty(value time.Time) LastModifiedProperty {
 	return &dateTimePropertyType{
-		PropName: registries.LASTMODIFIED,
+		PropName: registries.LastModified,
 		Value:    types.NewDateTimeValue(value, types.WithUtcTime),
 	}
 }
 
 func NewLastModifiedPropertyFromString(value string) LastModifiedProperty {
 	return &dateTimePropertyType{
-		PropName: registries.LASTMODIFIED,
+		PropName: registries.LastModified,
 		Value:    types.NewDateTimeValueFromString(value, types.WithUtcTime),
 	}
 }

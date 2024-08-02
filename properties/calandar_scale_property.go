@@ -18,7 +18,7 @@ type CalendarScaleProperty interface {
 func NewCalScaleProperty(params ...parameters.Parameter) CalendarScaleProperty {
 	return &textPropertyType{
 		Parameters: params,
-		PropName:   registries.CALSCALE,
+		PropName:   registries.CalendarScale,
 		Value: types.NewTextValue(
 			CalendarScaleValue),
 	}

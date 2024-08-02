@@ -30,13 +30,13 @@ func NewRecurrenceIdProperty(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.RECURRENCEID,
+			PropName:   registries.RecurrenceId,
 			Value:      types.NewDateTimeValue(value, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.RECURRENCEID,
+			PropName:   registries.RecurrenceId,
 			Value:      types.NewDateValue(value),
 			Parameters: params,
 		}
@@ -59,13 +59,13 @@ func NewRecurrenceIdPropertyFromString(
 	switch valueType {
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
-			PropName:   registries.RECURRENCEID,
+			PropName:   registries.RecurrenceId,
 			Value:      types.NewDateTimeValueFromString(value, format),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
-			PropName:   registries.RECURRENCEID,
+			PropName:   registries.RecurrenceId,
 			Value:      types.NewDateValueFromString(value),
 			Parameters: params,
 		}
