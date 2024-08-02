@@ -23,7 +23,7 @@ func NewDateTimeDueProperty(
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registries.Value {
+		if params[i].GetParamName() == registries.ValueParam {
 			valueType = params[i].GetParamValue()
 		}
 	}
@@ -52,7 +52,7 @@ func NewDateTimeDuePropertyFromString(
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registries.Value {
+		if params[i].GetParamName() == registries.ValueParam {
 			valueType = params[i].GetParamValue()
 		}
 	}

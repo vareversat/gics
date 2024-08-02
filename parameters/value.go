@@ -9,7 +9,7 @@ type ValueParam interface {
 	TextTypeParameter
 }
 
-// NewValueParam create a new registries.Value property
+// NewValueParam create a new registries.ValueParam property
 // This parameter can be used in these properties :
 // - registries.DateTimeEnd
 // - registries.DateTimeStart
@@ -21,7 +21,7 @@ type ValueParam interface {
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
 func NewValueParam(value registries.ValueTypeRegistry) ValueParam {
 	return &textParameter{
-		ParamName: registries.Value,
+		ParamName: registries.ValueParam,
 		Value:     types.NewTextValue(string(value)),
 	}
 }

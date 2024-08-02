@@ -9,13 +9,13 @@ type FormatTypeParam interface {
 	TextTypeParameter
 }
 
-// NewFormatTypeParam create a new registries.FormatType property
+// NewFormatTypeParam create a new registries.FormatTypeParam property
 // This parameter can be used in this property :
 // - registries.Attachment
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.8
 func NewFormatTypeParam(value string) FormatTypeParam {
 	return &textParameter{
-		ParamName: registries.FormatType,
+		ParamName: registries.FormatTypeParam,
 		Value:     types.NewTextValue(value),
 	}
 }

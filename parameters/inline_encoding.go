@@ -9,13 +9,13 @@ type InlineEncodingParam interface {
 	TextTypeParameter
 }
 
-// NewInlineEncodingParam create a new registries.Encoding property
+// NewInlineEncodingParam create a new registries.EncodingParam property
 // This parameter can be used in this property :
 // - registries.Binary
 // [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.7
 func NewInlineEncodingParam(value registries.EncodingType) InlineEncodingParam {
 	return &textParameter{
-		ParamName: registries.Encoding,
+		ParamName: registries.EncodingParam,
 		Value:     types.NewTextValue(string(value)),
 	}
 }
