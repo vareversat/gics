@@ -9,10 +9,10 @@ type RelationshipParam interface {
 	TextTypeParameter
 }
 
-// NewRelationshipParam create a new registries.RelationshipTypeParam property
+// NewRelationshipParam create a new registries.RelationshipTypeParam property. See [RFC-5545] ref for more info
 // This parameter can be used in this property :
 // - registries.RelatedToProp
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.10
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.10
 func NewRelationshipParam(value registries.RelationshipTypeRegistry) RelationshipParam {
 	return &textParameter{
 		ParamName: registries.RelationshipTypeParam,

@@ -9,7 +9,7 @@ type LanguageParam interface {
 	TextTypeParameter
 }
 
-// NewLanguageParam create a new registries.LanguageParam property
+// NewLanguageParam create a new registries.LanguageParam property. See [RFC-5545] ref for more info
 // This parameter can be used in these properties :
 // - registries.CategoriesProp
 // - registries.CommentProp
@@ -22,7 +22,7 @@ type LanguageParam interface {
 // - registries.ContactProp
 // - registries.OrganizerProp
 // - registries.RequestStatusProp
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.10
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.10
 func NewLanguageParam(value string) LanguageParam {
 	return &textParameter{
 		ParamName: registries.LanguageParam,

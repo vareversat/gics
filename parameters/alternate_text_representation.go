@@ -11,7 +11,7 @@ type AlternateTextRepresentationParam interface {
 	UriTypeParameter
 }
 
-// NewAlternateTextRepresentationParam create a new registries.AlternateTextRepresentationParam property
+// NewAlternateTextRepresentationParam create a new registries.AlternateTextRepresentationParam property. See [RFC-5545] ref for more info
 // This parameter can be used in these properties :
 // - registries.CommentProp
 // - registries.DescriptionProp
@@ -19,7 +19,7 @@ type AlternateTextRepresentationParam interface {
 // - registries.ResourcesProp
 // - registries.SummaryProp
 // - registries.ContactProp
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.1
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.1
 func NewAlternateTextRepresentationParam(value *url.URL) AlternateTextRepresentationParam {
 	return &uriParameter{
 		ParamName: registries.AlternateTextRepresentationParam,

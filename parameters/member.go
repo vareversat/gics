@@ -11,10 +11,10 @@ type MemberParam interface {
 	CalendarUserAddressTypeParameter
 }
 
-// NewMemberParam create a new registries.MemberParam property
+// NewMemberParam create a new registries.MemberParam property. See [RFC-5545] ref for more info
 // This parameter can be used in this property :
 // - registries.AttendeeProp
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.11
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.11
 func NewMemberParam(value *url.URL) MemberParam {
 	return &calendarUserAddressParameter{
 		ParamName: registries.MemberParam,

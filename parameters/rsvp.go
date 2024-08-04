@@ -9,10 +9,10 @@ type RSVPParam interface {
 	BooleanTypeParameter
 }
 
-// NewRSVPParam create a new registries.RsvpExpectationParam property
+// NewRSVPParam create a new registries.RsvpExpectationParam property. See [RFC-5545] ref for more info
 // This parameter can be used in this property :
 // - registries.AttendeeProp
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.17
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.17
 func NewRSVPParam(value bool) RSVPParam {
 	return &booleanParameter{
 		ParamName: registries.RsvpExpectationParam,

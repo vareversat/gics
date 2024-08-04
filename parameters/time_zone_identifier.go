@@ -9,7 +9,7 @@ type TimeZoneIdentifierParam interface {
 	TextTypeParameter
 }
 
-// NewTimeZoneIdentifierParam create a new registries.TimeZoneIdParam property
+// NewTimeZoneIdentifierParam create a new registries.TimeZoneIdParam property. See [RFC-5545] ref for more info
 // This parameter can be used in these properties :
 // - registries.DateTimeEndProp
 // - registries.DateTimeStartProp
@@ -18,7 +18,7 @@ type TimeZoneIdentifierParam interface {
 // - registries.RecurrenceIdProp
 // - registries.ExceptionDateTimesProp
 // - registries.RecurrenceDateTimesProp
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
 func NewTimeZoneIdentifierParam(value string) TimeZoneIdentifierParam {
 	return &textParameter{
 		ParamName: registries.TimeZoneIdParam,
