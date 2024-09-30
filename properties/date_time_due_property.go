@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.3
-
 import (
 	"time"
 
@@ -16,6 +14,13 @@ type DateTimeDueProperty interface {
 	DatePropertyType
 }
 
+// NewDateTimeDueProperty create a new registries.DateTimeDueProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtodo (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.3
 func NewDateTimeDueProperty(
 	value time.Time,
 	format types.DTFormat,
@@ -45,6 +50,13 @@ func NewDateTimeDueProperty(
 	}
 }
 
+// NewDateTimeDuePropertyFromString create a new registries.DateTimeDueProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtodo (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.3
 func NewDateTimeDuePropertyFromString(
 	value string,
 	format types.DTFormat,

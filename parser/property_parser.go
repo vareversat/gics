@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -22,8 +21,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 		}
 		return attendee, nil
 	case "BEGIN":
-		return properties.NewBlockDelimiterPropertyFromString(
-			registries.BeginProp,
+		return properties.NewBeginPropertyFromString(
 			propertyValue,
 		), nil
 	case "CATEGORIES":
@@ -53,8 +51,7 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 	case "DUE":
 		return properties.NewDateTimeDuePropertyFromString(propertyValue, types.WithUtcTime), nil
 	case "END":
-		return properties.NewBlockDelimiterPropertyFromString(
-			registries.EndProp,
+		return properties.NewEndPropertyFromString(
 			propertyValue,
 		), nil
 	case "EXDATE":

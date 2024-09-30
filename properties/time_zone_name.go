@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.2
-
 import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/registries"
@@ -12,6 +10,13 @@ type TimeZoneNameProperty interface {
 	TextPropertyType
 }
 
+// NewTimeZoneNameProperty create a new registries.TimeZoneNameProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// Optional parameters :
+// - registries.LanguageParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.2
 func NewTimeZoneNameProperty(value string, params ...parameters.Parameter) TimeZoneNameProperty {
 	return &textPropertyType{
 		PropName:   registries.TimeZoneNameProp,

@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.2
-
 import (
 	"time"
 
@@ -16,6 +14,17 @@ type DateTimeStartProperty interface {
 	DatePropertyType
 }
 
+// NewDateTimeStartProperty create a new registries.DateTimeStartProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional, mandatory if registries.RecurrenceRuleProp is set or registries.MethodProp is not set)
+// - registries.Vtodo (Optional, mandatory if registries.RecurrenceRuleProp)
+// - registries.Vfreebusy (Optional, mandatory if registries.RecurrenceRuleProp)
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.4
 func NewDateTimeStartProperty(
 	value time.Time,
 	format types.DTFormat,
@@ -45,6 +54,17 @@ func NewDateTimeStartProperty(
 	}
 }
 
+// NewDateTimeStartPropertyFromString create a new registries.DateTimeStartProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional, mandatory if registries.RecurrenceRuleProp is set or registries.MethodProp is not set)
+// - registries.Vtodo (Optional, mandatory if registries.RecurrenceRuleProp)
+// - registries.Vfreebusy (Optional, mandatory if registries.RecurrenceRuleProp)
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.4
 func NewDateTimeStartPropertyFromString(
 	value string,
 	format types.DTFormat,

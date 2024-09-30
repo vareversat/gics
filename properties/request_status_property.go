@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.8.3
-
 import (
 	"fmt"
 	"strings"
@@ -15,6 +13,15 @@ type RequestStatusProperty interface {
 	RequestStatusPropertyType
 }
 
+// NewRequestStatusProperty create a new registries.RequestStatusProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Vfreebusy (Optional)
+// Optional parameters :
+// - registries.LanguageParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.8.3
 func NewRequestStatusProperty(
 	code string,
 	description string,
@@ -30,6 +37,15 @@ func NewRequestStatusProperty(
 	}
 }
 
+// NewRequestStatusPropertyFromString create a new registries.RequestStatusProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Vfreebusy (Optional)
+// Optional parameters :
+// - registries.LanguageParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.8.3
 func NewRequestStatusPropertyFromString(
 	value string,
 	params ...parameters.Parameter,

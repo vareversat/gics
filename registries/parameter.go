@@ -41,12 +41,12 @@ const (
 	// ParticipationStatusParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.12
 	ParticipationStatusParam ParameterRegistry = "PARTSTAT"
-	// RangeParam [See RFC-5545 spec]
+	// RecurrenceIdRangeParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.13
-	RangeParam ParameterRegistry = "RANGE"
-	// RelatedParam [See RFC-5545 spec]
+	RecurrenceIdRangeParam ParameterRegistry = "RANGE"
+	// AlarmTriggerRelationshipParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.14
-	RelatedParam ParameterRegistry = "RELATED"
+	AlarmTriggerRelationshipParam ParameterRegistry = "RELATED"
 	// RelationshipTypeParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.15
 	RelationshipTypeParam ParameterRegistry = "RELTYPE"

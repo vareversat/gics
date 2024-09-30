@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.2
-
 import (
 	"time"
 
@@ -17,6 +15,14 @@ type RecurrenceDateTimesProperty interface {
 	PeriodPropertyType
 }
 
+// NewRecurrenceDateTimesProperty create a new registries.RecurrenceDateTimesProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.2
 func NewRecurrenceDateTimesProperty(
 	startValues []time.Time,
 	endValues []time.Time,

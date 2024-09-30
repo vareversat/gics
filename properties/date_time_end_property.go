@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.2
-
 import (
 	"time"
 
@@ -16,6 +14,14 @@ type DateTimeEndProperty interface {
 	DatePropertyType
 }
 
+// NewDateTimeEndProperty create a new registries.DateTimeEndProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional & must not appear at the same time as registries.PropertyRegistry)
+// - registries.Vfreebusy (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.2
 func NewDateTimeEndProperty(
 	value time.Time,
 	format types.DTFormat,
@@ -45,6 +51,14 @@ func NewDateTimeEndProperty(
 	}
 }
 
+// NewDateTimeEndPropertyFromString create a new registries.DateTimeEndProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional & must not appear at the same time as registries.PropertyRegistry)
+// - registries.Vfreebusy (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.2
 func NewDateTimeEndPropertyFromString(
 	value string,
 	format types.DTFormat,

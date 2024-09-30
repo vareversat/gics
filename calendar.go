@@ -17,13 +17,13 @@ type Calendar interface {
 }
 
 type calendar struct {
-	Begin      properties.BlockDelimiterProperty // Mandatory
-	ProdId     properties.ProductIdProperty      // Mandatory
-	Version    properties.VersionProperty        // Mandatory
-	Method     properties.MethodProperty         // Optional
-	CalScale   properties.CalendarScaleProperty  // Optional
-	Components components.CalendarComponents     // At list one
-	End        properties.BlockDelimiterProperty // Mandatory
+	Begin      properties.BeginProperty         // Mandatory
+	ProdId     properties.ProductIdProperty     // Mandatory
+	Version    properties.VersionProperty       // Mandatory
+	Method     properties.MethodProperty        // Optional
+	CalScale   properties.CalendarScaleProperty // Optional
+	Components components.CalendarComponents    // At list one
+	End        properties.EndProperty           // Mandatory
 }
 
 // NewCalendar create a iCalendar object
@@ -44,8 +44,7 @@ func NewCalendar(
 		return nil, fmt.Errorf("you must specify a PRODID number")
 	}
 	return &calendar{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Vcalendar,
 		),
 		ProdId:     properties.NewProductIdProperty(prodId),
@@ -53,8 +52,7 @@ func NewCalendar(
 		Method:     properties.NewMethodProperty(calendarMethod),
 		CalScale:   properties.NewCalScaleProperty(),
 		Components: calendarComponents,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Vcalendar,
 		),
 	}, nil

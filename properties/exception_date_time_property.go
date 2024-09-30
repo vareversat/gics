@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
-
 import (
 	"time"
 
@@ -19,6 +17,18 @@ type ExceptionDateTimeProperty interface {
 	PeriodPropertyType
 }
 
+// NewExceptionDateTimeProperty create a new registries.ExceptionDateTimesProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Valarm (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
 func NewExceptionDateTimeProperty(
 	values []time.Time,
 	format types.DTFormat,
@@ -47,6 +57,18 @@ func NewExceptionDateTimeProperty(
 	}
 }
 
+// NewExceptionDateTimePropertyFromString create a new registries.ExceptionDateTimesProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Valarm (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
 func NewExceptionDateTimePropertyFromString(
 	values string,
 	format types.DTFormat,

@@ -14,11 +14,11 @@ type AlarmCalendarComponent interface {
 }
 
 type alarmCalendarComponent struct {
-	Begin      properties.BlockDelimiterProperty
+	Begin      properties.BeginProperty
 	Action     properties.ActionProperty
 	Trigger    properties.TriggerProperty
 	Properties properties.Properties
-	End        properties.BlockDelimiterProperty
+	End        properties.EndProperty
 }
 
 // NewAlarmCalendarComponent create a VALARM calendar component
@@ -29,11 +29,11 @@ func NewAlarmCalendarComponent(
 	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
-		Begin:      properties.NewBlockDelimiterProperty(registries.BeginProp, registries.Valarm),
+		Begin:      properties.NewBeginProperty(registries.Valarm),
 		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
-		End:        properties.NewBlockDelimiterProperty(registries.EndProp, registries.Valarm),
+		End:        properties.NewEndProperty(registries.Valarm),
 	}
 }
 

@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.7.1
-
 import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/registries"
@@ -15,6 +13,18 @@ type CalendarScaleProperty interface {
 	TextPropertyType
 }
 
+// NewCalScaleProperty create a new registries.CalendarScaleProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// - registries.Vcalendar (Optional)
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vfreebusy (Optional)
+// - registries.Valarm (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Standard (Optional)
+// - registries.Daylight (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.7.1
 func NewCalScaleProperty(params ...parameters.Parameter) CalendarScaleProperty {
 	return &textPropertyType{
 		Parameters: params,

@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.4
-
 import (
 	"fmt"
 	"strconv"
@@ -15,6 +13,12 @@ type SequenceProperty interface {
 	IntegerPropertyType
 }
 
+// NewSequenceProperty create a new registries.SequenceProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.4
 func NewSequenceProperty(value int32, params ...parameters.Parameter) SequenceProperty {
 	return &integerPropertyType{
 		PropName:   registries.SequenceProp,
@@ -23,6 +27,12 @@ func NewSequenceProperty(value int32, params ...parameters.Parameter) SequencePr
 	}
 }
 
+// NewSequencePropertyFromString create a new registries.SequenceProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.4
 func NewSequencePropertyFromString(
 	value string,
 	params ...parameters.Parameter,

@@ -32,20 +32,20 @@ type TimeZoneCalendarDaylightComponent interface {
 }
 
 type timeZoneCalendarComponent struct {
-	Begin      properties.BlockDelimiterProperty
+	Begin      properties.BeginProperty
 	TimeZoneId properties.TimeZoneIdProperty
 	Properties properties.Properties
 	Components TimeZoneCalendarSubComponents
-	End        properties.BlockDelimiterProperty
+	End        properties.EndProperty
 }
 
 type timeZoneCalendarSubComponent struct {
-	Begin              properties.BlockDelimiterProperty
+	Begin              properties.BeginProperty
 	DateTimeStart      properties.DateTimeStartProperty
 	TimeZoneOffsetTo   properties.TimeZoneOffsetToProperty
 	TimeZoneOffsetFrom properties.TimeZoneOffsetFromProperty
 	Properties         properties.Properties
-	End                properties.BlockDelimiterProperty
+	End                properties.EndProperty
 }
 
 // NewTimeZoneCalendarComponent create a VTIMEZONE calendar component
@@ -56,15 +56,13 @@ func NewTimeZoneCalendarComponent(
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Vtimezone,
 		),
 		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Vtimezone,
 		),
 	}
@@ -101,16 +99,14 @@ func NewTimeZoneDayLightSubcomponent(
 	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
 	propertyList ...properties.Property) TimeZoneCalendarDaylightComponent {
 	return &timeZoneCalendarSubComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Daylight,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Daylight,
 		),
 	}
@@ -125,16 +121,14 @@ func NewTimeZoneCalendarStandardSubcomponent(
 	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
 	propertyList ...properties.Property) TimeZoneCalendarSubComponent {
 	return &timeZoneCalendarSubComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Standard,
 		),
 		DateTimeStart:      dateTimeStart,
 		TimeZoneOffsetTo:   timeZoneOffsetTo,
 		TimeZoneOffsetFrom: timeZoneOffsetFrom,
 		Properties:         propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Standard,
 		),
 	}

@@ -14,11 +14,11 @@ type JournalCalendarComponent interface {
 }
 
 type journalCalendarComponent struct {
-	Begin         properties.BlockDelimiterProperty
+	Begin         properties.BeginProperty
 	UID           properties.UidProperty
 	DateTimeStamp properties.DateTimeStampProperty
 	Properties    properties.Properties
-	End           properties.BlockDelimiterProperty
+	End           properties.EndProperty
 }
 
 // NewJournalCalendarComponent create a VJOURNAL calendar component
@@ -29,15 +29,13 @@ func NewJournalCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) JournalCalendarComponent {
 	return &journalCalendarComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Vjournal,
 		),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Vjournal,
 		),
 	}

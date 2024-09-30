@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.1
-
 import (
 	"time"
 
@@ -15,6 +13,12 @@ type DateTimeCreatedProperty interface {
 	DateTimePropertyType
 }
 
+// NewDateTimeCreatedProperty create a new registries.DateTimeCreatedProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.1
 func NewDateTimeCreatedProperty(
 	timeValue time.Time,
 	params ...parameters.Parameter,
@@ -26,6 +30,12 @@ func NewDateTimeCreatedProperty(
 	}
 }
 
+// NewDateTimeCreatedPropertyFromString create a new registries.DateTimeCreatedProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.1
 func NewDateTimeCreatedPropertyFromString(
 	value string,
 	params ...parameters.Parameter) DateTimeCreatedProperty {

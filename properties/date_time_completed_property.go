@@ -15,6 +15,10 @@ type DateTimeCompletedProperty interface {
 	DateTimePropertyType
 }
 
+// NewDateTimeCompletedProperty create a new registries.CompletedProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtodo (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.2
 func NewDateTimeCompletedProperty(
 	value time.Time,
 ) DateTimeCompletedProperty {
@@ -24,6 +28,10 @@ func NewDateTimeCompletedProperty(
 	}
 }
 
+// NewDateTimeCompletedPropertyFromString create a new registries.CompletedProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtodo (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.2
 func NewDateTimeCompletedPropertyFromString(
 	value string,
 	params ...parameters.Parameter) DateTimeCompletedProperty {

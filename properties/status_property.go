@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.11
-
 import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/registries"
@@ -12,6 +10,12 @@ type StatusProperty interface {
 	StatusPropertyType
 }
 
+// NewStatusProperty create a new registries.StatusProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.11
 func NewStatusProperty(status types.StatusType, params ...parameters.Parameter) StatusProperty {
 	return &statusPropertyType{
 		PropName:   registries.StatusProp,
@@ -20,6 +24,12 @@ func NewStatusProperty(status types.StatusType, params ...parameters.Parameter) 
 	}
 }
 
+// NewStatusPropertyFromString create a new registries.StatusProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.11
 func NewStatusPropertyFromString(status string, params ...parameters.Parameter) StatusProperty {
 	return &statusPropertyType{
 		PropName:   registries.StatusProp,

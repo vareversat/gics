@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.3
-
 import (
 	"time"
 
@@ -19,6 +17,15 @@ type TriggerParameters struct {
 	AlarmTriggerRelationship parameters.AlarmTriggerRelationshipParam
 }
 
+// NewTriggerProperty create a new registries.TriggerProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// - registries.AlarmTriggerRelationshipParam
+// - registries.AlarmTriggerRelationshipParam (Mandatory when use of registries.Duration type)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.3
 func NewTriggerProperty(
 	dateTimeValue time.Time,
 	durationValue string,

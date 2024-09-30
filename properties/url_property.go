@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.3
-
 import (
 	"fmt"
 	"net/url"
@@ -16,6 +14,13 @@ type UrlProperty interface {
 	UriPropertyType
 }
 
+// NewUrlProperty create a new registries.UrlProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Vfreebusy (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.6
 func NewUrlProperty(uri *url.URL, params ...parameters.Parameter) UrlProperty {
 	return &uriPropertyType{
 		PropName:   registries.UrlProp,
@@ -24,6 +29,13 @@ func NewUrlProperty(uri *url.URL, params ...parameters.Parameter) UrlProperty {
 	}
 }
 
+// NewUrlPropertyFromString create a new registries.UrlProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// - registries.Vfreebusy (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.6
 func NewUrlPropertyFromString(uri string, params ...parameters.Parameter) (UrlProperty, error) {
 	urlValue, err := url.Parse(uri)
 	if err != nil {

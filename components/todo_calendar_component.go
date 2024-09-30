@@ -14,12 +14,12 @@ type ToDoCalendarComponent interface {
 }
 
 type toDoCalendarComponent struct {
-	Begin                   properties.BlockDelimiterProperty
+	Begin                   properties.BeginProperty
 	UID                     properties.UidProperty
 	DateTimeStamp           properties.DateTimeStampProperty
 	AlarmCalendarComponents []AlarmCalendarComponent
 	Properties              properties.Properties
-	End                     properties.BlockDelimiterProperty
+	End                     properties.EndProperty
 }
 
 // NewToDoCalendarComponent create a VTODO calendar component
@@ -31,16 +31,14 @@ func NewToDoCalendarComponent(
 	alarmCalendarComponents []AlarmCalendarComponent,
 	propertyList ...properties.Property) ToDoCalendarComponent {
 	return &toDoCalendarComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Vtodo,
 		),
 		UID:                     uid,
 		DateTimeStamp:           dateTimeStamp,
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Vtodo,
 		),
 	}

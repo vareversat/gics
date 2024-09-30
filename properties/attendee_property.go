@@ -16,9 +16,25 @@ type AttendeeProperty interface {
 	CalendarUserAddressPropertyType
 }
 
-// NewAttendeeProperty create a new ATTENDEE property
-// This property CAN be seen in VALARM, VEVENT, VFREEBUSY & VJOURNAL components
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.1
+// NewAttendeeProperty create a new registries.AttendeeProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// - registries.Vevent (Optional)
+// - registries.Vfreebusy (Optional)
+// - registries.Vjournal (Optional)
+// Optional parameters :
+// - registries.MemberParam
+// - registries.CalendarUserTypeParam
+// - registries.CommonNameParam
+// - registries.DelegatedToParam
+// - registries.DelegatedFromParam
+// - registries.DirectoryEntryReferenceParam
+// - registries.MemberParam
+// - registries.RoleParam
+// - registries.ParticipationStatusParam
+// - registries.RsvpExpectationParam
+// - registries.SentByParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.1
 func NewAttendeeProperty(uri *url.URL, params ...parameters.Parameter) AttendeeProperty {
 	return &calendarUserAddressPropertyType{
 		PropName:   registries.AttendeeProp,
@@ -27,6 +43,25 @@ func NewAttendeeProperty(uri *url.URL, params ...parameters.Parameter) AttendeeP
 	}
 }
 
+// NewAttendeePropertyFromString create a new registries.AttendeeProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// - registries.Vevent (Optional)
+// - registries.Vfreebusy (Optional)
+// - registries.Vjournal (Optional)
+// Optional parameters :
+// - registries.MemberParam
+// - registries.CalendarUserTypeParam
+// - registries.CommonNameParam
+// - registries.DelegatedToParam
+// - registries.DelegatedFromParam
+// - registries.DirectoryEntryReferenceParam
+// - registries.MemberParam
+// - registries.RoleParam
+// - registries.ParticipationStatusParam
+// - registries.RsvpExpectationParam
+// - registries.SentByParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.1
 func NewAttendeePropertyFromString(
 	uri string,
 	params ...parameters.Parameter,

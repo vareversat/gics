@@ -10,9 +10,10 @@ type ActionProperty interface {
 	ActionPropertyType
 }
 
-// NewActionProperty create a new ACTION property
-// This property MUST be seen in VALARM component
-// [See RFC-5545 ref]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
+// NewActionProperty create a new registries.ActionProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Mandatory)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
 func NewActionProperty(
 	action registries.ActionRegistry,
 	params ...parameters.Parameter,
@@ -24,10 +25,14 @@ func NewActionProperty(
 	}
 }
 
+// NewActionPropertyFromString create a new registries.ActionProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Mandatory)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
 func NewActionPropertyFromString(
 	actionString string,
 	params ...parameters.Parameter,
-) BlockDelimiterProperty {
+) ActionPropertyType {
 	return &actionPropertyType{
 		PropName:   registries.ActionProp,
 		Value:      types.NewActionValue(registries.ActionRegistry(actionString)),

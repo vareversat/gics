@@ -14,12 +14,12 @@ type EventCalendarComponent interface {
 }
 
 type eventCalendarComponent struct {
-	Begin                   properties.BlockDelimiterProperty
+	Begin                   properties.BeginProperty
 	UID                     properties.UidProperty
 	DateTimeStamp           properties.DateTimeStampProperty
 	AlarmCalendarComponents []AlarmCalendarComponent
 	Properties              properties.Properties
-	End                     properties.BlockDelimiterProperty
+	End                     properties.EndProperty
 }
 
 // NewEventCalendarComponent create a VEVENT calendar component
@@ -31,16 +31,14 @@ func NewEventCalendarComponent(
 	alarmCalendarComponents []AlarmCalendarComponent,
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Vevent,
 		),
 		UID:                     uid,
 		DateTimeStamp:           dateTimeStamp,
 		AlarmCalendarComponents: alarmCalendarComponents,
 		Properties:              propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Vevent,
 		),
 	}

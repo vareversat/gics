@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.2
-
 import (
 	"time"
 
@@ -15,6 +13,16 @@ type DateTimeStampProperty interface {
 	DateTimePropertyType
 }
 
+// NewDateTimeStampProperty create a new registries.DateTimeStampProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Mandatory)
+// - registries.Vtodo (Mandatory)
+// - registries.Vjournal (Mandatory)
+// - registries.Vfreebusy (Mandatory)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.2
 func NewDateTimeStampProperty(
 	timeValue time.Time,
 	params ...parameters.Parameter,
@@ -26,6 +34,16 @@ func NewDateTimeStampProperty(
 	}
 }
 
+// NewDateTimeStampPropertyFromString create a new registries.DateTimeStampProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Mandatory)
+// - registries.Vtodo (Mandatory)
+// - registries.Vjournal (Mandatory)
+// - registries.Vfreebusy (Mandatory)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.2
 func NewDateTimeStampPropertyFromString(
 	value string,
 	params ...parameters.Parameter) DateTimeStampProperty {

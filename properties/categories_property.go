@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.2
-
 import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/registries"
@@ -13,6 +11,14 @@ type CategoriesProperty interface {
 	TextPropertyType
 }
 
+// NewCategoryProperty create a new registries.CategoriesProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// Optional parameters :
+// - registries.LanguageParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.2
 func NewCategoryProperty(values []string, params ...parameters.Parameter) CategoriesProperty {
 	return &textPropertyType{
 		PropName:   registries.CategoriesProp,
@@ -21,6 +27,14 @@ func NewCategoryProperty(values []string, params ...parameters.Parameter) Catego
 	}
 }
 
+// NewCategoryPropertyFromString create a new registries.CategoriesProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// Optional parameters :
+// - registries.LanguageParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.2
 func NewCategoryPropertyFromString(
 	values string,
 	params ...parameters.Parameter,

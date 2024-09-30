@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.3
-
 import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/registries"
@@ -12,6 +10,11 @@ type TimeZoneOffsetFromProperty interface {
 	UtcOffsetPropertyType
 }
 
+// NewTimeZoneOffsetFromProperty create a new registries.TimeZoneOffsetFromProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Standard (Mandatory)
+// - registries.Daylight (Mandatory)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.3
 func NewTimeZoneOffsetFromProperty(
 	value string,
 	params ...parameters.Parameter,

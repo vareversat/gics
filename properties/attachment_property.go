@@ -11,9 +11,15 @@ type AttachmentProperty interface {
 	TextPropertyType
 }
 
-// NewAttachmentProperty create a new ATTACH property
-// This property CAN be seen in VALARM, VEVENT, VTODO & VJOURNAL components
-// See the [RFC-5545] ref for more info
+// NewAttachmentProperty create a new registries.AttachmentProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// Optional parameters :
+// - registries.FormatTypeParam
+// - registries.FormatTypeParam
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.1
 func NewAttachmentProperty(
 	value string,

@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.4
-
 import (
 	"time"
 
@@ -16,6 +14,14 @@ type RecurrenceIdProperty interface {
 	DatePropertyType
 }
 
+// NewRecurrenceIdProperty create a new registries.RecurrenceIdProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vcalendar (Mandatory if recurring calendar components)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// - registries.RecurrenceIdRangeParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.4
 func NewRecurrenceIdProperty(
 	value time.Time,
 	format types.DTFormat,
@@ -45,6 +51,14 @@ func NewRecurrenceIdProperty(
 	}
 }
 
+// NewRecurrenceIdPropertyFromString create a new registries.RecurrenceIdProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vcalendar (Mandatory if recurring calendar components)
+// Optional parameters :
+// - registries.ValueParam
+// - registries.TimeZoneIdParam
+// - registries.RecurrenceIdRangeParam
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.4
 func NewRecurrenceIdPropertyFromString(
 	value string,
 	format types.DTFormat,

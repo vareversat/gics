@@ -15,6 +15,10 @@ type RepeatCountProperty interface {
 	IntegerPropertyType
 }
 
+// NewRepeatCountProperty create a new registries.RepeatProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.2
 func NewRepeatCountProperty(value int32, params ...parameters.Parameter) RepeatCountProperty {
 	return &integerPropertyType{
 		PropName:   registries.RepeatProp,
@@ -23,6 +27,10 @@ func NewRepeatCountProperty(value int32, params ...parameters.Parameter) RepeatC
 	}
 }
 
+// NewRepeatCountPropertyFromString create a new registries.RepeatProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Valarm (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.2
 func NewRepeatCountPropertyFromString(
 	value string,
 	params ...parameters.Parameter,

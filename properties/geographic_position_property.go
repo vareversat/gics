@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.6
-
 import (
 	"fmt"
 	"strconv"
@@ -16,6 +14,11 @@ type GeographicPositionProperty interface {
 	GeoPropertyType
 }
 
+// NewGeographicPositionProperty create a new registries.FreeBusyTimeProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.6
 func NewGeographicPositionProperty(
 	long float32,
 	lat float32,
@@ -29,6 +32,11 @@ func NewGeographicPositionProperty(
 	}
 }
 
+// NewGeographicPositionPropertyFromString create a new registries.FreeBusyTimeProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.6
 func NewGeographicPositionPropertyFromString(
 	value string,
 	params ...parameters.Parameter,

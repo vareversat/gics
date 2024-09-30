@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.8
-
 import (
 	"fmt"
 	"strconv"
@@ -15,6 +13,10 @@ type PercentCompleteProperty interface {
 	IntegerPropertyType
 }
 
+// NewPercentCompleteProperty create a new registries.PercentCompleteProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtodo (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.8
 func NewPercentCompleteProperty(value int32, params ...parameters.Parameter) IntegerPropertyType {
 	return &integerPropertyType{
 		PropName:   registries.PercentCompleteProp,
@@ -23,6 +25,10 @@ func NewPercentCompleteProperty(value int32, params ...parameters.Parameter) Int
 	}
 }
 
+// NewPercentCompletePropertyFromString create a new registries.PercentCompleteProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtodo (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.8
 func NewPercentCompletePropertyFromString(
 	value string,
 	params ...parameters.Parameter,

@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.3
-
 import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/registries"
@@ -12,6 +10,12 @@ type ClassificationProperty interface {
 	TextPropertyType
 }
 
+// NewClassificationProperty create a new registries.ClassProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.3
 func NewClassificationProperty(
 	classValue registries.ClassificationRegistry,
 	params ...parameters.Parameter,
@@ -23,6 +27,12 @@ func NewClassificationProperty(
 	}
 }
 
+// NewClassificationPropertyFromString create a new registries.ClassProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vevent (Optional)
+// - registries.Vtodo (Optional)
+// - registries.Vjournal (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.3
 func NewClassificationPropertyFromString(
 	classValue string,
 	params ...parameters.Parameter,

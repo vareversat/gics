@@ -1,7 +1,5 @@
 package properties
 
-// https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.5
-
 import (
 	"fmt"
 	"net/url"
@@ -16,6 +14,10 @@ type TimeZoneUrlProperty interface {
 	UriPropertyType
 }
 
+// NewTimeZoneUrlProperty create a new registries.TimeZoneUrlProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtimezone (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.5
 func NewTimeZoneUrlProperty(value *url.URL, params ...parameters.Parameter) TimeZoneUrlProperty {
 	return &uriPropertyType{
 		PropName:   registries.TimeZoneUrlProp,
@@ -24,6 +26,10 @@ func NewTimeZoneUrlProperty(value *url.URL, params ...parameters.Parameter) Time
 	}
 }
 
+// NewTimeZoneUrlPropertyFromString create a new registries.TimeZoneUrlProp property. See [RFC-5545] ref for more info
+// Usage :
+// - registries.Vtimezone (Optional)
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.3.5
 func NewTimeZoneUrlPropertyFromString(
 	uri string,
 	params ...parameters.Parameter,

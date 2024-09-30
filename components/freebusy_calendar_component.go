@@ -14,11 +14,11 @@ type FreeBusyCalendarComponent interface {
 }
 
 type freeBusyCalendarComponent struct {
-	Begin         properties.BlockDelimiterProperty
+	Begin         properties.BeginProperty
 	UID           properties.UidProperty
 	DateTimeStamp properties.DateTimeStampProperty
 	Properties    properties.Properties
-	End           properties.BlockDelimiterProperty
+	End           properties.EndProperty
 }
 
 // NewFreeBusyCalendarComponent create a VFREEBUSY calendar component
@@ -29,15 +29,13 @@ func NewFreeBusyCalendarComponent(
 	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
-		Begin: properties.NewBlockDelimiterProperty(
-			registries.BeginProp,
+		Begin: properties.NewBeginProperty(
 			registries.Vfreebusy,
 		),
 		UID:           uid,
 		DateTimeStamp: dateTimeStamp,
 		Properties:    propertyList,
-		End: properties.NewBlockDelimiterProperty(
-			registries.EndProp,
+		End: properties.NewEndProperty(
 			registries.Vfreebusy,
 		),
 	}
