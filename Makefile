@@ -31,7 +31,6 @@ test:
 
 # Install project dependencies
 deps:
-	$(GOCMD) mod download
 	$(GOCMD) mod tidy
 	$(GOCMD) mod vendor
 
@@ -49,7 +48,7 @@ fmt:
 
 # Lint the code using a linter tool
 lint:
-	golangci-lint run
+	staticcheck ./...
 
 # Generate code coverage report
 coverage:
