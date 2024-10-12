@@ -148,6 +148,9 @@ const (
 	// RequestStatusProp [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.8.3
 	RequestStatusProp PropertyRegistry = "REQUEST-STATUS"
+	// NonStandardProp [See RFC-5545 spec]
+	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.8.2
+	NonStandardProp PropertyRegistry = "NON-STANDARD-PROPERTY"
 
 	// BeginProp is used to start a new component definition
 	BeginProp PropertyRegistry = "BEGIN"

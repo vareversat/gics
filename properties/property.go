@@ -99,6 +99,10 @@ type BlockDelimiterPropertyType interface {
 	Property
 }
 
+type NonStandardPropertyType interface {
+	Property
+}
+
 type textPropertyType struct {
 	PropName   registries.PropertyRegistry
 	Value      types.TextValue
@@ -341,6 +345,20 @@ func (bdP *blockDelimiterPropertyType) GetName() registries.PropertyRegistry {
 
 func (bdP *blockDelimiterPropertyType) GetValue() string {
 	return string(bdP.Value.Value)
+}
+
+type nonStandardPropertyType struct {
+	PropName   string
+	Value      types.TextValue
+	Parameters parameters.Parameters
+}
+
+func (nSP *nonStandardPropertyType) GetName() registries.PropertyRegistry {
+	return registries.NonStandardProp
+}
+
+func (nSP *nonStandardPropertyType) GetValue() string {
+	return nSP.Value.S
 }
 
 func computeParameters(paramsOutput io.Writer, params parameters.Parameters) {
@@ -645,6 +663,19 @@ func (bT *blockDelimiterPropertyType) ToICalendarPropFormat(output io.Writer) {
 	}
 	unfoldedOutput.Write(
 		[]byte(fmt.Sprintf("%s%s:%s", bT.PropName, paramsOutput.String(), bT.Value.Value)),
+	)
+	foldOutput(&unfoldedOutput)
+	unfoldedOutput.WriteTo(output)
+}
+
+func (nSP *nonStandardPropertyType) ToICalendarPropFormat(output io.Writer) {
+	var unfoldedOutput bytes.Buffer
+	var paramsOutput bytes.Buffer
+	if nSP.Parameters != nil {
+		computeParameters(&paramsOutput, nSP.Parameters)
+	}
+	unfoldedOutput.Write(
+		[]byte(fmt.Sprintf("%s%s:%s", nSP.PropName, paramsOutput.String(), nSP.Value.S)),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)

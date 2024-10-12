@@ -157,8 +157,9 @@ func ParseProperty(propertyName string, propertyValue string) (properties.Proper
 		return url, nil
 	case "VERSION":
 		return properties.NewVersionProperty(propertyValue), nil
+	// Non standard properties
 	default:
-		fmt.Printf("### omitting %s\n", propertyName)
+		return properties.NewNonStandardProperty(propertyName, propertyValue), nil
 	}
 	return nil, nil
 }
