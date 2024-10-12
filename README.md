@@ -1,9 +1,9 @@
 # GICS 📅
 
-<a href="https://go.dev"><img src="https://img.shields.io/badge/go-white?logo=go&style=for-the-badge" alt="Go badge for gics Github project"></a>
-<a href="https://github.com/vareversat/gics/actions"><img src="https://img.shields.io/github/actions/workflow/status/vareversat/gics/push.default.yaml?logo=github&style=for-the-badge" alt="Build badge for gics Github project"></a>
-<a href="https://github.com/vareversat/gics/releases"><img src="https://img.shields.io/github/v/tag/vareversat/gics?label=version&logo=git&logoColor=white&style=for-the-badge" alt="Last release badge for gics Github project"></a>
-<a href="https://codecov.io/gh/vareversat/gics/"><img src="https://img.shields.io/codecov/c/github/vareversat/gics?logo=codecov&style=for-the-badge&token=ES462W8D70" alt="Code coverage badge for gics Github project"></a>
+[![Go badge for gics Github project](https://img.shields.io/badge/go-white?logo=go&style=for-the-badge)](https://go.dev)
+[![Build badge for gics Github project](https://img.shields.io/github/actions/workflow/status/vareversat/gics/push.default.yaml?logo=github&style=for-the-badge)](https://github.com/vareversat/gics/actions)
+[![Last release badge for gics Github project](https://img.shields.io/github/v/tag/vareversat/gics?label=version&logo=git&logoColor=white&style=for-the-badge)](https://github.com/vareversat/gics/releases)
+[![Code coverage badge for gics Github project](https://img.shields.io/codecov/c/github/vareversat/gics?logo=codecov&style=for-the-badge&token=ES462W8D70)](https://codecov.io/gh/vareversat/gics/)
 
 > [!WARNING]
 > There is still plenty work to do on this project. This package may be uses in a production environment at your own
