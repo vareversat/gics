@@ -21,12 +21,12 @@ I decided to create this go module because existing options didn't meet my needs
 Here the main features this module offers (some are already available ✅ and some are still in WIP state 🟧)
 
 - ✅ Create an **iCalendar** object
-    - ✅ With **VEVENT** components
-    - ✅ With **VALARM** components
-    - ✅ With **VJOURNAL** components
-    - ✅ With **VFREEBUSY** components
-    - ✅ With **VTIMEZONE** components
-    - ✅ With **VTODO** components
+  - ✅ With **VEVENT** components
+  - ✅ With **VALARM** components
+  - ✅ With **VJOURNAL** components
+  - ✅ With **VFREEBUSY** components
+  - ✅ With **VTIMEZONE** components
+  - ✅ With **VTODO** components
 - 🟧 Make use of all [properties available](https://datatracker.ietf.org/doc/html/rfc5545#section-3.2)
 - 🟧 Make use of all [types available](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3)
 - 🟧 Parse an iCalendar file
@@ -101,4 +101,3 @@ func main() {
 }
 
 ```
-
