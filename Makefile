@@ -2,28 +2,16 @@
 
 # Go parameters
 GOCMD = go
-BINARY_NAME_WIN = chabo-api.exe
-BINARY_NAME_UNIX = chabo-api.o
 
 .PHONY: deps-upgrade deps
 
 
 # Main build target
-all: deps test build
-
-# Build the application
-build:
-	$(GOCMD) build -o $(BINARY_NAME_WIN) -v
-
-# Build for Linux
-build-linux:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOCMD) build -o $(BINARY_NAME_UNIX) -v
+all: deps test
 
 # Clean the build artifacts
 clean:
 	$(GOCMD) clean
-	rm -f $(BINARY_NAME_WIN)
-	rm -f $(BINARY_NAME_UNIX)
 
 # Run tests
 test:
@@ -48,12 +36,12 @@ fmt:
 
 # Lint the code using a linter tool
 lint:
-	staticcheck ./...
+	golangci-lint run
 
 # Generate code coverage report
 coverage:
 	$(GOCMD) test -coverprofile='coverage.out' ./...
-	$(GOCMD) tool cover -html=coverage.out
+	$(GOCMD) tool cover -html=coverage.out -o coverage.html
 
 # Generate documentation using tools like godoc
 doc:
@@ -62,4 +50,4 @@ doc:
 # Perform a full code quality check (lint, tests, coverage)
 check: lint test coverage
 
-.PHONY: all build build-linux clean test deps run fmt lint coverage doc check
+.PHONY: all clean test deps run fmt lint coverage doc check
