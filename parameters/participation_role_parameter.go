@@ -19,3 +19,10 @@ func NewParticipationRoleParam(value registries.ParticipantRoleRegistry) Partici
 		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+func NewParticipationRoleParamFromString(value string) ParticipationRoleParam {
+	return &textParameter{
+		ParamName: registries.RoleParam,
+		Value:     types.NewTextValue(value),
+	}
+}

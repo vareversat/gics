@@ -9,7 +9,7 @@ type ValueParam interface {
 	TextTypeParameter
 }
 
-// NewValueParam create a new registries.ValueParam property. See [RFC-5545] ref for more info
+// NewValueDataTypesParam create a new registries.ValueParam property. See [RFC-5545] ref for more info
 // This parameter can be used in these properties :
 // - registries.DateTimeEndProp
 // - registries.DateTimeStartProp
@@ -19,9 +19,16 @@ type ValueParam interface {
 // - registries.ExceptionDateTimesProp
 // - registries.TriggerProp
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
-func NewValueParam(value registries.ValueTypeRegistry) ValueParam {
+func NewValueDataTypesParam(value registries.ValueTypeRegistry) ValueParam {
 	return &textParameter{
-		ParamName: registries.ValueParam,
+		ParamName: registries.ValueDataTypesParam,
 		Value:     types.NewTextValue(string(value)),
+	}
+}
+
+func NewValueDataTypesParamFromString(value string) ValueParam {
+	return &textParameter{
+		ParamName: registries.ValueDataTypesParam,
+		Value:     types.NewTextValue(value),
 	}
 }

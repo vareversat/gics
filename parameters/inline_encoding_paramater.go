@@ -19,3 +19,10 @@ func NewInlineEncodingParam(value registries.EncodingTypeRegistry) InlineEncodin
 		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+func NewInlineEncodingParamFromString(value string) InlineEncodingParam {
+	return &textParameter{
+		ParamName: registries.EncodingParam,
+		Value:     types.NewTextValue(value),
+	}
+}

@@ -19,3 +19,10 @@ func NewCalendarUserTypeParam(value registries.CalendarUserTypeRegistry) Calenda
 		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+func NewCalendarUserTypeParamFromString(value string) CalendarUserTypeParam {
+	return &textParameter{
+		ParamName: registries.CalendarUserTypeParam,
+		Value:     types.NewTextValue(value),
+	}
+}

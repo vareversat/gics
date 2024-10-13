@@ -35,7 +35,7 @@ func NewTriggerProperty(
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
-		if params[i].GetParamName() == registries.ValueParam {
+		if params[i].GetParamName() == registries.ValueDataTypesParam {
 			valueType = params[i].GetParamValue()
 		}
 	}

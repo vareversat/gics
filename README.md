@@ -28,8 +28,14 @@ Here the main features this module offers (some are already available ✅ and so
   - ✅ With **VTIMEZONE** components
   - ✅ With **VTODO** components
 - 🟧 Make use of all [properties available](https://datatracker.ietf.org/doc/html/rfc5545#section-3.2)
+  - ✅ All are implemented
+  - 🟧 Work needed for **EXRULE**, **FREEBUSY**, **RDATE**, **RRULE** and **RRULE**
 - 🟧 Make use of all [types available](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3)
+  - ✅ All are implemented
+  - 🟧 Work needed for **RECUR**
 - 🟧 Parse an iCalendar file
+  - ✅ Parsing ics files is implemented
+  - 🟧 Missing the struct computation
 - ✅ Write in an iCalendar file
 
 ## Installation
@@ -37,7 +43,7 @@ Here the main features this module offers (some are already available ✅ and so
 To install gics, use the `go get` command:
 
 ```sh
-go get github.com/vareversat/gics
+go get github.com/vareversat/gics@latest
 ```
 
 ## Type representations

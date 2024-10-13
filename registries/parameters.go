@@ -62,7 +62,10 @@ const (
 	// TimeZoneIdParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.19
 	TimeZoneIdParam ParameterRegistry = "TZID"
-	// ValueParam [See RFC-5545 spec]
+	// ValueDataTypesParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.20
-	ValueParam ParameterRegistry = "VALUE"
+	ValueDataTypesParam ParameterRegistry = "VALUE"
+	// NonStandardParam [See RFC-5545 spec]
+	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2
+	NonStandardParam ParameterRegistry = "NON-STANDARD-PARAMETER"
 )

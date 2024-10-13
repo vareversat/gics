@@ -21,3 +21,12 @@ func NewParticipationStatusParam(
 		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+func NewParticipationStatusParamFromString(
+	value string,
+) ParticipationStatusParam {
+	return &textParameter{
+		ParamName: registries.ParticipationStatusParam,
+		Value:     types.NewTextValue(value),
+	}
+}

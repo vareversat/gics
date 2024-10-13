@@ -74,7 +74,7 @@ func (l *Lexer) NextToken() Token {
 		// We started to reader the property name
 		if l.position == 0 {
 			tok.Literal = l.readIdentifier()
-			tok.Type = PropName
+			tok.Type = PropertyNameToken
 			l.property.SetPropertyName(tok.Literal)
 			return tok
 		}
@@ -84,28 +84,28 @@ func (l *Lexer) NextToken() Token {
 			l.isRelaxedMode = true
 			tok.Literal = l.readIdentifier()
 			l.isRelaxedMode = false
-			tok.Type = PropValue
+			tok.Type = PropertyValueToken
 			l.property.SetPropertyValue(tok.Literal)
 			return tok
 		}
 		// We started to reader a parameter name
 		if l.previousCh == ';' {
 			tok.Literal = l.readIdentifier()
-			tok.Type = ParamName
+			tok.Type = ParameterNameToken
 			l.property.AddParam(tok.Literal)
 			return tok
 		}
-		// We started to reader a parameter name
+		// We started to reader a parameter value
 		if l.previousCh == '=' {
 			tok.Literal = l.readIdentifier()
-			tok.Type = ParamValue
+			tok.Type = ParameterValueToken
 			l.property.SetValueOfLastParam(tok.Literal)
 			return tok
 		}
 		// We started to reader a double-quoted parameter name
 		if l.previousCh == '"' {
 			tok.Literal = l.readIdentifier()
-			tok.Type = ParamValue
+			tok.Type = ParameterValueToken
 			l.property.SetValueOfLastParam(tok.Literal)
 			return tok
 		}
@@ -144,7 +144,7 @@ func (l *Lexer) peekChar() byte {
 
 func (l *Lexer) readIdentifier() string {
 	position := l.position
-	// We run into a '"' or we are ready a property value
+	// We run into a '"' or we are reading a property value
 	if l.isRelaxedMode {
 		for isLetterRelaxed(l.ch) {
 			l.readChar()

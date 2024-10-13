@@ -1,6 +1,7 @@
 package parameters
 
 import (
+	"fmt"
 	"net/url"
 
 	"github.com/vareversat/gics/registries"
@@ -20,4 +21,15 @@ func NewMemberParam(value *url.URL) MemberParam {
 		ParamName: registries.MemberParam,
 		Value:     types.NewCalendarUserAddressValue(value),
 	}
+}
+
+func NewMemberParamFromString(value string) (MemberParam, error) {
+	urlValue, err := url.Parse(value)
+	if err != nil {
+		return nil, fmt.Errorf("%s is not a valid URL format", value)
+	}
+	return &calendarUserAddressParameter{
+		ParamName: registries.MemberParam,
+		Value:     types.NewCalendarUserAddressValue(urlValue),
+	}, nil
 }

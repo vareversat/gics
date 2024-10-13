@@ -19,3 +19,10 @@ func NewRelationshipParam(value registries.RelationshipTypeRegistry) Relationshi
 		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+func NewRelationshipParamFromString(value string) RelationshipParam {
+	return &textParameter{
+		ParamName: registries.RelationshipTypeParam,
+		Value:     types.NewTextValue(value),
+	}
+}

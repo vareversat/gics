@@ -1,6 +1,9 @@
 package parameters
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
@@ -18,4 +21,16 @@ func NewRSVPParam(value bool) RSVPParam {
 		ParamName: registries.RsvpExpectationParam,
 		Value:     types.NewBooleanValue(value),
 	}
+}
+
+func NewRSVPParamFromString(value string) (RSVPParam, error) {
+	boolValue, err := strconv.ParseBool(value)
+	if err != nil {
+		return nil, fmt.Errorf("%s is not a valid boolean value", value)
+	}
+
+	return &booleanParameter{
+		ParamName: registries.RsvpExpectationParam,
+		Value:     types.NewBooleanValue(boolValue),
+	}, nil
 }

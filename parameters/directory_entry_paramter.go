@@ -1,6 +1,7 @@
 package parameters
 
 import (
+	"fmt"
 	"net/url"
 
 	"github.com/vareversat/gics/registries"
@@ -21,4 +22,15 @@ func NewDirectoryEntryParam(value *url.URL) DirectoryEntryParam {
 		ParamName: registries.DirectoryEntryReferenceParam,
 		Value:     types.NewUriValue(value),
 	}
+}
+
+func NewDirectoryEntryParamFromString(value string) (DirectoryEntryParam, error) {
+	urlValue, err := url.Parse(value)
+	if err != nil {
+		return nil, fmt.Errorf("%s is not a valid URL format", value)
+	}
+	return &uriParameter{
+		ParamName: registries.DirectoryEntryReferenceParam,
+		Value:     types.NewUriValue(urlValue),
+	}, nil
 }

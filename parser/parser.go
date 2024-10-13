@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/vareversat/gics/parameters"
 )
 
 const (
@@ -48,9 +50,21 @@ func parse(unfoldedData bytes.Buffer) {
 		lexer := NewLexer(line)
 		for tok := lexer.NextToken(); tok.Type != EOF; tok = lexer.NextToken() {
 		}
+		// First, parsed all the parameters
+		parsedParameters := parameters.Parameters{}
+		for _, v := range lexer.property.ParameterParsers {
+			param, err := ParameterParser(v.ParameterName, v.ParameterValue)
+			if err != nil {
+				panic(err)
+			} else {
+				parsedParameters = append(parsedParameters, param)
+			}
+		}
+		// Then, compute the entire property with the parameters
 		parsedProperty, _ := ParseProperty(
 			lexer.property.PropertyName,
 			lexer.property.PropertyValue,
+			parsedParameters...,
 		)
 		if parsedProperty != nil {
 			parsedProperty.ToICalendarPropFormat(os.Stdout)

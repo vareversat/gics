@@ -10,11 +10,30 @@ type AlarmTriggerRelationshipParam interface {
 }
 
 // NewAlarmTriggerRelationshipParam create a new registries.AlarmTriggerRelationshipParam property. See [RFC-5545] ref for more info
+//
 // This parameter can be used in this property :
-// - registries.TriggerProp
+//
+//   - [registries.TriggerProp]
+//
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.14
 func NewAlarmTriggerRelationshipParam(
 	value registries.AlarmTriggerRelationshipTypeRegistry,
+) AlarmTriggerRelationshipParam {
+	return &textParameter{
+		ParamName: registries.AlarmTriggerRelationshipParam,
+		Value:     types.NewTextValue(string(value)),
+	}
+}
+
+// NewAlarmTriggerRelationshipParam create a new registries.AlarmTriggerRelationshipParam property from string value. See [RFC-5545] ref for more info
+//
+// This parameter can be used in this property :
+//
+//   - [registries.TriggerProp]
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.14
+func NewAlarmTriggerRelationshipParamFromString(
+	value string,
 ) AlarmTriggerRelationshipParam {
 	return &textParameter{
 		ParamName: registries.AlarmTriggerRelationshipParam,

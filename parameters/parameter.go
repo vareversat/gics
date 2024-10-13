@@ -113,3 +113,26 @@ func (cP *calendarUserAddressParameter) GetParamName() registries.ParameterRegis
 func (cP *calendarUserAddressParameter) GetParamValue() string {
 	return fmt.Sprintf("\"%s\"", cP.Value.GetValue())
 }
+
+// CalendarUserAddressTypeParameter is the interface representation of a calendar user address typed parameter
+// Go representation: string
+type NonStandardParameter interface {
+	Parameter
+}
+
+type nonStandardParameter struct {
+	ParamName string
+	Value     types.TextValue
+}
+
+func (nSP *nonStandardParameter) ToICalendarParamFormat(output io.Writer) {
+	output.Write([]byte(fmt.Sprintf("%s=%s", nSP.ParamName, nSP.GetParamValue())))
+}
+
+func (nSP *nonStandardParameter) GetParamName() registries.ParameterRegistry {
+	return registries.NonStandardParam
+}
+
+func (nSP *nonStandardParameter) GetParamValue() string {
+	return nSP.Value.S
+}

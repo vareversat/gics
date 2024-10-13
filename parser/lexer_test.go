@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestNewAlarmCalendarComponent(t *testing.T) {
+func TestEventCalendarComponentParsing(t *testing.T) {
 	input, err := os.OpenFile("./test_data/event.ics", os.O_CREATE, os.ModeAppend)
 	if err != nil {
 		fmt.Println("Error while opening file:", err)

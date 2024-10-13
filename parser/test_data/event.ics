@@ -6,24 +6,25 @@ METHOD:PUBLISH
 X-PUBLISHED-TTL:PT1H
 BEGIN:VEVENT
 UID:T2P79220240508T074100
-SUMMARY:Marseille Saint-Charles - Gap
-DTSTAMP:20240508T074100
-DTSTART:20240508T074100
-DTEND:20240508T105600
-DESCRIPTION:Votre voyage\n1 Voyageur\n\n    Marseille Saint-Charles -> Gap\n    Départ le mercredi 8 mai, 07:41\n    Arrivée à 10:56\n    Durée : 3h15\n    TER 17402\n    \n\n\nRéférences : T2P700 - DUPONT\nAccéder à mon voyage :\nhttps://sncf-connect.com/
+SUMMARY;LANGUAGE=fr:Marseille Saint-Charles - Gap
+DTSTAMP;TZID=Europe/Paris:20240508T074100
+DTSTART;TZID=Europe/Paris:20240508T074100
+DTEND;TZID=Europe/Paris:20240508T105600
+DESCRIPTION:LANGUAGE=fr;Votre voyage\n1 Voyageur\n\n    Marseille Saint-Charles -> Gap\n    Départ le mercredi 8 mai, 07:41\n    Arrivée à 10:56\n    Durée : 3h15\n    TER 17402\n    \n\n\nRéférences : T2P700 - DUPONT\nAccéder à mon voyage :\nhttps://sncf-connect.com/
 LOCATION:Marseille Saint-Charles
+GEO:43.301832126;5.375331832
 URL:https://sncf-connect.com
 TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
 REPEAT:1
-DESCRIPTION:Marseille Saint-Charles - Gap
+DESCRIPTION;LANGUAGE=fr:Marseille Saint-Charles - Gap
 DURATION:PT3H
 TRIGGER:-PT4H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Marseille Saint-Charles - Gap
+DESCRIPTION;LANGUAGE=fr:Marseille Saint-Charles - Gap
 TRIGGER:-PT1H
 END:VALARM
 END:VEVENT

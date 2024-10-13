@@ -19,3 +19,10 @@ func NewFreeBusyTimeParam(value registries.FreeBusyTimeTypeRegistry) FreeBusyTim
 		Value:     types.NewTextValue(string(value)),
 	}
 }
+
+func NewFreeBusyTimeParamFromString(value string) FreeBusyTimeParam {
+	return &textParameter{
+		ParamName: registries.FreeBusyTimeTypeParam,
+		Value:     types.NewTextValue(value),
+	}
+}
