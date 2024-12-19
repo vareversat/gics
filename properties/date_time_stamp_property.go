@@ -29,7 +29,7 @@ func NewDateTimeStampProperty(
 ) DateTimeStampProperty {
 	return &dateTimePropertyType{
 		PropName:   registries.DateTimeStampProp,
-		Value:      types.NewDateTimeValue(timeValue, types.WithUtcTime),
+		Value:      types.NewDateTimeValue(timeValue),
 		Parameters: params,
 	}
 }
@@ -49,7 +49,7 @@ func NewDateTimeStampPropertyFromString(
 	params ...parameters.Parameter) DateTimeStampProperty {
 	return &dateTimePropertyType{
 		PropName:   registries.DateTimeStampProp,
-		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
+		Value:      types.NewDateTimeValueFromString(value),
 		Parameters: params,
 	}
 }

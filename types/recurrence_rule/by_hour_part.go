@@ -14,7 +14,7 @@ type ByHourPart interface {
 
 type byHourPart struct {
 	PartName RRPartName
-	Seconds  []types.IntegerValue
+	Seconds  []types.IntegerType
 }
 
 // NewByHourPart seconds in range [0,23]

@@ -19,11 +19,11 @@ const (
 )
 
 type Property interface {
-	// ToICalendarPropFormat format output to the icalendar specs
+	// ToICalendarPropFormat format output to the iCalendar specs
 	ToICalendarPropFormat(output io.Writer)
 	// GetName return the property name
 	GetName() registries.PropertyRegistry
-	// GetValue return the string of a property
+	// GetValue return the string value of a property
 	GetValue() string
 }
 
@@ -79,8 +79,27 @@ type RecurrenceRulePropertyType interface {
 
 type ActionPropertyType interface {
 	Property
-	// GetActionValue return the types.ActionValue associated to this ActionProperty
-	GetActionValue() registries.ActionRegistry
+	// GetActionValue return the [types.ActionType] associated to this ActionProperty
+	GetActionValue() types.ActionType
+}
+
+type actionPropertyType struct {
+	PropName   registries.PropertyRegistry
+	PropValue  types.ActionType
+	Parameters parameters.Parameters
+}
+
+// GetActionValue implements ActionProperty.
+func (aP *actionPropertyType) GetActionValue() types.ActionType {
+	return aP.PropValue
+}
+
+func (aP *actionPropertyType) GetName() registries.PropertyRegistry {
+	return aP.PropName
+}
+
+func (aP *actionPropertyType) GetValue() string {
+	return string(aP.PropValue.GetStringValue())
 }
 
 type ClassificationPropertyType interface {
@@ -105,8 +124,8 @@ type NonStandardPropertyType interface {
 
 type textPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.TextValue
-	Values     []types.TextValue
+	Value      types.TextType
+	Values     []types.TextType
 	Parameters parameters.Parameters
 }
 
@@ -115,12 +134,12 @@ func (tP *textPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (tP *textPropertyType) GetValue() string {
-	return tP.Value.S
+	return tP.Value.GetStringValue()
 }
 
 type integerPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.IntegerValue
+	Value      types.IntegerType
 	Parameters parameters.Parameters
 }
 
@@ -134,8 +153,8 @@ func (iP *integerPropertyType) GetValue() string {
 
 type dateTimePropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.DateTimeValue
-	Values     []types.DateTimeValue
+	Value      types.DateTimeType
+	Values     []types.DateTimeType
 	Parameters parameters.Parameters
 }
 
@@ -144,13 +163,13 @@ func (dtP *dateTimePropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (dtP *dateTimePropertyType) GetValue() string {
-	return dtP.Value.GetValue()
+	return dtP.Value.GetStringValue()
 }
 
 type datePropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.DateValue
-	Values     []types.DateValue
+	Value      types.DateType
+	Values     []types.DateType
 	Parameters parameters.Parameters
 }
 
@@ -159,13 +178,13 @@ func (dP *datePropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (dP *datePropertyType) GetValue() string {
-	return dP.Value.GetValue()
+	return dP.Value.GetStringValue()
 }
 
 type periodPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.PeriodValue
-	Values     []types.PeriodValue
+	Value      types.PeriodOfTimeType
+	Values     []types.PeriodOfTimeType
 	Parameters parameters.Parameters
 }
 
@@ -174,12 +193,12 @@ func (pP *periodPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (pP *periodPropertyType) GetValue() string {
-	return pP.Value.GetValue()
+	return pP.Value.GetStringValue()
 }
 
 type durationPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.DurationValue
+	Value      types.DurationType
 	Parameters parameters.Parameters
 }
 
@@ -188,13 +207,13 @@ func (dP *durationPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (dP *durationPropertyType) GetValue() string {
-	return dP.Value.GetValue()
+	return dP.Value.GetStringValue()
 }
 
 type geoPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Longitude  types.FloatValue
-	Latitude   types.FloatValue
+	Longitude  types.FloatType
+	Latitude   types.FloatType
 	Parameters parameters.Parameters
 }
 
@@ -203,12 +222,12 @@ func (gP *geoPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (gP *geoPropertyType) GetValue() string {
-	return "GEO"
+	return fmt.Sprintf("%f;%f", gP.Longitude.GetValue(), gP.Latitude.GetValue())
 }
 
 type calendarUserAddressPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.CalendarUserAddressValue
+	Value      types.CalendarUserAddressType
 	Parameters parameters.Parameters
 }
 
@@ -217,12 +236,12 @@ func (caP *calendarUserAddressPropertyType) GetName() registries.PropertyRegistr
 }
 
 func (caP *calendarUserAddressPropertyType) GetValue() string {
-	return caP.Value.GetValue()
+	return caP.Value.GetStringValue()
 }
 
 type utcOffsetPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.UtcOffsetValue
+	Value      types.UtcOffsetType
 	Parameters parameters.Parameters
 }
 
@@ -231,12 +250,12 @@ func (uoP *utcOffsetPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (uoP *utcOffsetPropertyType) GetValue() string {
-	return uoP.Value.GetValue()
+	return uoP.Value.GetStringValue()
 }
 
 type uriPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.UriValue
+	Value      types.UriType
 	Parameters parameters.Parameters
 }
 
@@ -245,14 +264,14 @@ func (uP *uriPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (uP *uriPropertyType) GetValue() string {
-	return uP.Value.GetValue()
+	return uP.Value.GetStringValue()
 }
 
 type requestStatusPropertyType struct {
 	PropName          registries.PropertyRegistry
-	StatusCode        types.TextValue
-	StatusDescription types.TextValue
-	ExtraData         types.TextValue
+	StatusCode        types.TextType
+	StatusDescription types.TextType
+	ExtraData         types.TextType
 	Parameters        parameters.Parameters
 }
 
@@ -266,7 +285,7 @@ func (rsP *requestStatusPropertyType) GetValue() string {
 
 type recurrenceRulePropertyType struct {
 	PropName registries.PropertyRegistry
-	Value    recurrence_rule.RecurrenceRuleValue
+	Value    recurrence_rule.RecurrenceRuleType
 }
 
 func (rrP *recurrenceRulePropertyType) GetName() registries.PropertyRegistry {
@@ -274,26 +293,12 @@ func (rrP *recurrenceRulePropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (rrP *recurrenceRulePropertyType) GetValue() string {
-	return rrP.Value.GetValue()
-}
-
-type actionPropertyType struct {
-	PropName   registries.PropertyRegistry
-	Value      types.ActionValue
-	Parameters parameters.Parameters
-}
-
-func (aP *actionPropertyType) GetName() registries.PropertyRegistry {
-	return aP.PropName
-}
-
-func (aP *actionPropertyType) GetValue() string {
-	return string(aP.Value.Value)
+	return rrP.Value.GetStringValue()
 }
 
 type classificationPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.ClassificationValue
+	Value      types.ClassificationType
 	Parameters parameters.Parameters
 }
 
@@ -302,12 +307,12 @@ func (cP *classificationPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (cP *classificationPropertyType) GetValue() string {
-	return string(cP.Value.Value)
+	return string(cP.Value.GetStringValue())
 }
 
 type statusPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.StatusValue
+	Value      types.StatusType
 	Parameters parameters.Parameters
 }
 
@@ -316,12 +321,12 @@ func (sP *statusPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (sP *statusPropertyType) GetValue() string {
-	return string(sP.Value.Value)
+	return sP.Value.GetStringValue()
 }
 
 type timeTransparencyPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.TimeTransparencyValue
+	Value      types.TimeTransparencyType
 	Parameters parameters.Parameters
 }
 
@@ -330,12 +335,12 @@ func (ttP *timeTransparencyPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (ttP *timeTransparencyPropertyType) GetValue() string {
-	return string(ttP.Value.Value)
+	return ttP.GetValue()
 }
 
 type blockDelimiterPropertyType struct {
 	PropName   registries.PropertyRegistry
-	Value      types.BlockDelimiterValue
+	Value      types.ComponentDelimiterType
 	Parameters parameters.Parameters
 }
 
@@ -344,12 +349,12 @@ func (bdP *blockDelimiterPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (bdP *blockDelimiterPropertyType) GetValue() string {
-	return string(bdP.Value.Value)
+	return string(bdP.Value.GetStringValue())
 }
 
 type nonStandardPropertyType struct {
 	PropName   string
-	Value      types.TextValue
+	Value      types.TextType
 	Parameters parameters.Parameters
 }
 
@@ -358,26 +363,7 @@ func (nSP *nonStandardPropertyType) GetName() registries.PropertyRegistry {
 }
 
 func (nSP *nonStandardPropertyType) GetValue() string {
-	return nSP.Value.S
-}
-
-func computeParameters(paramsOutput io.Writer, params parameters.Parameters) {
-	for i := 0; i < len(params); i++ {
-		paramsOutput.Write([]byte(fmt.Sprint(";")))
-		params[i].ToICalendarParamFormat(paramsOutput)
-	}
-}
-
-func foldOutput(unfoldedOutput *bytes.Buffer) {
-	for i := foldingIndex; i < unfoldedOutput.Len(); i += foldingIndex + 1 {
-		var afterFoldingBlock = bytes.Clone(unfoldedOutput.Bytes()[i:])
-		var beforeFoldingBlock = bytes.Clone(unfoldedOutput.Bytes()[:i])
-		unfoldedOutput.Reset()
-		unfoldedOutput.Write(beforeFoldingBlock)
-		unfoldedOutput.WriteString(foldingCharacter)
-		unfoldedOutput.Write(afterFoldingBlock)
-	}
-	unfoldedOutput.WriteString(escapeCharacter)
+	return nSP.Value.GetStringValue()
 }
 
 func (tP *textPropertyType) ToICalendarPropFormat(output io.Writer) {
@@ -386,13 +372,13 @@ func (tP *textPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
 	if tP.Values != nil {
 		for i := 0; i < len(tP.Values); i++ {
-			valuesOutput.WriteString(tP.Values[i].S)
+			valuesOutput.WriteString(tP.Values[i].GetStringValue())
 			if len(tP.Values)-1 > i {
 				valuesOutput.WriteString(fmt.Sprint(","))
 			}
 		}
 	} else {
-		valuesOutput.WriteString(tP.Value.S)
+		valuesOutput.WriteString(tP.Value.GetStringValue())
 	}
 	if tP.Parameters != nil {
 		computeParameters(&paramsOutput, tP.Parameters)
@@ -430,13 +416,13 @@ func (dP *dateTimePropertyType) ToICalendarPropFormat(output io.Writer) {
 	var paramsOutput bytes.Buffer
 	if dP.Values != nil {
 		for i := 0; i < len(dP.Values); i++ {
-			valuesOutput.WriteString(dP.Values[i].GetValue())
+			valuesOutput.WriteString(dP.Values[i].GetStringValue())
 			if len(dP.Values)-1 > i {
 				valuesOutput.WriteString(fmt.Sprint(","))
 			}
 		}
 	} else {
-		valuesOutput.WriteString(dP.Value.GetValue())
+		valuesOutput.WriteString(dP.Value.GetStringValue())
 	}
 	if dP.Parameters != nil {
 		computeParameters(&paramsOutput, dP.Parameters)
@@ -456,13 +442,13 @@ func (dP *datePropertyType) ToICalendarPropFormat(output io.Writer) {
 	var paramsOutput bytes.Buffer
 	if dP.Values != nil {
 		for i := 0; i < len(dP.Values); i++ {
-			valuesOutput.WriteString(dP.Values[i].GetValue())
+			valuesOutput.WriteString(dP.Values[i].GetStringValue())
 			if len(dP.Values)-1 > i {
 				valuesOutput.WriteString(fmt.Sprint(","))
 			}
 		}
 	} else {
-		valuesOutput.WriteString(dP.Value.GetValue())
+		valuesOutput.WriteString(dP.Value.GetStringValue())
 	}
 	if dP.Parameters != nil {
 		computeParameters(&paramsOutput, dP.Parameters)
@@ -481,13 +467,13 @@ func (pP *periodPropertyType) ToICalendarPropFormat(output io.Writer) {
 	var valuesOutput bytes.Buffer
 	if pP.Values != nil {
 		for i := 0; i < len(pP.Values); i++ {
-			valuesOutput.WriteString(pP.Values[i].GetValue())
+			valuesOutput.WriteString(pP.Values[i].GetStringValue())
 			if len(pP.Values)-1 > i {
 				valuesOutput.WriteString(fmt.Sprint(","))
 			}
 		}
 	} else {
-		valuesOutput.WriteString(pP.Value.GetValue())
+		valuesOutput.WriteString(pP.Value.GetStringValue())
 	}
 	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", pP.PropName, valuesOutput.String())))
 	foldOutput(&unfoldedOutput)
@@ -548,7 +534,7 @@ func (uP *utcOffsetPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, uP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", uP.PropName, paramsOutput.String(), uP.Value.GetValue())),
+		[]byte(fmt.Sprintf("%s%s:%s", uP.PropName, paramsOutput.String(), uP.Value.GetStringValue())),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -574,8 +560,8 @@ func (rsP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 	if rsP.Parameters != nil {
 		computeParameters(&paramsOutput, rsP.Parameters)
 	}
-	if rsP.ExtraData.S != "" {
-		extraValueOutput.Write([]byte(fmt.Sprintf(";%s", rsP.ExtraData.S)))
+	if rsP.ExtraData.GetStringValue() != "" {
+		extraValueOutput.Write([]byte(fmt.Sprintf(";%s", rsP.ExtraData.GetStringValue())))
 	}
 	unfoldedOutput.Write(
 		[]byte(
@@ -583,8 +569,8 @@ func (rsP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 				"%s%s:%s;%s",
 				rsP.PropName,
 				paramsOutput.String(),
-				rsP.StatusCode.S,
-				rsP.StatusDescription.S,
+				rsP.StatusCode.GetStringValue(),
+				rsP.StatusDescription.GetStringValue(),
 			),
 		),
 	)
@@ -595,7 +581,7 @@ func (rsP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 func (rrP *recurrenceRulePropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
 	var partsOutput bytes.Buffer
-	if rrP.Value.Parts != nil {
+	if rrP.Value.GetValue() != nil {
 		partsOutput.Write([]byte(fmt.Sprint(rrP.Value.GetValue())))
 	}
 	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", rrP.PropName, rrP.Value.GetValue())))
@@ -610,7 +596,14 @@ func (aP *actionPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, aP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", aP.PropName, paramsOutput.String(), aP.Value.Value)),
+		[]byte(
+			fmt.Sprintf(
+				"%s%s:%s",
+				aP.PropName,
+				paramsOutput.String(),
+				aP.PropValue.GetStringValue(),
+			),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -623,7 +616,9 @@ func (cP *classificationPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, cP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", cP.PropName, paramsOutput.String(), cP.Value.Value)),
+		[]byte(
+			fmt.Sprintf("%s%s:%s", cP.PropName, paramsOutput.String(), cP.Value.GetStringValue()),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -636,7 +631,9 @@ func (sP *statusPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, sP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", sP.PropName, paramsOutput.String(), sP.Value.Value)),
+		[]byte(
+			fmt.Sprintf("%s%s:%s", sP.PropName, paramsOutput.String(), sP.Value.GetStringValue()),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -649,7 +646,7 @@ func (ttP *timeTransparencyPropertyType) ToICalendarPropFormat(output io.Writer)
 		computeParameters(&paramsOutput, ttP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", ttP.PropName, paramsOutput.String(), ttP.Value.Value)),
+		[]byte(fmt.Sprintf("%s%s:%s", ttP.PropName, paramsOutput.String(), ttP.Value.GetStringValue())),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -662,7 +659,9 @@ func (bT *blockDelimiterPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, bT.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", bT.PropName, paramsOutput.String(), bT.Value.Value)),
+		[]byte(
+			fmt.Sprintf("%s%s:%s", bT.PropName, paramsOutput.String(), bT.Value.GetStringValue()),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -675,8 +674,29 @@ func (nSP *nonStandardPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, nSP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", nSP.PropName, paramsOutput.String(), nSP.Value.S)),
+		[]byte(
+			fmt.Sprintf("%s%s:%s", nSP.PropName, paramsOutput.String(), nSP.Value.GetStringValue()),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
+}
+
+func computeParameters(paramsOutput io.Writer, parameters parameters.Parameters) {
+	for i := 0; i < len(parameters); i++ {
+		paramsOutput.Write([]byte(fmt.Sprint(";")))
+		parameters[i].ToICalendarParamFormat(paramsOutput)
+	}
+}
+
+func foldOutput(unfoldedOutput *bytes.Buffer) {
+	for i := foldingIndex; i < unfoldedOutput.Len(); i += foldingIndex + 1 {
+		var afterFoldingBlock = bytes.Clone(unfoldedOutput.Bytes()[i:])
+		var beforeFoldingBlock = bytes.Clone(unfoldedOutput.Bytes()[:i])
+		unfoldedOutput.Reset()
+		unfoldedOutput.Write(beforeFoldingBlock)
+		unfoldedOutput.WriteString(foldingCharacter)
+		unfoldedOutput.Write(afterFoldingBlock)
+	}
+	unfoldedOutput.WriteString(escapeCharacter)
 }

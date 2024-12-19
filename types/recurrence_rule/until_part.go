@@ -14,13 +14,13 @@ type UntilPart interface {
 
 type untilPart struct {
 	PartName RRPartName
-	EndDate  types.DateTimeValue
+	EndDate  types.DateTimeType
 }
 
 func NewUntilPart(endDate time.Time) UntilPart {
 	return &untilPart{
 		PartName: UNTIL,
-		EndDate:  types.NewDateTimeValue(endDate, types.WithLocalTime),
+		EndDate:  types.NewDateTimeValue(endDate),
 	}
 }
 
@@ -33,5 +33,5 @@ func (f untilPart) GetPartName() RRPartName {
 }
 
 func (f untilPart) GetPartValue() string {
-	return f.EndDate.GetValue()
+	return f.EndDate.GetStringValue()
 }

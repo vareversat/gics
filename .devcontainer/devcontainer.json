@@ -7,7 +7,7 @@
             "golangciLintVersion": "1.61.0"
         },
         "ghcr.io/devcontainers/features/docker-in-docker:2.12.0": {},
-        "ghcr.io/devcontainers/features/common-utils:2.5.1": {
+        "ghcr.io/devcontainers/features/common-utils:2.5.2": {
             "installZsh": true,
             "configureZshAsDefaultShell": true,
             "installOhMyZsh": true,
@@ -16,24 +16,27 @@
         }
     },
     "customizations": {
-        "settings": {
-            "go.toolsManagement.autoUpdate": true,
-            "go.useLanguageServer": true,
-            "go.lintTool": "golangci-lint",
-            "git.autofetch": true,
-            "git.confirmSync": false,
-            "git.allowForcePush": true,
-            "git.confirmForcePush": false,
-            "[github-actions-workflow]": {
-                "editor.defaultFormatter": "redhat.vscode-yaml"
-            },
-            "window.autoDetectColorScheme": true,
-            "window.autoDetectHighContrast": true,
-            "workbench.preferredLightColorTheme": "Default Light Modern",
-            "workbench.preferredDarkColorTheme": "Monokai Dimmed",
-            "workbench.iconTheme": "material-icon-theme"
-        },
         "vscode": {
+            "settings": {
+                "dev.containers.mountWaylandSocket": false,
+                "go.toolsManagement.autoUpdate": true,
+                "go.useLanguageServer": true,
+                "go.lintTool": "golangci-lint",
+                "git.autofetch": true,
+                "git.confirmSync": false,
+                "git.allowForcePush": true,
+                "git.confirmForcePush": false,
+                "git.rebaseWhenSync": true,
+                "[github-actions-workflow]": {
+                    "editor.defaultFormatter": "redhat.vscode-yaml"
+                },
+                "window.autoDetectColorScheme": true,
+                "window.autoDetectHighContrast": true,
+                "workbench.preferredLightColorTheme": "Default Light Modern",
+                "workbench.preferredDarkColorTheme": "Default Dark Modern",
+                "workbench.iconTheme": "material-icon-theme",
+                "files.autoSave": "onFocusChange"
+            },
             "extensions": [
                 "golang.go",
                 "ms-vscode.go-tools",

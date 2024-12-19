@@ -49,7 +49,7 @@ func (aC *alarmCalendarComponent) GetProperty(
 }
 
 func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
-	switch aC.Action.GetActionValue() {
+	switch aC.Action.GetActionValue().GetValue() {
 	case registries.Audio:
 		return []registries.PropertyRegistry{
 			registries.BeginProp,

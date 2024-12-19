@@ -20,12 +20,12 @@ type DateTimeCreatedProperty interface {
 // - registries.Vjournal (Optional)
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.1
 func NewDateTimeCreatedProperty(
-	timeValue time.Time,
+	value time.Time,
 	params ...parameters.Parameter,
 ) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
 		PropName:   registries.DateTimeCreatedProp,
-		Value:      types.NewDateTimeValue(timeValue, types.WithUtcTime),
+		Value:      types.NewDateTimeValue(value),
 		Parameters: params,
 	}
 }
@@ -41,7 +41,7 @@ func NewDateTimeCreatedPropertyFromString(
 	params ...parameters.Parameter) DateTimeCreatedProperty {
 	return &dateTimePropertyType{
 		PropName:   registries.DateTimeCreatedProp,
-		Value:      types.NewDateTimeValueFromString(value, types.WithUtcTime),
+		Value:      types.NewDateTimeValueFromString(value),
 		Parameters: params,
 	}
 }

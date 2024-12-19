@@ -14,7 +14,7 @@ type ByYearDayPart interface {
 
 type byYearDayPart struct {
 	PartName RRPartName
-	Seconds  []types.IntegerValue
+	Seconds  []types.IntegerType
 }
 
 // NewByYearDayPart days in range [-366,0[U]0,366]

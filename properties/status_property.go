@@ -16,7 +16,10 @@ type StatusProperty interface {
 // - registries.Vtodo (Optional)
 // - registries.Vjournal (Optional)
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.11
-func NewStatusProperty(status types.StatusType, params ...parameters.Parameter) StatusProperty {
+func NewStatusProperty(
+	status registries.ParticipantStatusRegistry,
+	params ...parameters.Parameter,
+) StatusProperty {
 	return &statusPropertyType{
 		PropName:   registries.StatusProp,
 		Value:      types.NewStatusValue(status),
@@ -33,7 +36,7 @@ func NewStatusProperty(status types.StatusType, params ...parameters.Parameter) 
 func NewStatusPropertyFromString(status string, params ...parameters.Parameter) StatusProperty {
 	return &statusPropertyType{
 		PropName:   registries.StatusProp,
-		Value:      types.NewStatusValue(types.StatusType(status)),
+		Value:      types.NewStatusValue(registries.ParticipantStatusRegistry(status)),
 		Parameters: params,
 	}
 }

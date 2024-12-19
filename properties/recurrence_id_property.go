@@ -24,7 +24,6 @@ type RecurrenceIdProperty interface {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.4
 func NewRecurrenceIdProperty(
 	value time.Time,
-	format types.DTFormat,
 	params ...parameters.Parameter) RecurrenceIdProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -37,7 +36,7 @@ func NewRecurrenceIdProperty(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.RecurrenceIdProp,
-			Value:      types.NewDateTimeValue(value, format),
+			Value:      types.NewDateTimeValue(value),
 			Parameters: params,
 		}
 	case string(registries.Date):
@@ -61,7 +60,7 @@ func NewRecurrenceIdProperty(
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.4
 func NewRecurrenceIdPropertyFromString(
 	value string,
-	format types.DTFormat,
+	format types.DateTimeFormat,
 	params ...parameters.Parameter) RecurrenceIdProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -74,7 +73,7 @@ func NewRecurrenceIdPropertyFromString(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.RecurrenceIdProp,
-			Value:      types.NewDateTimeValueFromString(value, format),
+			Value:      types.NewDateTimeValueFromString(value),
 			Parameters: params,
 		}
 	case string(registries.Date):

@@ -21,7 +21,7 @@ func NewTimeZoneOffsetToProperty(
 ) TimeZoneOffsetToProperty {
 	return &utcOffsetPropertyType{
 		PropName:   registries.TimeZoneOffsetToProp,
-		Value:      types.NewUtcOffsetValue(value),
+		Value:      types.NewUtcOffsetValueFromString(value),
 		Parameters: params,
 	}
 }

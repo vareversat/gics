@@ -18,6 +18,6 @@ type DurationProperty interface {
 func NewDurationProperty(duration string) DurationProperty {
 	return &durationPropertyType{
 		PropName: registries.DurationProp,
-		Value:    types.NewDurationValue(duration),
+		Value:    types.NewDurationValueFromString(duration),
 	}
 }

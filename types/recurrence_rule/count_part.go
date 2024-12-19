@@ -13,7 +13,7 @@ type CountPart interface {
 
 type countPart struct {
 	PartName RRPartName
-	Count    types.IntegerValue
+	Count    types.IntegerType
 }
 
 // NewCountPart count in range [0,9]

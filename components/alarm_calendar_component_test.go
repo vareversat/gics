@@ -10,16 +10,15 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/vareversat/gics/properties"
-	"github.com/vareversat/gics/types"
 )
 
 func TestNewAlarmCalendarComponent(t *testing.T) {
 	action := properties.NewActionProperty(registries.Audio)
-	trigger := properties.NewTriggerProperty(time.Now(), "PT5M", types.WithUtcTime)
+	trigger := properties.NewTriggerProperty(time.Now(), "PT5M")
 	component := NewAlarmCalendarComponent(action, trigger)
 
 	assert.NotNil(t, component)
-	assert.Equal(t, action.GetActionValue(), registries.Audio)
+	assert.Equal(t, action.GetActionValue().GetValue(), registries.Audio)
 }
 
 func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
@@ -27,7 +26,7 @@ func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	action := properties.NewActionProperty(registries.Audio)
-	trigger := properties.NewTriggerProperty(myTime, "PT5M", types.WithUtcTime)
+	trigger := properties.NewTriggerProperty(myTime, "PT5M")
 	description := properties.NewDescriptionProperty("Test Alarm")
 	summary := properties.NewSummaryProperty("Alarm SummaryProp")
 

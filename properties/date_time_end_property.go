@@ -24,7 +24,6 @@ type DateTimeEndProperty interface {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.2
 func NewDateTimeEndProperty(
 	value time.Time,
-	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeEndProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -37,7 +36,7 @@ func NewDateTimeEndProperty(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.DateTimeEndProp,
-			Value:      types.NewDateTimeValue(value, format),
+			Value:      types.NewDateTimeValue(value),
 			Parameters: params,
 		}
 	case string(registries.Date):
@@ -61,7 +60,6 @@ func NewDateTimeEndProperty(
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.2
 func NewDateTimeEndPropertyFromString(
 	value string,
-	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeEndProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -74,7 +72,7 @@ func NewDateTimeEndPropertyFromString(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.DateTimeEndProp,
-			Value:      types.NewDateTimeValueFromString(value, format),
+			Value:      types.NewDateTimeValueFromString(value),
 			Parameters: params,
 		}
 	case string(registries.Date):
