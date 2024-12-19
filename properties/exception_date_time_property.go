@@ -31,7 +31,6 @@ type ExceptionDateTimeProperty interface {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
 func NewExceptionDateTimeProperty(
 	values []time.Time,
-	format types.DTFormat,
 	params ...parameters.Parameter) ExceptionDateTimeProperty {
 	valueType := string(registries.DateTime)
 	for i := 0; i < len(params); i++ {
@@ -43,7 +42,7 @@ func NewExceptionDateTimeProperty(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.ExceptionDateTimesProp,
-			Values:     types.NewDateTimeValues(values, format),
+			Values:     types.NewDateTimeValues(values),
 			Parameters: params,
 		}
 	case string(registries.Date):
@@ -70,8 +69,7 @@ func NewExceptionDateTimeProperty(
 // - registries.TimeZoneIdParam
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
 func NewExceptionDateTimePropertyFromString(
-	values string,
-	format types.DTFormat,
+	value string,
 	params ...parameters.Parameter) ExceptionDateTimeProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -84,16 +82,15 @@ func NewExceptionDateTimePropertyFromString(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName: registries.ExceptionDateTimesProp,
-			Values: types.NewDateTimeValuesFromString(
-				utils.StringToStringArray(values),
-				format,
+			Values: types.NewDateTimeValueFromStrings(
+				utils.StringToStringArray(value),
 			),
 			Parameters: params,
 		}
 	case string(registries.Date):
 		return &datePropertyType{
 			PropName:   registries.ExceptionDateTimesProp,
-			Values:     types.NewDateValuesFromString(utils.StringToStringArray(values)),
+			Values:     types.NewDateValuesFromString(utils.StringToStringArray(value)),
 			Parameters: params,
 		}
 	default:

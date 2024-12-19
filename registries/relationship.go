@@ -7,11 +7,11 @@ type RelationshipTypeRegistry string
 const (
 	// Child [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.15
-	Child ParticipantStatusRegistry = "CHILD"
+	Child RelationshipTypeRegistry = "CHILD"
 	// Parent [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.15
-	Parent ParticipantStatusRegistry = "PARENT"
+	Parent RelationshipTypeRegistry = "PARENT"
 	// Sibling [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.15
-	Sibling ParticipantStatusRegistry = "SIBLING"
+	Sibling RelationshipTypeRegistry = "SIBLING"
 )

@@ -29,7 +29,6 @@ type TriggerParameters struct {
 func NewTriggerProperty(
 	dateTimeValue time.Time,
 	durationValue string,
-	format types.DTFormat,
 	params ...parameters.Parameter,
 ) TriggerProperty {
 	// Get the VALUE param
@@ -43,13 +42,13 @@ func NewTriggerProperty(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.TriggerProp,
-			Value:      types.NewDateTimeValue(dateTimeValue, format),
+			Value:      types.NewDateTimeValue(dateTimeValue),
 			Parameters: params,
 		}
 	case string(registries.Duration):
 		return &durationPropertyType{
 			PropName:   registries.TriggerProp,
-			Value:      types.NewDurationValue(durationValue),
+			Value:      types.NewDurationValueFromString(durationValue),
 			Parameters: params,
 		}
 	default:

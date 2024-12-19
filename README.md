@@ -56,7 +56,7 @@ go get github.com/vareversat/gics@latest
 |    [DATE](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.4)     | `time.Time`                      |
 |  [DATE-TIME](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.5)  | `time.Time`                      |
 |  [DURATION](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.6)   | `string`                         |
-|    [FLOAT](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.7)    | `float32`                        |
+|    [FLOAT](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.7)    | `float64`                        |
 |   [INTEGER](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.8)   | `int32`                          |
 |   [PERIOD](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9)    | `time.Time` / `time.Time`        |
 |   [RECUR](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10)    | *complex*                        |

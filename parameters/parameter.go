@@ -30,7 +30,7 @@ type TextTypeParameter interface {
 
 type textParameter struct {
 	ParamName registries.ParameterRegistry
-	Value     types.TextValue
+	Value     types.TextType
 }
 
 func (tP *textParameter) ToICalendarParamFormat(output io.Writer) {
@@ -42,7 +42,7 @@ func (tP *textParameter) GetParamName() registries.ParameterRegistry {
 }
 
 func (tP *textParameter) GetParamValue() string {
-	return tP.Value.S
+	return tP.Value.GetStringValue()
 }
 
 // UriTypeParameter is the interface representation of an uri typed parameter
@@ -53,7 +53,7 @@ type UriTypeParameter interface {
 
 type uriParameter struct {
 	ParamName registries.ParameterRegistry
-	Value     types.UriValue
+	Value     types.UriType
 }
 
 func (uP *uriParameter) ToICalendarParamFormat(output io.Writer) {
@@ -76,7 +76,7 @@ type BooleanTypeParameter interface {
 
 type booleanParameter struct {
 	ParamName registries.ParameterRegistry
-	Value     types.BooleanValue
+	Value     types.BooleanType
 }
 
 func (bP *booleanParameter) ToICalendarParamFormat(output io.Writer) {
@@ -88,7 +88,7 @@ func (bP *booleanParameter) GetParamName() registries.ParameterRegistry {
 }
 
 func (bP *booleanParameter) GetParamValue() string {
-	return bP.Value.GetValue()
+	return bP.Value.GetStringValue()
 }
 
 // CalendarUserAddressTypeParameter is the interface representation of a calendar user address typed parameter
@@ -99,7 +99,7 @@ type CalendarUserAddressTypeParameter interface {
 
 type calendarUserAddressParameter struct {
 	ParamName registries.ParameterRegistry
-	Value     types.CalendarUserAddressValue
+	Value     types.CalendarUserAddressType
 }
 
 func (cP *calendarUserAddressParameter) ToICalendarParamFormat(output io.Writer) {
@@ -122,7 +122,7 @@ type NonStandardParameter interface {
 
 type nonStandardParameter struct {
 	ParamName string
-	Value     types.TextValue
+	Value     types.TextType
 }
 
 func (nSP *nonStandardParameter) ToICalendarParamFormat(output io.Writer) {
@@ -134,5 +134,5 @@ func (nSP *nonStandardParameter) GetParamName() registries.ParameterRegistry {
 }
 
 func (nSP *nonStandardParameter) GetParamValue() string {
-	return nSP.Value.S
+	return nSP.Value.GetStringValue()
 }

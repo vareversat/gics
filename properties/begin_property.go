@@ -23,7 +23,7 @@ type BeginProperty interface {
 func NewBeginProperty(registry registries.ComponentRegistry) BeginProperty {
 	return &blockDelimiterPropertyType{
 		PropName: registries.BeginProp,
-		Value:    types.NewBlockDelimiterValue(registry),
+		Value:    types.NewComponentDelimiterValue(registry),
 	}
 }
 
@@ -41,6 +41,6 @@ func NewBeginProperty(registry registries.ComponentRegistry) BeginProperty {
 func NewBeginPropertyFromString(registry string) BeginProperty {
 	return &blockDelimiterPropertyType{
 		PropName: registries.BeginProp,
-		Value:    types.NewBlockDelimiterValue(registries.ComponentRegistry(registry)),
+		Value:    types.NewComponentDelimiterValue(registries.ComponentRegistry(registry)),
 	}
 }

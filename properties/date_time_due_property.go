@@ -23,7 +23,6 @@ type DateTimeDueProperty interface {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.3
 func NewDateTimeDueProperty(
 	value time.Time,
-	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeDueProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -36,7 +35,7 @@ func NewDateTimeDueProperty(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.DateTimeDueProp,
-			Value:      types.NewDateTimeValue(value, format),
+			Value:      types.NewDateTimeValue(value),
 			Parameters: params,
 		}
 	case string(registries.Date):
@@ -59,7 +58,6 @@ func NewDateTimeDueProperty(
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.3
 func NewDateTimeDuePropertyFromString(
 	value string,
-	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeDueProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -72,7 +70,7 @@ func NewDateTimeDuePropertyFromString(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.DateTimeDueProp,
-			Value:      types.NewDateTimeValueFromString(value, format),
+			Value:      types.NewDateTimeValueFromString(value),
 			Parameters: params,
 		}
 	case string(registries.Date):

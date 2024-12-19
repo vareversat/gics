@@ -10,36 +10,30 @@ type ActionProperty interface {
 	ActionPropertyType
 }
 
-// NewActionProperty create a new registries.ActionProp property. See [RFC-5545] ref for more info
-// Usage :
-// - registries.Valarm (Mandatory)
+// NewActionProperty create a new [registries.ActionProp] property. See [RFC-5545] ref for more info
+//
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
 func NewActionProperty(
 	action registries.ActionRegistry,
-	params ...parameters.Parameter,
+	parameters ...parameters.Parameter,
 ) ActionProperty {
 	return &actionPropertyType{
 		PropName:   registries.ActionProp,
-		Value:      types.NewActionValue(action),
-		Parameters: params,
+		PropValue:  types.NewActionValue(action),
+		Parameters: parameters,
 	}
 }
 
-// NewActionPropertyFromString create a new registries.ActionProp property. See [RFC-5545] ref for more info
-// Usage :
-// - registries.Valarm (Mandatory)
+// NewActionPropertyFromString create a new [registries.ActionProp] property from a string value. See [RFC-5545] ref for more info
+//
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.6.1
 func NewActionPropertyFromString(
-	actionString string,
-	params ...parameters.Parameter,
-) ActionPropertyType {
+	action string,
+	parameters ...parameters.Parameter,
+) ActionProperty {
 	return &actionPropertyType{
 		PropName:   registries.ActionProp,
-		Value:      types.NewActionValue(registries.ActionRegistry(actionString)),
-		Parameters: params,
+		PropValue:  types.NewActionValue(registries.ActionRegistry(action)),
+		Parameters: parameters,
 	}
-}
-
-func (aP *actionPropertyType) GetActionValue() registries.ActionRegistry {
-	return aP.Value.Value
 }

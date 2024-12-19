@@ -14,7 +14,7 @@ type ByWeekNoPart interface {
 
 type byWeekNoPart struct {
 	PartName RRPartName
-	Seconds  []types.IntegerValue
+	Seconds  []types.IntegerType
 }
 
 // NewByWeekNoPart days in range [-53,0[U]0,53]

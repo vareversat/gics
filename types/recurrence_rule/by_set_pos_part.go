@@ -14,7 +14,7 @@ type BySetPosPart interface {
 
 type bySetPosPart struct {
 	PartName RRPartName
-	Seconds  []types.IntegerValue
+	Seconds  []types.IntegerType
 }
 
 // NewBySetPosPart days in range [-366,0[U]0,366]

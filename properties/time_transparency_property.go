@@ -15,7 +15,7 @@ type TimeTransparencyProperty interface {
 // - registries.Vcalendar (Mandatory)
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.7.4
 func NewTimeTransparencyProperty(
-	value types.TimeTransparencyType,
+	value registries.TimeTransparencyRegistry,
 	params ...parameters.Parameter,
 ) TimeTransparencyProperty {
 	return &timeTransparencyPropertyType{
@@ -35,7 +35,7 @@ func NewTimeTransparencyPropertyFromString(
 ) TimeTransparencyProperty {
 	return &timeTransparencyPropertyType{
 		PropName:   registries.TimeTransparencyProp,
-		Value:      types.NewTimeTransparencyValue(types.TimeTransparencyType(value)),
+		Value:      types.NewTimeTransparencyValueFromString(value),
 		Parameters: params,
 	}
 }

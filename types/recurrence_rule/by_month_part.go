@@ -14,7 +14,7 @@ type ByMonthPart interface {
 
 type byMonthPart struct {
 	PartName RRPartName
-	Seconds  []types.IntegerValue
+	Seconds  []types.IntegerType
 }
 
 // NewByMonthPart days in range [1,13]

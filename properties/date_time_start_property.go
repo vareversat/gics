@@ -27,7 +27,6 @@ type DateTimeStartProperty interface {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.4
 func NewDateTimeStartProperty(
 	value time.Time,
-	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeStartProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -40,7 +39,7 @@ func NewDateTimeStartProperty(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.DateTimeStartProp,
-			Value:      types.NewDateTimeValue(value, format),
+			Value:      types.NewDateTimeValue(value),
 			Parameters: params,
 		}
 	case string(registries.Date):
@@ -67,7 +66,6 @@ func NewDateTimeStartProperty(
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.2.4
 func NewDateTimeStartPropertyFromString(
 	value string,
-	format types.DTFormat,
 	params ...parameters.Parameter) DateTimeStartProperty {
 	// Get the VALUE param
 	valueType := string(registries.DateTime)
@@ -80,7 +78,7 @@ func NewDateTimeStartPropertyFromString(
 	case string(registries.DateTime):
 		return &dateTimePropertyType{
 			PropName:   registries.DateTimeStartProp,
-			Value:      types.NewDateTimeValueFromString(value, format),
+			Value:      types.NewDateTimeValueFromString(value),
 			Parameters: params,
 		}
 	case string(registries.Date):

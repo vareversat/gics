@@ -2,7 +2,6 @@ package properties
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/vareversat/gics/parameters"
@@ -20,8 +19,8 @@ type GeographicPositionProperty interface {
 // - registries.Vtodo (Optional)
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.1.6
 func NewGeographicPositionProperty(
-	long float32,
-	lat float32,
+	long float64,
+	lat float64,
 	params ...parameters.Parameter,
 ) GeographicPositionProperty {
 	return &geoPropertyType{
@@ -45,20 +44,10 @@ func NewGeographicPositionPropertyFromString(
 	if len(coordinates) != 2 {
 		return nil, fmt.Errorf("the GEO property is not formatted as LATITUDE;LONGITUDE")
 	}
-	long, err := strconv.ParseFloat(coordinates[0], 32)
-	lat, err := strconv.ParseFloat(coordinates[1], 32)
-
-	if err != nil {
-		return nil, fmt.Errorf(
-			"%s or %s cannot be parsed as float32",
-			coordinates[0],
-			coordinates[1],
-		)
-	}
 	return &geoPropertyType{
 		PropName:   registries.GeoProp,
-		Longitude:  types.NewFloatValue(float32(long)),
-		Latitude:   types.NewFloatValue(float32(lat)),
+		Longitude:  types.NewFloatValueFromString(coordinates[0]),
+		Latitude:   types.NewFloatValueFromString(coordinates[1]),
 		Parameters: params,
 	}, nil
 }

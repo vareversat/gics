@@ -43,25 +43,39 @@ type RRPart interface {
 
 type RRParts []RRPart
 
-type RecurrenceRuleValue struct {
-	types.V
-	Parts RRParts
+type RecurrenceRuleType interface {
+	types.ValueType
+	GetValue() RRParts
 }
 
-func NewRecurrenceRuleValue(parts []RRPart) RecurrenceRuleValue {
-	return RecurrenceRuleValue{
-		V:     types.NewValue(registries.Recur),
-		Parts: parts,
+type recurrenceRuleType struct {
+	typeName  registries.ValueTypeRegistry
+	typeValue RRParts
+}
+
+func NewRecurrenceRuleValue(parts []RRPart) RecurrenceRuleType {
+	return &recurrenceRuleType{
+		typeName:  registries.Recur,
+		typeValue: parts,
 	}
 }
 
-func (tV *RecurrenceRuleValue) GetValue() string {
+func (r *recurrenceRuleType) GetStringValue() string {
 	var partOut bytes.Buffer
-	for i := 0; i < len(tV.Parts); i++ {
-		if len(tV.Parts) > 1 && i > 0 {
+	for i := 0; i < len(r.typeValue); i++ {
+		if len(r.typeValue) > 1 && i > 0 {
 			partOut.Write([]byte(fmt.Sprint(";")))
 		}
-		tV.Parts[i].ToICalendarPartFormat(&partOut)
+		r.typeValue[i].ToICalendarPartFormat(&partOut)
 	}
 	return partOut.String()
+}
+
+func (c *recurrenceRuleType) GetTypeName() string {
+	return string(c.typeName)
+}
+
+// GetValue get the [registries.ComponentRegistry] typed value
+func (tV *recurrenceRuleType) GetValue() RRParts {
+	return nil
 }

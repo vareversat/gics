@@ -48,12 +48,10 @@ func ParseProperty(
 	case "DTEND":
 		return properties.NewDateTimeEndPropertyFromString(
 			propertyValue,
-			types.WithUtcTime,
 			params...), nil
 	case "DTSTART":
 		return properties.NewDateTimeStartPropertyFromString(
 			propertyValue,
-			types.WithUtcTime,
 			params...), nil
 	case "DTSTAMP":
 		return properties.NewDateTimeStampPropertyFromString(propertyValue, params...), nil
@@ -62,7 +60,6 @@ func ParseProperty(
 	case "DUE":
 		return properties.NewDateTimeDuePropertyFromString(
 			propertyValue,
-			types.WithUtcTime,
 			params...), nil
 	case "END":
 		return properties.NewEndPropertyFromString(
@@ -70,8 +67,7 @@ func ParseProperty(
 		), nil
 	case "EXDATE":
 		return properties.NewExceptionDateTimePropertyFromString(
-			propertyValue,
-			types.WithUtcTime, params...,
+			propertyValue, params...,
 		), nil
 	case "EXRULE":
 		fmt.Printf("### omitting %s\n", propertyName)

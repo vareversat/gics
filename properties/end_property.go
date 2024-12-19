@@ -23,7 +23,7 @@ type EndProperty interface {
 func NewEndProperty(registry registries.ComponentRegistry) EndProperty {
 	return &blockDelimiterPropertyType{
 		PropName: registries.EndProp,
-		Value:    types.NewBlockDelimiterValue(registry),
+		Value:    types.NewComponentDelimiterValue(registry),
 	}
 }
 
@@ -41,6 +41,6 @@ func NewEndProperty(registry registries.ComponentRegistry) EndProperty {
 func NewEndPropertyFromString(registry string) EndProperty {
 	return &blockDelimiterPropertyType{
 		PropName: registries.EndProp,
-		Value:    types.NewBlockDelimiterValue(registries.ComponentRegistry(registry)),
+		Value:    types.NewComponentDelimiterValue(registries.ComponentRegistry(registry)),
 	}
 }
