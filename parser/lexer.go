@@ -5,36 +5,36 @@ type parameterParser struct {
 	ParameterValue string
 }
 
-type PropertyParser struct {
+type propertyParser struct {
 	PropertyName     string
 	PropertyValue    string
 	ParameterParsers []parameterParser
 }
 
-func NewPropertyParser() *PropertyParser {
-	return &PropertyParser{
+func NewPropertyParser() *propertyParser {
+	return &propertyParser{
 		PropertyName:     "",
 		PropertyValue:    "",
 		ParameterParsers: make([]parameterParser, 0),
 	}
 }
 
-func (p *PropertyParser) SetPropertyName(name string) {
+func (p *propertyParser) SetPropertyName(name string) {
 	p.PropertyName = name
 }
 
-func (p *PropertyParser) SetPropertyValue(value string) {
+func (p *propertyParser) SetPropertyValue(value string) {
 	p.PropertyValue = value
 }
 
-func (p *PropertyParser) AddParam(paramName string) {
+func (p *propertyParser) AddParam(paramName string) {
 	p.ParameterParsers = append(
 		p.ParameterParsers,
 		parameterParser{ParameterName: paramName, ParameterValue: ""},
 	)
 }
 
-func (p *PropertyParser) SetValueOfLastParam(paramValue string) {
+func (p *propertyParser) SetValueOfLastParam(paramValue string) {
 	p.ParameterParsers[len(p.ParameterParsers)-1].ParameterValue = paramValue
 }
 
@@ -44,7 +44,7 @@ type Lexer struct {
 	readPosition  int  // current reading position in input (after current char)
 	ch            byte // current char under examination
 	previousCh    byte // previous char examined
-	property      *PropertyParser
+	property      *propertyParser
 	isRelaxedMode bool
 }
 
