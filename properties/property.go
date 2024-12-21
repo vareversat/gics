@@ -534,7 +534,9 @@ func (uP *utcOffsetPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, uP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", uP.PropName, paramsOutput.String(), uP.Value.GetStringValue())),
+		[]byte(
+			fmt.Sprintf("%s%s:%s", uP.PropName, paramsOutput.String(), uP.Value.GetStringValue()),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
@@ -646,7 +648,9 @@ func (ttP *timeTransparencyPropertyType) ToICalendarPropFormat(output io.Writer)
 		computeParameters(&paramsOutput, ttP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", ttP.PropName, paramsOutput.String(), ttP.Value.GetStringValue())),
+		[]byte(
+			fmt.Sprintf("%s%s:%s", ttP.PropName, paramsOutput.String(), ttP.Value.GetStringValue()),
+		),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)

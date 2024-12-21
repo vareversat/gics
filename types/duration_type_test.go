@@ -15,7 +15,11 @@ func TestDurationGetStringValue(t *testing.T) {
 		args args
 		want string
 	}{
-		{"19 years, 1 month, 4 weeks, 1 day, 20 hours, 14 minutes and 55 seconds", args{value: 604800898 * 1e9}, "P19Y1M4W1DT20H14M55S"},
+		{
+			"19 years, 1 month, 4 weeks, 1 day, 20 hours, 14 minutes and 55 seconds",
+			args{value: 604800898 * 1e9},
+			"P19Y1M4W1DT20H14M55S",
+		},
 		{"1 week", args{value: 604800 * 1e9}, "P1W"},
 		{"4 days", args{value: 345600 * 1e9}, "P4D"},
 		{"1 week and 2 days", args{value: 777600 * 1e9}, "P1W2D"},
@@ -41,7 +45,11 @@ func TestGetValue(t *testing.T) {
 		args args
 		want time.Duration
 	}{
-		{"19 years, 1 month, 4 weeks, 1 day, 20 hours, 14 minutes and 55 seconds", args{value: "P19Y1M4W1DT20H14M55S"}, 604800898 * 1e9},
+		{
+			"19 years, 1 month, 4 weeks, 1 day, 20 hours, 14 minutes and 55 seconds",
+			args{value: "P19Y1M4W1DT20H14M55S"},
+			604800898 * 1e9,
+		},
 		{"1 week", args{value: "P1W"}, 604800 * 1e9},
 		{"4 days", args{value: "P4D"}, 345600 * 1e9},
 		{"1 week and 2 days", args{value: "P1W2D"}, 777600 * 1e9},

@@ -58,7 +58,9 @@ func (d *periodOfTimeType) GetFormat() PeriodOfTimeFormat {
 }
 
 // parseStringToPeriodOfTime take a string value and return the from [time.Time] value, the to [time.Duration] value to and the corresponding [PeriodOfTimeFormat]
-func parseStringToPeriodOfTime(value string) (from time.Time, to time.Duration, format PeriodOfTimeFormat) {
+func parseStringToPeriodOfTime(
+	value string,
+) (from time.Time, to time.Duration, format PeriodOfTimeFormat) {
 	splitString := strings.Split(value, "/")
 
 	from, _ = time.Parse("20060102T150405Z", splitString[0])
@@ -79,7 +81,11 @@ func parseStringToPeriodOfTime(value string) (from time.Time, to time.Duration, 
 // NewPeriodOfTimeValue create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
-func NewPeriodOfTimeValue(startValue time.Time, endValue time.Duration, format PeriodOfTimeFormat) PeriodOfTimeType {
+func NewPeriodOfTimeValue(
+	startValue time.Time,
+	endValue time.Duration,
+	format PeriodOfTimeFormat,
+) PeriodOfTimeType {
 	return &periodOfTimeType{
 		typeName:      registries.PeriodOfTime,
 		typeFromValue: startValue,
