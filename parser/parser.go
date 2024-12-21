@@ -40,6 +40,7 @@ func unfold(foldedFile *os.File, unfoldedData *bytes.Buffer) {
 	}
 }
 
+// parse take an unfoldedData to create parameters and properties
 func parse(unfoldedData bytes.Buffer) {
 	unfoldedDataReader := bytes.NewReader(unfoldedData.Bytes())
 	scanner := bufio.NewScanner(unfoldedDataReader)
