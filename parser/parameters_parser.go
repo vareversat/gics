@@ -34,7 +34,7 @@ func ParseParameter(parameterName string, parameterValue string) (parameters.Par
 	case "RELATED":
 		return parameters.NewAlarmTriggerRelationshipParamFromString(parameterValue), nil
 	case "RANGE":
-		return parameters.NewRangeParam(), nil
+		return parameters.NewRecurrenceIdRangeParam(), nil
 	case "RELTYPE":
 		return parameters.NewRelationshipParamFromString(parameterValue), nil
 	case "ROLE":
