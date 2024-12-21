@@ -44,7 +44,7 @@ func ParseParameter(parameterName string, parameterValue string) (parameters.Par
 	case "SENT-BY":
 		return parameters.NewSentByParamFromString(parameterValue)
 	case "TZID":
-		return parameters.NewTimeZoneIdentifierParam(parameterValue), nil
+		return parameters.NewTimeZoneIdentifierParam(parameterValue)
 	case "VALUE":
 		return parameters.NewValueDataTypesParamFromString(parameterValue), nil
 	// Non standard properties
