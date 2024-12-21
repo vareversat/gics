@@ -15,8 +15,6 @@ type EventCalendarComponent interface {
 
 type eventCalendarComponent struct {
 	Begin                   properties.BeginProperty
-	UID                     properties.UidProperty
-	DateTimeStamp           properties.DateTimeStampProperty
 	AlarmCalendarComponents []AlarmCalendarComponent
 	Properties              properties.Properties
 	End                     properties.EndProperty
@@ -26,22 +24,21 @@ type eventCalendarComponent struct {
 // See the [RFC-5545] ref for more info
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.1
 func NewEventCalendarComponent(
-	uid properties.UidProperty,
-	dateTimeStamp properties.DateTimeStampProperty,
-	alarmCalendarComponents []AlarmCalendarComponent,
 	propertyList ...properties.Property) EventCalendarComponent {
 	return &eventCalendarComponent{
 		Begin: properties.NewBeginProperty(
 			registries.Vevent,
 		),
-		UID:                     uid,
-		DateTimeStamp:           dateTimeStamp,
-		AlarmCalendarComponents: alarmCalendarComponents,
+		AlarmCalendarComponents: []AlarmCalendarComponent{},
 		Properties:              propertyList,
 		End: properties.NewEndProperty(
 			registries.Vevent,
 		),
 	}
+}
+
+func (eC *eventCalendarComponent) AddAlarmComponent(alarm AlarmCalendarComponent) {
+	eC.AlarmCalendarComponents = append(eC.AlarmCalendarComponents, alarm)
 }
 
 func (eC *eventCalendarComponent) GetProperty(
@@ -73,8 +70,6 @@ func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 
 func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
-	eC.UID.ToICalendarPropFormat(output)
-	eC.DateTimeStamp.ToICalendarPropFormat(output)
 	for i := 0; i < len(eC.AlarmCalendarComponents); i++ {
 		eC.AlarmCalendarComponents[i].SerializeToICSFormat(output)
 	}

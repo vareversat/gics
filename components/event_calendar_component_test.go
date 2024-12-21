@@ -16,7 +16,6 @@ func TestNewEventCalendarComponent(t *testing.T) {
 	component := NewEventCalendarComponent(
 		properties.NewUidProperty("UID"),
 		properties.NewDateTimeStampProperty(time.Now()),
-		[]AlarmCalendarComponent{},
 	)
 
 	assert.NotNil(t, component)
@@ -34,7 +33,6 @@ func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	component := NewEventCalendarComponent(
 		uid,
 		dateTimestamp,
-		[]AlarmCalendarComponent{},
 		description,
 		summary,
 	)
@@ -61,7 +59,6 @@ func TestEventCalendarComponent_GetProperty(t *testing.T) {
 	component := NewEventCalendarComponent(
 		uid,
 		dateTimestamp,
-		[]AlarmCalendarComponent{},
 		description,
 		summary,
 	)
