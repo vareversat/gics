@@ -14,27 +14,21 @@ type FreeBusyCalendarComponent interface {
 }
 
 type freeBusyCalendarComponent struct {
-	Begin         properties.BeginProperty
-	UID           properties.UidProperty
-	DateTimeStamp properties.DateTimeStampProperty
-	Properties    properties.Properties
-	End           properties.EndProperty
+	Begin      properties.BeginProperty
+	Properties properties.Properties
+	End        properties.EndProperty
 }
 
 // NewFreeBusyCalendarComponent create a VFREEBUSY calendar component
 // See the [RFC-5545] ref for more info
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.4
 func NewFreeBusyCalendarComponent(
-	uid properties.UidProperty,
-	dateTimeStamp properties.DateTimeStampProperty,
 	propertyList ...properties.Property) FreeBusyCalendarComponent {
 	return &freeBusyCalendarComponent{
 		Begin: properties.NewBeginProperty(
 			registries.Vfreebusy,
 		),
-		UID:           uid,
-		DateTimeStamp: dateTimeStamp,
-		Properties:    propertyList,
+		Properties: propertyList,
 		End: properties.NewEndProperty(
 			registries.Vfreebusy,
 		),
@@ -71,8 +65,6 @@ func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.
 
 func (fC *freeBusyCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	fC.Begin.ToICalendarPropFormat(output)
-	fC.UID.ToICalendarPropFormat(output)
-	fC.DateTimeStamp.ToICalendarPropFormat(output)
 	for i := 0; i < len(fC.Properties); i++ {
 		fC.Properties[i].ToICalendarPropFormat(output)
 	}
