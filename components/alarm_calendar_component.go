@@ -84,6 +84,10 @@ func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 	return []registries.PropertyRegistry{registries.DurationProp, registries.RepeatProp}
 }
 
+func (aC *alarmCalendarComponent) AddProperty(property properties.Property) {
+	aC.Properties = append(aC.Properties, property)
+}
+
 func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	aC.Begin.ToICalendarPropFormat(output)
 	aC.Action.ToICalendarPropFormat(output)

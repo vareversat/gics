@@ -63,6 +63,10 @@ func (jC *journalCalendarComponent) MutuallyInclusiveProperties() []registries.P
 	return []registries.PropertyRegistry{}
 }
 
+func (jC *journalCalendarComponent) AddProperty(property properties.Property) {
+	jC.Properties = append(jC.Properties, property)
+}
+
 func (jC *journalCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	jC.Begin.ToICalendarPropFormat(output)
 	for i := 0; i < len(jC.Properties); i++ {

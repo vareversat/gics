@@ -70,6 +70,10 @@ func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 	return []registries.PropertyRegistry{}
 }
 
+func (eC *eventCalendarComponent) AddProperty(property properties.Property) {
+	eC.Properties = append(eC.Properties, property)
+}
+
 func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
 	for i := 0; i < len(eC.Properties); i++ {

@@ -70,6 +70,10 @@ func (tC *toDoCalendarComponent) MutuallyInclusiveProperties() []registries.Prop
 	return []registries.PropertyRegistry{}
 }
 
+func (tC *toDoCalendarComponent) AddProperty(property properties.Property) {
+	tC.Properties = append(tC.Properties, property)
+}
+
 func (tC *toDoCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	for i := 0; i < len(tC.Properties); i++ {

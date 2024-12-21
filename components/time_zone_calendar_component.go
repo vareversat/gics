@@ -162,6 +162,10 @@ func (tC *timeZoneCalendarComponent) MutuallyInclusiveProperties() []registries.
 	return []registries.PropertyRegistry{}
 }
 
+func (tC *timeZoneCalendarComponent) AddProperty(property properties.Property) {
+	tC.Properties = append(tC.Properties, property)
+}
+
 func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
 	tC.DateTimeStart.ToICalendarPropFormat(output)
@@ -189,4 +193,8 @@ func (tC *timeZoneCalendarSubComponent) MutuallyExclusiveProperties() []registri
 
 func (tC *timeZoneCalendarSubComponent) MutuallyInclusiveProperties() []registries.PropertyRegistry {
 	return []registries.PropertyRegistry{}
+}
+
+func (tC *timeZoneCalendarSubComponent) AddProperty(property properties.Property) {
+	tC.Properties = append(tC.Properties, property)
 }

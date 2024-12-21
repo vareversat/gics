@@ -63,6 +63,10 @@ func (fC *freeBusyCalendarComponent) MutuallyInclusiveProperties() []registries.
 	return []registries.PropertyRegistry{}
 }
 
+func (fC *freeBusyCalendarComponent) AddProperty(property properties.Property) {
+	fC.Properties = append(fC.Properties, property)
+}
+
 func (fC *freeBusyCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	fC.Begin.ToICalendarPropFormat(output)
 	for i := 0; i < len(fC.Properties); i++ {

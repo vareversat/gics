@@ -21,6 +21,9 @@ type CalendarComponent interface {
 	// GetProperty get a property by his registries.PropertyRegistry
 	GetProperty(name registries.PropertyRegistry) properties.Property
 
+	// AddProperty add a new property to a component
+	AddProperty(property properties.Property)
+
 	// MutuallyExclusiveProperties return the list of the mutually exclusives properties of a CalendarComponent
 	// Example : In a VEVENT component, you can't have a DTEND and a DURATION property at the same time
 	MutuallyExclusiveProperties() []registries.PropertyRegistry
