@@ -15,7 +15,6 @@ type AlarmCalendarComponent interface {
 
 type alarmCalendarComponent struct {
 	Begin      properties.BeginProperty
-	Action     properties.ActionProperty
 	Properties properties.Properties
 	End        properties.EndProperty
 }
@@ -24,12 +23,10 @@ type alarmCalendarComponent struct {
 // See the [RFC-5545] ref for more info
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
 func NewAlarmCalendarComponent(
-	action properties.ActionProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
 		Begin:      properties.NewBeginProperty(registries.Valarm),
 		Properties: propertyList,
-		Action:     action,
 		End:        properties.NewEndProperty(registries.Valarm),
 	}
 }
@@ -46,33 +43,39 @@ func (aC *alarmCalendarComponent) GetProperty(
 }
 
 func (aC *alarmCalendarComponent) MandatoryProperties() []registries.PropertyRegistry {
-	switch aC.Action.GetActionValue().GetValue() {
-	case registries.Audio:
-		return []registries.PropertyRegistry{
-			registries.BeginProp,
-			registries.EndProp,
-			registries.ActionProp,
-			registries.TriggerProp,
+	actionProp := aC.GetProperty(registries.ActionProp)
+	if actionProp != nil {
+		switch registries.ActionRegistry(actionProp.GetValue()) {
+		case registries.Audio:
+			return []registries.PropertyRegistry{
+				registries.BeginProp,
+				registries.EndProp,
+				registries.ActionProp,
+				registries.TriggerProp,
+			}
+		case registries.Display:
+			return []registries.PropertyRegistry{
+				registries.BeginProp,
+				registries.EndProp,
+				registries.ActionProp,
+				registries.TriggerProp,
+				registries.DescriptionProp,
+			}
+		case registries.Email:
+			return []registries.PropertyRegistry{
+				registries.BeginProp,
+				registries.EndProp,
+				registries.ActionProp,
+				registries.TriggerProp,
+				registries.DescriptionProp,
+				registries.SummaryProp,
+			}
+		default:
+			return []registries.PropertyRegistry{registries.BeginProp, registries.EndProp}
+
 		}
-	case registries.Display:
-		return []registries.PropertyRegistry{
-			registries.BeginProp,
-			registries.EndProp,
-			registries.ActionProp,
-			registries.TriggerProp,
-			registries.DescriptionProp,
-		}
-	case registries.Email:
-		return []registries.PropertyRegistry{
-			registries.BeginProp,
-			registries.EndProp,
-			registries.ActionProp,
-			registries.TriggerProp,
-			registries.DescriptionProp,
-			registries.SummaryProp,
-		}
-	default:
-		return []registries.PropertyRegistry{registries.BeginProp, registries.EndProp}
+	} else {
+		return []registries.PropertyRegistry{}
 	}
 }
 
@@ -90,7 +93,6 @@ func (aC *alarmCalendarComponent) AddProperty(property properties.Property) {
 
 func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	aC.Begin.ToICalendarPropFormat(output)
-	aC.Action.ToICalendarPropFormat(output)
 	for i := 0; i < len(aC.Properties); i++ {
 		aC.Properties[i].ToICalendarPropFormat(output)
 	}
