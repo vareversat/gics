@@ -1,6 +1,7 @@
 package components
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/vareversat/gics/properties"
@@ -35,3 +36,23 @@ type CalendarComponent interface {
 
 // CalendarComponents is an array of CalendarComponent
 type CalendarComponents []CalendarComponent
+
+// NewComponentFromName create a new CalendarComponent based on the first BEGIN: block
+func NewComponentFromName(name registries.ComponentRegistry) (CalendarComponent, error) {
+	switch name {
+	case registries.Valarm:
+		return NewAlarmCalendarComponent(nil), nil
+	case registries.Vevent:
+		return NewEventCalendarComponent(nil), nil
+	case registries.Vfreebusy:
+		return NewFreeBusyCalendarComponent(nil), nil
+	case registries.Vjournal:
+		return NewJournalCalendarComponent(nil), nil
+	case registries.Vtimezone:
+		return NewTimeZoneCalendarComponent(nil), nil
+	case registries.Vtodo:
+		return NewToDoCalendarComponent(nil), nil
+	default:
+		return nil, fmt.Errorf("%s is not a valid calendar component name", string(name))
+	}
+}
