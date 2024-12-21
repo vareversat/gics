@@ -11,6 +11,7 @@ import (
 // See also : [CalendarComponent]
 type EventCalendarComponent interface {
 	CalendarComponent
+	// AddAlarmComponent allow to add an AlarmCalendarComponent to the EventCalendarComponent
 	AddAlarmComponent(alarm AlarmCalendarComponent)
 }
 
