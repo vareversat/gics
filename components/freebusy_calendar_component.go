@@ -8,9 +8,9 @@ import (
 )
 
 // FreeBusyCalendarComponent is the interface definition of a VFREEBUSY calendar component
-// See also : [CalendarComponent]
+// See also : [Component]
 type FreeBusyCalendarComponent interface {
-	CalendarComponent
+	Component
 }
 
 type freeBusyCalendarComponent struct {

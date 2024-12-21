@@ -8,14 +8,14 @@ import (
 )
 
 // TimeZoneCalendarComponent is the interface definition of a VTIMEZONE calendar component
-// See also : [CalendarComponent]
+// See also : [Component]
 type TimeZoneCalendarComponent interface {
-	CalendarComponent
+	Component
 }
 
 // TimeZoneCalendarSubComponent may be either a STANDARD or a DAYLIGHT subcomponent of a VTIMEZONE calendar component
 type TimeZoneCalendarSubComponent interface {
-	CalendarComponent
+	Component
 }
 
 // TimeZoneCalendarSubComponents array of TimeZoneCalendarSubComponent

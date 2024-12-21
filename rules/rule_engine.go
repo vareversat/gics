@@ -8,6 +8,6 @@ type RuleEngine interface {
 type ruleEngine struct {
 }
 
-func (e *ruleEngine) hasAllMandatoryProperties(component components.CalendarComponent) {
+func (e *ruleEngine) hasAllMandatoryProperties(component components.Component) {
 
 }

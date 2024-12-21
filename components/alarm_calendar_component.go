@@ -8,9 +8,9 @@ import (
 )
 
 // AlarmCalendarComponent is the interface definition of a VALARM calendar component
-// See also : [CalendarComponent]
+// See also : [Component]
 type AlarmCalendarComponent interface {
-	CalendarComponent
+	Component
 }
 
 type alarmCalendarComponent struct {

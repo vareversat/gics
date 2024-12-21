@@ -8,9 +8,9 @@ import (
 )
 
 // EventCalendarComponent is the interface definition of a VEVENT calendar component
-// See also : [CalendarComponent]
+// See also : [Component]
 type EventCalendarComponent interface {
-	CalendarComponent
+	Component
 	// AddAlarmComponent allow to add an AlarmCalendarComponent to the EventCalendarComponent
 	AddAlarmComponent(alarm AlarmCalendarComponent)
 }

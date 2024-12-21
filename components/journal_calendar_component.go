@@ -8,9 +8,9 @@ import (
 )
 
 // JournalCalendarComponent is the interface definition of a VJOURNAL calendar component
-// See also : [CalendarComponent]
+// See also : [Component]
 type JournalCalendarComponent interface {
-	CalendarComponent
+	Component
 }
 
 type journalCalendarComponent struct {

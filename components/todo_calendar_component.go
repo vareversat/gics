@@ -8,9 +8,9 @@ import (
 )
 
 // ToDoCalendarComponent is the interface definition of a VTODO calendar component
-// See also : [CalendarComponent]
+// See also : [Component]
 type ToDoCalendarComponent interface {
-	CalendarComponent
+	Component
 	// AddAlarmComponent allow to add an AlarmCalendarComponent to the ToDoCalendarComponent
 	AddAlarmComponent(alarm AlarmCalendarComponent)
 }
