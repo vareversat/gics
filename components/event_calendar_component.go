@@ -11,6 +11,7 @@ import (
 // See also : [CalendarComponent]
 type EventCalendarComponent interface {
 	CalendarComponent
+	AddAlarmComponent(alarm AlarmCalendarComponent)
 }
 
 type eventCalendarComponent struct {
@@ -70,11 +71,11 @@ func (eC *eventCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 
 func (eC *eventCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	eC.Begin.ToICalendarPropFormat(output)
-	for i := 0; i < len(eC.AlarmCalendarComponents); i++ {
-		eC.AlarmCalendarComponents[i].SerializeToICSFormat(output)
-	}
 	for i := 0; i < len(eC.Properties); i++ {
 		eC.Properties[i].ToICalendarPropFormat(output)
+	}
+	for i := 0; i < len(eC.AlarmCalendarComponents); i++ {
+		eC.AlarmCalendarComponents[i].SerializeToICSFormat(output)
 	}
 	eC.End.ToICalendarPropFormat(output)
 }

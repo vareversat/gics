@@ -48,6 +48,43 @@ func TestEventCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	assert.Equal(t, expected, serialized)
 }
 
+func TestEventCalendarComponent_WithAlarm(t *testing.T) {
+	myTime := time.Now()
+	myTimeToString := myTime.Format("20060102T150405Z")
+
+	action := properties.NewActionProperty(registries.Audio)
+	trigger := properties.NewTriggerProperty(myTime, "PT5M")
+	alarmDescription := properties.NewDescriptionProperty("Test Alarm")
+	alarmSummary := properties.NewSummaryProperty("Alarm SummaryProp")
+
+	alarm := NewAlarmCalendarComponent(action, trigger, alarmDescription, alarmSummary)
+
+	uid := properties.NewUidProperty("My Event")
+	dateTimestamp := properties.NewDateTimeStampProperty(myTime)
+	description := properties.NewDescriptionProperty("Test Event")
+	summary := properties.NewSummaryProperty("Event SummaryProp")
+
+	component := NewEventCalendarComponent(
+		uid,
+		dateTimestamp,
+		description,
+		summary,
+	)
+
+	component.AddAlarmComponent(alarm)
+
+	var buf bytes.Buffer
+	component.SerializeToICSFormat(&buf)
+	serialized := buf.String()
+
+	expected := fmt.Sprintf(
+		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event SummaryProp\r\nBEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm SummaryProp\r\nEND:VALARM\r\nEND:VEVENT\r\n",
+		myTimeToString,
+		myTimeToString,
+	)
+	assert.Equal(t, expected, serialized)
+}
+
 func TestEventCalendarComponent_GetProperty(t *testing.T) {
 	myTime := time.Now()
 

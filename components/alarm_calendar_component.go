@@ -16,7 +16,6 @@ type AlarmCalendarComponent interface {
 type alarmCalendarComponent struct {
 	Begin      properties.BeginProperty
 	Action     properties.ActionProperty
-	Trigger    properties.TriggerProperty
 	Properties properties.Properties
 	End        properties.EndProperty
 }
@@ -26,11 +25,9 @@ type alarmCalendarComponent struct {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.6
 func NewAlarmCalendarComponent(
 	action properties.ActionProperty,
-	trigger properties.TriggerProperty,
 	propertyList ...properties.Property) AlarmCalendarComponent {
 	return &alarmCalendarComponent{
 		Begin:      properties.NewBeginProperty(registries.Valarm),
-		Trigger:    trigger,
 		Properties: propertyList,
 		Action:     action,
 		End:        properties.NewEndProperty(registries.Valarm),
@@ -90,7 +87,6 @@ func (aC *alarmCalendarComponent) MutuallyInclusiveProperties() []registries.Pro
 func (aC *alarmCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	aC.Begin.ToICalendarPropFormat(output)
 	aC.Action.ToICalendarPropFormat(output)
-	aC.Trigger.ToICalendarPropFormat(output)
 	for i := 0; i < len(aC.Properties); i++ {
 		aC.Properties[i].ToICalendarPropFormat(output)
 	}
