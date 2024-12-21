@@ -50,10 +50,10 @@ func parse(unfoldedData bytes.Buffer) {
 		lexer := NewLexer(line)
 		for tok := lexer.NextToken(); tok.Type != EOF; tok = lexer.NextToken() {
 		}
-		// First, parsed all the parameters
+		// First, parsed all the parameters of the current line
 		parsedParameters := parameters.Parameters{}
 		for _, v := range lexer.property.ParameterParsers {
-			param, err := ParameterParser(v.ParameterName, v.ParameterValue)
+			param, err := ParseParameter(v.ParameterName, v.ParameterValue)
 			if err != nil {
 				panic(err)
 			} else {

@@ -4,8 +4,8 @@ import (
 	"github.com/vareversat/gics/parameters"
 )
 
-// ParameterParser will try to parse a property based on parameterName with the associated parameterValue
-func ParameterParser(parameterName string, parameterValue string) (parameters.Parameter, error) {
+// ParseParameter will try to parse a property based on parameterName with the associated parameterValue
+func ParseParameter(parameterName string, parameterValue string) (parameters.Parameter, error) {
 	switch parameterName {
 	case "ALTREP":
 		return parameters.NewAlternateTextRepresentationParamFromString(parameterValue)
