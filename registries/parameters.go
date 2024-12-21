@@ -50,9 +50,9 @@ const (
 	// RelationshipTypeParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.15
 	RelationshipTypeParam ParameterRegistry = "RELTYPE"
-	// RoleParam [See RFC-5545 spec]
+	// ParticipantRoleParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.16
-	RoleParam ParameterRegistry = "ROLE"
+	ParticipantRoleParam ParameterRegistry = "ROLE"
 	// RsvpExpectationParam [See RFC-5545 spec]
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.2.17
 	RsvpExpectationParam ParameterRegistry = "RSVP"
