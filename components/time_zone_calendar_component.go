@@ -33,33 +33,27 @@ type TimeZoneCalendarDaylightComponent interface {
 
 type timeZoneCalendarComponent struct {
 	Begin      properties.BeginProperty
-	TimeZoneId properties.TimeZoneIdProperty
 	Properties properties.Properties
 	Components TimeZoneCalendarSubComponents
 	End        properties.EndProperty
 }
 
 type timeZoneCalendarSubComponent struct {
-	Begin              properties.BeginProperty
-	DateTimeStart      properties.DateTimeStartProperty
-	TimeZoneOffsetTo   properties.TimeZoneOffsetToProperty
-	TimeZoneOffsetFrom properties.TimeZoneOffsetFromProperty
-	Properties         properties.Properties
-	End                properties.EndProperty
+	Begin      properties.BeginProperty
+	Properties properties.Properties
+	End        properties.EndProperty
 }
 
 // NewTimeZoneCalendarComponent create a VTIMEZONE calendar component
 // See the [RFC-5545] ref for more info
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
 func NewTimeZoneCalendarComponent(
-	timeZoneId properties.TimeZoneIdProperty,
 	components TimeZoneCalendarSubComponents,
 	propertyList ...properties.Property) TimeZoneCalendarStandardComponent {
 	return &timeZoneCalendarComponent{
 		Begin: properties.NewBeginProperty(
 			registries.Vtimezone,
 		),
-		TimeZoneId: timeZoneId,
 		Components: components,
 		Properties: propertyList,
 		End: properties.NewEndProperty(
@@ -94,18 +88,12 @@ func (tC *timeZoneCalendarSubComponent) GetProperty(
 // See the [RFC-5545] ref for more info
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
 func NewTimeZoneDayLightSubcomponent(
-	dateTimeStart properties.DateTimeStartProperty,
-	timeZoneOffsetTo properties.TimeZoneOffsetToProperty,
-	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
 	propertyList ...properties.Property) TimeZoneCalendarDaylightComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBeginProperty(
 			registries.Daylight,
 		),
-		DateTimeStart:      dateTimeStart,
-		TimeZoneOffsetTo:   timeZoneOffsetTo,
-		TimeZoneOffsetFrom: timeZoneOffsetFrom,
-		Properties:         propertyList,
+		Properties: propertyList,
 		End: properties.NewEndProperty(
 			registries.Daylight,
 		),
@@ -116,18 +104,12 @@ func NewTimeZoneDayLightSubcomponent(
 // See the [RFC-5545] ref for more info
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.5
 func NewTimeZoneCalendarStandardSubcomponent(
-	dateTimeStart properties.DateTimeStartProperty,
-	timeZoneOffsetTo properties.TimeZoneOffsetToProperty,
-	timeZoneOffsetFrom properties.TimeZoneOffsetFromProperty,
 	propertyList ...properties.Property) TimeZoneCalendarSubComponent {
 	return &timeZoneCalendarSubComponent{
 		Begin: properties.NewBeginProperty(
 			registries.Standard,
 		),
-		DateTimeStart:      dateTimeStart,
-		TimeZoneOffsetTo:   timeZoneOffsetTo,
-		TimeZoneOffsetFrom: timeZoneOffsetFrom,
-		Properties:         propertyList,
+		Properties: propertyList,
 		End: properties.NewEndProperty(
 			registries.Standard,
 		),
@@ -136,12 +118,11 @@ func NewTimeZoneCalendarStandardSubcomponent(
 
 func (tC *timeZoneCalendarComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
-	tC.TimeZoneId.ToICalendarPropFormat(output)
-	for i := 0; i < len(tC.Components); i++ {
-		tC.Components[i].SerializeToICSFormat(output)
-	}
 	for i := 0; i < len(tC.Properties); i++ {
 		tC.Properties[i].ToICalendarPropFormat(output)
+	}
+	for i := 0; i < len(tC.Components); i++ {
+		tC.Components[i].SerializeToICSFormat(output)
 	}
 	tC.End.ToICalendarPropFormat(output)
 }
@@ -168,9 +149,6 @@ func (tC *timeZoneCalendarComponent) AddProperty(property properties.Property) {
 
 func (tC *timeZoneCalendarSubComponent) SerializeToICSFormat(output io.Writer) {
 	tC.Begin.ToICalendarPropFormat(output)
-	tC.DateTimeStart.ToICalendarPropFormat(output)
-	tC.TimeZoneOffsetTo.ToICalendarPropFormat(output)
-	tC.TimeZoneOffsetFrom.ToICalendarPropFormat(output)
 	for i := 0; i < len(tC.Properties); i++ {
 		tC.Properties[i].ToICalendarPropFormat(output)
 	}

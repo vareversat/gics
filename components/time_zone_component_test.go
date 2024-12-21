@@ -17,8 +17,8 @@ func TestNewTimeZoneCalendarComponent_STANDARD(t *testing.T) {
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
 	component := NewTimeZoneCalendarComponent(
-		properties.NewTimeZoneIdProperty("Europe/Paris"),
 		[]TimeZoneCalendarSubComponent{subComponent},
+		properties.NewTimeZoneIdProperty("Europe/Paris"),
 	)
 
 	assert.NotNil(t, component)
@@ -31,8 +31,8 @@ func TestNewTimeZoneCalendarComponent_DAYLIGHT(t *testing.T) {
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
 	component := NewTimeZoneCalendarComponent(
-		properties.NewTimeZoneIdProperty("Europe/Paris"),
 		[]TimeZoneCalendarSubComponent{subComponent},
+		properties.NewTimeZoneIdProperty("Europe/Paris"),
 	)
 
 	assert.NotNil(t, component)
@@ -48,8 +48,8 @@ func TestTimeZoneCalendarComponent_STANDARD_SerializeToICSFormat(t *testing.T) {
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
 	component := NewTimeZoneCalendarComponent(
-		properties.NewTimeZoneIdProperty("Europe/Paris"),
 		[]TimeZoneCalendarSubComponent{subComponent},
+		properties.NewTimeZoneIdProperty("Europe/Paris"),
 	)
 
 	var buf bytes.Buffer
@@ -73,8 +73,8 @@ func TestTimeZoneCalendarComponent_DAYLIGHT_SerializeToICSFormat(t *testing.T) {
 		properties.NewTimeZoneOffsetFromProperty("-0300"))
 
 	component := NewTimeZoneCalendarComponent(
-		properties.NewTimeZoneIdProperty("Europe/Paris"),
 		[]TimeZoneCalendarSubComponent{subComponent},
+		properties.NewTimeZoneIdProperty("Europe/Paris"),
 	)
 
 	var buf bytes.Buffer
