@@ -487,7 +487,7 @@ func (dP *durationPropertyType) ToICalendarPropFormat(output io.Writer) {
 		computeParameters(&paramsOutput, dP.Parameters)
 	}
 	unfoldedOutput.Write(
-		[]byte(fmt.Sprintf("%s%s:%s", dP.PropName, paramsOutput.String(), dP.Value.GetValue())),
+		[]byte(fmt.Sprintf("%s%s:%s", dP.PropName, paramsOutput.String(), dP.Value.GetStringValue())),
 	)
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
