@@ -59,8 +59,7 @@
     ],
     "portsAttributes": {
         "6060": {
-            "label": "Go Doc",
-            "onAutoForward": "notify"
+            "label": "Go Doc"
         }
     }
 }
