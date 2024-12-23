@@ -18,6 +18,7 @@
     "customizations": {
         "vscode": {
             "settings": {
+                "makefile.configureOnOpen": false,
                 "dev.containers.mountWaylandSocket": false,
                 "go.toolsManagement.autoUpdate": true,
                 "go.useLanguageServer": true,
