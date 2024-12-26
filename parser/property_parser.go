@@ -57,7 +57,7 @@ func ParseProperty(
 	case string(registries.DateTimeStampProp):
 		return properties.NewDateTimeStampPropertyFromString(propertyValue, params...), nil
 	case string(registries.DurationProp):
-		return properties.NewDurationProperty(propertyValue)
+		return properties.NewDurationPropertyFromString(propertyValue)
 	case string(registries.DateTimeDueProp):
 		return properties.NewDateTimeDuePropertyFromString(
 			propertyValue,
@@ -73,7 +73,7 @@ func ParseProperty(
 	case string(registries.ExceptionRuleProp):
 		fmt.Printf("### omitting %s\n", propertyName)
 	case string(registries.FreeBusyTimeProp):
-		fmt.Printf("### omitting %s\n", propertyName)
+		return properties.NewFreeBusyTimePropertyFromString(propertyValue, params...)
 	case string(registries.GeoProp):
 		geo, err := properties.NewGeographicPositionPropertyFromString(propertyValue, params...)
 		if err != nil {
