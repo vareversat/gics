@@ -7,7 +7,11 @@ import (
 	"os"
 	"strings"
 
+	"github.com/vareversat/gics"
+	"github.com/vareversat/gics/components"
 	"github.com/vareversat/gics/parameters"
+	"github.com/vareversat/gics/properties"
+	"github.com/vareversat/gics/registries"
 )
 
 const (
@@ -41,11 +45,14 @@ func unfold(foldedFile *os.File, unfoldedData *bytes.Buffer) {
 }
 
 // parse take an unfoldedData to create parameters and properties
-func parse(unfoldedData bytes.Buffer) {
+func parse(unfoldedData bytes.Buffer) properties.Properties {
 	unfoldedDataReader := bytes.NewReader(unfoldedData.Bytes())
 	scanner := bufio.NewScanner(unfoldedDataReader)
+	properties := properties.Properties{}
 	// Iterate through all the unfolded file
 	lineNumber := 0
+	// Init new calendar
+	calendar := gics.NewCalendar(nil)
 	for scanner.Scan() {
 		line := scanner.Text()
 		lexer := NewLexer(line)
@@ -67,9 +74,25 @@ func parse(unfoldedData bytes.Buffer) {
 			lexer.property.PropertyValue,
 			parsedParameters...,
 		)
-		if parsedProperty != nil {
-			parsedProperty.ToICalendarPropFormat(os.Stdout)
-		}
+		properties = append(properties, parsedProperty)
+		calendar.AddProperty(parsedProperty)
 		lineNumber++
+	}
+	return properties
+}
+
+func compute(property properties.Property, level *int, calendar gics.Calendar) {
+	if property.GetName() == registries.BeginProp {
+		*level++
+		if *level == 1 {
+			calendar = gics.NewCalendar(nil)
+		} else {
+			component, err := components.NewComponentFromName(registries.ComponentRegistry(property.GetValue()))
+			if err != nil && calendar != nil {
+				calendar.SetComponent(component)
+			}
+		}
+	} else if property.GetName() == registries.EndProp {
+		*level--
 	}
 }
