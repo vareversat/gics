@@ -53,7 +53,7 @@ func TestEventCalendarComponent_WithAlarm(t *testing.T) {
 	myTimeToString := myTime.Format("20060102T150405Z")
 
 	action := properties.NewActionProperty(registries.Audio)
-	trigger := properties.NewTriggerProperty(myTime, "PT5M")
+	trigger, _ := properties.NewTriggerFromDurationProperty(-3600 * 1e9)
 	alarmDescription := properties.NewDescriptionProperty("Test Alarm")
 	alarmSummary := properties.NewSummaryProperty("Alarm SummaryProp")
 
@@ -78,8 +78,7 @@ func TestEventCalendarComponent_WithAlarm(t *testing.T) {
 	serialized := buf.String()
 
 	expected := fmt.Sprintf(
-		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event SummaryProp\r\nBEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm SummaryProp\r\nEND:VALARM\r\nEND:VEVENT\r\n",
-		myTimeToString,
+		"BEGIN:VEVENT\r\nUID:My Event\r\nDTSTAMP:%s\r\nDESCRIPTION:Test Event\r\nSUMMARY:Event SummaryProp\r\nBEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:-PT1H\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm SummaryProp\r\nEND:VALARM\r\nEND:VEVENT\r\n",
 		myTimeToString,
 	)
 	assert.Equal(t, expected, serialized)

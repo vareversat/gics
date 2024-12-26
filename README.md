@@ -29,7 +29,7 @@ Here the main features this module offers (some are already available ✅ and so
   - ✅ With **VTODO** components
 - 🟧 Make use of all [properties available](https://datatracker.ietf.org/doc/html/rfc5545#section-3.2)
   - ✅ All are implemented
-  - 🟧 Work needed for **EXRULE**, **RRULE** and **TRIGGER**
+  - 🟧 Work needed for **EXRULE** and **RRULE**
 - 🟧 Make use of all [types available](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3)
   - ✅ All are implemented
   - 🟧 Work needed for **RECUR**

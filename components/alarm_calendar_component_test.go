@@ -2,9 +2,7 @@ package components
 
 import (
 	"bytes"
-	"fmt"
 	"testing"
-	"time"
 
 	"github.com/vareversat/gics/registries"
 
@@ -14,7 +12,7 @@ import (
 
 func TestNewAlarmCalendarComponent(t *testing.T) {
 	action := properties.NewActionProperty(registries.Audio)
-	trigger := properties.NewTriggerProperty(time.Now(), "PT5M")
+	trigger, _ := properties.NewTriggerFromDurationProperty(3600 * 1e9)
 	component := NewAlarmCalendarComponent(action, trigger)
 
 	assert.NotNil(t, component)
@@ -22,11 +20,8 @@ func TestNewAlarmCalendarComponent(t *testing.T) {
 }
 
 func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
-	myTime := time.Now()
-	myTimeToString := myTime.Format("20060102T150405Z")
-
 	action := properties.NewActionProperty(registries.Audio)
-	trigger := properties.NewTriggerProperty(myTime, "PT5M")
+	trigger, _ := properties.NewTriggerFromDurationProperty(-3600 * 1e9)
 	description := properties.NewDescriptionProperty("Test Alarm")
 	summary := properties.NewSummaryProperty("Alarm SummaryProp")
 
@@ -36,9 +31,6 @@ func TestAlarmCalendarComponent_SerializeToICSFormat(t *testing.T) {
 	component.SerializeToICSFormat(&buf)
 	serialized := buf.String()
 
-	expected := fmt.Sprintf(
-		"BEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:%s\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm SummaryProp\r\nEND:VALARM\r\n",
-		myTimeToString,
-	)
+	expected := "BEGIN:VALARM\r\nACTION:AUDIO\r\nTRIGGER:-PT1H\r\nDESCRIPTION:Test Alarm\r\nSUMMARY:Alarm SummaryProp\r\nEND:VALARM\r\n"
 	assert.Equal(t, expected, serialized)
 }

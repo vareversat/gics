@@ -144,7 +144,7 @@ func ParseProperty(
 	case string(registries.TimeTransparencyProp):
 		return properties.NewTimeTransparencyPropertyFromString(propertyValue, params...), nil
 	case string(registries.TriggerProp):
-		fmt.Printf("### omitting %s\n", propertyName)
+		return properties.NewTriggerPropertyFromString(propertyValue, params...)
 	case string(registries.TimeZoneNameProp):
 		return properties.NewTimeZoneNameProperty(propertyValue, params...), nil
 	case string(registries.TimeZoneOffsetFromProp):
