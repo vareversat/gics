@@ -5,6 +5,7 @@ import (
 
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/properties"
+	"github.com/vareversat/gics/registries"
 	"github.com/vareversat/gics/types"
 )
 
@@ -15,158 +16,158 @@ func ParseProperty(
 	params ...parameters.Parameter,
 ) (properties.Property, error) {
 	switch propertyName {
-	case "ACTION":
+	case string(registries.ActionProp):
 		return properties.NewActionPropertyFromString(propertyValue, params...), nil
-	case "ATTACH":
+	case string(registries.AttachmentProp):
 		return properties.NewAttachmentProperty(propertyValue, params...), nil
-	case "ATTENDEE":
+	case string(registries.AttendeeProp):
 		attendee, err := properties.NewAttendeePropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return attendee, nil
-	case "BEGIN":
+	case string(registries.BeginProp):
 		return properties.NewBeginPropertyFromString(
 			propertyValue,
 		), nil
-	case "CATEGORIES":
+	case string(registries.CategoriesProp):
 		return properties.NewCategoryPropertyFromString(propertyValue, params...), nil
-	case "CALSCALE":
+	case string(registries.CalendarScaleProp):
 		return properties.NewCalScaleProperty(params...), nil
-	case "CLASS":
+	case string(registries.ClassProp):
 		return properties.NewClassificationPropertyFromString(propertyValue, params...), nil
-	case "COMMENT":
+	case string(registries.CommentProp):
 		return properties.NewCommentProperty(propertyValue, params...), nil
-	case "COMPLETED_PROP":
+	case string(registries.CompletedProp):
 		return properties.NewDateTimeCompletedPropertyFromString(propertyValue, params...), nil
-	case "CONTACT":
+	case string(registries.ContactProp):
 		return properties.NewContactProperty(propertyValue, params...), nil
-	case "CREATED":
+	case string(registries.DateTimeCreatedProp):
 		return properties.NewDateTimeCreatedPropertyFromString(propertyValue, params...), nil
-	case "DESCRIPTION":
+	case string(registries.DescriptionProp):
 		return properties.NewDescriptionProperty(propertyValue, params...), nil
-	case "DTEND":
+	case string(registries.DateTimeEndProp):
 		return properties.NewDateTimeEndPropertyFromString(
 			propertyValue,
 			params...), nil
-	case "DTSTART":
+	case string(registries.DateTimeStartProp):
 		return properties.NewDateTimeStartPropertyFromString(
 			propertyValue,
 			params...), nil
-	case "DTSTAMP":
+	case string(registries.DateTimeStampProp):
 		return properties.NewDateTimeStampPropertyFromString(propertyValue, params...), nil
-	case "DURATION":
+	case string(registries.DurationProp):
 		return properties.NewDurationProperty(propertyValue), nil
-	case "DUE":
+	case string(registries.DateTimeDueProp):
 		return properties.NewDateTimeDuePropertyFromString(
 			propertyValue,
 			params...), nil
-	case "END":
+	case string(registries.EndProp):
 		return properties.NewEndPropertyFromString(
 			propertyValue,
 		), nil
-	case "EXDATE":
+	case string(registries.ExceptionDateTimesProp):
 		return properties.NewExceptionDateTimePropertyFromString(
 			propertyValue, params...,
 		), nil
-	case "EXRULE":
+	case string(registries.ExceptionRuleProp):
 		fmt.Printf("### omitting %s\n", propertyName)
-	case "FREEBUSY":
+	case string(registries.FreeBusyTimeProp):
 		fmt.Printf("### omitting %s\n", propertyName)
-	case "GEO":
+	case string(registries.GeoProp):
 		geo, err := properties.NewGeographicPositionPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return geo, nil
-	case "LAST-MODIFIED":
+	case string(registries.LastModifiedProp):
 		return properties.NewLastModifiedPropertyFromString(propertyValue), nil
-	case "LOCATION":
+	case string(registries.LocationProp):
 		return properties.NewLocationProperty(propertyValue, params...), nil
-	case "METHOD":
+	case string(registries.MethodProp):
 		return properties.NewMethodProperty(propertyValue, params...), nil
-	case "ORGANIZER":
+	case string(registries.OrganizerProp):
 		organize, err := properties.NewOrganizerPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return organize, nil
-	case "PERCENTCOMPLETE":
+	case string(registries.PercentCompleteProp):
 		percentage, err := properties.NewPercentCompletePropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return percentage, nil
-	case "PRIORITY":
+	case string(registries.PriorityProp):
 		priority, err := properties.NewPriorityPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return priority, nil
-	case "PROP_TZID":
+	case string(registries.TimeZoneIdProp):
 		return properties.NewTimeZoneIdProperty(propertyValue), nil
-	case "PRODID":
+	case string(registries.ProductIdentifierProp):
 		return properties.NewProductIdProperty(propertyValue, params...), nil
-	case "RDATE":
+	case string(registries.RecurrenceDateTimesProp):
 		fmt.Printf("### omitting %s\n", propertyName)
-	case "RECURRENCE-ID":
+	case string(registries.RecurrenceIdProp):
 		return properties.NewRecurrenceIdPropertyFromString(
 			propertyValue,
 			types.WithUtcTime,
 			params...), nil
-	case "RELATED-TO":
+	case string(registries.RelatedToProp):
 		return properties.NewRelatedToProperty(propertyValue, params...), nil
-	case "REPEAT":
+	case string(registries.RepeatProp):
 		repeat, err := properties.NewRepeatCountPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return repeat, nil
-	case "REQUEST-STATUS":
+	case string(registries.RequestStatusProp):
 		status, err := properties.NewRequestStatusPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return status, nil
-	case "RESOURCES":
+	case string(registries.ResourcesProp):
 		return properties.NewResourcesPropertyFromString(propertyValue, params...), nil
-	case "RRULE":
+	case string(registries.RecurrenceRuleProp):
 		fmt.Printf("### omitting %s\n", propertyName)
-	case "SEQUENCE":
+	case string(registries.SequenceProp):
 		sequence, err := properties.NewSequencePropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return sequence, nil
-	case "STATUS":
+	case string(registries.StatusProp):
 		return properties.NewStatusPropertyFromString(propertyValue, params...), nil
-	case "SUMMARY":
+	case string(registries.SummaryProp):
 		return properties.NewSummaryProperty(propertyValue, params...), nil
-	case "TRANSP":
+	case string(registries.TimeTransparencyProp):
 		return properties.NewTimeTransparencyPropertyFromString(propertyValue, params...), nil
-	case "TRIGGER":
+	case string(registries.TriggerProp):
 		fmt.Printf("### omitting %s\n", propertyName)
-	case "TZNAME":
+	case string(registries.TimeZoneNameProp):
 		return properties.NewTimeZoneNameProperty(propertyValue, params...), nil
-	case "TZOFFSETFROM":
+	case string(registries.TimeZoneOffsetFromProp):
 		return properties.NewTimeZoneOffsetFromProperty(propertyValue, params...), nil
-	case "TZOFFSETTO":
+	case string(registries.TimeZoneOffsetToProp):
 		return properties.NewTimeZoneOffsetToProperty(propertyValue, params...), nil
-	case "TZURL":
+	case string(registries.TimeZoneUrlProp):
 		url, err := properties.NewTimeZoneUrlPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return url, nil
-	case "UID":
+	case string(registries.UidProp):
 		return properties.NewUidProperty(propertyValue, params...), nil
-	case "URL":
+	case string(registries.UrlProp):
 		url, err := properties.NewUrlPropertyFromString(propertyValue, params...)
 		if err != nil {
 			panic(err)
 		}
 		return url, nil
-	case "VERSION":
+	case string(registries.VersionProp):
 		return properties.NewVersionProperty(propertyValue, params...), nil
 	// Non standard properties
 	default:
