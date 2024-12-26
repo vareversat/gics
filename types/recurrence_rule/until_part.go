@@ -9,11 +9,11 @@ import (
 )
 
 type UntilPart interface {
-	RRPart
+	RecurrenceRulePart
 }
 
 type untilPart struct {
-	PartName RRPartName
+	PartName RecurrenceRulePartName
 	EndDate  types.DateTimeType
 }
 
@@ -28,7 +28,7 @@ func (f untilPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
 }
 
-func (f untilPart) GetPartName() RRPartName {
+func (f untilPart) GetPartName() RecurrenceRulePartName {
 	return f.PartName
 }
 

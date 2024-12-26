@@ -16,7 +16,7 @@ type ExceptionRuleProperty interface {
 // - registries.Vjournal (Optional)
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc2445#section-4.8.5.2
 // NewExceptionRuleProperty Deprecated
-func NewExceptionRuleProperty(parts ...recurrence_rule.RRPart) ExceptionRuleProperty {
+func NewExceptionRuleProperty(parts ...recurrence_rule.RecurrenceRulePart) ExceptionRuleProperty {
 	return &recurrenceRulePropertyType{
 		PropName: registries.ExceptionRuleProp,
 		Value:    recurrence_rule.NewRecurrenceRuleValue(parts),

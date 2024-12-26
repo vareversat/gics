@@ -7,11 +7,11 @@ import (
 )
 
 type ByDayPart interface {
-	RRPart
+	RecurrenceRulePart
 }
 
 type byDayPart struct {
-	PartName RRPartName
+	PartName RecurrenceRulePartName
 	WeekDays []RRWeekDayNum
 }
 
@@ -26,7 +26,7 @@ func (f byDayPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
 }
 
-func (f byDayPart) GetPartName() RRPartName {
+func (f byDayPart) GetPartName() RecurrenceRulePartName {
 	return f.PartName
 }
 

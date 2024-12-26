@@ -41,10 +41,10 @@ const (
 	//
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
 	PeriodOfTime ValueTypeRegistry = "PERIOD"
-	// Recur. [See RFC-5545 spec]
+	// Recurrence. [See RFC-5545 spec]
 	//
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
-	Recur ValueTypeRegistry = "RECUR"
+	Recurrence ValueTypeRegistry = "RECUR"
 	// Text. [See RFC-5545 spec]
 	//
 	// [See RFC-5545 spec]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.11

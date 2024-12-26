@@ -107,7 +107,7 @@ func NewExplicitPeriodOfTimeValue(
 	}
 }
 
-// NewPeriodOfTimeValue create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
+// NewPeriodOfTimeValueFromString create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
 func NewPeriodOfTimeValueFromString(value string) (PeriodOfTimeType, error) {

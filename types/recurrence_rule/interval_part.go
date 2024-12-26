@@ -8,11 +8,11 @@ import (
 )
 
 type IntervalPart interface {
-	RRPart
+	RecurrenceRulePart
 }
 
 type intervalPart struct {
-	PartName RRPartName
+	PartName RecurrenceRulePartName
 	Count    types.IntegerType
 }
 
@@ -28,7 +28,7 @@ func (f intervalPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
 }
 
-func (f intervalPart) GetPartName() RRPartName {
+func (f intervalPart) GetPartName() RecurrenceRulePartName {
 	return f.PartName
 }
 

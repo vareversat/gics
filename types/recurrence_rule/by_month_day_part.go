@@ -9,11 +9,11 @@ import (
 )
 
 type ByMonthDayPart interface {
-	RRPart
+	RecurrenceRulePart
 }
 
 type byMonthDayPart struct {
-	PartName RRPartName
+	PartName RecurrenceRulePartName
 	Seconds  []types.IntegerType
 }
 
@@ -29,7 +29,7 @@ func (f byMonthDayPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
 }
 
-func (f byMonthDayPart) GetPartName() RRPartName {
+func (f byMonthDayPart) GetPartName() RecurrenceRulePartName {
 	return f.PartName
 }
 

@@ -6,11 +6,11 @@ import (
 )
 
 type FrequencyPart interface {
-	RRPart
+	RecurrenceRulePart
 }
 
 type frequencyPart struct {
-	PartName  RRPartName
+	PartName  RecurrenceRulePartName
 	Frequency RRFrequency
 }
 
@@ -25,7 +25,7 @@ func (f frequencyPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
 }
 
-func (f frequencyPart) GetPartName() RRPartName {
+func (f frequencyPart) GetPartName() RecurrenceRulePartName {
 	return f.PartName
 }
 
