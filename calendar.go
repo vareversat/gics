@@ -22,13 +22,17 @@ type Calendar interface {
 
 	// AddProperty add a new property to a Calendar
 	AddProperty(property properties.Property)
+
+	// SetComponent set a component to a calendar
+	SetComponent(component components.Component)
 }
 
 type calendar struct {
-	Begin      properties.BeginProperty
-	Properties properties.Properties
-	Component  components.Component
-	End        properties.EndProperty
+	Begin         properties.BeginProperty
+	Properties    properties.Properties
+	Component     components.Component
+	End           properties.EndProperty
+	propertyLevel int
 }
 
 // NewCalendar create a iCalendar object
@@ -36,7 +40,7 @@ type calendar struct {
 func NewCalendar(
 	calendarComponent components.Component,
 	propertyList ...properties.Property,
-) (Calendar, error) {
+) Calendar {
 	return &calendar{
 		Begin: properties.NewBeginProperty(
 			registries.Vcalendar,
@@ -46,7 +50,8 @@ func NewCalendar(
 		End: properties.NewEndProperty(
 			registries.Vcalendar,
 		),
-	}, nil
+		propertyLevel: 0,
+	}
 }
 
 func (c *calendar) GetProperty(
@@ -70,6 +75,10 @@ func (c *calendar) MandatoryProperties() []registries.PropertyRegistry {
 
 func (c *calendar) AddProperty(property properties.Property) {
 	c.Properties = append(c.Properties, property)
+}
+
+func (c *calendar) SetComponent(component components.Component) {
+	c.Component = component
 }
 
 func (c *calendar) SerializeToICSFormat(output io.Writer) {
