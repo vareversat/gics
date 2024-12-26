@@ -46,9 +46,10 @@ func NewTriggerProperty(
 			Parameters: params,
 		}
 	case string(registries.Duration):
+		duration, _ := types.NewDurationValueFromString(durationValue)
 		return &durationPropertyType{
 			PropName:   registries.TriggerProp,
-			Value:      types.NewDurationValueFromString(durationValue),
+			Value:      duration,
 			Parameters: params,
 		}
 	default:

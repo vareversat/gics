@@ -11,8 +11,8 @@ import (
 type PeriodOfTimeFormat string
 
 const (
-	ExplicitPeriodOfTime PeriodOfTimeFormat = "ExplicitPeriodOfTime"
 	ImplicitPeriodOfTime PeriodOfTimeFormat = "ImplicitPeriodOfTime"
+	ExplicitPeriodOfTime PeriodOfTimeFormat = "ExplicitPeriodOfTime"
 )
 
 type PeriodOfTimeType interface {
@@ -21,88 +21,136 @@ type PeriodOfTimeType interface {
 	GetFormat() PeriodOfTimeFormat
 }
 
-type periodOfTimeType struct {
+type implicitPeriodOfTimeType struct {
 	typeName      registries.ValueTypeRegistry
 	typeFromValue time.Time
 	typeToValue   time.Duration
 	typeFormat    PeriodOfTimeFormat
 }
 
-// GetStringValue return the string representation according to the correct format
-func (d *periodOfTimeType) GetStringValue() string {
-	var endToString string
-	startToString := d.typeFromValue.Format("20060102T150405Z")
-
-	switch d.typeFormat {
-	case ExplicitPeriodOfTime:
-		endToString = d.typeFromValue.Add(d.typeToValue).Format("20060102T150405Z")
-	case ImplicitPeriodOfTime:
-		endToString = parseDurationToString(d.typeToValue)
-	default:
-		endToString = d.typeFromValue.Add(d.typeToValue).Format("20060102T150405Z")
-	}
-	return fmt.Sprintf("%s/%s", startToString, endToString)
+type explicitPeriodOfTimeType struct {
+	typeName      registries.ValueTypeRegistry
+	typeFromValue time.Time
+	typeToValue   time.Time
+	typeFormat    PeriodOfTimeFormat
 }
 
-func (d *periodOfTimeType) GetTypeName() string {
+// GetStringValue return the string representation according to the correct format
+func (d *implicitPeriodOfTimeType) GetStringValue() string {
+	fromToString := d.typeFromValue.Format("20060102T150405Z")
+	toToString := parseDurationToString(d.typeToValue)
+
+	return fmt.Sprintf("%s/%s", fromToString, toToString)
+}
+
+// GetStringValue return the string representation according to the correct format
+func (d *explicitPeriodOfTimeType) GetStringValue() string {
+	fromToString := d.typeFromValue.Format("20060102T150405Z")
+	toToString := d.typeToValue.Format("20060102T150405Z")
+
+	return fmt.Sprintf("%s/%s", fromToString, toToString)
+}
+
+func (d *implicitPeriodOfTimeType) GetTypeName() string {
+	return string(d.typeName)
+}
+
+func (d *explicitPeriodOfTimeType) GetTypeName() string {
 	return string(d.typeName)
 }
 
 // GetValue get the [time.Duration] typed value
-func (f *periodOfTimeType) GetValue() (from, to time.Time) {
+func (f *implicitPeriodOfTimeType) GetValue() (from, to time.Time) {
 	return f.typeFromValue, f.typeFromValue.Add(f.typeToValue)
 }
 
-func (d *periodOfTimeType) GetFormat() PeriodOfTimeFormat {
+// GetValue get the [time.Duration] typed value
+func (f *explicitPeriodOfTimeType) GetValue() (from, to time.Time) {
+	return f.typeFromValue, f.typeFromValue.Add(f.typeToValue.Sub(f.typeFromValue))
+}
+
+func (d *implicitPeriodOfTimeType) GetFormat() PeriodOfTimeFormat {
 	return d.typeFormat
 }
 
-// parseStringToPeriodOfTime take a string value and return the from [time.Time] value, the to [time.Duration] value to and the corresponding [PeriodOfTimeFormat]
-func parseStringToPeriodOfTime(
-	value string,
-) (from time.Time, to time.Duration, format PeriodOfTimeFormat) {
-	splitString := strings.Split(value, "/")
+func (d *explicitPeriodOfTimeType) GetFormat() PeriodOfTimeFormat {
+	return d.typeFormat
+}
 
-	from, _ = time.Parse("20060102T150405Z", splitString[0])
+// NewImplicitPeriodOfTimeValue create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
+func NewImplicitPeriodOfTimeValue(
+	fromValue time.Time,
+	toValue time.Duration,
+) PeriodOfTimeType {
+	return &implicitPeriodOfTimeType{
+		typeName:      registries.PeriodOfTime,
+		typeFromValue: fromValue,
+		typeToValue:   toValue,
+		typeFormat:    ImplicitPeriodOfTime,
+	}
+}
+
+// NewExplicitPeriodOfTimeValue create a new [registries.PeriodOfTime] type value used for [registries.FreeBusyTimeProp]. See [RFC-5545] ref for more info
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
+func NewExplicitPeriodOfTimeValue(
+	fromValue time.Time,
+	toValue time.Time,
+) PeriodOfTimeType {
+	return &explicitPeriodOfTimeType{
+		typeName:      registries.PeriodOfTime,
+		typeFromValue: fromValue,
+		typeToValue:   toValue,
+		typeFormat:    ExplicitPeriodOfTime,
+	}
+}
+
+// NewPeriodOfTimeValue create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
+func NewPeriodOfTimeValueFromString(value string) (PeriodOfTimeType, error) {
+	var err error
+	var from time.Time
+
+	splitString := strings.Split(value, "/")
+	from, err = time.Parse("20060102T150405Z", splitString[0])
+
+	if err != nil {
+		return nil, fmt.Errorf("%s is not a valid period of time", value)
+	}
 
 	if strings.HasPrefix(splitString[1], "P") {
-		// We are dealing with a duration
-		to = parseStringToDuration(splitString[1])
-		format = ImplicitPeriodOfTime
+		// We are dealing with an implicit period of time
+		var to *time.Duration
+		to, err = parseStringToDuration(splitString[1])
+
+		if err != nil {
+			return nil, fmt.Errorf("%s is not a valid implicit period of time", value)
+		}
+
+		return &implicitPeriodOfTimeType{
+			typeName:      registries.PeriodOfTime,
+			typeFromValue: from,
+			typeToValue:   *to,
+			typeFormat:    ImplicitPeriodOfTime,
+		}, nil
+
 	} else {
-		// We are dealing with a time
-		toTime, _ := time.Parse("20060102T150405Z", splitString[1])
-		to = toTime.Sub(from)
-		format = ExplicitPeriodOfTime
-	}
-	return from, to, format
-}
+		// We are dealing with an explicit period of time
+		var to time.Time
+		to, err = time.Parse("20060102T150405Z", splitString[1])
 
-// NewPeriodOfTimeValue create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
-//
-// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
-func NewPeriodOfTimeValue(
-	startValue time.Time,
-	endValue time.Duration,
-	format PeriodOfTimeFormat,
-) PeriodOfTimeType {
-	return &periodOfTimeType{
-		typeName:      registries.PeriodOfTime,
-		typeFromValue: startValue,
-		typeToValue:   endValue,
-		typeFormat:    format,
-	}
-}
+		if err != nil {
+			return nil, fmt.Errorf("%s is not a valid explicit period of time", value)
+		}
 
-// NewPeriodOfTimeValue create a new [registries.PeriodOfTime] type value. See [RFC-5545] ref for more info
-//
-// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.9
-func NewPeriodOfTimeValueFromString(value string) PeriodOfTimeType {
-	from, to, format := parseStringToPeriodOfTime(value)
-	return &periodOfTimeType{
-		typeName:      registries.PeriodOfTime,
-		typeFromValue: from,
-		typeToValue:   to,
-		typeFormat:    format,
+		return &explicitPeriodOfTimeType{
+			typeName:      registries.PeriodOfTime,
+			typeFromValue: from,
+			typeToValue:   to,
+			typeFormat:    ImplicitPeriodOfTime,
+		}, nil
 	}
 }

@@ -57,7 +57,7 @@ func ParseProperty(
 	case string(registries.DateTimeStampProp):
 		return properties.NewDateTimeStampPropertyFromString(propertyValue, params...), nil
 	case string(registries.DurationProp):
-		return properties.NewDurationProperty(propertyValue), nil
+		return properties.NewDurationProperty(propertyValue)
 	case string(registries.DateTimeDueProp):
 		return properties.NewDateTimeDuePropertyFromString(
 			propertyValue,

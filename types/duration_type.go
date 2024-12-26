@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"log"
 	"math"
 	"strconv"
 	"strings"
@@ -98,7 +97,7 @@ func (t *durationType) GetValue() time.Duration {
 }
 
 // parseStringToDuration With a given text value (ex: P2W6DT6H0M0S) return a [time.Duration] value
-func parseStringToDuration(value string) time.Duration {
+func parseStringToDuration(value string) (*time.Duration, error) {
 	var finalDuration time.Duration
 	currentQuantity := ""
 	readingTime := false
@@ -108,7 +107,7 @@ func parseStringToDuration(value string) time.Duration {
 			if err == io.EOF {
 				break
 			} else {
-				log.Fatal(err)
+				return nil, fmt.Errorf(err.Error())
 			}
 		} else {
 			str := string(r)
@@ -160,7 +159,7 @@ func parseStringToDuration(value string) time.Duration {
 			}
 		}
 	}
-	return finalDuration
+	return &finalDuration, nil
 }
 
 // NewDurationValue create a new [registries.Duration] type value. See [RFC-5545] ref for more info
@@ -176,9 +175,15 @@ func NewDurationValue(value time.Duration) DurationType {
 // NewDurationValue create a new [registries.Duration] type value from a string. See [RFC-5545] ref for more info
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.6
-func NewDurationValueFromString(value string) DurationType {
+func NewDurationValueFromString(value string) (DurationType, error) {
+	duration, err := parseStringToDuration(value)
+
+	if err != nil {
+		return nil, fmt.Errorf("%s is not a valid DURATION : %s", value, err.Error())
+	}
+
 	return &durationType{
 		typeName:  registries.Duration,
-		typeValue: parseStringToDuration(value),
-	}
+		typeValue: *duration,
+	}, nil
 }
