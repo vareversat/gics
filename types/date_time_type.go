@@ -50,19 +50,6 @@ func (d *dateTimeType) GetFormat() DateTimeFormat {
 	return d.typeFormat
 }
 
-// parseStringToDateTime take a string value and return a [time.Time] and the corresponding [DateTimeFormat]
-func parseStringToDateTime(value string) (time.Time, DateTimeFormat) {
-	// Try to parse it into UTC format
-	date, err := time.Parse("20060102T150405Z", value)
-	format := WithUtcTime
-	if err != nil {
-		// If failed, parse to local time format
-		date, err = time.Parse("20060102T150405", value)
-		format = WithLocalTime
-	}
-	return date, format
-}
-
 // NewDurationValue create a new [registries.Duration] type value. See [RFC-5545] ref for more info
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.6
@@ -98,25 +85,46 @@ func NewDateTimeValues(values []time.Time) []DateTimeType {
 // NewDurationValue create a new [registries.Duration] type value from a string one (ex: 19980119T020000 or 19980119T070000Z). See [RFC-5545] ref for more info
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.6
-func NewDateTimeValueFromString(value string) DateTimeType {
-	dateTime, format := parseStringToDateTime(value)
+func NewDateTimeValueFromString(value string) (DateTimeType, error) {
+	// Try to parse it into UTC format
+	date, errUTC := time.Parse("20060102T150405Z", value)
+	format := WithUtcTime
+	if errUTC != nil {
+		// If failed, parse to local time format
+		var errLocal error
+		date, errLocal = time.Parse("20060102T150405", value)
+		format = WithLocalTime
+
+		if errLocal != nil {
+			return nil, fmt.Errorf(
+				"%s is not a valid value DATE-TIME (either UTC or Local formatted) value: %s",
+				value, errLocal.Error(),
+			)
+		}
+	}
 	return &dateTimeType{
 		typeName:   registries.DateTime,
-		typeValue:  dateTime,
+		typeValue:  date,
 		typeFormat: format,
-	}
+	}, nil
 }
 
 // NewDurationValue create a new [registries.Duration] type value from multiple strings (ex: 19980119T020000,20000119T020000). See [RFC-5545] ref for more info
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.6
-func NewDateTimeValueFromStrings(values []string) []DateTimeType {
+func NewDateTimeValueFromStrings(values []string) ([]DateTimeType, error) {
 	var dateTimeValues []DateTimeType
 
 	for i := 0; i < len(values); i++ {
-		dateTimeValues = append(dateTimeValues, NewDateTimeValueFromString(
-			values[i],
-		))
+		dateTime, err := NewDateTimeValueFromString(values[i])
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to format the %d-th element of the list: %s",
+				i, err.Error(),
+			)
+		} else {
+			dateTimeValues = append(dateTimeValues, dateTime)
+		}
 	}
-	return dateTimeValues
+	return dateTimeValues, nil
 }

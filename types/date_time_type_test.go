@@ -69,7 +69,7 @@ func TestNewDateTimeValueFromString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			dataTime := NewDateTimeValueFromString(tt.args.value)
+			dataTime, _ := NewDateTimeValueFromString(tt.args.value)
 			if got := dataTime.GetFormat(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("dataTime.GetFormat() = %v, want %v", got, tt.want)
 			}

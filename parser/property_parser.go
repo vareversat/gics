@@ -6,7 +6,6 @@ import (
 	"github.com/vareversat/gics/parameters"
 	"github.com/vareversat/gics/properties"
 	"github.com/vareversat/gics/registries"
-	"github.com/vareversat/gics/types"
 )
 
 // ParseProperty will try to parse a property based on rawPropertyName with the associated rawPropertyValue
@@ -39,29 +38,29 @@ func ParseProperty(
 	case string(registries.CommentProp):
 		return properties.NewCommentProperty(propertyValue, params...), nil
 	case string(registries.CompletedProp):
-		return properties.NewDateTimeCompletedPropertyFromString(propertyValue, params...), nil
+		return properties.NewDateTimeCompletedPropertyFromString(propertyValue, params...)
 	case string(registries.ContactProp):
 		return properties.NewContactProperty(propertyValue, params...), nil
 	case string(registries.DateTimeCreatedProp):
-		return properties.NewDateTimeCreatedPropertyFromString(propertyValue, params...), nil
+		return properties.NewDateTimeCreatedPropertyFromString(propertyValue, params...)
 	case string(registries.DescriptionProp):
 		return properties.NewDescriptionProperty(propertyValue, params...), nil
 	case string(registries.DateTimeEndProp):
 		return properties.NewDateTimeEndPropertyFromString(
 			propertyValue,
-			params...), nil
+			params...)
 	case string(registries.DateTimeStartProp):
 		return properties.NewDateTimeStartPropertyFromString(
 			propertyValue,
-			params...), nil
+			params...)
 	case string(registries.DateTimeStampProp):
-		return properties.NewDateTimeStampPropertyFromString(propertyValue, params...), nil
+		return properties.NewDateTimeStampPropertyFromString(propertyValue, params...)
 	case string(registries.DurationProp):
 		return properties.NewDurationPropertyFromString(propertyValue)
 	case string(registries.DateTimeDueProp):
 		return properties.NewDateTimeDuePropertyFromString(
 			propertyValue,
-			params...), nil
+			params...)
 	case string(registries.EndProp):
 		return properties.NewEndPropertyFromString(
 			propertyValue,
@@ -69,7 +68,7 @@ func ParseProperty(
 	case string(registries.ExceptionDateTimesProp):
 		return properties.NewExceptionDateTimePropertyFromString(
 			propertyValue, params...,
-		), nil
+		)
 	case string(registries.ExceptionRuleProp):
 		fmt.Printf("### omitting %s\n", propertyName)
 	case string(registries.FreeBusyTimeProp):
@@ -81,7 +80,7 @@ func ParseProperty(
 		}
 		return geo, nil
 	case string(registries.LastModifiedProp):
-		return properties.NewLastModifiedPropertyFromString(propertyValue), nil
+		return properties.NewLastModifiedPropertyFromString(propertyValue)
 	case string(registries.LocationProp):
 		return properties.NewLocationProperty(propertyValue, params...), nil
 	case string(registries.MethodProp):
@@ -109,12 +108,11 @@ func ParseProperty(
 	case string(registries.ProductIdentifierProp):
 		return properties.NewProductIdProperty(propertyValue, params...), nil
 	case string(registries.RecurrenceDateTimesProp):
-		fmt.Printf("### omitting %s\n", propertyName)
+		return properties.NewRecurrenceDateTimesPropertyFromString(propertyValue, params...)
 	case string(registries.RecurrenceIdProp):
 		return properties.NewRecurrenceIdPropertyFromString(
 			propertyValue,
-			types.WithUtcTime,
-			params...), nil
+			params...)
 	case string(registries.RelatedToProp):
 		return properties.NewRelatedToProperty(propertyValue, params...), nil
 	case string(registries.RepeatProp):

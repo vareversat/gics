@@ -1,6 +1,7 @@
 package properties
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/vareversat/gics/parameters"
@@ -46,10 +47,18 @@ func NewDateTimeStampProperty(
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.2
 func NewDateTimeStampPropertyFromString(
 	value string,
-	params ...parameters.Parameter) DateTimeStampProperty {
+	params ...parameters.Parameter) (DateTimeStampProperty, error) {
+	date, err := types.NewDateTimeValueFromString(value)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"cannot parse %s to a DATE-TIME value: %s",
+			date,
+			err.Error(),
+		)
+	}
 	return &dateTimePropertyType{
 		PropName:   registries.DateTimeStampProp,
-		Value:      types.NewDateTimeValueFromString(value),
+		Value:      date,
 		Parameters: params,
-	}
+	}, nil
 }
