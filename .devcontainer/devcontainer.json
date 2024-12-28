@@ -27,6 +27,7 @@
                 "git.allowForcePush": true,
                 "git.confirmForcePush": false,
                 "git.rebaseWhenSync": true,
+                "git.enableCommitSigning": true,
                 "[github-actions-workflow]": {
                     "editor.defaultFormatter": "redhat.vscode-yaml"
                 },
