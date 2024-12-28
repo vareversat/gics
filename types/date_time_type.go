@@ -55,7 +55,6 @@ func (d *dateTimeType) GetFormat() DateTimeFormat {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.6
 func NewDateTimeValue(value time.Time) DateTimeType {
 	zone, _ := value.Zone()
-	fmt.Print(zone)
 	format := WithLocalTime
 	// Determine the correct format representation
 	if zone == "UTC" {

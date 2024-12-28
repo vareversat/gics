@@ -1,7 +1,6 @@
 package types
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/vareversat/gics/registries"
@@ -69,7 +68,6 @@ func parseStringToTime(value string) (time.Time, TimeFormat) {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.12
 func NewTimeValue(value time.Time) TimeType {
 	zone, _ := value.Zone()
-	fmt.Print(zone)
 	format := TimeWithLocalTime
 	// Determine the correct format representation
 	if zone == "UTC" {

@@ -1,7 +1,6 @@
 package properties
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 	"time"
@@ -91,11 +90,10 @@ func TestNewRecurrenceDateTimesProperty_Date(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			rDate, err := NewRecurrenceDateTimesFromDateProperty(
+			rDate, _ := NewRecurrenceDateTimesFromDateProperty(
 				tt.args.date,
 				parameters.NewValueDataTypesParam(registries.Date),
 			)
-			fmt.Print(err)
 			if got := rDate.GetValue(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("periodOfTime.GetStringValue() = %v, want %v", got, tt.want)
 			}
