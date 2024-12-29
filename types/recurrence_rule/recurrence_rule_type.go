@@ -32,7 +32,7 @@ func (r *recurrenceRuleType) GetStringValue() string {
 		if len(r.typeValue) > 1 && i > 0 {
 			partOut.Write([]byte(";"))
 		}
-		partOut.WriteString(r.typeValue[i].GetPartValue())
+		r.typeValue[i].ToICalendarPartFormat(&partOut)
 	}
 	return partOut.String()
 }
