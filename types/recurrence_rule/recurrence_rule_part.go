@@ -1,5 +1,7 @@
 package recurrence_rule
 
+import "io"
+
 type RecurrenceRulePartName string
 
 const (
@@ -16,12 +18,16 @@ const (
 	ByWeekNumber RecurrenceRulePartName = "BYWEEKNO"
 	ByMonth      RecurrenceRulePartName = "BYMONTH"
 	BySetPos     RecurrenceRulePartName = "BYSETPOS"
-	WKST         RecurrenceRulePartName = "WKST"
+	WeekStart    RecurrenceRulePartName = "WKST"
 )
 
 type RecurrenceRulePart interface {
+	// GetPartName return the name of the Recurrence rule part
 	GetPartName() RecurrenceRulePartName
+	// GetPartValue return the string value of the Recurrence rule part
 	GetPartValue() string
+	// ToICalendarPartFormat return the formatted the Recurrence rule part ('NAME=VALUE')
+	ToICalendarPartFormat(output io.Writer)
 }
 
 type RecurrenceRuleParts []RecurrenceRulePart

@@ -585,10 +585,10 @@ func (rsP *requestStatusPropertyType) ToICalendarPropFormat(output io.Writer) {
 func (rrP *recurrenceRulePropertyType) ToICalendarPropFormat(output io.Writer) {
 	var unfoldedOutput bytes.Buffer
 	var partsOutput bytes.Buffer
-	if rrP.Value.GetValue() != nil {
-		partsOutput.Write([]byte(fmt.Sprint(rrP.Value.GetValue())))
+	if rrP.Value.GetStringValue() != "" {
+		partsOutput.Write([]byte(fmt.Sprint(rrP.Value.GetStringValue())))
 	}
-	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", rrP.PropName, rrP.Value.GetValue())))
+	unfoldedOutput.Write([]byte(fmt.Sprintf("%s:%s", rrP.PropName, rrP.Value.GetStringValue())))
 	foldOutput(&unfoldedOutput)
 	unfoldedOutput.WriteTo(output)
 }

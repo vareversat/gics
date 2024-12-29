@@ -2,13 +2,13 @@ package recurrence_rule
 
 import (
 	"bytes"
-	"fmt"
 
 	"github.com/vareversat/gics/registries"
+	"github.com/vareversat/gics/types"
 )
 
 type RecurrenceRuleType interface {
-	ValueType
+	types.ValueType
 }
 
 type recurrenceRuleType struct {
@@ -30,7 +30,7 @@ func (r *recurrenceRuleType) GetStringValue() string {
 	var partOut bytes.Buffer
 	for i := 0; i < len(r.typeValue); i++ {
 		if len(r.typeValue) > 1 && i > 0 {
-			partOut.Write([]byte(fmt.Sprint(";")))
+			partOut.Write([]byte(";"))
 		}
 		partOut.WriteString(r.typeValue[i].GetPartValue())
 	}

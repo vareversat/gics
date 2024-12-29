@@ -5,42 +5,46 @@ import (
 	"io"
 )
 
+type RecurrenceRuleFrequency string
+
+const (
+	Secondly RecurrenceRuleFrequency = "SECONDLY"
+	Minutely RecurrenceRuleFrequency = "MINUTELY"
+	Hourly   RecurrenceRuleFrequency = "HOURLY"
+	Daily    RecurrenceRuleFrequency = "DAILY"
+	Weekly   RecurrenceRuleFrequency = "WEEKLY"
+	Monthly  RecurrenceRuleFrequency = "MONTHLY"
+	Yearly   RecurrenceRuleFrequency = "YEARLY"
+)
+
 type FrequencyPart interface {
 	RecurrenceRulePart
 }
 
 type frequencyPart struct {
-	PartName  RecurrenceRulePartName
-	Frequency RRFrequency
+	partName  RecurrenceRulePartName
+	frequency RecurrenceRuleFrequency
 }
 
-func NewFrequencyPart(frequency RRFrequency) FrequencyPart {
+// NewFrequencyPart give the info of the recurrence occurs type. See [RFC-5545] ref for more info
+// Example: FREQ=SECONDLY => "events based on an interval of a second or more"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewFrequencyPart(frequency RecurrenceRuleFrequency) FrequencyPart {
 	return &frequencyPart{
-		PartName:  FREQ,
-		Frequency: frequency,
+		partName:  Frequency,
+		frequency: frequency,
 	}
 }
 
-func (f frequencyPart) ToICalendarPartFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
+func (p *frequencyPart) ToICalendarPartFormat(output io.Writer) {
+	output.Write([]byte(fmt.Sprintf("%s=%s", p.GetPartName(), p.GetPartValue())))
 }
 
-func (f frequencyPart) GetPartName() RecurrenceRulePartName {
-	return f.PartName
+func (p *frequencyPart) GetPartName() RecurrenceRulePartName {
+	return p.partName
 }
 
-func (f frequencyPart) GetPartValue() string {
-	return string(f.Frequency)
+func (p *frequencyPart) GetPartValue() string {
+	return string(p.frequency)
 }
-
-type RRFrequency string
-
-const (
-	SECONDLY RRFrequency = "SECONDLY"
-	MINUTELY RRFrequency = "MINUTELY"
-	HOURLY   RRFrequency = "HOURLY"
-	DAILY    RRFrequency = "DAILY"
-	WEEKLY   RRFrequency = "WEEKLY"
-	MONTHLY  RRFrequency = "MONTHLY"
-	YEARLY   RRFrequency = "YEARLY"
-)

@@ -6,62 +6,92 @@ import (
 	"io"
 )
 
+const (
+	minWeekOrdinal = -53
+	maxWeekOrdinal = 53
+)
+
 type ByDayPart interface {
 	RecurrenceRulePart
 }
 
 type byDayPart struct {
-	PartName RecurrenceRulePartName
-	WeekDays []RRWeekDayNum
+	partName RecurrenceRulePartName
+	weekDays weekDayWithOrdinals
 }
 
-func NewByDayPart(days []RRWeekDayNum) ByDayPart {
-	return &byDayPart{
-		PartName: BYDAY,
-		WeekDays: days,
-	}
+type weekDayWithOrdinal struct {
+	ordinal int32
+	weekday WeekDay
 }
 
-func (f byDayPart) ToICalendarPartFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
-}
+type weekDayWithOrdinals []weekDayWithOrdinal
 
-func (f byDayPart) GetPartName() RecurrenceRulePartName {
-	return f.PartName
-}
-
-func (f byDayPart) GetPartValue() string {
-	var secondsOutput bytes.Buffer
-	for i := 0; i < len(f.WeekDays); i++ {
-		secondsOutput.Write([]byte(f.WeekDays[i].GetValue()))
-		if len(f.WeekDays)-1 > i {
-			secondsOutput.Write([]byte(fmt.Sprint(",")))
-		}
-	}
-	return secondsOutput.String()
-}
-
-type RRWeekday string
+type WeekDay string
 
 const (
-	SU RRWeekday = "SU"
-	MO RRWeekday = "MO"
-	TU RRWeekday = "MO"
-	WE RRWeekday = "WE"
-	TH RRWeekday = "TH"
-	FR RRWeekday = "FR"
-	SA RRWeekday = "SA"
+	Monday    WeekDay = "MO"
+	Tuesday   WeekDay = "TU"
+	Wednesday WeekDay = "WE"
+	Thursday  WeekDay = "TH"
+	Friday    WeekDay = "FR"
+	Saturday  WeekDay = "SA"
+	Sunday    WeekDay = "SU"
 )
 
-// RRWeekDayNum
-// Ordinal in range [0,23]
-// Sign + or -
-type RRWeekDayNum struct {
-	Sign    string
-	Ordinal int
-	Weekday RRWeekday
+// NewByDayPart give the info on which day of the month the recurrence occurs. See [RFC-5545] ref for more info
+// Example: BYDAY=1TU => "11th tuesday occurrence in the year"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewByDayPart(days []weekDayWithOrdinal) ByDayPart {
+	return &byDayPart{
+		partName: ByDay,
+		weekDays: days,
+	}
 }
 
-func (rrdN *RRWeekDayNum) GetValue() string {
-	return fmt.Sprintf("%s%d%s", rrdN.Sign, rrdN.Ordinal, rrdN.Weekday)
+// NewWeekDayWithOrdinal return an ordinal followed by a week name. See [RFC-5545] ref for more info
+// Example: 11TU => "11th tuesday occurrence in the year"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewWeekDayWithOrdinal(ordinal int32, weekDay WeekDay) (*weekDayWithOrdinal, error) {
+	if ordinal < minWeekOrdinal || ordinal > maxWeekOrdinal || ordinal == 0 {
+		return nil, fmt.Errorf(
+			"%d is not a valid ordinal. It must satisfy this : ord ∈ [%d;0[U]0;%d]",
+			ordinal,
+			minWeekOrdinal,
+			maxWeekOrdinal,
+		)
+	}
+	return &weekDayWithOrdinal{
+		ordinal: ordinal,
+		weekday: weekDay,
+	}, nil
+}
+
+func (p *byDayPart) ToICalendarPartFormat(output io.Writer) {
+	output.Write([]byte(fmt.Sprintf("%s=%s", p.GetPartName(), p.GetPartValue())))
+}
+
+func (p *byDayPart) GetPartName() RecurrenceRulePartName {
+	return p.partName
+}
+
+func (p *byDayPart) GetPartValue() string {
+	var output bytes.Buffer
+	for i := 0; i < len(p.weekDays); i++ {
+		output.Write([]byte(p.weekDays[i].ToString()))
+		if len(p.weekDays)-1 > i {
+			output.Write([]byte(","))
+		}
+	}
+	return output.String()
+}
+
+func (w *weekDayWithOrdinal) ToString() string {
+	if w != nil {
+		return fmt.Sprintf("%d%s", w.ordinal, w.weekday)
+	} else {
+		return ""
+	}
 }

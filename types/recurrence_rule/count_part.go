@@ -12,26 +12,29 @@ type CountPart interface {
 }
 
 type countPart struct {
-	PartName RecurrenceRulePartName
-	Count    types.IntegerType
+	partName RecurrenceRulePartName
+	count    types.IntegerType
 }
 
-// NewCountPart count in range [0,9]
+// NewCountPart give the info on how many time repeat the recurrence rule. See [RFC-5545] ref for more info
+// Example: COUNT=100 => "repeat 100 times"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
 func NewCountPart(count int32) CountPart {
 	return &countPart{
-		PartName: COUNT,
-		Count:    types.NewIntegerValue(count),
+		partName: Count,
+		count:    types.NewIntegerValue(count),
 	}
 }
 
-func (f countPart) ToICalendarPartFormat(output io.Writer) {
-	output.Write([]byte(fmt.Sprintf("%s=%s", f.GetPartName(), f.GetPartValue())))
+func (p *countPart) ToICalendarPartFormat(output io.Writer) {
+	output.Write([]byte(fmt.Sprintf("%s=%s", p.GetPartName(), p.GetPartValue())))
 }
 
-func (f countPart) GetPartName() RecurrenceRulePartName {
-	return f.PartName
+func (p *countPart) GetPartName() RecurrenceRulePartName {
+	return p.partName
 }
 
-func (f countPart) GetPartValue() string {
-	return f.Count.GetStringValue()
+func (p *countPart) GetPartValue() string {
+	return p.count.GetStringValue()
 }
