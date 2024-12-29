@@ -17,7 +17,11 @@ type ByDayPart interface {
 
 type byDayPart struct {
 	partName RecurrenceRulePartName
-	weekDays weekDayWithOrdinals
+	weekDays WeekDayWithOrdinals
+}
+
+type WeekDayWithOrdinal interface {
+	ToString() string
 }
 
 type weekDayWithOrdinal struct {
@@ -25,7 +29,7 @@ type weekDayWithOrdinal struct {
 	weekday WeekDay
 }
 
-type weekDayWithOrdinals []weekDayWithOrdinal
+type WeekDayWithOrdinals []WeekDayWithOrdinal
 
 type WeekDay string
 
@@ -43,7 +47,7 @@ const (
 // Example: BYDAY=1TU => "11th tuesday occurrence in the year"
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
-func NewByDayPart(days []weekDayWithOrdinal) ByDayPart {
+func NewByDayPart(days []WeekDayWithOrdinal) ByDayPart {
 	return &byDayPart{
 		partName: ByDay,
 		weekDays: days,
@@ -54,14 +58,17 @@ func NewByDayPart(days []weekDayWithOrdinal) ByDayPart {
 // Example: 11TU => "11th tuesday occurrence in the year"
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
-func NewWeekDayWithOrdinal(ordinal int32, weekDay WeekDay) (*weekDayWithOrdinal, error) {
+func NewWeekDayWithOrdinal(ordinal int32, weekDay WeekDay) (WeekDayWithOrdinal, error) {
 	if ordinal < minWeekOrdinal || ordinal > maxWeekOrdinal || ordinal == 0 {
-		return nil, fmt.Errorf(
-			"%d is not a valid ordinal. It must satisfy this : ord ∈ [%d;0[U]0;%d]",
-			ordinal,
-			minWeekOrdinal,
-			maxWeekOrdinal,
-		)
+		return &weekDayWithOrdinal{
+				ordinal: 0,
+				weekday: Sunday,
+			}, fmt.Errorf(
+				"%d is not a valid ordinal. It must satisfy this : ord ∈ [%d;0[U]0;%d]",
+				ordinal,
+				minWeekOrdinal,
+				maxWeekOrdinal,
+			)
 	}
 	return &weekDayWithOrdinal{
 		ordinal: ordinal,
@@ -89,9 +96,5 @@ func (p *byDayPart) GetPartValue() string {
 }
 
 func (w *weekDayWithOrdinal) ToString() string {
-	if w != nil {
-		return fmt.Sprintf("%d%s", w.ordinal, w.weekday)
-	} else {
-		return ""
-	}
+	return fmt.Sprintf("%d%s", w.ordinal, w.weekday)
 }

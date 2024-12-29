@@ -9,7 +9,7 @@ func TestNewByDayPart(t *testing.T) {
 	week1, _ := NewWeekDayWithOrdinal(1, Tuesday)
 	week2, _ := NewWeekDayWithOrdinal(20, Tuesday)
 	type args struct {
-		days []weekDayWithOrdinal
+		days WeekDayWithOrdinals
 	}
 	tests := []struct {
 		name string
@@ -18,17 +18,17 @@ func TestNewByDayPart(t *testing.T) {
 	}{
 		{
 			"Create BYDAY Recurrence rule component #1",
-			args{days: []weekDayWithOrdinal{*week1}},
+			args{days: WeekDayWithOrdinals{week1}},
 			"1TU",
 		},
 		{
 			"Create BYDAY Recurrence rule component #2",
-			args{days: []weekDayWithOrdinal{*week2}},
+			args{days: WeekDayWithOrdinals{week2}},
 			"20TU",
 		},
 		{
 			"Create BYDAY Recurrence rule component #3",
-			args{days: []weekDayWithOrdinal{*week1, *week2}},
+			args{days: WeekDayWithOrdinals{week1, week2}},
 			"1TU,20TU",
 		},
 	}
@@ -53,7 +53,7 @@ func TestNewWeekDayWithOrdinal(t *testing.T) {
 		wantErr bool
 	}{
 		{"Create WeekDay (no error)", args{ordinal: 1, weekDay: Tuesday}, "1TU", false},
-		{"Create WeekDay (with error)", args{ordinal: 100, weekDay: Tuesday}, "", true},
+		{"Create WeekDay (with error)", args{ordinal: 100, weekDay: Tuesday}, "0SU", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
