@@ -13,3 +13,8 @@ jobs:
     secrets: inherit
     with:
       go_version: '1.22.x'
+  go-list:
+    uses: vareversat/github-actions/.github/workflows/go.list.yml@c3ca2e2e5b6831c611a4614750f57a039d5e53ec
+    secrets: inherit
+    with:
+      go_version: '1.22.x'
