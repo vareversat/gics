@@ -1,0 +1,27 @@
+name: Workflow - Push tag
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  go-lint:
+    uses: vareversat/github-actions/.github/workflows/go.lint.yml@v1.2.2
+    with:
+      go_version: '1.22.x'
+  go-test:
+    uses: vareversat/github-actions/.github/workflows/go.test.yml@v1.2.2
+    secrets: inherit
+    with:
+      go_version: '1.22.x'
+  go-list:
+    uses: vareversat/github-actions/.github/workflows/go.list.yml@v1.2.2
+    secrets: inherit
+    with:
+      go_version: '1.22.x'
+  release:
+    needs: [ go-list, go-lint, go-test ]
+    uses: vareversat/github-actions/.github/workflows/global.release.yml@v1.2.2
+    with:
+      prerelease_suffix: rc
