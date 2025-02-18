@@ -1,6 +1,6 @@
 module github.com/vareversat/gics
 
-go 1.22.8
+go 1.22
 
 require github.com/stretchr/testify v1.9.0
 
