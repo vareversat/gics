@@ -42,3 +42,29 @@ func TestNewByMinutePart(t *testing.T) {
 		})
 	}
 }
+
+func TestNewByMinutePartFromString(t *testing.T) {
+	want, _ := NewByMinutePart([]int32{18, 19})
+	type args struct {
+		value string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    ByMinutePart
+		wantErr bool
+	}{
+		{"Create ByMinute (no error)", args{value: "18, 19"}, want, false},
+		{"Create ByMinute (with error)", args{value: "100"}, nil, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewByMinutePartFromString(tt.args.value)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("got \"%s\" error, want not", err.Error())
+			} else if got != nil && !reflect.DeepEqual(got.GetPartValue(), tt.want.GetPartValue()) {
+				t.Errorf("got.ToString() = %s, want %s", got.GetPartValue(), tt.want.GetPartValue())
+			}
+		})
+	}
+}

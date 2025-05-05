@@ -17,10 +17,6 @@ type untilPart struct {
 	endDate  types.DateTimeType
 }
 
-// NewUntilPart give info of the bounds the recurrence rule in an inclusive manner. See [RFC-5545] ref for more info
-// Example: UNTIL=19730429T070000Z => "until April 29, 1973 at 07:00:00 UTC"
-//
-// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
 func NewUntilPart(endDate time.Time) UntilPart {
 	return &untilPart{
 		partName: Until,

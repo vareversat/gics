@@ -48,3 +48,29 @@ func TestNewByYearDayPart(t *testing.T) {
 		})
 	}
 }
+
+func TestNewByYearDayPartFromString(t *testing.T) {
+	want, _ := NewByYearDayPart([]int32{10, 11, 40})
+	type args struct {
+		value string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    ByYearDayPart
+		wantErr bool
+	}{
+		{"Create BYYEARDAY (no error)", args{value: "10, 11, 40"}, want, false},
+		{"Create BYYEARDAY (with error)", args{value: "1000"}, nil, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewByYearDayPartFromString(tt.args.value)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("got \"%s\" error, want not", err.Error())
+			} else if got != nil && !reflect.DeepEqual(got.GetPartValue(), tt.want.GetPartValue()) {
+				t.Errorf("got.ToString() = %s, want %s", got.GetPartValue(), tt.want.GetPartValue())
+			}
+		})
+	}
+}

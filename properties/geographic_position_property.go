@@ -9,6 +9,8 @@ import (
 	"github.com/vareversat/gics/types"
 )
 
+const coordinatesSeparator = ";"
+
 type GeographicPositionProperty interface {
 	GeoPropertyType
 }
@@ -40,7 +42,7 @@ func NewGeographicPositionPropertyFromString(
 	value string,
 	params ...parameters.Parameter,
 ) (GeographicPositionProperty, error) {
-	coordinates := strings.Split(value, ";")
+	coordinates := strings.Split(value, coordinatesSeparator)
 	if len(coordinates) != 2 {
 		return nil, fmt.Errorf("the GEO property is not formatted as LATITUDE;LONGITUDE")
 	}

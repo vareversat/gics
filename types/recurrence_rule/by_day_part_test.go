@@ -68,3 +68,43 @@ func TestNewWeekDayWithOrdinal(t *testing.T) {
 		})
 	}
 }
+
+func TestNewWeekDayWithOrdinalFromString(t *testing.T) {
+	var weekDays []WeekDayWithOrdinal
+	wdo1, _ := NewWeekDayWithOrdinal(1, Tuesday)
+	wdo2, _ := NewWeekDayWithOrdinal(2, Wednesday)
+	weekDays = append(weekDays, wdo1, wdo2)
+	want := NewByDayPart(weekDays)
+	type args struct {
+		value string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    ByDayPart
+		wantErr bool
+	}{
+		{
+			"Create WeekDay (no error)",
+			args{value: "1TU, 2WE"},
+			want,
+			false,
+		},
+		{
+			"Create WeekDay (with error)",
+			args{value: "1000000MO"},
+			nil,
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewByDayPartFromString(tt.args.value)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("got \"%s\" error, want not", err.Error())
+			} else if got != nil && !reflect.DeepEqual(got.GetPartValue(), tt.want.GetPartValue()) {
+				t.Errorf("got.ToString() = %s, want %s", got.GetPartValue(), tt.want.GetPartValue())
+			}
+		})
+	}
+}

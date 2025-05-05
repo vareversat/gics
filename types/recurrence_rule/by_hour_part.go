@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strconv"
+	"strings"
 
 	"github.com/vareversat/gics/types"
 )
@@ -29,16 +31,33 @@ type byHourPart struct {
 func NewByHourPart(hours []int32) (ByHourPart, error) {
 	for i := 0; i < len(hours); i++ {
 		if hours[i] < minHour || hours[i] > maxHour {
-			return &byHourPart{
-				partName: ByHour,
-				hours:    types.NewIntegerValues([]int32{0}),
-			}, fmt.Errorf("%d (%d-th) is not a valid hour. It must satisfy this : hour ∈ [%d;%d]", hours[i], i, minHour, maxHour)
+			return nil, fmt.Errorf("%d (%d-th) is not a valid hour. It must satisfy this : hour ∈ [%d;%d]", hours[i], i, minHour, maxHour)
 		}
 	}
 	return &byHourPart{
 		partName: ByHour,
 		hours:    types.NewIntegerValues(hours),
 	}, nil
+}
+
+// NewByHourPartFromString give the info on which day of the month the recurrence occurs. See [RFC-5545] ref for more info
+// Example: BYHOUR=19 => "at 19:XX (7:XX pm)"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewByHourPartFromString(value string) (ByHourPart, error) {
+	var hours []int32
+	stringHours := strings.Split(value, multiValueSeparator)
+	for _, hour := range stringHours {
+		finalHour, err := strconv.ParseInt(strings.TrimSpace(hour), 10, 32)
+
+		if err != nil {
+			return nil, fmt.Errorf("cannot parsed the following string into int %s", err.Error())
+		} else {
+			hours = append(hours, int32(finalHour))
+		}
+	}
+	return NewByHourPart(hours)
+
 }
 
 func (p *byHourPart) ToICalendarPartFormat(output io.Writer) {

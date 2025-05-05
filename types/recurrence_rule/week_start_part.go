@@ -25,6 +25,16 @@ func NewWeekStartPart(weekday WeekDay) WeekStartPart {
 	}
 }
 
+// NewWeekStartPartFromString give info of the week start. See [RFC-5545] ref for more info
+// Example: WKST=MO => "week start on monday"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewWeekStartPartFromString(value string) WeekStartPart {
+	weekDay := WeekDay(value)
+	return NewWeekStartPart(weekDay)
+
+}
+
 func (p *weekStartPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", p.GetPartName(), p.GetPartValue())))
 }

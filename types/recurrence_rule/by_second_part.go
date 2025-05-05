@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strconv"
+	"strings"
 
 	"github.com/vareversat/gics/types"
 )
@@ -28,17 +30,34 @@ type bySecondPart struct {
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
 func NewBySecondPart(seconds []int32) (BySecondPart, error) {
 	for i := 0; i < len(seconds); i++ {
-		if seconds[i] < minMonth || seconds[i] > maxMonth {
-			return &bySecondPart{
-				partName: ByMonth,
-				seconds:  types.NewIntegerValues([]int32{0}),
-			}, fmt.Errorf("%d (%d-th) is not a valid second. It must satisfy this : second ∈ [%d;%d]", seconds[i], i, minSecond, maxSecond)
+		if seconds[i] < minSecond || seconds[i] > maxSecond {
+			return nil, fmt.Errorf("%d (%d-th) is not a valid second. It must satisfy this : second ∈ [%d;%d]", seconds[i], i, minSecond, maxSecond)
 		}
 	}
 	return &bySecondPart{
-		partName: ByMonth,
+		partName: BySecond,
 		seconds:  types.NewIntegerValues(seconds),
 	}, nil
+}
+
+// NewBySecondPartFromString give the info on which second of the minute the recurrence occurs. See [RFC-5545] ref for more info
+// Example: BYSECOND=2 => "2nd second of the minute"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewBySecondPartFromString(value string) (BySecondPart, error) {
+	var seconds []int32
+	stringSeconds := strings.Split(value, multiValueSeparator)
+	for _, second := range stringSeconds {
+		finalSecond, err := strconv.ParseInt(strings.TrimSpace(second), 10, 32)
+
+		if err != nil {
+			return nil, fmt.Errorf("cannot parsed the following string into int %s", err.Error())
+		} else {
+			seconds = append(seconds, int32(finalSecond))
+		}
+	}
+	return NewBySecondPart(seconds)
+
 }
 
 func (p *bySecondPart) ToICalendarPartFormat(output io.Writer) {

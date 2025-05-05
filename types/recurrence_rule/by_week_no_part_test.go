@@ -53,3 +53,29 @@ func TestNewByWeekNoPart(t *testing.T) {
 		})
 	}
 }
+
+func TestNewByWeekNoPartFromString(t *testing.T) {
+	want, _ := NewByWeekNoPart([]int32{10, 11, 40})
+	type args struct {
+		value string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    ByWeekNoPart
+		wantErr bool
+	}{
+		{"Create ByWeekNo (no error)", args{value: "10, 11, 40"}, want, false},
+		{"Create ByWeekNo (with error)", args{value: "1000"}, nil, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewByWeekNoPartFromString(tt.args.value)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("got \"%s\" error, want not", err.Error())
+			} else if got != nil && !reflect.DeepEqual(got.GetPartValue(), tt.want.GetPartValue()) {
+				t.Errorf("got.ToString() = %s, want %s", got.GetPartValue(), tt.want.GetPartValue())
+			}
+		})
+	}
+}

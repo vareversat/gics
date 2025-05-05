@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strings"
 )
 
 const (
@@ -54,21 +55,50 @@ func NewByDayPart(days []WeekDayWithOrdinal) ByDayPart {
 	}
 }
 
+// NewByDayPart give the info on which day of the month the recurrence occurs. See [RFC-5545] ref for more info
+// Example: BYDAY=1TU => "11th tuesday occurrence in the year"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewByDayPartFromString(value string) (ByDayPart, error) {
+	var weekDays WeekDayWithOrdinals
+	var err error
+	stringWeekDays := strings.Split(value, multiValueSeparator)
+	for _, weekDay := range stringWeekDays {
+		var parsedItems int
+		var finalOrdinal int32
+		var finalWeekDay string
+		parsedItems, err = fmt.Sscanf(strings.TrimSpace(weekDay), "%d%s", &finalOrdinal, &finalWeekDay)
+
+		if err != nil || parsedItems != 2 {
+			return nil, fmt.Errorf(
+				"cannot parsed the following string into BYDAY component %s",
+				err.Error(),
+			)
+		} else {
+			weekDayWithOrdinal, err := NewWeekDayWithOrdinal(finalOrdinal, WeekDay(finalWeekDay))
+			if err != nil {
+				return nil, err
+			} else {
+				weekDays = append(weekDays, weekDayWithOrdinal)
+			}
+		}
+	}
+	return NewByDayPart(weekDays), nil
+
+}
+
 // NewWeekDayWithOrdinal return an ordinal followed by a week name. See [RFC-5545] ref for more info
 // Example: 11TU => "11th tuesday occurrence in the year"
 //
 // [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
 func NewWeekDayWithOrdinal(ordinal int32, weekDay WeekDay) (WeekDayWithOrdinal, error) {
 	if ordinal < minWeekOrdinal || ordinal > maxWeekOrdinal || ordinal == 0 {
-		return &weekDayWithOrdinal{
-				ordinal: 0,
-				weekday: Sunday,
-			}, fmt.Errorf(
-				"%d is not a valid ordinal. It must satisfy this : ord ∈ [%d;0[U]0;%d]",
-				ordinal,
-				minWeekOrdinal,
-				maxWeekOrdinal,
-			)
+		return nil, fmt.Errorf(
+			"%d is not a valid ordinal. It must satisfy this : ord ∈ [%d;0[U]0;%d]",
+			ordinal,
+			minWeekOrdinal,
+			maxWeekOrdinal,
+		)
 	}
 	return &weekDayWithOrdinal{
 		ordinal: ordinal,

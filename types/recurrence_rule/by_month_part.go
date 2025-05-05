@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strconv"
+	"strings"
 
 	"github.com/vareversat/gics/types"
 )
@@ -29,16 +31,33 @@ type byMonthPart struct {
 func NewByMonthPart(months []int32) (ByMonthPart, error) {
 	for i := 0; i < len(months); i++ {
 		if months[i] < minMonth || months[i] > maxMonth {
-			return &byMonthPart{
-				partName: ByMonth,
-				months:   types.NewIntegerValues([]int32{0}),
-			}, fmt.Errorf("%d (%d-th) is not a valid month. It must satisfy this : month ∈ [%d;%d]", months[i], i, minMonth, maxMonth)
+			return nil, fmt.Errorf("%d (%d-th) is not a valid month. It must satisfy this : month ∈ [%d;%d]", months[i], i, minMonth, maxMonth)
 		}
 	}
 	return &byMonthPart{
 		partName: ByMonth,
 		months:   types.NewIntegerValues(months),
 	}, nil
+}
+
+// NewByMonthPartFromString give the info on which month of the year the recurrence occurs. See [RFC-5545] ref for more info
+// Example: BYMONTH=2 => "2nd month of the year"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewByMonthPartFromString(value string) (ByMonthPart, error) {
+	var months []int32
+	stringMonths := strings.Split(value, multiValueSeparator)
+	for _, month := range stringMonths {
+		finalMonth, err := strconv.ParseInt(strings.TrimSpace(month), 10, 32)
+
+		if err != nil {
+			return nil, fmt.Errorf("cannot parsed the following string into int %s", err.Error())
+		} else {
+			months = append(months, int32(finalMonth))
+		}
+	}
+	return NewByMonthPart(months)
+
 }
 
 func (p *byMonthPart) ToICalendarPartFormat(output io.Writer) {

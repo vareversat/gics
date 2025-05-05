@@ -37,6 +37,16 @@ func NewFrequencyPart(frequency RecurrenceRuleFrequency) FrequencyPart {
 	}
 }
 
+// NewFrequencyPart give the info on how many time repeat the recurrence rule. See [RFC-5545] ref for more info
+// Example: FREQ=SECONDLY => "repeat 100 times"
+//
+// [RFC-5545]: https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
+func NewFrequencyPartFromString(value string) FrequencyPart {
+	frequency := RecurrenceRuleFrequency(value)
+	return NewFrequencyPart(frequency)
+
+}
+
 func (p *frequencyPart) ToICalendarPartFormat(output io.Writer) {
 	output.Write([]byte(fmt.Sprintf("%s=%s", p.GetPartName(), p.GetPartValue())))
 }

@@ -19,6 +19,8 @@ const (
 	ByMonth      RecurrenceRulePartName = "BYMONTH"
 	BySetPos     RecurrenceRulePartName = "BYSETPOS"
 	WeekStart    RecurrenceRulePartName = "WKST"
+
+	multiValueSeparator string = ","
 )
 
 type RecurrenceRulePart interface {

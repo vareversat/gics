@@ -48,3 +48,29 @@ func TestNewBySecondPart(t *testing.T) {
 		})
 	}
 }
+
+func TestNewBySecondPartFromString(t *testing.T) {
+	want, _ := NewBySecondPart([]int32{10, 11})
+	type args struct {
+		value string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    BySecondPart
+		wantErr bool
+	}{
+		{"Create BySecond (no error)", args{value: "10, 11"}, want, false},
+		{"Create BySecond (with error)", args{value: "100"}, nil, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewBySecondPartFromString(tt.args.value)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("got \"%s\" error, want not", err.Error())
+			} else if got != nil && !reflect.DeepEqual(got.GetPartValue(), tt.want.GetPartValue()) {
+				t.Errorf("got.ToString() = %s, want %s", got.GetPartValue(), tt.want.GetPartValue())
+			}
+		})
+	}
+}
